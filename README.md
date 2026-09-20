@@ -5,9 +5,9 @@ MaleCNS connectome into a deterministic executable graph for later
 sensorimotor research.
 
 It is not a complete brain simulation, a biological claim that a connectome is
-an executable brain, or an embodied fly environment. It currently has no
-Leaky Integrate-and-Fire model, sensory/body coupling, FlyGym, NeuroMechFly,
-MuJoCo, GPU backend, or learning system.
+an executable brain, or an embodied fly environment. It has a deterministic
+CPU reference Leaky Integrate-and-Fire engine, but no sensory/body coupling,
+FlyGym, NeuroMechFly, MuJoCo, GPU backend, or learning system.
 
 ## Current stage
 
@@ -21,10 +21,18 @@ The intended pipeline is:
 MaleCNS data
 → normalization
 → sparse directed graph
-→ deterministic propagation
-→ future neural dynamics
+→ signed anatomical projection
+→ reference LIF dynamics
 → future FlyGym integration
 ```
+
+Task 005 adds the CPU reference dynamics layer. It uses the published Shiu
+equations with an exact linear state update, explicit `dt=0.1 ms`, integer
+1.8 ms delayed sparse events, explicit refractory handling, deterministic
+spike schedules, and seeded reference-style Poisson input. It consumes only
+resolved Task 004 signed edges and reports excluded unresolved edge counts and
+weights. This is a numerical reference and bounded engineering substrate, not
+a reproduction of the Shiu FlyWire network or a biological validation.
 
 Task 002 validated MaleCNS v1.0 locally from the three official Feather
 files. The measured full segment graph contains 88,404,403 node IDs and

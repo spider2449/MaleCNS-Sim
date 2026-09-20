@@ -15,6 +15,17 @@ from malecns_sim.sign import (
     Shiu2024SignPolicy,
     SignResult,
 )
+from malecns_sim.dynamics import (
+    EffectiveSignedProjection,
+    ExplicitStimulus,
+    LIFParameters,
+    PoissonStimulus,
+    REFERENCE_LIF_PARAMETERS,
+    SimulationResult,
+    SpikeSchedule,
+    linear_state_update,
+    simulate_lif,
+)
 
 __all__ = [
     "EdgeColumns",
@@ -27,6 +38,15 @@ __all__ = [
     "NeurotransmitterSignPolicy",
     "Shiu2024SignPolicy",
     "SignResult",
+    "EffectiveSignedProjection",
+    "ExplicitStimulus",
+    "LIFParameters",
+    "PoissonStimulus",
+    "REFERENCE_LIF_PARAMETERS",
+    "SimulationResult",
+    "SpikeSchedule",
+    "linear_state_update",
+    "simulate_lif",
     "normalize_connectome",
     "normalize_edges",
     "normalize_neurons",
