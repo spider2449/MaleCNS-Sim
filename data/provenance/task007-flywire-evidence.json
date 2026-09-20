@@ -1,0 +1,90 @@
+{
+  "task": "007",
+  "reference_source": {
+    "repository": "philshiu/Drosophila_brain_model",
+    "commit": "91bdd1e7dcf193f3e7ca5a8933497fcef63b7960",
+    "notebook": "example.ipynb",
+    "population_definition": "neu_sugar in the official example notebook plus MN9 example ID",
+    "materialization": "630",
+    "reference_root_ids_are_strings": true
+  },
+  "reference_population_fingerprint": "8db73a8d0aae2e7a4ab3075b3592d2ccfa83c8eb565ca8e57905e90c8c2eb184",
+  "annotation_sources": [
+    {
+      "release": "v1.0.0",
+      "commit": "847a711ce3b6e3cc675cf9ef9c843ba564bba1b5",
+      "materialization_basis": "630",
+      "file": "supplemental_files/Supplemental_file1_annotations.tsv",
+      "url": "https://raw.githubusercontent.com/flyconnectome/flywire_annotations/v1.0.0/supplemental_files/Supplemental_file1_annotations.tsv",
+      "role": "version-matched annotation evidence"
+    },
+    {
+      "release": "v3.0.0",
+      "commit": "a92610ef4cb86653aaf2b337eaf466b22f3ebd23",
+      "materialization_basis": "783",
+      "file": "supplemental_files/Supplemental_file1_neuron_annotations.tsv",
+      "url": "https://raw.githubusercontent.com/flyconnectome/flywire_annotations/v3.0.0/supplemental_files/Supplemental_file1_neuron_annotations.tsv",
+      "role": "later typed-annotation overlap only; not a silent replacement for v630"
+    }
+  ],
+  "lineage_method": {
+    "status": "not_queried",
+    "method": "Public CAVE/fafbseg lineage tooling was not used because no authenticated private API was admitted for this task.",
+    "consequence": "The later table's same-root overlap is recorded as annotation-table evidence only; absence is not collapsed to a single updated root."
+  },
+  "version_matched_annotations": [
+    {"root_id":"720575940624963786","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.5540904998779297},
+    {"root_id":"720575940630233916","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.5429134964942932},
+    {"root_id":"720575940637568838","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.4742177128791809},
+    {"root_id":"720575940638202345","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.5435369610786438},
+    {"root_id":"720575940617000768","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.4280985593795776},
+    {"root_id":"720575940630797113","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.32443612813949585},
+    {"root_id":"720575940632889389","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.4917390048503876},
+    {"root_id":"720575940621754367","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.3327585160732269},
+    {"root_id":"720575940621502051","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.3873114585876465},
+    {"root_id":"720575940640649691","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.4349825084209442},
+    {"root_id":"720575940639332736","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.33373260498046875},
+    {"root_id":"720575940616885538","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.5069331526756287},
+    {"root_id":"720575940639198653","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.6990129351615906},
+    {"root_id":"720575940620900446","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.6648756861686707},
+    {"root_id":"720575940617937543","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.48721158504486084},
+    {"root_id":"720575940632425919","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.7035637497901917},
+    {"root_id":"720575940633143833","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.6093026399612427},
+    {"root_id":"720575940612670570","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.5725370049476624},
+    {"root_id":"720575940628853239","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.6854687929153442},
+    {"root_id":"720575940629176663","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.5833377838134766},
+    {"root_id":"720575940611875570","role":"sugar","flow":"afferent","superclass":"sensory","cell_class":"gustatory","subclass":null,"cell_type":null,"side":"left","nerve":"MxLbN","top_nt":"acetylcholine","top_nt_conf":0.6127708554267883},
+    {"root_id":"720575940660219265","role":"mn9","flow":"efferent","superclass":"motor","cell_class":"motor","subclass":null,"cell_type":null,"side":"right","nerve":"PhN","top_nt":"acetylcholine","top_nt_conf":0.43173348903656006}
+  ],
+  "later_type_evidence": {
+    "release": "v3.0.0",
+    "typed_root_ids": {
+      "720575940624963786":"LB3",
+      "720575940630233916":"LB3",
+      "720575940637568838":"LB3",
+      "720575940638202345":"LB3",
+      "720575940617000768":"LB3",
+      "720575940630797113":"LB3",
+      "720575940632889389":"LB3",
+      "720575940621754367":"LB3",
+      "720575940621502051":"LB3",
+      "720575940640649691":"LB3",
+      "720575940639332736":"LB3",
+      "720575940616885538":"LB3",
+      "720575940639198653":"LB3",
+      "720575940617937543":"LB3",
+      "720575940632425919":"LB3",
+      "720575940633143833":"LB3",
+      "720575940612670570":"LB3",
+      "720575940628853239":"LB3",
+      "720575940629176663":"LB3",
+      "720575940611875570":"LB3",
+      "720575940660219265":"CB0701"
+    },
+    "typed_fields": {
+      "sugar": {"flow":"afferent","superclass":"sensory","cell_class":"gustatory","cell_sub_class":"sugar/water","cell_type":"LB3","side":"left","nerve":"MxLbN","top_nt":"acetylcholine","dimorphism":"isomorphic"},
+      "mn9": {"flow":"efferent","superclass":"motor","cell_class":"brain_motor_neuron","cell_sub_class":"ingestion_motor_neuron","cell_type":"CB0701","side":"right","nerve":"PhN","top_nt":"acetylcholine","dimorphism":"isomorphic"}
+    },
+    "absent_v3_root_ids": ["720575940620900446"]
+  }
+}

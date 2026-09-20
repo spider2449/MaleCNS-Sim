@@ -69,6 +69,19 @@ on the historical v630 graph only; it does not map FlyWire IDs to MaleCNS v1.0
 IDs. See the [Task 006 validation record](docs/plans/2026-09-20-task-006-shiu-v630-sugar-mn9-reproduction.md)
 and [its provenance manifest](data/provenance/shiu-2024-v630.json).
 
+Task 007 establishes a provenance-pinned homolog mapping boundary without
+running a MaleCNS experiment. Twenty historical sugar roots have later
+FlyWire `LB3`/`sugar/water` type evidence and one remains unresolved; their
+MaleCNS `flywireType=LB3` mapping contains 87 type-level candidates. The
+evidence-backed right-side MaleCNS input population contains 43 gustatory
+`MxLbN` bodies, with 42 Task 004-resolved NT records and one unresolved NT
+record. FlyWire MN9 type `CB0701` maps to MaleCNS `type=MN9` bodies `10331`
+and `16949` at `TYPE_LEVEL`; neither is silently selected. Structural checks
+found no direct sugar-to-MN9 edge and shortest curated paths of two hops to
+both candidates. This is an identity result, not a firing or behavioral
+claim. See the [Task 007 mapping record](docs/plans/2026-09-20-task-007-malecns-sugar-mn9-homolog-mapping.md)
+and [its compact evidence summaries](data/provenance/task007-mapping-summary.json).
+
 ## Installation
 
 Python 3.12 or newer is required.

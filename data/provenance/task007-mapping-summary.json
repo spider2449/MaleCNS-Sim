@@ -1,0 +1,47 @@
+{
+  "task": "007",
+  "male_cns_release": "v1.0",
+  "reference_fingerprint": "8db73a8d0aae2e7a4ab3075b3592d2ccfa83c8eb565ca8e57905e90c8c2eb184",
+  "mapping_fingerprint": "832d8428c458e59cfff7b52fc257a4ba3fd85fdd6f3ebf47f01e02e218f50269",
+  "sugar_population_fingerprint": "2d8c0738a9f95d1e33d9dadae434fa8ed1be12b19778f91948da0fcf63054c0b",
+  "mapping_status_counts": {"EXACT": 0, "TYPE_LEVEL": 21, "AMBIGUOUS": 0, "UNRESOLVED": 1},
+  "per_reference": {
+    "type_level_sugar_root_ids": [
+      "720575940624963786", "720575940630233916", "720575940637568838", "720575940638202345", "720575940617000768", "720575940630797113", "720575940632889389", "720575940621754367", "720575940621502051", "720575940640649691", "720575940639332736", "720575940616885538", "720575940639198653", "720575940617937543", "720575940632425919", "720575940633143833", "720575940612670570", "720575940628853239", "720575940629176663", "720575940611875570"
+     ],
+     "unresolved_sugar_root_ids": ["720575940620900446"],
+    "type_level_mn9_root_ids": ["720575940660219265"],
+    "exact_root_ids": [],
+    "ambiguous_root_ids": [],
+    "candidate_set_by_type": {"LB3": "lb3_candidates", "CB0701": "mn9_candidates"}
+  },
+  "candidate_sets": {
+    "lb3_candidates": {
+      "flywire_type": "LB3",
+      "count": 87,
+      "body_ids": [33339, 71254, 72047, 72059, 78240, 85806, 92440, 93290, 101087, 120303, 122806, 125405, 128129, 129171, 130693, 136183, 140015, 140619, 140851, 141663, 142827, 152400, 158537, 159772, 160435, 163597, 166190, 167663, 178321, 178913, 180314, 183061, 183084, 187492, 187776, 190769, 199196, 199308, 201075, 202888, 203234, 204726, 209155, 210344, 215556, 236475, 261048, 261450, 262567, 272263, 312102, 317616, 374701, 512551, 512552, 516216, 516217, 516218, 518542, 531237, 538117, 550065, 557646, 916953, 923024, 933317, 942168, 957530, 104287023, 147619274, 158893964, 174444965, 213650853, 245892505, 349137284, 388541892, 422510463, 456838775, 475202322, 553738738, 581710868, 766547228, 786482749, 816904261, 884238775, 885642755, 1026733570
+    ]
+    },
+    "mn9_candidates": {"flywire_type": "CB0701", "count": 2, "body_ids": [10331, 16949]}
+  },
+  "sugar_population": {
+    "side_field": "rootSide",
+    "count": 43,
+    "body_ids": [33339, 72047, 72059, 92440, 101087, 120303, 122806, 125405, 129171, 140015, 140619, 141663, 142827, 158537, 163597, 166190, 183061, 183084, 187492, 199196, 199308, 201075, 202888, 209155, 210344, 215556, 261048, 374701, 516217, 516218, 518542, 538117, 550065, 557646, 916953, 942168, 104287023, 147619274, 213650853, 245892505, 388541892, 422510463, 885642755],
+    "type_counts": {"<missing>": 1, "LB3a": 8, "LB3b": 6, "LB3c": 10, "LB3d": 15, "LB4b": 3},
+    "receptor_type_counts": {"<missing>": 43},
+    "entry_nerve_counts": {"MxLbN": 43},
+    "task004_nt_counts": {"resolved": 42, "unresolved": 1}
+  },
+  "mn9_readout": {"status": "TYPE_LEVEL", "candidate_body_ids": [10331, 16949], "selected_body_id": null},
+  "structural_sanity": {
+    "graph": "MaleCNS v1.0 curated body graph; superclass-non-null endpoints",
+    "direct_sugar_to_mn9_edges": 0,
+    "first_hop_target_count": 459,
+    "shortest_path_lengths": {"10331": 2, "16949": 2},
+    "reachable_mn9_candidate_ids": ["10331", "16949"],
+    "total_structural_path_availability": 2,
+    "first_hop_target_fingerprint": "c485c6b9ec4f5e270a83a88812566b2eb976cd3c6e0514a4418f1184b6c3117f"
+  },
+  "not_run": ["MaleCNS sugar stimulation", "LIF frequency sweep", "parameter tuning", "female-versus-male rate comparison"]
+}
