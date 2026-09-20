@@ -34,6 +34,13 @@ are preserved as metadata without assigning biological sign. See the
 [Task 002 validation record](docs/plans/task-002-malecns-v1-real-data-validation-and-provenance.md)
 and the local provenance manifest at `data/provenance/male-cns-v1.0.json`.
 
+Task 003 projected the raw segment graph onto the publication-defined curated
+neuron identity set: 166,700 curated IDs, 25,582,938 full neuron-level edges,
+and 6,242,118 edges at `min_synapses=5`. The full graph has 217 isolated
+curated IDs; the thresholded graph has 864. The curated graph, not the raw
+88-million-segment graph, is the intended future simulation substrate. See the
+[Task 003 validation record](docs/plans/2026-09-20-task-003-curated-neuron-level-connectome-projection.md).
+
 ## Installation
 
 Python 3.12 or newer is required.

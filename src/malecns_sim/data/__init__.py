@@ -1,7 +1,14 @@
 """External-table adapters and normalized connectome data structures."""
 
 from malecns_sim.data.io import load_connectome
-from malecns_sim.data.model import EdgeRecord, NeuronRecord, NormalizedConnectome
+from malecns_sim.data.model import (
+    CuratedNeuronProjection,
+    CuratedNeuronSelection,
+    EdgeRecord,
+    NeuronRecord,
+    NormalizedConnectome,
+    NumericNormalizedConnectome,
+)
 from malecns_sim.data.normalize import (
     EdgeColumns,
     NeuronColumns,
@@ -13,9 +20,12 @@ from malecns_sim.data.normalize import (
 __all__ = [
     "EdgeColumns",
     "EdgeRecord",
+    "CuratedNeuronProjection",
+    "CuratedNeuronSelection",
     "NeuronColumns",
     "NeuronRecord",
     "NormalizedConnectome",
+    "NumericNormalizedConnectome",
     "load_connectome",
     "normalize_connectome",
     "normalize_edges",
@@ -27,6 +37,11 @@ from malecns_sim.data.male_cns_v1 import (
     MaleCNSV1ColumnMapping,
     inspect_feather,
     load_male_cns_v1,
+    load_male_cns_v1_numeric,
+    official_v1_mapping,
+    project_numeric_connectome,
+    select_publication_neuron_ids,
+    threshold_curated_projection,
 )
 from malecns_sim.data.provenance import (
     DatasetProvenance,
@@ -44,6 +59,11 @@ __all__ = [
     "MaleCNSV1ColumnMapping",
     "inspect_feather",
     "load_male_cns_v1",
+    "load_male_cns_v1_numeric",
+    "official_v1_mapping",
+    "project_numeric_connectome",
+    "select_publication_neuron_ids",
+    "threshold_curated_projection",
     "DatasetProvenance",
     "FileProvenance",
     "file_provenance",

@@ -65,3 +65,92 @@ class NumericNormalizedConnectome:
     @property
     def edge_count(self) -> int:
         return int(self.source_ids.size)
+
+
+@dataclass(frozen=True, slots=True)
+class CuratedNeuronSelection:
+    """Publication-defined neuron identity selection and audit counts."""
+
+    neuron_ids: np.ndarray
+    annotation_count: int
+    excluded_ids: np.ndarray
+    exclusion_counts: tuple[tuple[str, int], ...]
+    missing_status_count: int = 0
+    glia_status_count: int = 0
+    glia_retained_count: int = 0
+
+    @property
+    def retained_count(self) -> int:
+        return int(self.neuron_ids.size)
+
+
+@dataclass(frozen=True, slots=True)
+class CuratedNeuronProjection:
+    """Neuron-level projection of the normalized segment-level edge arrays."""
+
+    connectome: NumericNormalizedConnectome
+    raw_edge_count: int
+    endpoint_edge_count: int
+    projected_edge_count: int
+    duplicate_pair_count: int
+    threshold: int = 0
+
+    @property
+    def edge_count(self) -> int:
+        return self.connectome.edge_count
+
+    @property
+    def endpoint_excluded_edge_count(self) -> int:
+        return self.raw_edge_count - self.endpoint_edge_count
+
+    @property
+    def threshold_excluded_edge_count(self) -> int:
+        return self.projected_edge_count - self.connectome.edge_count
+
+    @property
+    def retained_source_count(self) -> int:
+        return int(np.unique(self.connectome.source_ids).size)
+
+    @property
+    def retained_target_count(self) -> int:
+        return int(np.unique(self.connectome.target_ids).size)
+
+    @property
+    def participating_count(self) -> int:
+        if self.connectome.edge_count == 0:
+            return 0
+        return int(
+            np.unique(
+                np.concatenate((self.connectome.source_ids, self.connectome.target_ids))
+            ).size
+        )
+
+    @property
+    def isolated_count(self) -> int:
+        return self.connectome.neuron_count - self.participating_count
+
+    @property
+    def self_edge_count(self) -> int:
+        return int(
+            np.count_nonzero(self.connectome.source_ids == self.connectome.target_ids)
+        )
+
+    @property
+    def total_synaptic_weight(self) -> int:
+        return int(self.connectome.synapse_counts.sum(dtype=np.int64))
+
+    @property
+    def min_synaptic_weight(self) -> int | None:
+        return (
+            int(self.connectome.synapse_counts.min())
+            if self.connectome.edge_count
+            else None
+        )
+
+    @property
+    def max_synaptic_weight(self) -> int | None:
+        return (
+            int(self.connectome.synapse_counts.max())
+            if self.connectome.edge_count
+            else None
+        )

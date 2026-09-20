@@ -8,7 +8,11 @@ from typing import Mapping
 import numpy as np
 from scipy.sparse import csr_matrix
 
-from malecns_sim.data.model import NormalizedConnectome, NumericNormalizedConnectome
+from malecns_sim.data.model import (
+    CuratedNeuronProjection,
+    NormalizedConnectome,
+    NumericNormalizedConnectome,
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -65,6 +69,16 @@ class SparseDirectedGraph:
         )
         matrix.sort_indices()
         return cls(connectome.neuron_ids, matrix, min_synapses)
+
+    @classmethod
+    def from_curated_projection(
+        cls, projection: CuratedNeuronProjection
+    ) -> "SparseDirectedGraph":
+        """Build a CSR graph whose dimension is the curated neuron set."""
+
+        return cls.from_numeric_connectome(
+            projection.connectome, min_synapses=projection.threshold
+        )
 
     @property
     def node_index(self) -> dict[str, int]:
