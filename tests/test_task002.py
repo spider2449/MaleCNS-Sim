@@ -8,6 +8,7 @@ from malecns_sim.data.male_cns_v1 import (
     MaleCNSV1ColumnMapping,
     inspect_feather,
     load_male_cns_v1,
+    load_male_cns_v1_numeric,
 )
 from malecns_sim.data.model import NormalizedConnectome
 from malecns_sim.data.normalize import normalize_edges, normalize_neurons
@@ -132,3 +133,36 @@ def test_male_cns_feather_mapping_and_schema_inspection(tmp_path):
     assert result.neurons[1].neurotransmitter == "GABA"
     assert ("prediction", "GABA") in result.neurons[1].metadata
     assert ("probability", "0.9") in result.neurons[1].metadata
+
+
+def test_male_cns_numeric_mapping_aggregates_duplicates_and_preserves_integer_ids(tmp_path):
+    pa = pytest.importorskip("pyarrow")
+    import pyarrow.feather as feather
+
+    annotation = tmp_path / "annotations.feather"
+    neurotransmitter = tmp_path / "neurotransmitters.feather"
+    weights = tmp_path / "weights.feather"
+    feather.write_feather(
+        pa.table({"bodyId": pa.array([9_007_199_254_740_993], type=pa.int64()), "type": ["alpha"], "somaSide": ["L"], "superclass": ["interneuron"], "status": ["Traced"]}),
+        annotation,
+    )
+    feather.write_feather(
+        pa.table({"body": pa.array([9_007_199_254_740_993], type=pa.int64()), "consensus_nt": ["acetylcholine"], "predicted_nt": ["acetylcholine"], "predicted_nt_confidence": [0.9]}),
+        neurotransmitter,
+    )
+    feather.write_feather(
+        pa.table({"body_pre": pa.array([9_007_199_254_740_993, 9_007_199_254_740_993], type=pa.int64()), "body_post": pa.array([9_007_199_254_740_993, 2], type=pa.int64()), "weight": pa.array([2, 3], type=pa.int64())}),
+        weights,
+    )
+    mapping = MaleCNSV1ColumnMapping(
+        annotation_body_id="bodyId", edge_source_id="body_pre", edge_target_id="body_post", edge_weight="weight",
+        annotation_cell_type="type", annotation_side="somaSide", annotation_class="superclass", annotation_status="status",
+        neurotransmitter_body_id="body", neurotransmitter_prediction_columns=("consensus_nt",), neurotransmitter_probability_columns=("predicted_nt_confidence",),
+    )
+    result = load_male_cns_v1_numeric(annotation, neurotransmitter, weights, mapping)
+    assert mapping.edge_source_id == "body_pre"
+    assert result.neuron_ids.tolist() == [2, 9_007_199_254_740_993]
+    assert result.source_ids.tolist() == [9_007_199_254_740_993, 9_007_199_254_740_993]
+    assert result.target_ids.tolist() == [2, 9_007_199_254_740_993]
+    assert result.synapse_counts.tolist() == [3, 2]
+    assert result.annotated_neurons[0].neurotransmitter == "acetylcholine"

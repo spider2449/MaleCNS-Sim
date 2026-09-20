@@ -26,6 +26,14 @@ MaleCNS data
 → future FlyGym integration
 ```
 
+Task 002 validated MaleCNS v1.0 locally from the three official Feather
+files. The measured full segment graph contains 88,404,403 node IDs and
+151,856,684 edges; the `min_synapses=5` graph contains 7,622,864 edges.
+Both CSR builds are deterministic, and source neurotransmitter predictions
+are preserved as metadata without assigning biological sign. See the
+[Task 002 validation record](docs/plans/task-002-malecns-v1-real-data-validation-and-provenance.md)
+and the local provenance manifest at `data/provenance/male-cns-v1.0.json`.
+
 ## Installation
 
 Python 3.12 or newer is required.
