@@ -19,6 +19,7 @@ class MappingStatus(StrEnum):
     """Evidence category, not a probability or biological certainty score."""
 
     EXACT = "EXACT"
+    SIDE_RESOLVED = "SIDE_RESOLVED"
     TYPE_LEVEL = "TYPE_LEVEL"
     AMBIGUOUS = "AMBIGUOUS"
     UNRESOLVED = "UNRESOLVED"
@@ -54,6 +55,7 @@ class MaleCNSCandidate:
 
     body_id: str
     type: str | None = None
+    instance: str | None = None
     flywire_type: str | None = None
     side: str | None = None
     soma_side: str | None = None
@@ -113,8 +115,8 @@ class MappingRecord:
         object.__setattr__(self, "candidates", candidates)
         if not self.evidence_sources:
             raise ValueError("mapping evidence must retain at least one source")
-        if self.status is MappingStatus.EXACT and len(candidates) != 1:
-            raise ValueError("EXACT mappings require exactly one candidate")
+        if self.status in {MappingStatus.EXACT, MappingStatus.SIDE_RESOLVED} and len(candidates) != 1:
+            raise ValueError(f"{self.status} mappings require exactly one candidate")
         if self.status is MappingStatus.UNRESOLVED and candidates:
             raise ValueError("UNRESOLVED mappings cannot contain candidates")
         if self.status is not MappingStatus.UNRESOLVED and not candidates:
@@ -147,15 +149,16 @@ class MN9Readout:
     candidate_body_ids: tuple[str, ...]
     selected_body_id: str | None
     evidence_notes: tuple[str, ...]
+    provenance: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
         ids = tuple(_id(value) for value in self.candidate_body_ids)
         if ids != tuple(sorted(set(ids), key=int)):
             raise ValueError("MN9 candidates must be unique and numerically ordered")
         object.__setattr__(self, "candidate_body_ids", ids)
-        if self.status is MappingStatus.EXACT and self.selected_body_id is None:
-            raise ValueError("EXACT MN9 readouts require a selected body")
-        if self.status is not MappingStatus.EXACT and self.selected_body_id is not None:
+        if self.status in {MappingStatus.EXACT, MappingStatus.SIDE_RESOLVED} and self.selected_body_id is None:
+            raise ValueError(f"{self.status} MN9 readouts require a selected body")
+        if self.status not in {MappingStatus.EXACT, MappingStatus.SIDE_RESOLVED} and self.selected_body_id is not None:
             raise ValueError("uncertain MN9 readouts must not select a body")
 
 
@@ -256,14 +259,23 @@ def derive_sugar_population(
 def define_mn9_readout(record: MappingRecord) -> MN9Readout:
     """Convert an MN9 mapping record into an explicit later-readout contract."""
 
-    selected = record.candidate_body_ids[0] if record.status is MappingStatus.EXACT else None
+    selected = (
+        record.candidate_body_ids[0]
+        if record.status in {MappingStatus.EXACT, MappingStatus.SIDE_RESOLVED}
+        else None
+    )
     return MN9Readout(
         status=record.status,
         candidate_body_ids=record.candidate_body_ids,
         selected_body_id=selected,
         evidence_notes=(
-            "Task 008 must use every documented candidate unless a later identity task resolves the set.",
+            (
+                "The selected body is side-resolved; this does not claim segmentation identity, identical connectivity, or identical physiology."
+                if record.status is MappingStatus.SIDE_RESOLVED
+                else "Task 008 must use every documented candidate unless a later identity task resolves the set."
+            ),
         ),
+        provenance=record.evidence_sources,
     )
 
 

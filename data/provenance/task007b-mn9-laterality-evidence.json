@@ -1,0 +1,137 @@
+{
+  "task": "007b",
+  "retrieval_date": "2026-09-20",
+  "starting_state": {
+    "task007a_status": "AMBIGUOUS",
+    "task007a_commit": "3683dc963274efa1c910e224aca4d473f847bb97",
+    "task007a_commit_subject": "research: resolve public MaleCNS identity evidence",
+    "candidate_ids": ["10331", "16949"],
+    "sugar_population_changed": false,
+    "dynamics_or_connectivity_outcome_used": false
+  },
+  "vfb_evidence": {
+    "source": "Virtual Fly Brain",
+    "source_version": "current VFB entry; page record dated 2022-01-01",
+    "source_url": "https://www.virtualflybrain.org/term/cb0701-vfb_fw000395/",
+    "identifier": "VFB_fw000395",
+    "flywire_type": "CB0701",
+    "flywire_root": "720575940660219265",
+    "organism_side": "right",
+    "relationship_fields": {
+      "classification": ["adult cholinergic neuron", "proboscis muscle 9 motor neuron"],
+      "has_soma_location": "right side of organism",
+      "is_part_of": ["adult brain", "female organism"],
+      "flywire_cross_reference": "720575940660219265"
+    },
+    "retrieved": "2026-09-20"
+  },
+  "shiu_evidence": {
+    "source": "Shiu et al. 2024, Nature",
+    "source_version": "Nature 634 (8032): 210-219; DOI 10.1038/s41586-024-07763-9; PMCID PMC11446845",
+    "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11446845/",
+    "publisher_url": "https://www.nature.com/articles/s41586-024-07763-9",
+    "reference_code_url": "https://github.com/philshiu/Drosophila_brain_model/tree/91bdd1e7dcf193f3e7ca5a8933497fcef63b7960",
+    "reference_code_commit": "91bdd1e7dcf193f3e7ca5a8933497fcef63b7960",
+    "source_location": "Methods, Computational modelling of water and sugar GRN activity; paper full text lines 516-525 in the PMC rendering",
+    "stimulus_side": "left",
+    "stimulus_population": "unilateral left-hemisphere sugar GRNs",
+    "principal_simulations_exception": "all simulations except Extended Data Fig. 1d",
+    "mn9_relation": "contralateral",
+    "mn9_side": "right",
+    "relationship_fields": {
+      "paper_default_mn9": "MN9 contralateral to activated GRNs",
+      "ordinary_anatomical_mapping": "left stimulus -> right MN9",
+      "paper_side_basis": "true biological side"
+    },
+    "coordinate_system_note": "The paper states that FAFB was found left-right inverted and that the paper uses true biological side. Its reference notebook labels the 21-neuron principal input list as right hemisphere and the root 720575940660219265 as left; those frame labels are not used to override the paper's anatomical-side statement.",
+    "retrieved": "2026-09-20"
+  },
+  "malecns_evidence": {
+    "source": "validated MaleCNS v1.0 body annotation rows",
+    "source_version": "male-cns:v1.0",
+    "source_url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-annotations-male-cns-v1.0-minconf-0.5.feather",
+    "official_explorer_url": "https://github.com/reiserlab/celltype-explorer-drosophila/blob/main/types/MN9.html",
+    "official_type": "MN9",
+    "official_flywire_type": "CB0701",
+    "rows": [
+      {
+        "bodyId": "10331",
+        "type": "MN9",
+        "instance": "MN9_L",
+        "somaSide": "L",
+        "rootSide": null,
+        "flywireType": "CB0701",
+        "superclass": "cb_motor",
+        "subclass": "pm",
+        "exitNerve": "PhN",
+        "vfbId": "VFB_jrmc20e1",
+        "vfb_url": "https://www.virtualflybrain.org/blog/2022/01/01/mn9_l-malecns10331-vfb_jrmc20e1/",
+        "direct_side_source": "somaSide"
+      },
+      {
+        "bodyId": "16949",
+        "type": "MN9",
+        "instance": "MN9_R",
+        "somaSide": "R",
+        "rootSide": null,
+        "flywireType": "CB0701",
+        "superclass": "cb_motor",
+        "subclass": "pm",
+        "exitNerve": "PhN",
+        "vfbId": "VFB_jrmc20e2",
+        "vfb_url": "https://www.virtualflybrain.org/blog/2022/01/01/mn9_r-malecns16949-vfb_jrmc20e2/",
+        "direct_side_source": "somaSide"
+      }
+    ],
+    "neurotransmitter_source_url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-neurotransmitters-male-cns-v1.0.feather"
+  },
+  "contradiction_check": {
+    "flywire_root_720575940660219265_left_sided": {
+      "result": "not found in the inspected primary VFB entry",
+      "primary_entry_side": "right"
+    },
+    "cb0701_inconsistent_side_annotations": {
+      "result": "no inconsistency for the queried root; CB0701 is a bilateral type and VFB has a distinct left CB0701 root",
+      "distinct_left_entry": "https://www.virtualflybrain.org/blog/2022/01/01/cb0701-vfb_fw001542/"
+    },
+    "malecns_transformed_side_naming": {
+      "result": "not found; direct somaSide and instance fields agree with the VFB MaleCNS entries"
+    },
+    "shiu_coordinate_inversion": {
+      "result": "confirmed as a documented coordinate-convention difference, not a biological contradiction",
+      "resolution": "use true organism anatomical side from the paper and VFB; do not use notebook frame labels as the comparison basis"
+    }
+  },
+  "resolution_rule": {
+    "required_independent_agreement": [
+      "VFB root 720575940660219265 / CB0701 is right-sided",
+      "Shiu's ordinary readout is the MN9 contralateral to left sugar GRNs, therefore right-sided",
+      "MaleCNS has exactly one direct MN9/CB0701 candidate with explicit right somaSide"
+    ],
+    "status_if_passed": "SIDE_RESOLVED",
+    "exact_not_used_because": "EXACT would imply a stronger individual or segmentation identity than VFB, paper laterality, and one-per-side type evidence establish"
+  },
+  "resolution": {
+    "status": "SIDE_RESOLVED",
+    "preferred_readout": "16949",
+    "preferred_readout_type": "MN9_R",
+    "basis": "VFB and Shiu independently resolve the reference readout to the unique right-side MaleCNS MN9 candidate",
+    "provenance_chain": [
+      "FlyWire 720575940660219265",
+      "CB0701 / proboscis muscle 9 motor neuron",
+      "right-side correspondence",
+      "MaleCNS MN9_R body 16949"
+    ],
+    "permitted_identity_claim": "side-resolved cross-brain homolog corresponding to the right MN9 / CB0701 reference",
+    "explicit_nonclaims": [
+      "segmentation identity across FlyWire and MaleCNS",
+      "same physical animal neuron",
+      "identical connectivity",
+      "identical physiology",
+      "selection from dynamics or connectivity outcome"
+    ],
+    "dynamics_used": false,
+    "connectivity_outcome_used": false
+  },
+  "evidence_fingerprint": "b6e0ec543f7f19f5e452baca8f55ea065c762871b18445ad024db362bb8cfbbd"
+}

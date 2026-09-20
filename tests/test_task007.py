@@ -66,7 +66,7 @@ def test_exact_id_reference_is_preserved_as_canonical_strings():
 
 
 def test_mapping_status_representation_is_explicit():
-    assert [item.value for item in MappingStatus] == ["EXACT", "TYPE_LEVEL", "AMBIGUOUS", "UNRESOLVED"]
+    assert [item.value for item in MappingStatus] == ["EXACT", "SIDE_RESOLVED", "TYPE_LEVEL", "AMBIGUOUS", "UNRESOLVED"]
 
 
 def test_one_to_one_exact_mapping():

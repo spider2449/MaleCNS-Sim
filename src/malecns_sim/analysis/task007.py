@@ -129,6 +129,7 @@ def _candidate_from_rows(row: dict[str, Any], nt_row: dict[str, Any]) -> MaleCNS
     return MaleCNSCandidate(
         body_id=str(int(row["bodyId"])),
         type=_clean(row.get("type")),
+        instance=_clean(row.get("instance")),
         flywire_type=_clean(row.get("flywireType")),
         side=_clean(row.get("rootSide")) or _clean(row.get("somaSide")),
         soma_side=_clean(row.get("somaSide")),
@@ -261,6 +262,7 @@ def build_task007_result(
     *,
     weights_path: str | Path | None = None,
     evidence_path: str | Path = TASK007_REFERENCE_PATH,
+    task007b_path: str | Path | None = "data/provenance/task007b-mn9-laterality-evidence.json",
 ) -> Task007Result:
     evidence = load_task007_evidence(evidence_path)
     candidates = load_male_cns_candidates(annotation_path, neurotransmitter_path)
@@ -268,6 +270,17 @@ def build_task007_result(
     sugar_candidates = tuple(item for item in candidates if item.flywire_type == "LB3")
     population = derive_sugar_population(sugar_candidates, side="R")
     mn9_record = next(record for record in records if record.reference_role == "mn9")
+    if task007b_path is not None:
+        from malecns_sim.analysis.task007b import (
+            apply_mn9_laterality,
+            load_task007b_provenance,
+            resolve_task007b_provenance,
+        )
+
+        task007b_evidence = load_task007b_provenance(task007b_path)
+        task007b_resolution = resolve_task007b_provenance(task007b_evidence, mn9_record.candidates)
+        if task007b_resolution.status is MappingStatus.SIDE_RESOLVED:
+            mn9_record = apply_mn9_laterality(mn9_record, task007b_resolution)
     readout = define_mn9_readout(mn9_record)
     result = Task007Result(
         reference_fingerprint=reference_population_fingerprint(evidence),
