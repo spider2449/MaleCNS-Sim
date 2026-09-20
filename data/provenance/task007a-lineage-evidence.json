@@ -1,0 +1,98 @@
+{
+  "task": "007a",
+  "combined_task007a_fingerprint": "4681bbec86391752642ee2f9936e18d763ca77820d7f4dfb3492dd7e11da2d1a",
+  "reference_root_id": "720575940620900446",
+  "starting_task007_status": "UNRESOLVED",
+  "query_timestamp_utc": "2026-09-20T12:18:50.4291515Z",
+  "materialization_specific_evidence": [
+    {
+      "dataset": "FlyWire FAFB",
+      "materialization": "630",
+      "release": "flywire_annotations v1.0.0",
+      "release_commit": "847a711ce3b6e3cc675cf9ef9c843ba564bba1b5",
+      "queried_root_id": "720575940620900446",
+      "source_url": "https://raw.githubusercontent.com/flyconnectome/flywire_annotations/v1.0.0/supplemental_files/Supplemental_file1_annotations.tsv",
+      "raw_result_category": "row_present",
+      "valid_at_materialization": true,
+      "returned_annotation": {
+        "flow": "afferent",
+        "superclass": "sensory",
+        "cell_class": "gustatory",
+        "side": "left",
+        "nerve": "MxLbN",
+        "top_nt": "acetylcholine"
+      }
+    },
+    {
+      "dataset": "FlyWire FAFB",
+      "materialization": "783-era public release",
+      "release": "flywire_annotations v3.0.0",
+      "release_commit": "a92610ef4cb86653aaf2b337eaf466b22f3ebd23",
+      "queried_root_id": "720575940620900446",
+      "source_url": "https://raw.githubusercontent.com/flyconnectome/flywire_annotations/v3.0.0/supplemental_files/Supplemental_file1_neuron_annotations.tsv",
+      "raw_result_category": "row_absent",
+      "valid_at_materialization": null,
+      "returned_annotation": null,
+      "interpretation": "Annotation-table absence only; not classified as deleted, retired, merged, split, or superseded."
+    }
+  ],
+  "lineage_queries": [
+    {
+      "dataset": "flywire_fafb_production",
+      "segmentation_table": "fly_v31",
+      "materialization_or_timestamp": "live production endpoint",
+      "queried_root_id": "720575940620900446",
+      "tool": "CAVE/ChunkedGraph HTTP endpoint",
+      "api": "tabular_change_log",
+      "url": "https://prodv1.flywire-daf.com/segmentation/api/v1/table/fly_v31/root/720575940620900446/tabular_change_log?root_ids=true&filtered=false",
+      "raw_http_category": "authentication_redirect_to_accounts_google_com",
+      "http_status_observed": 200,
+      "json_payload_admitted": false,
+      "lineage_candidates": [],
+      "notes": "The endpoint redirected to Google authentication; no token or private response was used."
+    },
+    {
+      "dataset": "flywire_fafb_production",
+      "segmentation_table": "fly_v31",
+      "materialization_or_timestamp": "live production endpoint",
+      "queried_root_id": "720575940620900446",
+      "tool": "CAVE/ChunkedGraph HTTP endpoint",
+      "api": "root lookup",
+      "url": "https://prodv1.flywire-daf.com/segmentation/api/v1/table/fly_v31/node/720575940620900446/root?int64_as_str=1",
+      "raw_http_category": "authentication_redirect_to_accounts_google_com",
+      "http_status_observed": 200,
+      "json_payload_admitted": false,
+      "lineage_candidates": [],
+      "notes": "A root lookup cannot substitute for lineage and produced no authenticated result."
+    }
+  ],
+  "official_lineage_mechanism": {
+    "documentation_url": "https://www.caveconnecto.me/CAVEclient/api/chunkedgraph/",
+    "documented_methods_considered": ["get_tabular_change_log", "get_lineage_graph", "is_latest_roots"],
+    "public_result": "no_public_lineage_result_without_authentication",
+    "one_to_many_descendants": [],
+    "merged_parent_roots": [],
+    "lineage_status": "UNRESOLVED",
+    "nonclaims": [
+      "The later annotation-table absence is not a lineage result.",
+      "No current root, split descendant, merge parent, deletion, retirement, or supersession is claimed."
+    ]
+  },
+  "annotation_type_evidence_separate_from_lineage": {
+    "later_release": "v3.0.0",
+    "queried_root_id": "720575940620900446",
+    "cell_type": null,
+    "sugar_water_identity": null,
+    "same_root_overlap": false,
+    "lineage_candidates": []
+  },
+  "task007_mapping_impact": {
+    "final_sugar_root_status": "UNRESOLVED",
+    "updated_root_ids": [],
+    "male_cns_sugar_population_changed": false,
+    "male_cns_sugar_population_count": 43,
+    "previous_sugar_population_fingerprint": "2d8c0738a9f95d1e33d9dadae434fa8ed1be12b19778f91948da0fcf63054c0b",
+    "current_sugar_population_fingerprint": "2d8c0738a9f95d1e33d9dadae434fa8ed1be12b19778f91948da0fcf63054c0b"
+  },
+  "evidence_fingerprint": "7b07598b48a4df2bb67fd76262800d0162ac6f47d7ab42e8b6642d4ae284ec6b"
+}

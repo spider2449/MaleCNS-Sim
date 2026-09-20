@@ -1,0 +1,229 @@
+{
+  "task": "007a",
+  "reference": {
+    "flywire_root_id": "720575940660219265",
+    "materialization": "630",
+    "flywire_type": "CB0701",
+    "functional_annotation": "ingestion motor neuron",
+    "version_matched_source": "data/provenance/task007-flywire-evidence.json",
+    "side": "right",
+    "nerve": "PhN",
+    "superclass": "motor",
+    "cell_class": "motor"
+  },
+  "local_malecns_release": {
+    "release": "v1.0",
+    "annotation_source_url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-annotations-male-cns-v1.0-minconf-0.5.feather",
+    "neurotransmitter_source_url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-neurotransmitters-male-cns-v1.0.feather",
+    "metadata_fields_are_complete_for_rows": true
+  },
+  "candidate_metadata": [
+    {
+      "bodyId": 10331,
+      "flywireType": "CB0701",
+      "type": "MN9",
+      "superclass": "cb_motor",
+      "class": null,
+      "subclass": "pm",
+      "supertype": null,
+      "instance": "MN9_L",
+      "somaSide": "L",
+      "rootSide": null,
+      "somaNeuromere": null,
+      "mancType": null,
+      "mancBodyid": null,
+      "entryNerve": null,
+      "exitNerve": "PhN",
+      "dimorphism": null,
+      "matchingNotes": null,
+      "synonyms": null,
+      "status": "Traced",
+      "statusLabel": "Roughly traced",
+      "neurotransmitter": {
+        "consensus_nt": "acetylcholine",
+        "predicted_nt": "unclear",
+        "predicted_nt_confidence": 0.4896524466871221,
+        "celltype_predicted_nt": "acetylcholine",
+        "celltype_predicted_nt_confidence": 0.5386020792860344
+      },
+      "receptorType": null,
+      "somaLocation": [55365, 36271, 15889],
+      "tosomaLocation": null,
+      "vfbId": "VFB_jrmc20e1",
+      "itoleeHl": "putative_primary",
+      "group": 10331.0,
+      "mancGroup": null,
+      "mancSerial": null,
+      "mcnsSerial": null,
+      "serialMotif": null,
+      "trumanHl": null,
+      "fruDsx": null,
+      "individual_notes": "Left member of the official MN9 type; not an exact homolog of the right-side FlyWire reference by side alone."
+    },
+    {
+      "bodyId": 16949,
+      "flywireType": "CB0701",
+      "type": "MN9",
+      "superclass": "cb_motor",
+      "class": null,
+      "subclass": "pm",
+      "supertype": null,
+      "instance": "MN9_R",
+      "somaSide": "R",
+      "rootSide": null,
+      "somaNeuromere": null,
+      "mancType": null,
+      "mancBodyid": null,
+      "entryNerve": null,
+      "exitNerve": "PhN",
+      "dimorphism": null,
+      "matchingNotes": null,
+      "synonyms": null,
+      "status": "Traced",
+      "statusLabel": "RT Hard to trace",
+      "neurotransmitter": {
+        "consensus_nt": "acetylcholine",
+        "predicted_nt": "acetylcholine",
+        "predicted_nt_confidence": 0.5731075580033004,
+        "celltype_predicted_nt": "acetylcholine",
+        "celltype_predicted_nt_confidence": 0.5386020792860344
+      },
+      "receptorType": null,
+      "somaLocation": [41546, 38775, 15447],
+      "tosomaLocation": null,
+      "vfbId": "VFB_jrmc20e2",
+      "itoleeHl": "putative_primary",
+      "group": 10331.0,
+      "mancGroup": null,
+      "mancSerial": null,
+      "mcnsSerial": null,
+      "serialMotif": null,
+      "trumanHl": null,
+      "fruDsx": null,
+      "individual_notes": "Right member of the official MN9 type; side and PhN are compatible with the right-side FlyWire reference, but no individual cross-brain proof was found."
+    }
+  ],
+  "official_cross_brain_mapping": {
+    "source_url": "https://github.com/reiserlab/celltype-explorer-drosophila-male-cns/blob/main/types/MN9.html",
+    "source_commit": "789cc6c105798ce2fd70ba85dab394f90899616b",
+    "dataset": "male-cns:v1.0",
+    "generated_at": "2026-09-09 18:21",
+    "male_type": "MN9",
+    "flywire_type": "CB0701",
+    "aka": "CB0701",
+    "across_brain_mapping_label": "MN9 / CB0701",
+    "male_left_count": 1,
+    "male_right_count": 1,
+    "dimorphism_classification": "isomorphic in the versioned FlyWire annotation evidence; MaleCNS candidate dimorphism fields are null",
+    "one_to_many_across_brains": true,
+    "neurotransmitter": "acetylcholine",
+    "neurotransmitter_confidence": 0.539,
+    "notes": "The explorer groups both male bodies under one bilateral MN9 type; counts do not by themselves prove an individual homolog."
+  },
+  "neuronbridge": {
+    "source_url": "https://janelia-neuronbridge-data-prod.s3.amazonaws.com/v3_10_0/config.json",
+    "version": "v3_10_0",
+    "current_url": "https://janelia-neuronbridge-data-prod.s3.amazonaws.com/current.txt",
+    "queried_at_utc": "2026-09-20T12:18:50.4291515Z",
+    "candidate_queries": [
+      {
+        "body_id": "10331",
+        "metadata_url": "https://janelia-neuronbridge-data-prod.s3.amazonaws.com/v3_10_0/metadata/by_body/10331.json",
+        "male_cns_image": "male-cns:v0.9:10331",
+        "aligned_skeleton_url": "https://s3.amazonaws.com/janelia-flylight-color-depth/JRC2018_Unisex_20x_HR/FlyEM_Male_CNS_Brain_v0.9/SWC/10331.swc",
+        "cds_results_url": "https://janelia-neuronbridge-data-prod.s3.amazonaws.com/v3_10_0/metadata/cdsresults/3513029256316227715.json",
+        "matched_dataset": "FlyLight LM libraries",
+        "result_count": 1671,
+        "top_result": {"published_name": "R51H05", "score": 29367.56, "rank": null},
+        "direct_flywire_or_mn9_match_count": 0,
+        "official_rank_available": false
+      },
+      {
+        "body_id": "16949",
+        "metadata_url": "https://janelia-neuronbridge-data-prod.s3.amazonaws.com/v3_10_0/metadata/by_body/16949.json",
+        "male_cns_image": "male-cns:v0.9:16949",
+        "aligned_skeleton_url": "https://s3.amazonaws.com/janelia-flylight-color-depth/JRC2018_Unisex_20x_HR/FlyEM_Male_CNS_Brain_v0.9/SWC/16949.swc",
+        "cds_results_url": "https://janelia-neuronbridge-data-prod.s3.amazonaws.com/v3_10_0/metadata/cdsresults/3513029318459826307.json",
+        "matched_dataset": "FlyLight LM libraries",
+        "result_count": 2118,
+        "top_result": {"published_name": "VT005008", "score": 34375.0, "rank": null},
+        "direct_flywire_or_mn9_match_count": 0,
+        "official_rank_available": false
+      },
+      {
+        "query_body_or_root": "720575940660219265",
+        "metadata_url": "https://janelia-neuronbridge-data-prod.s3.amazonaws.com/v3_10_0/metadata/by_body/720575940660219265.json",
+        "matched_dataset": "FlyWire_FAFB_v783_realign",
+        "published_name": "flywire_fafb:v783:720575940660219265",
+        "neuron_type": null,
+        "aligned_skeleton_url": "https://s3.amazonaws.com/janelia-flylight-color-depth/JRC2018_Unisex_20x_HR/FlyWire_FAFB_v783_realign/SWC/720575940660219265.swc",
+        "cds_results_url": "https://janelia-neuronbridge-data-prod.s3.amazonaws.com/v3_10_0/metadata/cdsresults/3477551665220259971.json",
+        "result_count": 1492,
+        "direct_male_cns_or_mn9_match_count": 0,
+        "official_rank_available": false
+      }
+    ],
+    "interpretation": "The official service was queried, but its returned candidate-specific CDM matches are LM results, not a direct candidate-vs-FlyWire individual score. Scores are not compared across candidates and cannot select a body."
+  },
+  "transformed_morphology": {
+    "resource": "NeuronBridge aligned SWC resources in JRC2018_Unisex_20x_HR",
+    "method": "official transformed skeleton availability check only",
+    "quantitative_score": null,
+    "qualitative_support": "not sufficient to distinguish the bilateral MN9 candidates",
+    "new_matching_system_built": false
+  },
+  "manc_evidence": {
+    "local_fields": {
+      "10331": {"mancType": null, "mancBodyid": null},
+      "16949": {"mancType": null, "mancBodyid": null}
+    },
+    "official_mapping_result": "no MaleCNS-to-MANC crosswalk was present for either candidate",
+    "neuronbridge_same_numeric_id_warning": "NeuronBridge separately exposes MANC records with the same numeric IDs, but those records have unrelated MANC annotations and are not admitted as a crosswalk.",
+    "independent_motor_identity_support": null
+  },
+  "anatomical_evidence": {
+    "reference": "FlyWire root is right-side motor, PhN, ingestion motor annotation",
+    "10331": "MN9_L, somaSide L, cb_motor, pm, exitNerve PhN; side contradicts the right-side reference",
+    "16949": "MN9_R, somaSide R, cb_motor, pm, exitNerve PhN; side and nerve are compatible",
+    "missing_fields_for_both": ["class", "supertype", "rootSide", "somaNeuromere", "entryNerve"]
+  },
+  "evidence_matrix": [
+    {
+      "body_id": "10331",
+      "flywire_type_match": true,
+      "across_brain_mapping": "CB0701 -> MN9",
+      "side": "L",
+      "motor_superclass": "cb_motor",
+      "manc_match": "none",
+      "neuronbridge_match": "candidate query returned FlyLight-only results; no direct FlyWire/MN9 target",
+      "morphology_support": "official JRC2018 aligned SWC available; no resolving score",
+      "nerve_soma_support": "PhN and motor type compatible; side contradictory",
+      "dimorphism_status": "isomorphic type evidence; candidate row null",
+      "contradictory_evidence": ["right-side reference versus MN9_L"],
+      "evidence_source": ["local MaleCNS v1.0", "official CTE MN9", "FlyWire v3.0.0", "NeuronBridge v3_10_0"]
+    },
+    {
+      "body_id": "16949",
+      "flywire_type_match": true,
+      "across_brain_mapping": "CB0701 -> MN9",
+      "side": "R",
+      "motor_superclass": "cb_motor",
+      "manc_match": "none",
+      "neuronbridge_match": "candidate query returned FlyLight-only results; no direct FlyWire/MN9 target",
+      "morphology_support": "official JRC2018 aligned SWC available; no resolving score",
+      "nerve_soma_support": "PhN, motor type, and right side compatible",
+      "dimorphism_status": "isomorphic type evidence; candidate row null",
+      "contradictory_evidence": [],
+      "evidence_source": ["local MaleCNS v1.0", "official CTE MN9", "FlyWire v3.0.0", "NeuronBridge v3_10_0"]
+    }
+  ],
+  "resolution": {
+    "status": "AMBIGUOUS",
+    "selected_body_id": null,
+    "side_evidence_points_toward": "16949",
+    "reason": "The right-side MN9_R row is anatomically compatible and the left MN9_L row is contradicted by side, but no public individual lineage, direct NeuronBridge candidate-to-reference score, MANC crosswalk, or authoritative cross-sex individual correspondence rules out the other body sufficiently for EXACT.",
+    "ranking_only_winner": null,
+    "dynamics_used": false
+  },
+  "evidence_fingerprint": "dd37302ce60946040674f29f6b9b3fb1a5a0cf6edee1756aa122b248ab1c4ea8"
+}
