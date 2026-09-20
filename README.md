@@ -58,6 +58,17 @@ conservative policy signs 79.8927% and 81.2499%, respectively. Signed counts
 are derived data, not functional synaptic weights. See the
 [Task 004 validation record](docs/plans/2026-09-20-task-004-neurotransmitter-sign-policy-and-signed-connectome.md).
 
+Task 006 reproduces the Shiu et al. FlyWire v630 sugar-to-MN9 experiment as a
+separate reference-data validation. Against the official stored
+`sugarR_100Hz.parquet`, the local 30-trial run measured MN9 mean firing rates
+of 67.0667 Hz versus 67.0333 Hz, with all trials active; the original signed
+`Excitatory x Connectivity` column times 0.275 mV was used directly. The
+frequency curve was measured at 10, 25, 50, 100, 150, and 200 Hz, and rose
+from 0 Hz at 10/25 Hz to 93.1333 Hz at 200 Hz. This validates engine behavior
+on the historical v630 graph only; it does not map FlyWire IDs to MaleCNS v1.0
+IDs. See the [Task 006 validation record](docs/plans/2026-09-20-task-006-shiu-v630-sugar-mn9-reproduction.md)
+and [its provenance manifest](data/provenance/shiu-2024-v630.json).
+
 ## Installation
 
 Python 3.12 or newer is required.

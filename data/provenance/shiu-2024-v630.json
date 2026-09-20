@@ -1,0 +1,49 @@
+{
+  "dataset_name": "Shiu et al. 2024 FlyWire v630 model inputs and example output",
+  "release": "main@91bdd1e7dcf193f3e7ca5a8933497fcef63b7960",
+  "source_organization": "philshiu/Drosophila_brain_model",
+  "official_dataset_page": "https://github.com/philshiu/Drosophila_brain_model/tree/91bdd1e7dcf193f3e7ca5a8933497fcef63b7960",
+  "adapter_schema_version": "shiu-v630-reference-adapter-v1",
+  "files": [
+    {
+      "source_url": "https://raw.githubusercontent.com/philshiu/Drosophila_brain_model/91bdd1e7dcf193f3e7ca5a8933497fcef63b7960/2023_03_23_completeness_630_final.csv",
+      "local_filename": "2023_03_23_completeness_630_final.csv",
+      "byte_size": 3057611,
+      "sha256": "e6b71e17671a9bdb05f55e4bc6774640a1418cb7a05125e0fc994ad40f9bfdfb",
+      "validated_at_utc": "2026-09-20T00:00:00+00:00"
+    },
+    {
+      "source_url": "https://raw.githubusercontent.com/philshiu/Drosophila_brain_model/91bdd1e7dcf193f3e7ca5a8933497fcef63b7960/2023_03_23_connectivity_630_final.parquet",
+      "local_filename": "2023_03_23_connectivity_630_final.parquet",
+      "byte_size": 86630944,
+      "sha256": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3",
+      "validated_at_utc": "2026-09-20T00:00:00+00:00"
+    },
+    {
+      "source_url": "https://raw.githubusercontent.com/philshiu/Drosophila_brain_model/91bdd1e7dcf193f3e7ca5a8933497fcef63b7960/example.ipynb",
+      "local_filename": "example.ipynb",
+      "byte_size": 10282,
+      "sha256": "1737c3043af700504c4791c4bfc02d1856bbeb0d36c469832e4b9399dfddda3a",
+      "validated_at_utc": "2026-09-20T00:00:00+00:00"
+    },
+    {
+      "source_url": "https://raw.githubusercontent.com/philshiu/Drosophila_brain_model/91bdd1e7dcf193f3e7ca5a8933497fcef63b7960/model.py",
+      "local_filename": "model.py",
+      "byte_size": 11900,
+      "sha256": "fc45837d7122c6ce2a7f3f2f23c515992e4b232aadb919efabb72337fac88e4e",
+      "validated_at_utc": "2026-09-20T00:00:00+00:00"
+    },
+    {
+      "source_url": "https://raw.githubusercontent.com/philshiu/Drosophila_brain_model/91bdd1e7dcf193f3e7ca5a8933497fcef63b7960/results/example/sugarR_100Hz.parquet",
+      "local_filename": "sugarR_100Hz.parquet",
+      "byte_size": 557849,
+      "sha256": "93722ec03c3faa5a85790d77ed16bdd7f1e38a7c847ed0bc3af3dc2e4d0c3d34",
+      "validated_at_utc": "2026-09-20T00:00:00+00:00"
+    }
+  ],
+  "notes": [
+    "The companion model.py default r_poi is 150 Hz; example.ipynb changes r_poi to 100 Hz for sugarR_100Hz.",
+    "The notebook prose/default example also uses sugarR at 200 Hz in the historical source context; sugarR.parquet is not a quantitative oracle here.",
+    "The v630 adapter uses the source Excitatory x Connectivity column times 0.275 mV and does not invoke the MaleCNS neurotransmitter resolver."
+  ]
+}

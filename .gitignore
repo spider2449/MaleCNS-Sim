@@ -10,5 +10,6 @@ dist/
 # Raw and locally derived connectome data must stay outside Git.
 data/raw/
 data/derived/
+data/reference/shiu-2024/
 *.parquet
 *.feather
