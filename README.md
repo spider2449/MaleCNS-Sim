@@ -41,6 +41,15 @@ curated IDs; the thresholded graph has 864. The curated graph, not the raw
 88-million-segment graph, is the intended future simulation substrate. See the
 [Task 003 validation record](docs/plans/2026-09-20-task-003-curated-neuron-level-connectome-projection.md).
 
+Task 004 adds explicit MaleCNS neurotransmitter resolution and named sign
+policies without changing the unsigned anatomical graph. The curated set has
+163,523 resolved neurotransmitter identities and 3,177 unresolved identities
+under the consensus-first policy. The Shiu-compatible policy signs 97.7988% of
+full curated anatomical weight and 97.9549% of `min_synapses=5` weight; the
+conservative policy signs 79.8927% and 81.2499%, respectively. Signed counts
+are derived data, not functional synaptic weights. See the
+[Task 004 validation record](docs/plans/2026-09-20-task-004-neurotransmitter-sign-policy-and-signed-connectome.md).
+
 ## Installation
 
 Python 3.12 or newer is required.
@@ -82,10 +91,11 @@ release is successfully loaded and inspected.
 ## Scientific limitations
 
 Neuron and edge metadata are preserved where supplied, including
-neurotransmitter predictions and classifications. Neurotransmitters do not
-receive invented excitatory/inhibitory signs. Edge weights are synapse counts;
-the baseline has no membrane state, delays, stochasticity, plasticity,
-neuromodulation, or biological validation.
+neurotransmitter predictions and classifications. Model signs are explicit
+policy assumptions and edge weights remain anatomical synapse counts; signed
+counts are not functional synaptic weights. The baseline has no membrane
+state, delays, stochasticity, plasticity, receptor identity, gap-junction
+representation, or biological validation.
 
 Raw source data and normalized records are separate concepts. Raw or derived
 connectome files should remain outside Git.

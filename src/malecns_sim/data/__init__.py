@@ -9,6 +9,15 @@ from malecns_sim.data.model import (
     NormalizedConnectome,
     NumericNormalizedConnectome,
 )
+from malecns_sim.data.neurotransmitter import (
+    NT_SOURCE_FIELDS,
+    SUPPORTED_NEUROTRANSMITTERS,
+    NeurotransmitterEvidence,
+    NeurotransmitterResolutionPolicy,
+    ResolvedNeurotransmitter,
+    canonical_neurotransmitter,
+    load_male_cns_v1_neurotransmitter_evidence,
+)
 from malecns_sim.data.normalize import (
     EdgeColumns,
     NeuronColumns,
@@ -26,6 +35,13 @@ __all__ = [
     "NeuronRecord",
     "NormalizedConnectome",
     "NumericNormalizedConnectome",
+    "NT_SOURCE_FIELDS",
+    "SUPPORTED_NEUROTRANSMITTERS",
+    "NeurotransmitterEvidence",
+    "NeurotransmitterResolutionPolicy",
+    "ResolvedNeurotransmitter",
+    "canonical_neurotransmitter",
+    "load_male_cns_v1_neurotransmitter_evidence",
     "load_connectome",
     "normalize_connectome",
     "normalize_edges",

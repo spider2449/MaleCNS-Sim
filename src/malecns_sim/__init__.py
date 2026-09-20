@@ -1,4 +1,4 @@
-"""MaleCNS-Sim Task 001 data and graph foundation."""
+"""MaleCNS-Sim deterministic data, graph, and explicit sign-policy layers."""
 
 from malecns_sim.data.model import EdgeRecord, NeuronRecord, NormalizedConnectome
 from malecns_sim.data.normalize import (
@@ -9,6 +9,12 @@ from malecns_sim.data.normalize import (
     normalize_neurons,
 )
 from malecns_sim.graph.sparse import SparseDirectedGraph
+from malecns_sim.sign import (
+    ConservativeSignPolicy,
+    NeurotransmitterSignPolicy,
+    Shiu2024SignPolicy,
+    SignResult,
+)
 
 __all__ = [
     "EdgeColumns",
@@ -17,6 +23,10 @@ __all__ = [
     "NeuronRecord",
     "NormalizedConnectome",
     "SparseDirectedGraph",
+    "ConservativeSignPolicy",
+    "NeurotransmitterSignPolicy",
+    "Shiu2024SignPolicy",
+    "SignResult",
     "normalize_connectome",
     "normalize_edges",
     "normalize_neurons",
