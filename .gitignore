@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+build/
+dist/
+
+# Raw and locally derived connectome data must stay outside Git.
+data/raw/
+data/derived/
+*.parquet
+*.feather
