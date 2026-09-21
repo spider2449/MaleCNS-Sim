@@ -75,8 +75,8 @@ def test_v630_loader_records_schema_and_original_index_mapping(tmp_path):
             "Excitatory": [1, -1],
             "Excitatory x Connectivity": [2, -3],
         }
-    ).to_parquet(tmp_path / "con.parquet")
-    reference = load_shiu_v630(tmp_path / "comp.csv", tmp_path / "con.parquet")
+    ).to_parquet(tmp_path / "connectivity.parquet")
+    reference = load_shiu_v630(tmp_path / "comp.csv", tmp_path / "connectivity.parquet")
     assert reference.neuron_ids.tolist() == ids
     assert reference.source_positions.tolist() == [0, 1]
     assert reference.target_positions.tolist() == [1, 2]
