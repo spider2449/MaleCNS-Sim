@@ -16,6 +16,7 @@ from malecns_sim.dynamics.lif import (
     LIFParameters,
     REFERENCE_LIF_PARAMETERS,
     SimulationResult,
+    _canonicalize_spike_events,
     _validate_duration,
 )
 from malecns_sim.dynamics.stimulus import (
@@ -384,6 +385,7 @@ def simulate_cuda_batch(
         flat_positions = all_positions_host[trial_mask] % n
         output_steps = all_steps_host[trial_mask]
         output_ids = ids[flat_positions]
+        output_ids, output_steps = _canonicalize_spike_events(output_ids, output_steps)
         counts = np.bincount(flat_positions, minlength=n).astype(np.int64)
         digest = hashlib.sha256(
             b"malecns-sim-spike-result-v1" + output_ids.tobytes() + output_steps.tobytes() + counts.tobytes()

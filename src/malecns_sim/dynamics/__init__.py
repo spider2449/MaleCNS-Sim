@@ -7,6 +7,7 @@ from malecns_sim.dynamics.lif import (
     SimulationResult,
     linear_state_update,
     simulate_lif,
+    simulate_lif_active,
 )
 from malecns_sim.dynamics.stimulus import (
     ExplicitStimulus,
@@ -30,6 +31,7 @@ __all__ = [
     "SpikeSchedule",
     "linear_state_update",
     "simulate_lif",
+    "simulate_lif_active",
     "PREPARED_CACHE_SCHEMA_VERSION",
     "PreparedCacheIdentity",
     "PreparedGraphCache",

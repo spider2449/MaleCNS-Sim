@@ -271,6 +271,17 @@ def _freeze(array: np.ndarray) -> np.ndarray:
     return array
 
 
+def _canonicalize_spike_events(
+    spike_neuron_ids: np.ndarray, spike_timesteps: np.ndarray
+) -> tuple[np.ndarray, np.ndarray]:
+    """Return spike events in the backend-independent canonical order."""
+
+    if spike_neuron_ids.size < 2:
+        return spike_neuron_ids, spike_timesteps
+    order = np.lexsort((spike_neuron_ids, spike_timesteps))
+    return spike_neuron_ids[order], spike_timesteps[order]
+
+
 def _validate_duration(duration_ms: float, dt_ms: float) -> int:
     duration = _finite(duration_ms, "duration_ms")
     if duration <= 0.0:
@@ -394,6 +405,7 @@ def simulate_lif(
     else:
         output_ids = np.empty(0, dtype=np.int64)
         output_steps = np.empty(0, dtype=np.int64)
+    output_ids, output_steps = _canonicalize_spike_events(output_ids, output_steps)
     counts = np.bincount(np.searchsorted(ids, output_ids), minlength=n).astype(np.int64)
     graph_payload = {
         "unsigned": projection.unsigned_graph_fingerprint,
@@ -435,4 +447,156 @@ def simulate_lif(
         trace_neuron_ids=trace_positions,
         trace_v_mV=trace_v,
         trace_g_mV=trace_g,
+    )
+
+
+def simulate_lif_active(
+    projection: EffectiveSignedProjection,
+    *,
+    duration_ms: float,
+    stimulus: ExplicitStimulus | PoissonStimulus = ExplicitStimulus(),
+    parameters: LIFParameters = REFERENCE_LIF_PARAMETERS,
+    dt_ms: float = 0.1,
+) -> SimulationResult:
+    """Run the same reference equations while updating only active neurons.
+
+    This execution path keeps the full immutable projection but avoids a dense
+    membrane update for every curated neuron at every timestep. It is used by
+    Task 008 for repeated trials and has no identity or parameter-selection
+    behavior.
+    """
+
+    delay_steps, refractory_steps = parameters.grid_steps(dt_ms)
+    if not np.isclose(
+        projection.synaptic_weight_mV,
+        parameters.synaptic_weight_per_anatomical_synapse_mV,
+        rtol=0.0,
+        atol=1e-15,
+    ):
+        raise ValueError(
+            "projection synaptic weight does not match LIF parameter "
+            "synaptic_weight_per_anatomical_synapse_mV"
+        )
+    steps = _validate_duration(duration_ms, dt_ms)
+    ids = np.asarray(projection.neuron_ids, dtype=np.int64)
+    n = ids.size
+    if isinstance(stimulus, PoissonStimulus):
+        explicit = stimulus.generate(duration_ms, dt_ms, parameters.synaptic_weight_per_anatomical_synapse_mV)
+        stimulus_fingerprint = stimulus.fingerprint
+    elif isinstance(stimulus, ExplicitStimulus):
+        explicit = stimulus
+        stimulus_fingerprint = stimulus.fingerprint
+    else:
+        explicit = ExplicitStimulus(tuple(stimulus))
+        stimulus_fingerprint = explicit.fingerprint
+    input_weight = parameters.synaptic_weight_per_anatomical_synapse_mV if explicit.weight_mV is None else explicit.weight_mV
+    event_batches = schedule_events(explicit, neuron_positions=ids, duration_steps=steps, dt_ms=dt_ms)
+    refractory_free = validate_refractory_ids(explicit.refractory_free_neuron_ids, ids)
+    refractory_free_mask = np.zeros(n, dtype=bool)
+    refractory_free_mask[refractory_free] = True
+    v = np.full(n, parameters.v_rest_mV, dtype=np.float64)
+    g = np.zeros(n, dtype=np.float64)
+    refractory_until = np.full(n, -1, dtype=np.int64)
+    ring_size = max(delay_steps + 1, 1)
+    pending = np.zeros((ring_size, n), dtype=np.float64)
+    pending_counts = np.zeros((ring_size, n), dtype=np.int32)
+    pending_totals = np.zeros(ring_size, dtype=np.int64)
+    active: set[int] = set()
+    spike_ids: list[np.ndarray] = []
+    spike_steps: list[np.ndarray] = []
+    queued_events = 0
+    delivered_events = 0
+    for step in range(steps):
+        for position, _ in zip(*event_batches.get(step, (np.empty(0, dtype=np.int64), np.empty(0, dtype=np.float64)))):
+            position = int(position)
+            if step > refractory_until[position] or refractory_free_mask[position]:
+                v[position] += input_weight
+                active.add(position)
+        slot = step % ring_size
+        if pending_totals[slot]:
+            due_counts = pending_counts[slot]
+            due_positions = np.flatnonzero(due_counts)
+            if due_positions.size:
+                allowed = (step > refractory_until[due_positions]) | refractory_free_mask[due_positions]
+                allowed_positions = due_positions[allowed]
+                g[allowed_positions] += pending[slot, allowed_positions]
+                active.update(int(position) for position in allowed_positions)
+            delivered_events += int(pending_totals[slot])
+            pending[slot].fill(0.0)
+            due_counts.fill(0)
+            pending_totals[slot] = 0
+        if active:
+            active_positions = np.fromiter(active, dtype=np.int64)
+            allowed = (step > refractory_until[active_positions]) | refractory_free_mask[active_positions]
+            allowed_positions = active_positions[allowed]
+            if allowed_positions.size:
+                updated_v, updated_g = linear_state_update(v[allowed_positions], g[allowed_positions], parameters=parameters, dt_ms=dt_ms)
+                v[allowed_positions] = updated_v
+                g[allowed_positions] = updated_g
+            fired_positions = allowed_positions[v[allowed_positions] > parameters.v_threshold_mV]
+            if fired_positions.size:
+                spike_ids.append(ids[fired_positions].copy())
+                spike_steps.append(np.full(fired_positions.size, step + 1, dtype=np.int64))
+                v[fired_positions] = parameters.v_reset_mV
+                g[fired_positions] = 0.0
+                refractory_until[fired_positions] = step + 1 + refractory_steps
+                delivery_step = step + 1 + delay_steps
+                if delivery_step < steps + ring_size:
+                    event_slot = delivery_step % ring_size
+                    for source_position in fired_positions:
+                        start, end = projection.outgoing_indptr[source_position:source_position + 2]
+                        targets = projection.outgoing_targets[start:end]
+                        weights = projection.outgoing_weights_mV[start:end]
+                        np.add.at(pending[event_slot], targets, weights)
+                        np.add.at(pending_counts[event_slot], targets, 1)
+                        queued_events += int(end - start)
+                        pending_totals[event_slot] += int(end - start)
+            keep = (
+                (v[active_positions] != parameters.v_rest_mV)
+                | (g[active_positions] != 0.0)
+                | (refractory_until[active_positions] >= step)
+            )
+            active = set(int(position) for position in active_positions[keep])
+    if spike_ids:
+        output_ids = np.concatenate(spike_ids)
+        output_steps = np.concatenate(spike_steps)
+    else:
+        output_ids = np.empty(0, dtype=np.int64)
+        output_steps = np.empty(0, dtype=np.int64)
+    output_ids, output_steps = _canonicalize_spike_events(output_ids, output_steps)
+    counts = np.bincount(np.searchsorted(ids, output_ids), minlength=n).astype(np.int64)
+    graph_payload = {
+        "unsigned": projection.unsigned_graph_fingerprint,
+        "signed": projection.signed_policy_fingerprint,
+        "effective": projection.fingerprint,
+        "parameters": parameters.fingerprint,
+        "dt_ms": dt_ms,
+        "delay_steps": delay_steps,
+        "refractory_steps": refractory_steps,
+        "duration_ms": duration_ms,
+        "stimulus": stimulus_fingerprint,
+        "silenced": (),
+    }
+    simulation_fingerprint = hashlib.sha256(json.dumps(graph_payload, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+    result_digest = hashlib.sha256(
+        b"malecns-sim-spike-result-v1" + output_ids.tobytes() + output_steps.tobytes() + counts.tobytes()
+    ).hexdigest()
+    for array in (output_ids, output_steps, counts):
+        _freeze(array)
+    return SimulationResult(
+        spike_neuron_ids=output_ids,
+        spike_timesteps=output_steps,
+        spike_counts=counts,
+        duration_ms=float(duration_ms),
+        dt_ms=float(dt_ms),
+        parameter_fingerprint=parameters.fingerprint,
+        unsigned_graph_fingerprint=projection.unsigned_graph_fingerprint,
+        sign_policy_fingerprint=projection.signed_policy_fingerprint,
+        stimulus_fingerprint=stimulus_fingerprint,
+        simulation_fingerprint=simulation_fingerprint,
+        spike_result_digest=result_digest,
+        emitted_spike_count=int(output_ids.size),
+        active_neuron_count=int(np.count_nonzero(counts)),
+        queued_synaptic_event_count=queued_events,
+        delivered_synaptic_event_count=delivered_events,
     )
