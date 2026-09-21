@@ -1,0 +1,42 @@
+{
+  "record": "SOMA_SIDE_DEFINED_EXPLORATORY_RESULT_NOT_APPLICABLE_CURRENT_TASK008_USED_ROOT_SIDE",
+  "task008_result_path": "data/derived/task008-results.json",
+  "task008_result_file_bytes": 262032,
+  "task008_result_file_sha256": "30dc0b57be64a8272a77763bc28d25409b6a6e489e15f87ef91a4ea785a80595",
+  "experiment_fingerprint": "7ebd96522154f09ffa6e913ca0db17c366fe8a1fa7901aa52f28138e10039ef2",
+  "primary_prepared_graph_fingerprint": "d773107682fdc4280e91ac5aa88c8bd2a3a913ee80c85b5e7fc12d7d47ba6495",
+  "current_side_field": "rootSide",
+  "current_population_predicate": [
+    "flywireType == LB3",
+    "superclass == cb_sensory",
+    "class == gustatory",
+    "entryNerve == MxLbN",
+    "rootSide == requested side"
+  ],
+  "backend": "cuda-float64",
+  "full_prepared_cache": "data/derived/task008/full-prepared-graph.npz",
+  "sugar_left_population_fingerprint": "8b1c625ddf719e5853d409223d88b8c997a1fdcffb298210965b0402efce49c7",
+  "sugar_right_population_fingerprint": "2d8c0738a9f95d1e33d9dadae434fa8ed1be12b19778f91948da0fcf63054c0b",
+  "sugar_left_body_ids": [
+    "71254", "78240", "85806", "93290", "128129", "130693", "136183", "140851", "152400", "159772", "160435", "167663", "178321", "178913", "180314", "187776", "190769", "203234", "204726", "236475", "261450", "262567", "272263", "312102", "317616", "512551", "512552", "516216", "531237", "933317", "158893964", "174444965", "349137284", "456838775", "475202322", "553738738", "581710868", "766547228", "786482749", "816904261", "884238775", "1026733570"
+  ],
+  "sugar_right_body_ids": [
+    "33339", "72047", "72059", "92440", "101087", "120303", "122806", "125405", "129171", "140015", "140619", "141663", "142827", "158537", "163597", "166190", "183061", "183084", "187492", "199196", "199308", "201075", "202888", "209155", "210344", "215556", "261048", "374701", "516217", "516218", "518542", "538117", "550065", "557646", "916953", "942168", "104287023", "147619274", "213650853", "245892505", "388541892", "422510463", "885642755"
+  ],
+  "primary_summary_result_digests": [
+    "bdf069ad4cbe4423dd4292807e9ad3d2be11bd0eb159d7bbe0cfe7a4531f4100",
+    "cf665e8092f89e71f2843c0f254254890d6ff12ba4dc15e5aea60485f927c93c",
+    "e92673af283696672ed2245626fbf10e00ed02ce2e49af23ef15d73bdf3336e",
+    "a7a9e9b13171f08c8d271716113840ee104bc8d610d6bcc0fab46068be92d2ed",
+    "1e92a03b8185d328ad3265ba03a53154f5a0435e95751d57a9269cb89bd3e20d",
+    "56e8b7dafd3e9e1ada40b96038c8d0d1258b0db6370a56d415c39bfeaffd71ea"
+  ],
+  "seed_manifest_sha256": {
+    "primary": "c8f124dfc2834089764bed85d6db5980aa36843d70441fb90550b9c3b3811d4f",
+    "mirror_100hz": "4848341243ced83db66312c1c1b8933be4cfa9e80f58cf7805c39f6a5e6f4c47",
+    "normalized_100hz": "c060c3106b57d8559899a8925071ff9e11aa9aff5c3dd96fa3376313f9384469",
+    "min_synapses_5_100hz": "6670d6107048208a539340b4b00fdf5a39d5dbfe6de1ff607edbc26f3c22aec0",
+    "repeat_100hz": "5f34e0528ad3a57f1b50208ef096ba22c660798ee225a3723cdccb6e6f6b0b47"
+  },
+  "note": "The ignored Task 008 result file remains the authoritative retained source for every exact trial seed and digest. This manifest records its integrity before Task 008a work; no Task 008 result was overwritten."
+}

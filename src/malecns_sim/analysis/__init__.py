@@ -60,6 +60,16 @@ from malecns_sim.analysis.task008 import (
     spearman_rank_association,
     summarize_trials,
 )
+from malecns_sim.analysis.task008a import (
+    ANATOMICAL_SENSORY_SIDE_FIELD,
+    CURRENT_TASK008_SIDE_FIELD,
+    LateralityAudit,
+    SugarCandidateAuditRecord,
+    build_laterality_audit,
+    classify_task008_side_rule,
+    load_sugar_candidate_audit,
+    population_symmetric_difference,
+)
 
 __all__ = [
     "BenchmarkResult",
@@ -113,4 +123,12 @@ __all__ = [
     "run_condition_trials",
     "spearman_rank_association",
     "summarize_trials",
+    "ANATOMICAL_SENSORY_SIDE_FIELD",
+    "CURRENT_TASK008_SIDE_FIELD",
+    "LateralityAudit",
+    "SugarCandidateAuditRecord",
+    "build_laterality_audit",
+    "classify_task008_side_rule",
+    "load_sugar_candidate_audit",
+    "population_symmetric_difference",
 ]
