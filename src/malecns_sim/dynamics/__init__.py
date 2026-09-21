@@ -13,6 +13,12 @@ from malecns_sim.dynamics.stimulus import (
     PoissonStimulus,
     SpikeSchedule,
 )
+from malecns_sim.dynamics.cache import (
+    PREPARED_CACHE_SCHEMA_VERSION,
+    PreparedCacheIdentity,
+    PreparedGraphCache,
+    write_prepared_cache,
+)
 
 __all__ = [
     "EffectiveSignedProjection",
@@ -24,4 +30,8 @@ __all__ = [
     "SpikeSchedule",
     "linear_state_update",
     "simulate_lif",
+    "PREPARED_CACHE_SCHEMA_VERSION",
+    "PreparedCacheIdentity",
+    "PreparedGraphCache",
+    "write_prepared_cache",
 ]

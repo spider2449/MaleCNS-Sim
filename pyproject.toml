@@ -18,6 +18,7 @@ dependencies = [
 
 [project.optional-dependencies]
 test = ["pytest>=8.0"]
+gpu = ["cupy-cuda12x==14.2.0"]
 
 [project.scripts]
 malecns-sim = "malecns_sim.cli:main"
