@@ -518,6 +518,7 @@ def simulate_lif_active(
     stimulus: ExplicitStimulus | PoissonStimulus = ExplicitStimulus(),
     parameters: LIFParameters = REFERENCE_LIF_PARAMETERS,
     dt_ms: float = 0.1,
+    silenced_neuron_ids: Iterable[int] = (),
 ) -> SimulationResult:
     """Run the same reference equations while updating only active neurons.
 
@@ -555,6 +556,10 @@ def simulate_lif_active(
     refractory_free = validate_refractory_ids(explicit.refractory_free_neuron_ids, ids)
     refractory_free_mask = np.zeros(n, dtype=bool)
     refractory_free_mask[refractory_free] = True
+    silenced_ids = tuple(int(value) for value in silenced_neuron_ids)
+    silenced = validate_refractory_ids(silenced_ids, ids) if silenced_ids else np.empty(0, dtype=np.int64)
+    silenced_mask = np.zeros(n, dtype=bool)
+    silenced_mask[silenced] = True
     v = np.full(n, parameters.v_rest_mV, dtype=np.float64)
     g = np.zeros(n, dtype=np.float64)
     refractory_until = np.full(n, -1, dtype=np.int64)
@@ -604,7 +609,7 @@ def simulate_lif_active(
                 delivery_step = step + 1 + delay_steps
                 if delivery_step < steps + ring_size:
                     event_slot = delivery_step % ring_size
-                    for source_position in fired_positions:
+                    for source_position in fired_positions[~silenced_mask[fired_positions]]:
                         start, end = projection.outgoing_indptr[source_position:source_position + 2]
                         targets = projection.outgoing_targets[start:end]
                         weights = projection.outgoing_weights_mV[start:end]
@@ -636,7 +641,7 @@ def simulate_lif_active(
         "refractory_steps": refractory_steps,
         "duration_ms": duration_ms,
         "stimulus": stimulus_fingerprint,
-        "silenced": (),
+        "silenced": silenced_ids,
     }
     simulation_fingerprint = hashlib.sha256(json.dumps(graph_payload, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
     result_digest = hashlib.sha256(

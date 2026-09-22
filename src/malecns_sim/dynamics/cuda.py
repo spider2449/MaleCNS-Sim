@@ -236,6 +236,7 @@ def simulate_cuda_batch(
     parameters: LIFParameters = REFERENCE_LIF_PARAMETERS,
     dt_ms: float = 0.1,
     silenced_neuron_ids: Iterable[int] = (),
+    silenced_neuron_ids_by_trial: Iterable[Iterable[int]] | None = None,
     trace_neuron_ids: Iterable[int] = (),
     collect_sparse_trace: bool = False,
     cuda_graph: CudaGraph | None = None,
@@ -278,7 +279,14 @@ def simulate_cuda_batch(
         dtype=np.float64,
     )
     silenced_ids_input = tuple(silenced_neuron_ids)
+    per_trial_silenced_input = None if silenced_neuron_ids_by_trial is None else tuple(
+        tuple(int(value) for value in values) for values in silenced_neuron_ids_by_trial
+    )
+    if per_trial_silenced_input is not None and len(per_trial_silenced_input) != batch_size:
+        raise ValueError("per-trial silencing count must match stimulus count")
     trace_ids_input = tuple(trace_neuron_ids)
+    if per_trial_silenced_input is not None and silenced_ids_input:
+        raise ValueError("use either shared or per-trial silencing, not both")
     silenced = validate_refractory_ids(silenced_ids_input, ids) if silenced_ids_input else np.empty(0, dtype=np.int64)
     trace_positions = validate_refractory_ids(trace_ids_input, ids) if trace_ids_input else np.empty(0, dtype=np.int64)
     ring_size = max(delay_steps + 1, 1)
@@ -296,7 +304,12 @@ def simulate_cuda_batch(
         if item[3].size:
             refractory_free[trial, cp.asarray(item[3])] = True
     silenced_mask = cp.zeros((batch_size, n), dtype=cp.bool_)
-    if silenced.size:
+    if per_trial_silenced_input is not None:
+        for trial, trial_ids in enumerate(per_trial_silenced_input):
+            trial_positions = validate_refractory_ids(trial_ids, ids) if trial_ids else np.empty(0, dtype=np.int64)
+            if trial_positions.size:
+                silenced_mask[trial, cp.asarray(trial_positions)] = True
+    elif silenced.size:
         silenced_mask[:, cp.asarray(silenced)] = True
     trace_v = cp.empty((batch_size, trace_positions.size, steps + 1), dtype=cp.float64) if trace_positions.size else None
     trace_g = cp.empty((batch_size, trace_positions.size, steps + 1), dtype=cp.float64) if trace_positions.size else None
@@ -412,7 +425,10 @@ def simulate_cuda_batch(
         digest = hashlib.sha256(
             b"malecns-sim-spike-result-v1" + output_ids.tobytes() + output_steps.tobytes() + counts.tobytes()
         ).hexdigest()
-        silenced_ids = tuple(int(ids[position]) for position in silenced) if silenced.size else ()
+        if per_trial_silenced_input is not None:
+            silenced_ids = tuple(sorted(per_trial_silenced_input[trial]))
+        else:
+            silenced_ids = tuple(int(ids[position]) for position in silenced) if silenced.size else ()
         simulation_fingerprint = _simulation_fingerprint(
             projection,
             parameters,
@@ -479,6 +495,7 @@ def simulate_cuda(
     parameters: LIFParameters = REFERENCE_LIF_PARAMETERS,
     dt_ms: float = 0.1,
     silenced_neuron_ids: Iterable[int] = (),
+    silenced_neuron_ids_by_trial: Iterable[Iterable[int]] | None = None,
     trace_neuron_ids: Iterable[int] = (),
     collect_sparse_trace: bool = False,
     cuda_graph: CudaGraph | None = None,
@@ -492,6 +509,7 @@ def simulate_cuda(
         parameters=parameters,
         dt_ms=dt_ms,
         silenced_neuron_ids=silenced_neuron_ids,
+        silenced_neuron_ids_by_trial=silenced_neuron_ids_by_trial,
         trace_neuron_ids=trace_neuron_ids,
         collect_sparse_trace=collect_sparse_trace,
         cuda_graph=cuda_graph,
