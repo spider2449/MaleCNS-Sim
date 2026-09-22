@@ -2014,6 +2014,7 @@ def _delivery_payload(
         "task016_fingerprint": task016_specification_fingerprint(),
         "specification_fingerprint": task016_specification_fingerprint(),
         "checkpoint_fingerprint": checkpoint.fingerprint,
+        "checkpoint_state": "RESUMED" if int(ledger_before["completed_unit_count"]) else "INITIALIZED",
         "checkpoint_path": str(checkpoint.path),
         "canonical_pending_unit_order": "variant_id -> stimulus_side -> analysis_kind -> trial_index -> candidate_id",
         "selected_variant_ids": list(selected_variant_ids),

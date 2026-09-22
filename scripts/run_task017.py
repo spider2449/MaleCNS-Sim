@@ -53,6 +53,8 @@ def main() -> None:
                 "output": str(OUTPUT),
                 "report": str(REPORT),
                 "specification_fingerprint": result["specification_fingerprint"],
+                "task016_fingerprint": result.get("task016_fingerprint"),
+                "checkpoint_state": result.get("checkpoint_state"),
                 "current_scientific_status": result.get("current_scientific_status", result.get("global_classification")),
                 "current_status": result.get("current_status"),
                 "checkpoint_fingerprint": result.get("checkpoint_fingerprint"),
