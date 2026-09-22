@@ -30,6 +30,8 @@ from malecns_sim.analysis.task017 import (
     task016_specification_fingerprint,
     task017_scoring_allowed,
 )
+from malecns_sim.analysis.task008 import PreparedNetwork
+from malecns_sim.analysis.task017 import FrozenSchedule, _run_or_reuse_series
 from malecns_sim.dynamics import simulate_lif, simulate_lif_active
 from malecns_sim.dynamics.cuda import cuda_available, simulate_cuda_batch, upload_graph
 
@@ -231,6 +233,77 @@ def test_task017_incomplete_journal_tail_is_recovered(tmp_path):
     resumed = Task017Checkpoint(path, identity)
     assert resumed.get(key, unit_fingerprint) is not None
     assert path.read_bytes().endswith(b"\n")
+
+
+def test_task017_bounded_execution_resume_matches_uninterrupted(tmp_path, monkeypatch):
+    identity = {"schema": "execution-resume"}
+    projection = _synthetic_projection(0.275)
+    prepared = PreparedNetwork(
+        projection=projection,
+        signed_connectome=None,
+        graph_name="synthetic",
+        preparation_seconds=0.0,
+        graph_loading_seconds=0.0,
+        setup_seconds=0.0,
+        memory_bytes=0,
+        fingerprint=projection.fingerprint,
+        cache_fingerprint="cache",
+    )
+    stimuli = _synthetic_fixtures(0.275)[:2]
+    schedules = tuple(FrozenSchedule(index, index, stimulus, stimulus.fingerprint) for index, stimulus in enumerate(stimuli))
+
+    def fake_run_batch(prepared_network, variant, batch_stimuli, **kwargs):
+        return tuple(
+            simulate_lif(
+                prepared_network.projection,
+                duration_ms=kwargs["duration_ms"],
+                stimulus=stimulus,
+                silenced_neuron_ids=kwargs.get("silenced_ids", ()),
+            )
+            for stimulus in batch_stimuli
+        )
+
+    monkeypatch.setattr("malecns_sim.analysis.task017._run_batch", fake_run_batch)
+
+    resumable_path = tmp_path / "resumable.jsonl"
+    first = Task017Checkpoint(resumable_path, identity)
+    with pytest.raises(ExecutionBudgetExceeded):
+        _run_or_reuse_series(
+            first,
+            REFERENCE_VARIANT,
+            prepared,
+            schedules,
+            side="LEFT",
+            candidate_id=BASELINE_CANDIDATE_ID,
+            analysis_kind=TASK010_BASELINE,
+            duration_ms=10.0,
+            budget=ExecutionBudget(max_units=1),
+        )
+    resumed = Task017Checkpoint(resumable_path, identity)
+    _run_or_reuse_series(
+        resumed,
+        REFERENCE_VARIANT,
+        prepared,
+        schedules,
+        side="LEFT",
+        candidate_id=BASELINE_CANDIDATE_ID,
+        analysis_kind=TASK010_BASELINE,
+        duration_ms=10.0,
+        budget=ExecutionBudget(max_units=1),
+    )
+
+    uninterrupted = Task017Checkpoint(tmp_path / "uninterrupted.jsonl", identity)
+    _run_or_reuse_series(
+        uninterrupted,
+        REFERENCE_VARIANT,
+        prepared,
+        schedules,
+        side="LEFT",
+        candidate_id=BASELINE_CANDIDATE_ID,
+        analysis_kind=TASK010_BASELINE,
+        duration_ms=10.0,
+    )
+    assert [item["result_digest"] for item in resumed.records()] == [item["result_digest"] for item in uninterrupted.records()]
 
 
 def test_task017_effective_parameter_and_stale_sidecar_rejection(tmp_path):
