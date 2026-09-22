@@ -5,15 +5,18 @@ MaleCNS connectome into a deterministic executable graph for later
 sensorimotor research.
 
 It is not a complete brain simulation, a biological claim that a connectome is
-an executable brain, or an embodied fly environment. It has a deterministic
-CPU reference Leaky Integrate-and-Fire engine, but no sensory/body coupling,
-FlyGym, NeuroMechFly, MuJoCo, GPU backend, or learning system.
+an executable brain, or an embodied fly environment. It has deterministic CPU
+reference and optional CUDA float64 Leaky Integrate-and-Fire engines, but no
+sensory/body coupling, FlyGym, NeuroMechFly, MuJoCo, or learning system.
 
 ## Current stage
 
-Task 001 establishes data ingestion, normalization, sparse CSR graph
-construction, deterministic scalar propagation, and small measurements. The
-propagation operation is a graph test primitive, not a neural model.
+Task 011 is the current scientific endpoint. Task 012 records the authoritative
+research checkpoint, and Task 013 prepares that checkpoint for reproducible
+release. The validated state covers the curated MaleCNS v1.0 graph, explicit
+sign policies, reference LIF dynamics, the Shiu v630 reference reproduction,
+Task 008 dynamics, Task 009 structural analysis, Task 010 frozen-candidate
+perturbations, and the Task 011 temporal mechanism audit.
 
 The intended pipeline is:
 
@@ -23,7 +26,7 @@ MaleCNS data
 → sparse directed graph
 → signed anatomical projection
 → reference LIF dynamics
-→ future FlyGym integration
+→ validated reference dynamics
 ```
 
 Task 005 adds the CPU reference dynamics layer. It uses the published Shiu
@@ -82,9 +85,29 @@ both candidates. This is an identity result, not a firing or behavioral
 claim. See the [Task 007 mapping record](docs/plans/2026-09-20-task-007-malecns-sugar-mn9-homolog-mapping.md)
 and [its compact evidence summaries](data/provenance/task007-mapping-summary.json).
 
+The complete release gate, including scientific nonclaims, fingerprints,
+environment, and reproduction commands, is in the
+[MaleCNS release gate](docs/MALECNS_RELEASE_GATE.md). The authoritative
+scientific state is in the
+[research checkpoint](docs/MALECNS_RESEARCH_CHECKPOINT.md).
+
 ## Installation
 
 Python 3.12 or newer is required.
+
+```powershell
+uv sync --extra test
+```
+
+The optional CUDA environment used by the validated GPU analyses is:
+
+```powershell
+uv sync --extra test --extra gpu
+uv run python -c "import cupy; print(cupy.__version__, cupy.cuda.runtime.runtimeGetVersion())"
+```
+
+The GPU extra is pinned to `cupy-cuda12x==14.2.0`. Python 3.12 or newer is
+required. A pip-based CPU installation is also supported:
 
 ```powershell
 python -m pip install -e ".[test]"
@@ -93,13 +116,48 @@ python -m pip install -e ".[test]"
 ## Tests
 
 ```powershell
-python -m pytest
-python -m compileall src
+uv run pytest
+uv run python -m compileall src scripts tests
 git diff --check
 ```
 
-Tests use small in-memory fixtures and do not download or require real MaleCNS
-data.
+The accepted checkpoint baseline is `183 passed, 1 skipped`. Unit tests use
+small in-memory fixtures and do not download real MaleCNS data.
+
+## Reproducing the validated analyses
+
+Place the exact raw files named by
+[`data/provenance/male-cns-v1.0.json`](data/provenance/male-cns-v1.0.json)
+under `data/raw/male-cns/v1.0`, then verify them:
+
+```powershell
+uv run malecns-sim data verify `
+  --manifest data/provenance/male-cns-v1.0.json `
+  --root data/raw/male-cns/v1.0
+```
+
+The validated Task 008 run prepares and caches the full curated graph and the
+separate `min_synapses=5` sensitivity graph:
+
+```powershell
+uv run python scripts/run_task008.py
+```
+
+This script requests CUDA and writes ignored cache/result files under
+`data/derived/`. Task 009, 010, and 011 are then run in order:
+
+```powershell
+uv run python scripts/run_task009.py
+uv run python scripts/run_task010.py
+uv run python scripts/run_task011.py
+```
+
+Task 010 and Task 011 load and validate the full Task 008 cache. Task 006 has
+no standalone runner in this repository; its pinned Shiu v630 inputs, API
+entry points, and nonclaims are documented in the
+[release gate](docs/MALECNS_RELEASE_GATE.md) and the
+[Task 006 plan](docs/plans/2026-09-20-task-006-shiu-v630-sugar-mn9-reproduction.md).
+The repository does not claim a one-command reproduction for Task 006.
 
 ## Local data inspection and benchmarking
 
@@ -125,9 +183,10 @@ release is successfully loaded and inspected.
 Neuron and edge metadata are preserved where supplied, including
 neurotransmitter predictions and classifications. Model signs are explicit
 policy assumptions and edge weights remain anatomical synapse counts; signed
-counts are not functional synaptic weights. The baseline has no membrane
-state, delays, stochasticity, plasticity, receptor identity, gap-junction
-representation, or biological validation.
+counts are not functional synaptic weights. The LIF model is a deterministic
+reference model, not a complete biological neuron model, and the simulation
+does not provide biological causality, behavioral validation, receptor-level
+physiology, or an embodied fly environment.
 
 Raw source data and normalized records are separate concepts. Raw or derived
 connectome files should remain outside Git.
