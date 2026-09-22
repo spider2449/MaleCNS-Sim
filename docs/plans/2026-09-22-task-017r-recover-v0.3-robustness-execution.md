@@ -2,7 +2,8 @@
 
 Status: TECHNICAL RECOVERY IMPLEMENTED. The complete Task 017 scientific matrix
 was not executed by Task 017R. The current scientific classification remains
-`INDETERMINATE` and no sensitivity or invariance claim is made.
+`INDETERMINATE` and no sensitivity or invariance claim is made. Final execution
+state: `BLOCKED_EXECUTION_BUDGET`.
 
 ## Phase 0 - preserved failed execution
 
@@ -139,7 +140,11 @@ No partial scientific interpretation occurred. No Task 018 work started.
 
 ## Delivery boundary
 
-The implementation and tests are eligible for a technical Task 017R commit
-after final diff and scope review. No derived JSON checkpoint or robustness
-result is to be committed under the existing data/derived policy. No push,
-tag, release, or follow-up scientific task is authorized by this report.
+The recovery implementation was committed as
+`bcd16d5406ce507ac6804a56b484c28f9ade3135` with message
+`feat: make robustness matrix execution resumable` and pushed to `origin/master`.
+At that verification point, local HEAD, tracking `origin/master`, and live
+remote `origin/master` all equaled that commit. The worktree was clean, the
+stash was empty, no tag pointed at the commit, and no release or Task 018 work
+occurred. No derived JSON checkpoint or robustness result was committed under
+the existing `data/derived` policy.
