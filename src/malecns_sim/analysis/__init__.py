@@ -70,6 +70,18 @@ from malecns_sim.analysis.task008a import (
     load_sugar_candidate_audit,
     population_symmetric_difference,
 )
+from malecns_sim.analysis.task011 import (
+    FIXED_TRIAL_INDICES,
+    FROZEN_TASK011_CANDIDATES,
+    Divergence,
+    classify_mechanism,
+    detect_first_divergence,
+    fixed_trial_indices,
+    frozen_task011_candidate_ids,
+    propagation_windows,
+    run_task011,
+    validate_intervention_scope,
+)
 
 __all__ = [
     "BenchmarkResult",
@@ -131,4 +143,14 @@ __all__ = [
     "classify_task008_side_rule",
     "load_sugar_candidate_audit",
     "population_symmetric_difference",
+    "FIXED_TRIAL_INDICES",
+    "FROZEN_TASK011_CANDIDATES",
+    "Divergence",
+    "classify_mechanism",
+    "detect_first_divergence",
+    "fixed_trial_indices",
+    "frozen_task011_candidate_ids",
+    "propagation_windows",
+    "run_task011",
+    "validate_intervention_scope",
 ]

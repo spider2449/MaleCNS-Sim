@@ -239,6 +239,34 @@ class EffectiveSignedProjection:
 
 
 @dataclass(frozen=True, slots=True)
+class SparseTrace:
+    """Per-timestep sparse delivery summaries for observational diagnostics."""
+
+    timesteps: np.ndarray
+    delivered_event_counts: np.ndarray
+    delivered_weight_sums_mV: np.ndarray
+    delivered_abs_weight_sums_mV: np.ndarray
+    delivered_target_counts: np.ndarray
+    delivered_target_index_sums: np.ndarray
+
+    @property
+    def fingerprint(self) -> str:
+        digest = hashlib.sha256(b"malecns-sim-sparse-trace-v1")
+        for array in (
+            self.timesteps,
+            self.delivered_event_counts,
+            self.delivered_weight_sums_mV,
+            self.delivered_abs_weight_sums_mV,
+            self.delivered_target_counts,
+            self.delivered_target_index_sums,
+        ):
+            digest.update(str(array.dtype).encode("ascii"))
+            canonical = np.round(array, decimals=10) if array.dtype.kind == "f" else array
+            digest.update(canonical.tobytes(order="C"))
+        return digest.hexdigest()
+
+
+@dataclass(frozen=True, slots=True)
 class SimulationResult:
     """Compact immutable spike output and audit metadata."""
 
@@ -260,6 +288,7 @@ class SimulationResult:
     trace_neuron_ids: np.ndarray = field(default_factory=lambda: np.empty(0, dtype=np.int64))
     trace_v_mV: np.ndarray | None = None
     trace_g_mV: np.ndarray | None = None
+    sparse_trace: SparseTrace | None = None
 
     @property
     def spike_times_ms(self) -> np.ndarray:
@@ -298,6 +327,7 @@ def simulate_lif(
     dt_ms: float = 0.1,
     silenced_neuron_ids: Iterable[int] = (),
     trace_neuron_ids: Iterable[int] = (),
+    collect_sparse_trace: bool = False,
 ) -> SimulationResult:
     """Run the reference model using active spikes and a dense delay ring.
 
@@ -353,6 +383,12 @@ def simulate_lif(
     spike_steps: list[np.ndarray] = []
     trace_v = np.empty((trace_positions.size, steps + 1), dtype=np.float64) if trace_positions.size else None
     trace_g = np.empty((trace_positions.size, steps + 1), dtype=np.float64) if trace_positions.size else None
+    sparse_timesteps = np.arange(steps, dtype=np.int64) if collect_sparse_trace else None
+    sparse_delivered_counts = np.zeros(steps, dtype=np.int64) if collect_sparse_trace else None
+    sparse_delivered_weights = np.zeros(steps, dtype=np.float64) if collect_sparse_trace else None
+    sparse_delivered_abs_weights = np.zeros(steps, dtype=np.float64) if collect_sparse_trace else None
+    sparse_delivered_targets = np.zeros(steps, dtype=np.int64) if collect_sparse_trace else None
+    sparse_delivered_target_indices = np.zeros(steps, dtype=np.int64) if collect_sparse_trace else None
     if trace_v is not None:
         trace_v[:, 0] = v[trace_positions]
         trace_g[:, 0] = g[trace_positions]
@@ -367,6 +403,17 @@ def simulate_lif(
         slot = step % ring_size
         due = pending[slot]
         if np.any(due) or np.any(pending_event_counts[slot]):
+            if collect_sparse_trace:
+                due_counts = pending_event_counts[slot]
+                sparse_delivered_counts[step] = due_counts.sum(dtype=np.int64)
+                sparse_delivered_weights[step] = due.sum(dtype=np.float64)
+                sparse_delivered_abs_weights[step] = np.abs(due).sum(dtype=np.float64)
+                target_positions = np.flatnonzero(due_counts)
+                sparse_delivered_targets[step] = target_positions.size
+                sparse_delivered_target_indices[step] = np.dot(
+                    target_positions.astype(np.int64),
+                    due_counts[target_positions].astype(np.int64),
+                )
             delivered_events += int(pending_event_counts[slot].sum(dtype=np.int64))
             allowed = (step > refractory_until) | refractory_free_mask
             g[allowed] += due[allowed]
@@ -428,6 +475,19 @@ def simulate_lif(
     if trace_v is not None:
         _freeze(trace_v)
         _freeze(trace_g)
+    sparse_trace = None
+    if collect_sparse_trace:
+        arrays = (
+            sparse_timesteps,
+            sparse_delivered_counts,
+            sparse_delivered_weights,
+            sparse_delivered_abs_weights,
+            sparse_delivered_targets,
+            sparse_delivered_target_indices,
+        )
+        for array in arrays:
+            _freeze(array)
+        sparse_trace = SparseTrace(*arrays)
     return SimulationResult(
         spike_neuron_ids=output_ids,
         spike_timesteps=output_steps,
@@ -444,9 +504,10 @@ def simulate_lif(
         active_neuron_count=int(np.count_nonzero(counts)),
         queued_synaptic_event_count=queued_events,
         delivered_synaptic_event_count=delivered_events,
-        trace_neuron_ids=trace_positions,
+        trace_neuron_ids=ids[trace_positions].copy() if trace_positions.size else np.empty(0, dtype=np.int64),
         trace_v_mV=trace_v,
         trace_g_mV=trace_g,
+        sparse_trace=sparse_trace,
     )
 
 

@@ -16,6 +16,7 @@ from malecns_sim.dynamics.lif import (
     LIFParameters,
     REFERENCE_LIF_PARAMETERS,
     SimulationResult,
+    SparseTrace,
     _canonicalize_spike_events,
     _validate_duration,
 )
@@ -236,6 +237,7 @@ def simulate_cuda_batch(
     dt_ms: float = 0.1,
     silenced_neuron_ids: Iterable[int] = (),
     trace_neuron_ids: Iterable[int] = (),
+    collect_sparse_trace: bool = False,
     cuda_graph: CudaGraph | None = None,
 ) -> tuple[SimulationResult, ...]:
     """Run independent trials while sharing the uploaded CSR graph.
@@ -298,6 +300,13 @@ def simulate_cuda_batch(
         silenced_mask[:, cp.asarray(silenced)] = True
     trace_v = cp.empty((batch_size, trace_positions.size, steps + 1), dtype=cp.float64) if trace_positions.size else None
     trace_g = cp.empty((batch_size, trace_positions.size, steps + 1), dtype=cp.float64) if trace_positions.size else None
+    sparse_timesteps = np.arange(steps, dtype=np.int64) if collect_sparse_trace else None
+    sparse_delivered_counts = cp.zeros((batch_size, steps), dtype=cp.int64) if collect_sparse_trace else None
+    sparse_delivered_weights = cp.zeros((batch_size, steps), dtype=cp.float64) if collect_sparse_trace else None
+    sparse_delivered_abs_weights = cp.zeros((batch_size, steps), dtype=cp.float64) if collect_sparse_trace else None
+    sparse_delivered_targets = cp.zeros((batch_size, steps), dtype=cp.int64) if collect_sparse_trace else None
+    sparse_delivered_target_indices = cp.zeros((batch_size, steps), dtype=cp.int64) if collect_sparse_trace else None
+    target_positions = cp.arange(n, dtype=cp.int64)
     if trace_positions.size:
         trace_v[:, :, 0] = v[:, cp.asarray(trace_positions)]
         trace_g[:, :, 0] = g[:, cp.asarray(trace_positions)]
@@ -330,6 +339,14 @@ def simulate_cuda_batch(
         due = pending[:, slot, :]
         due_counts = pending_counts[:, slot, :]
         allowed = (step > refractory_until) | refractory_free
+        if collect_sparse_trace:
+            sparse_delivered_counts[:, step] = cp.sum(due_counts, axis=1, dtype=cp.int64)
+            sparse_delivered_weights[:, step] = cp.sum(due, axis=1, dtype=cp.float64)
+            sparse_delivered_abs_weights[:, step] = cp.sum(cp.abs(due), axis=1, dtype=cp.float64)
+            sparse_delivered_targets[:, step] = cp.count_nonzero(due_counts, axis=1)
+            sparse_delivered_target_indices[:, step] = cp.sum(
+                due_counts * target_positions[None, :], axis=1, dtype=cp.int64
+            )
         g = cp.where(allowed, g + due, g)
         delivered_counts += cp.sum(due_counts, axis=1, dtype=cp.int64)
         due.fill(0.0)
@@ -379,6 +396,11 @@ def simulate_cuda_batch(
     all_steps_host = cp.asnumpy(all_steps)
     queued_host = cp.asnumpy(queued_counts).astype(np.int64)
     delivered_host = cp.asnumpy(delivered_counts)
+    sparse_delivered_counts_host = cp.asnumpy(sparse_delivered_counts) if collect_sparse_trace else None
+    sparse_delivered_weights_host = cp.asnumpy(sparse_delivered_weights) if collect_sparse_trace else None
+    sparse_delivered_abs_weights_host = cp.asnumpy(sparse_delivered_abs_weights) if collect_sparse_trace else None
+    sparse_delivered_targets_host = cp.asnumpy(sparse_delivered_targets) if collect_sparse_trace else None
+    sparse_delivered_target_indices_host = cp.asnumpy(sparse_delivered_target_indices) if collect_sparse_trace else None
     results: list[SimulationResult] = []
     for trial, item in enumerate(prepared):
         trial_mask = (all_positions_host // n) == trial
@@ -405,11 +427,24 @@ def simulate_cuda_batch(
         trace_g_host = cp.asnumpy(trace_g[trial]) if trace_g is not None else None
         for array in (output_ids, output_steps, counts):
             array.flags.writeable = False
-        trace_ids = trace_positions.copy()
+        trace_ids = ids[trace_positions].copy() if trace_positions.size else np.empty(0, dtype=np.int64)
         trace_ids.flags.writeable = False
         if trace_v_host is not None:
             trace_v_host.flags.writeable = False
             trace_g_host.flags.writeable = False
+        sparse_trace = None
+        if collect_sparse_trace:
+            sparse_arrays = (
+                sparse_timesteps.copy(),
+                sparse_delivered_counts_host[trial],
+                sparse_delivered_weights_host[trial],
+                sparse_delivered_abs_weights_host[trial],
+                sparse_delivered_targets_host[trial],
+                sparse_delivered_target_indices_host[trial],
+            )
+            for array in sparse_arrays:
+                array.flags.writeable = False
+            sparse_trace = SparseTrace(*sparse_arrays)
         results.append(
             SimulationResult(
                 spike_neuron_ids=output_ids,
@@ -430,6 +465,7 @@ def simulate_cuda_batch(
                 trace_neuron_ids=trace_ids,
                 trace_v_mV=trace_v_host,
                 trace_g_mV=trace_g_host,
+                sparse_trace=sparse_trace,
             )
         )
     return tuple(results)
@@ -444,6 +480,7 @@ def simulate_cuda(
     dt_ms: float = 0.1,
     silenced_neuron_ids: Iterable[int] = (),
     trace_neuron_ids: Iterable[int] = (),
+    collect_sparse_trace: bool = False,
     cuda_graph: CudaGraph | None = None,
 ) -> SimulationResult:
     """Run one trial on CUDA with the same public result shape as the CPU."""
@@ -456,5 +493,6 @@ def simulate_cuda(
         dt_ms=dt_ms,
         silenced_neuron_ids=silenced_neuron_ids,
         trace_neuron_ids=trace_neuron_ids,
+        collect_sparse_trace=collect_sparse_trace,
         cuda_graph=cuda_graph,
     )[0]
