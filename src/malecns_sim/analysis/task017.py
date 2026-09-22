@@ -91,7 +91,15 @@ from malecns_sim.sign import ConservativeSignPolicy, Shiu2024SignPolicy
 TASK017_SCHEMA = "malecns-sim-task017-v0.3-mechanism-robustness-v1"
 TASK016_SPEC_SCHEMA = "malecns-sim-task016-frozen-specification-v1"
 TASK016_PLAN = "docs/plans/2026-09-22-task-016-v0.3-mechanism-robustness-preregistration.md"
-STARTING_HEAD = "77f0c1110df766d93198275845e29749e53c9d04"
+STARTING_HEAD = "b32c116b704cf94bcfd9d9e601eddfdd70271a2f"
+TASK017B_DELIVERY_PATHS = frozenset(
+    {
+        "docs/plans/2026-09-22-task-017b-bounded-batch-delivery.md",
+        "scripts/run_task017.py",
+        "src/malecns_sim/analysis/task017.py",
+        "tests/test_task017.py",
+    }
+)
 V020_SOURCE = "470f8274a1b002c9f27fd430984b6755c9f56759"
 TASK011_RESULT_DIGEST = "fbe9b0a7f138fdbdea7a0a8cf22e8493596a9299dd9b9f6c3537c48f550dece4"
 TASK010_RESULT_DIGEST = "20f8d8f6432070625a9ca6a4ddb32b2cc0a68f380102dbd3ee5e35bbcc578e45"
@@ -125,8 +133,40 @@ class DuplicateUnitExecution(CheckpointError):
     """Raised when a completed unit is written more than once."""
 
 
+class StaleSidecar(CheckpointError):
+    """Raised when a result sidecar is not referenced by the journal."""
+
+
 class ExecutionBudgetExceeded(RuntimeError):
     """Raised before starting another unit when the declared wall-clock budget ends."""
+
+
+@dataclass(slots=True)
+class ExecutionBudget:
+    """Bound scientific execution without interrupting a backend batch."""
+
+    max_units: int | None = None
+    deadline: float | None = None
+    executed_units: int = 0
+
+    def batch_limit(self, pending_count: int) -> int:
+        if pending_count <= 0:
+            return 0
+        if self.max_units is None:
+            return pending_count
+        remaining = self.max_units - self.executed_units
+        if remaining <= 0:
+            raise ExecutionBudgetExceeded("maximum scientific unit count reached")
+        return min(pending_count, remaining)
+
+    def before_batch(self, batch_count: int) -> None:
+        if self.deadline is not None and time.perf_counter() >= self.deadline:
+            raise ExecutionBudgetExceeded("maximum runtime reached before the next scientific unit")
+        if self.max_units is not None and self.executed_units + batch_count > self.max_units:
+            raise ExecutionBudgetExceeded("maximum scientific unit count reached")
+
+    def committed(self, batch_count: int) -> None:
+        self.executed_units += batch_count
 
 
 @dataclass(frozen=True, slots=True)
@@ -168,6 +208,26 @@ def expected_task017_unit_keys() -> tuple[Task017UnitKey, ...]:
                 for candidate_id in FROZEN_TASK011_CANDIDATES:
                     keys.append(Task017UnitKey(variant.variant_id, candidate_id, side, trial_index, TASK011_INTERVENTION))
     return tuple(sorted(keys, key=lambda item: (item.variant_id, item.stimulus_side, item.analysis_kind, item.trial_index, item.candidate_id)))
+
+
+def pending_task017_unit_keys(
+    checkpoint: "Task017Checkpoint",
+    *,
+    variant_ids: Sequence[str] | None = None,
+    analysis_kinds: Sequence[str] | None = None,
+) -> tuple[Task017UnitKey, ...]:
+    """Return missing keys in the single canonical matrix order."""
+
+    allowed_variants = None if variant_ids is None else set(variant_ids)
+    allowed_analyses = None if analysis_kinds is None else set(analysis_kinds)
+    completed = {Task017UnitKey(**record["key"]).token for record in checkpoint.records()}
+    return tuple(
+        key
+        for key in expected_task017_unit_keys()
+        if (allowed_variants is None or key.variant_id in allowed_variants)
+        and (allowed_analyses is None or key.analysis_kind in allowed_analyses)
+        and key.token not in completed
+    )
 
 
 def _freeze_result_arrays(result: SimulationResult) -> None:
@@ -295,16 +355,34 @@ class Task017Checkpoint:
         self._duplicates = 0
         self._load_or_initialize()
 
+    @property
+    def fingerprint(self) -> str:
+        return _digest("malecns-sim-task017-checkpoint-state-v1", self.identity)
+
     def _append(self, record: Mapping[str, object]) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.path.open("a", encoding="utf-8", newline="\n") as handle:
             handle.write(json.dumps(record, sort_keys=True, separators=(",", ":")) + "\n")
+            handle.flush()
+            os.fsync(handle.fileno())
 
     def _load_or_initialize(self) -> None:
         if not self.path.exists():
             self._append({"kind": CHECKPOINT_HEADER_KIND, "schema": CHECKPOINT_SCHEMA, "identity": self.identity})
+            stale = sorted(path.name for path in self.artifact_dir.glob("*.npz"))
+            if stale:
+                raise StaleSidecar(f"unreferenced checkpoint sidecar(s): {stale}")
             return
-        lines = self.path.read_text(encoding="utf-8").splitlines()
+        raw = self.path.read_bytes()
+        if not raw:
+            raise CheckpointError("checkpoint is empty")
+        if not raw.endswith(b"\n"):
+            last_separator = raw.rfind(b"\n")
+            if last_separator < 0:
+                raise CheckpointError("checkpoint has no complete journal record")
+            self.path.write_bytes(raw[: last_separator + 1])
+            raw = raw[: last_separator + 1]
+        lines = raw.decode("utf-8").splitlines()
         if not lines:
             raise CheckpointError("checkpoint is empty")
         header = json.loads(lines[0])
@@ -324,7 +402,16 @@ class Task017Checkpoint:
             token = key.token
             if token in self._records:
                 raise CheckpointError(f"duplicate checkpoint record for {token}")
+            metadata = record.get("metadata")
+            if not isinstance(metadata, dict) or _digest(CHECKPOINT_UNIT_PREFIX, metadata) != record.get("unit_fingerprint"):
+                raise CheckpointIdentityMismatch(f"checkpoint unit metadata fingerprint mismatch for {token}")
+            if metadata.get("key") != key.as_record():
+                raise CheckpointIdentityMismatch(f"checkpoint unit metadata key mismatch for {token}")
             self._records[token] = record
+        referenced = {str(record["result_artifact"]) for record in self._records.values()}
+        stale = sorted(path.name for path in self.artifact_dir.glob("*.npz") if path.name not in referenced)
+        if stale:
+            raise StaleSidecar(f"unreferenced checkpoint sidecar(s): {stale}")
 
     @property
     def duplicate_count(self) -> int:
@@ -336,6 +423,11 @@ class Task017Checkpoint:
             return None
         if record["unit_fingerprint"] != unit_fingerprint:
             raise CheckpointIdentityMismatch(f"unit fingerprint mismatch for {key.token}")
+        metadata = record.get("metadata")
+        if not isinstance(metadata, dict) or _digest(CHECKPOINT_UNIT_PREFIX, metadata) != record["unit_fingerprint"]:
+            raise CheckpointIdentityMismatch(f"checkpoint unit metadata fingerprint mismatch for {key.token}")
+        if metadata.get("key") != key.as_record():
+            raise CheckpointIdentityMismatch(f"checkpoint unit metadata key mismatch for {key.token}")
         artifact = self.artifact_dir / str(record["result_artifact"])
         if not artifact.exists():
             raise CheckpointError(f"checkpoint artifact missing for {key.token}")
@@ -882,7 +974,7 @@ def _run_or_reuse_cases(
     cases: Sequence[tuple[str, str, Sequence[str]]],
     trace_ids: Sequence[str] = (),
     collect_sparse_trace: bool = False,
-    deadline: float | None = None,
+    budget: ExecutionBudget | None = None,
 ) -> dict[tuple[str, str], SimulationResult]:
     """Reuse exact units or execute one deterministic independent-trial batch."""
 
@@ -904,26 +996,27 @@ def _run_or_reuse_cases(
             missing.append((key, metadata, unit_fingerprint, tuple(silenced_ids)))
         else:
             results[(candidate_id, analysis_kind)] = reused
-    if missing:
-        if deadline is not None and time.perf_counter() >= deadline:
-            raise ExecutionBudgetExceeded("Task 017 execution budget reached before another scientific batch")
+    offset = 0
+    while offset < len(missing):
+        limit = len(missing) - offset if budget is None else budget.batch_limit(len(missing) - offset)
+        batch = missing[offset : offset + limit]
+        if budget is not None:
+            budget.before_batch(len(batch))
         batch_results = _run_batch(
             prepared,
             variant,
-            tuple(schedule.stimulus for _ in missing),
+            tuple(schedule.stimulus for _ in batch),
             duration_ms=duration_ms,
-            silenced_ids_by_trial=tuple(item[3] for item in missing),
+            silenced_ids_by_trial=tuple(item[3] for item in batch),
             trace_ids=trace_ids,
             collect_sparse_trace=collect_sparse_trace,
         )
-        for (key, metadata, unit_fingerprint, silenced_ids), result in zip(missing, batch_results):
-            checkpoint.put(
-                key,
-                unit_fingerprint=unit_fingerprint,
-                metadata=metadata,
-                result=result,
-            )
+        for (key, metadata, unit_fingerprint, _silenced_ids), result in zip(batch, batch_results):
+            checkpoint.put(key, unit_fingerprint=unit_fingerprint, metadata=metadata, result=result)
             results[(key.candidate_id, key.analysis_kind)] = result
+        if budget is not None:
+            budget.committed(len(batch))
+        offset += len(batch)
     return results
 
 
@@ -941,6 +1034,7 @@ def _run_or_reuse_series(
     trace_ids: Sequence[str] = (),
     collect_sparse_trace: bool = False,
     deadline: float | None = None,
+    budget: ExecutionBudget | None = None,
 ) -> tuple[SimulationResult, ...]:
     """Reuse or batch one candidate/side series while checkpointing each unit."""
 
@@ -962,21 +1056,27 @@ def _run_or_reuse_series(
             missing.append((schedule, key, metadata, unit_fingerprint))
         else:
             results[schedule.trial_index] = reused
-    if missing:
-        if deadline is not None and time.perf_counter() >= deadline:
-            raise ExecutionBudgetExceeded("Task 017 execution budget reached before another scientific batch")
+    offset = 0
+    while offset < len(missing):
+        limit = len(missing) - offset if budget is None else budget.batch_limit(len(missing) - offset)
+        batch = missing[offset : offset + limit]
+        if budget is not None:
+            budget.before_batch(len(batch))
         batch_results = _run_batch(
             prepared,
             variant,
-            tuple(item[0].stimulus for item in missing),
+            tuple(item[0].stimulus for item in batch),
             duration_ms=duration_ms,
             silenced_ids=silenced_ids,
             trace_ids=trace_ids,
             collect_sparse_trace=collect_sparse_trace,
         )
-        for (schedule, key, metadata, unit_fingerprint), result in zip(missing, batch_results):
+        for (schedule, key, metadata, unit_fingerprint), result in zip(batch, batch_results):
             checkpoint.put(key, unit_fingerprint=unit_fingerprint, metadata=metadata, result=result)
             results[schedule.trial_index] = result
+        if budget is not None:
+            budget.committed(len(batch))
+        offset += len(batch)
     return tuple(results[item.trial_index] for item in schedules)
 
 
@@ -1188,7 +1288,7 @@ def _task010_variant(
     schedules_by_side: Mapping[str, tuple[FrozenSchedule, ...]],
     manifest: FrozenCandidateManifest,
     checkpoint: Task017Checkpoint,
-    deadline: float | None = None,
+    budget: ExecutionBudget | None = None,
 ) -> dict[str, object]:
     populations = ((PRIMARY_CONDITION, "LEFT"), (MIRROR_CONDITION, "RIGHT"))
     baseline_trials: dict[str, tuple[Task010Trial, ...]] = {}
@@ -1204,7 +1304,7 @@ def _task010_variant(
             candidate_id=BASELINE_CANDIDATE_ID,
             analysis_kind=TASK010_BASELINE,
             duration_ms=DURATION_MS,
-            deadline=deadline,
+            budget=budget,
         )
         baseline_trials[side] = _trials_from_results(
             "baseline",
@@ -1214,19 +1314,26 @@ def _task010_variant(
             tuple(baseline_rows),
             prepared.projection,
         )
-        for candidate_id in FROZEN_TASK011_CANDIDATES:
-            intervention_results[(candidate_id, side)] = _run_or_reuse_series(
+        intervention_rows = {candidate_id: [] for candidate_id in FROZEN_TASK011_CANDIDATES}
+        for schedule in schedules:
+            cases = tuple(
+                (candidate_id, TASK010_INTERVENTION, (candidate_id,))
+                for candidate_id in sorted(FROZEN_TASK011_CANDIDATES)
+            )
+            case_results = _run_or_reuse_cases(
                 checkpoint,
                 variant,
                 prepared,
-                schedules,
+                schedule,
                 side=side,
-                candidate_id=candidate_id,
-                analysis_kind=TASK010_INTERVENTION,
                 duration_ms=DURATION_MS,
-                silenced_ids=(candidate_id,),
-                deadline=deadline,
+                cases=cases,
+                budget=budget,
             )
+            for candidate_id in FROZEN_TASK011_CANDIDATES:
+                intervention_rows[candidate_id].append(case_results[(candidate_id, TASK010_INTERVENTION)])
+        for candidate_id, rows in intervention_rows.items():
+            intervention_results[(candidate_id, side)] = tuple(rows)
     outcomes: dict[str, object] = {}
     for candidate_id in FROZEN_TASK011_CANDIDATES:
         for condition, side in populations:
@@ -1276,7 +1383,7 @@ def _task011_variant(
     manifest: FrozenCandidateManifest,
     annotation_path: str | Path,
     checkpoint: Task017Checkpoint,
-    deadline: float | None = None,
+    budget: ExecutionBudget | None = None,
 ) -> dict[str, object]:
     trace_ids = FROZEN_TASK011_CANDIDATES + (MN9_L, MN9_R)
     populations = ((PRIMARY_CONDITION, "LEFT"), (MIRROR_CONDITION, "RIGHT"))
@@ -1295,23 +1402,30 @@ def _task011_variant(
             duration_ms=TRACE_DURATION_MS,
             trace_ids=trace_ids,
             collect_sparse_trace=True,
-            deadline=deadline,
+            budget=budget,
         )
-        for candidate_id in FROZEN_TASK011_CANDIDATES:
-            silenced_by_case[(candidate_id, side)] = _run_or_reuse_series(
+        intervention_rows = {candidate_id: [] for candidate_id in FROZEN_TASK011_CANDIDATES}
+        for schedule in schedules:
+            cases = tuple(
+                (candidate_id, TASK011_INTERVENTION, (candidate_id,))
+                for candidate_id in sorted(FROZEN_TASK011_CANDIDATES)
+            )
+            case_results = _run_or_reuse_cases(
                 checkpoint,
                 variant,
                 prepared,
-                schedules,
+                schedule,
                 side=side,
-                candidate_id=candidate_id,
-                analysis_kind=TASK011_INTERVENTION,
                 duration_ms=TRACE_DURATION_MS,
-                silenced_ids=(candidate_id,),
+                cases=cases,
                 trace_ids=trace_ids,
                 collect_sparse_trace=True,
-                deadline=deadline,
+                budget=budget,
             )
+            for candidate_id in FROZEN_TASK011_CANDIDATES:
+                intervention_rows[candidate_id].append(case_results[(candidate_id, TASK011_INTERVENTION)])
+        for candidate_id, rows in intervention_rows.items():
+            silenced_by_case[(candidate_id, side)] = tuple(rows)
     annotation_by_id = _annotation_map(annotation_path)
     candidate_rows = {item.body_id: asdict(item) for item in manifest.candidates}
     structural = {
@@ -1625,9 +1739,13 @@ def _git_state() -> dict[str, object]:
 def _starting_state(task016_path: str | Path) -> dict[str, object]:
     raw = Path(task016_path).read_bytes()
     state = _git_state()
-    if state["head"] != STARTING_HEAD:
-        raise RuntimeError(f"Task 017 starting HEAD mismatch: {state['head']}")
-    if state["origin_master"] != STARTING_HEAD or state["live_origin_master"] != STARTING_HEAD:
+    def run(*args: str) -> str:
+        return subprocess.check_output(("git", *args), text=True).strip()
+
+    delivery_paths = set(run("diff", "--name-only", f"{STARTING_HEAD}..{state['head']}").splitlines())
+    if state["head"] != STARTING_HEAD and not delivery_paths.issubset(TASK017B_DELIVERY_PATHS):
+        raise RuntimeError(f"Task 017 authoritative source drift: {sorted(delivery_paths)}")
+    if state["origin_master"] != state["head"] or state["live_origin_master"] != state["head"]:
         raise RuntimeError("Task 017 local/remote HEAD mismatch")
     if state["stash_entries_before_execution"]:
         raise RuntimeError("Task 017 requires an empty stash at the execution gate")
@@ -1635,6 +1753,8 @@ def _starting_state(task016_path: str | Path) -> dict[str, object]:
         raise RuntimeError("Task 017 v0.2.0 peel mismatch")
     return {
         "starting_head": STARTING_HEAD,
+        "execution_head": state["head"],
+        "delivery_paths_since_authoritative_start": sorted(delivery_paths),
         "git_state": state,
         "task016_plan_sha256": hashlib.sha256(raw).hexdigest(),
         "task016_section_3_head_in_document": "1113c0c8a5ff3c8799a10b9b4b01199b6e5c2ec9",
@@ -1658,10 +1778,10 @@ def _variant_task_result(
     annotation_path: str | Path,
     technical: Mapping[str, object],
     checkpoint: Task017Checkpoint,
-    deadline: float | None = None,
+    budget: ExecutionBudget | None = None,
 ) -> dict[str, object]:
-    task010 = _task010_variant(variant, prepared, schedules, manifest, checkpoint, deadline)
-    temporal = _task011_variant(variant, prepared, schedules, manifest, annotation_path, checkpoint, deadline)
+    task010 = _task010_variant(variant, prepared, schedules, manifest, checkpoint, budget)
+    temporal = _task011_variant(variant, prepared, schedules, manifest, annotation_path, checkpoint, budget)
     return {
         "variant": variant.as_record(),
         "validity": {"status": "VALID", "exclusion_reason": None},
@@ -1849,6 +1969,96 @@ def _scientific_report_lines(payload: Mapping[str, object]) -> list[str]:
     return lines
 
 
+def _resolve_variant_ids(selection: str | None) -> tuple[str, ...]:
+    if selection is None or selection.lower() == "all":
+        return tuple(item.variant_id for item in VARIANT_CONFIGURATIONS)
+    normalized = selection.upper()
+    for item in VARIANT_CONFIGURATIONS:
+        if normalized in {item.variant_id.upper(), item.variant_id.split("_", 1)[0].upper()}:
+            return (item.variant_id,)
+    raise ValueError(f"unknown Task 017 variant: {selection}")
+
+
+def _resolve_analysis_kinds(selection: str) -> tuple[str, ...]:
+    normalized = selection.lower()
+    if normalized == "all":
+        return (TASK010_BASELINE, TASK010_INTERVENTION, TASK011_BASELINE, TASK011_INTERVENTION)
+    if normalized == "task010":
+        return (TASK010_BASELINE, TASK010_INTERVENTION)
+    if normalized == "task011":
+        return (TASK011_BASELINE, TASK011_INTERVENTION)
+    raise ValueError(f"unknown Task 017 analysis selector: {selection}")
+
+
+def _delivery_payload(
+    *,
+    checkpoint: Task017Checkpoint,
+    ledger_before: Mapping[str, object],
+    ledger_after: Mapping[str, object],
+    budget: ExecutionBudget,
+    selected_variant_ids: Sequence[str],
+    selected_analysis_kinds: Sequence[str],
+    elapsed_seconds: float,
+    reason: str | None = None,
+) -> dict[str, object]:
+    missing = int(ledger_after["missing_unit_count"])
+    status = "READY_FOR_INCREMENTAL_EXECUTION" if missing else "MATRIX_COMPLETE_PENDING_SCIENTIFIC_REVIEW"
+    if reason is not None and budget.executed_units == 0:
+        status = "BLOCKED_EXECUTION_BUDGET"
+    return {
+        "task": "017B",
+        "status": "INDETERMINATE",
+        "current_scientific_status": "INDETERMINATE",
+        "current_status": status,
+        "reason": reason,
+        "task016_fingerprint": task016_specification_fingerprint(),
+        "specification_fingerprint": task016_specification_fingerprint(),
+        "checkpoint_fingerprint": checkpoint.fingerprint,
+        "checkpoint_path": str(checkpoint.path),
+        "canonical_pending_unit_order": "variant_id -> stimulus_side -> analysis_kind -> trial_index -> candidate_id",
+        "selected_variant_ids": list(selected_variant_ids),
+        "selected_analysis_kinds": list(selected_analysis_kinds),
+        "expected_unit_count": int(ledger_after["expected_unit_count"]),
+        "completed_before_invocation": int(ledger_before["completed_unit_count"]),
+        "executed_this_invocation": int(budget.executed_units),
+        "completed_after_invocation": int(ledger_after["completed_unit_count"]),
+        "missing_count": missing,
+        "duplicate_count": int(ledger_after["duplicate_count"]),
+        "invalid_technical_unit_count": int(ledger_after["invalid_technical_unit_count"]),
+        "per_variant_completion": ledger_after["per_variant_completion"],
+        "per_analysis_completion": ledger_after["per_analysis_completion"],
+        "elapsed_seconds": elapsed_seconds,
+        "execution_ledger": dict(ledger_after),
+    }
+
+
+def write_task017_delivery_report(path: str | Path, payload: Mapping[str, object]) -> None:
+    """Write only technical delivery state; never write partial scientific conclusions."""
+
+    target = Path(path)
+    lines = [
+        "# Task 017B - Bounded Batch Delivery",
+        "",
+        "Current scientific status: `INDETERMINATE`.",
+        "",
+        f"- Task 016 fingerprint: `{payload['task016_fingerprint']}`",
+        f"- Checkpoint fingerprint: `{payload['checkpoint_fingerprint']}`",
+        f"- Expected units: `{payload['expected_unit_count']}`",
+        f"- Completed before invocation: `{payload['completed_before_invocation']}`",
+        f"- Executed this invocation: `{payload['executed_this_invocation']}`",
+        f"- Completed after invocation: `{payload['completed_after_invocation']}`",
+        f"- Missing: `{payload['missing_count']}`",
+        f"- Duplicate attempts: `{payload['duplicate_count']}`",
+        f"- Invalid technical units: `{payload['invalid_technical_unit_count']}`",
+        f"- Current status: `{payload['current_status']}`",
+        f"- Elapsed seconds: `{payload['elapsed_seconds']:.3f}`",
+        "- No partial robustness conclusion was computed.",
+        "- No Task 018 work was started.",
+    ]
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
 def run_task017(
     annotation_path: str | Path,
     neurotransmitter_path: str | Path,
@@ -1862,13 +2072,34 @@ def run_task017(
     report_path: str | Path,
     checkpoint_path: str | Path | None = None,
     execution_budget_seconds: float | None = 1800.0,
+    *,
+    variant_id: str | None = None,
+    analysis: str = "all",
+    max_units: int | None = None,
+    max_runtime_minutes: float | None = None,
 ) -> dict[str, object]:
-    """Execute the frozen matrix through resumable raw, ledger, and scoring stages."""
+    """Execute or deliver bounded raw units from the frozen Task 017 matrix."""
 
     if not cuda_available():
         raise RuntimeError("Task 017 requires the validated CUDA backend")
+    if max_units is not None and max_units < 0:
+        raise ValueError("max_units must be non-negative")
+    if max_runtime_minutes is not None and max_runtime_minutes < 0:
+        raise ValueError("max_runtime_minutes must be non-negative")
+    selected_variant_ids = _resolve_variant_ids(variant_id)
+    selected_analysis_kinds = _resolve_analysis_kinds(analysis)
     execution_started = time.perf_counter()
-    deadline = None if execution_budget_seconds is None else execution_started + float(execution_budget_seconds)
+    if max_runtime_minutes is not None:
+        deadline = execution_started + float(max_runtime_minutes) * 60.0
+    else:
+        deadline = None if execution_budget_seconds is None else execution_started + float(execution_budget_seconds)
+    budget = ExecutionBudget(max_units=max_units, deadline=deadline)
+    bounded_delivery = (
+        tuple(selected_variant_ids) != tuple(item.variant_id for item in VARIANT_CONFIGURATIONS)
+        or tuple(selected_analysis_kinds) != (TASK010_BASELINE, TASK010_INTERVENTION, TASK011_BASELINE, TASK011_INTERVENTION)
+        or max_units is not None
+        or max_runtime_minutes is not None
+    )
     state = _starting_state(TASK016_PLAN)
     manifest = load_frozen_candidate_manifest(task009_results_path)
     if not set(FROZEN_CANDIDATES).issubset(set(manifest.body_ids)):
@@ -1890,55 +2121,89 @@ def run_task017(
         _checkpoint_identity(state, identities, reference_network),
     )
     expected_units = expected_task017_unit_keys()
+    ledger_before = checkpoint.ledger(expected_units)
 
     reference_schedules = {
         "LEFT": _make_frozen_schedules(reference_network, identities, identities.sugar_left, side="L", trial_indices=range(TASK010_TRIAL_COUNT), synaptic_weight_mV=0.275),
         "RIGHT": _make_frozen_schedules(reference_network, identities, identities.sugar_right, side="R", trial_indices=range(TASK010_TRIAL_COUNT), synaptic_weight_mV=0.275),
     }
-    technical_reference = _validate_variant_technical(REFERENCE_VARIANT, reference_network, reference_schedules["LEFT"][0])
-    try:
-        reference_task010 = _task010_variant(REFERENCE_VARIANT, reference_network, reference_schedules, manifest, checkpoint, deadline)
-        reference_temporal = _task011_variant(REFERENCE_VARIANT, reference_network, reference_schedules, manifest, annotation_path, checkpoint, deadline)
-    except ExecutionBudgetExceeded as error:
-        ledger = checkpoint.ledger(expected_units)
-        return write_task017_indeterminate_stop(
-            output_path,
-            report_path,
-            reason=str(error),
-            completed_phase="Stage A raw execution stopped before matrix completion",
-            ledger=ledger,
-            starting_state=state,
-        )
-    reference_result = {
-        "variant": REFERENCE_VARIANT.as_record(),
-        "validity": {"status": "VALID", "exclusion_reason": None},
-        "technical": technical_reference,
-        "task010": reference_task010,
-        "temporal": reference_temporal,
-    }
-    replay = _reference_replay_gate(reference_result, task008_results_path, task010_results_path, task011_results_path)
-    variant_results: dict[str, object] = {REFERENCE_VARIANT.variant_id: reference_result}
-    for variant in VARIANT_CONFIGURATIONS[1:]:
-        signed = signed_shiu if variant.sign_policy_id == "Shiu2024SignPolicy" else _load_signed_connectome(annotation_path, neurotransmitter_path, weights_path, variant.sign_policy)
-        prepared = _variant_network(variant, signed, cache, cache_path, cuda_graph_cache)
-        schedules = _reweight_frozen_schedules(reference_schedules, variant.synaptic_weight_mV)
-        if any(item.event_schedule_fingerprint != reference_schedules[side][item.trial_index].event_schedule_fingerprint for side, rows in schedules.items() for item in rows):
-            raise RuntimeError(f"{variant.variant_id} changed a frozen event schedule")
+    variant_results: dict[str, object] = {}
+    technical_results: dict[str, object] = {}
+    for variant in VARIANT_CONFIGURATIONS:
+        if variant.variant_id not in selected_variant_ids:
+            continue
+        if variant is REFERENCE_VARIANT:
+            prepared = reference_network
+            schedules = reference_schedules
+        else:
+            signed = signed_shiu if variant.sign_policy_id == "Shiu2024SignPolicy" else _load_signed_connectome(annotation_path, neurotransmitter_path, weights_path, variant.sign_policy)
+            prepared = _variant_network(variant, signed, cache, cache_path, cuda_graph_cache)
+            schedules = _reweight_frozen_schedules(reference_schedules, variant.synaptic_weight_mV)
+            if any(item.event_schedule_fingerprint != reference_schedules[side][item.trial_index].event_schedule_fingerprint for side, rows in schedules.items() for item in rows):
+                raise RuntimeError(f"{variant.variant_id} changed a frozen event schedule")
         technical = _validate_variant_technical(variant, prepared, schedules["LEFT"][0])
+        technical_results[variant.variant_id] = technical
         try:
-            variant_results[variant.variant_id] = _variant_task_result(
-                variant, prepared, schedules, manifest, annotation_path, technical, checkpoint, deadline
-            )
+            task010 = None
+            temporal = None
+            if TASK010_BASELINE in selected_analysis_kinds:
+                task010 = _task010_variant(variant, prepared, schedules, manifest, checkpoint, budget)
+            if TASK011_BASELINE in selected_analysis_kinds:
+                temporal = _task011_variant(variant, prepared, schedules, manifest, annotation_path, checkpoint, budget)
         except ExecutionBudgetExceeded as error:
-            ledger = checkpoint.ledger(expected_units)
-            return write_task017_indeterminate_stop(
-                output_path,
-                report_path,
+            if not bounded_delivery:
+                ledger = checkpoint.ledger(expected_units)
+                return write_task017_indeterminate_stop(
+                    output_path,
+                    report_path,
+                    reason=str(error),
+                    completed_phase=f"Stage A raw execution stopped during {variant.variant_id}",
+                    ledger=ledger,
+                    starting_state=state,
+                )
+            ledger_after = checkpoint.ledger(expected_units)
+            payload = _delivery_payload(
+                checkpoint=checkpoint,
+                ledger_before=ledger_before,
+                ledger_after=ledger_after,
+                budget=budget,
+                selected_variant_ids=selected_variant_ids,
+                selected_analysis_kinds=selected_analysis_kinds,
+                elapsed_seconds=time.perf_counter() - execution_started,
                 reason=str(error),
-                completed_phase=f"Stage A raw execution stopped during {variant.variant_id}",
-                ledger=ledger,
-                starting_state=state,
             )
+            _write_json(output_path, payload)
+            write_task017_delivery_report(report_path, payload)
+            return payload
+        if not bounded_delivery:
+            if task010 is None or temporal is None:
+                raise RuntimeError("full Task 017 execution requires both analyses")
+            variant_results[variant.variant_id] = {
+                "variant": variant.as_record(),
+                "validity": {"status": "VALID", "exclusion_reason": None},
+                "technical": technical,
+                "task010": task010,
+                "temporal": temporal,
+            }
+
+    if bounded_delivery:
+        ledger_after = checkpoint.ledger(expected_units)
+        payload = _delivery_payload(
+            checkpoint=checkpoint,
+            ledger_before=ledger_before,
+            ledger_after=ledger_after,
+            budget=budget,
+            selected_variant_ids=selected_variant_ids,
+            selected_analysis_kinds=selected_analysis_kinds,
+            elapsed_seconds=time.perf_counter() - execution_started,
+        )
+        _write_json(output_path, payload)
+        write_task017_delivery_report(report_path, payload)
+        return payload
+
+    reference_result = variant_results[REFERENCE_VARIANT.variant_id]
+    replay = _reference_replay_gate(reference_result, task008_results_path, task010_results_path, task011_results_path)
+    technical_reference = technical_results[REFERENCE_VARIANT.variant_id]
 
     ledger = checkpoint.ledger(expected_units)
     if not task017_scoring_allowed(ledger):

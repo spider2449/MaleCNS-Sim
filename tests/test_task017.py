@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 import pytest
 
 from malecns_sim.analysis.task017 import (
@@ -7,17 +9,24 @@ from malecns_sim.analysis.task017 import (
     REFERENCE_VARIANT,
     TASK010_BASELINE,
     TASK010_INTERVENTION,
+    ExecutionBudget,
+    ExecutionBudgetExceeded,
+    CheckpointError,
     CheckpointIdentityMismatch,
+    CHECKPOINT_UNIT_PREFIX,
     DuplicateUnitExecution,
+    StaleSidecar,
     Task017Checkpoint,
     Task017UnitKey,
     VARIANT_CONFIGURATIONS,
     _compatibility_score,
+    _digest,
     _result_equal,
     _trace_equal,
     _synthetic_fixtures,
     _synthetic_projection,
     expected_task017_unit_keys,
+    pending_task017_unit_keys,
     task016_specification_fingerprint,
     task017_scoring_allowed,
 )
@@ -94,13 +103,14 @@ def test_task017_checkpoint_resume_duplicate_and_fingerprint_rejection(tmp_path)
         "candidate_identity": BASELINE_CANDIDATE_ID,
         "stimulus_identity": "LEFT",
     }
-    checkpoint.put(key, unit_fingerprint="unit-a", metadata=metadata, result=result)
+    unit_fingerprint = _digest(CHECKPOINT_UNIT_PREFIX, metadata)
+    checkpoint.put(key, unit_fingerprint=unit_fingerprint, metadata=metadata, result=result)
     resumed = Task017Checkpoint(path, identity)
-    reused = resumed.get(key, "unit-a")
+    reused = resumed.get(key, unit_fingerprint)
     assert reused is not None
     assert _result_equal(result, reused)
     with pytest.raises(DuplicateUnitExecution):
-        resumed.put(key, unit_fingerprint="unit-a", metadata=metadata, result=result)
+        resumed.put(key, unit_fingerprint=unit_fingerprint, metadata=metadata, result=result)
     assert resumed.duplicate_count == 1
     with pytest.raises(CheckpointIdentityMismatch):
         resumed.get(key, "unit-b")
@@ -152,8 +162,9 @@ def test_task017_checkpoint_preserves_trace_payloads(tmp_path):
         "candidate_identity": key.candidate_id,
         "stimulus_identity": key.stimulus_side,
     }
-    checkpoint.put(key, unit_fingerprint="trace-unit", metadata=metadata, result=result)
-    reused = Task017Checkpoint(path, identity).get(key, "trace-unit")
+    unit_fingerprint = _digest(CHECKPOINT_UNIT_PREFIX, metadata)
+    checkpoint.put(key, unit_fingerprint=unit_fingerprint, metadata=metadata, result=result)
+    reused = Task017Checkpoint(path, identity).get(key, unit_fingerprint)
     assert reused is not None
     assert _trace_equal(result, reused)
 
@@ -170,6 +181,108 @@ def test_task017_incomplete_matrix_is_not_scoring_eligible():
     complete = dict(ledger, completed_unit_count=3168, missing_unit_count=0, matrix_complete=True)
     assert task017_scoring_allowed(complete)
     assert not task017_scoring_allowed(dict(complete, invalid_technical_unit_count=1))
+
+
+def test_task017_bounded_budget_and_canonical_pending_resume(tmp_path):
+    identity = {"schema": "bounded", "specification_fingerprint": task016_specification_fingerprint()}
+    path = tmp_path / "bounded.jsonl"
+    checkpoint = Task017Checkpoint(path, identity)
+    projection = _synthetic_projection(0.275)
+    result = simulate_lif(projection, duration_ms=10.0, stimulus=_synthetic_fixtures(0.275)[0])
+    keys = expected_task017_unit_keys()[:2]
+    for key in keys:
+        metadata = {
+            "key": key.as_record(),
+            "effective_model_parameters": REFERENCE_VARIANT.as_record(),
+            "schedule_fingerprint": "schedule",
+            "candidate_identity": key.candidate_id,
+            "stimulus_identity": key.stimulus_side,
+        }
+        checkpoint.put(key, unit_fingerprint=_digest(CHECKPOINT_UNIT_PREFIX, metadata), metadata=metadata, result=result)
+    resumed = Task017Checkpoint(path, identity)
+    pending = pending_task017_unit_keys(resumed)
+    assert pending[0] == expected_task017_unit_keys()[2]
+    budget = ExecutionBudget(max_units=2)
+    assert budget.batch_limit(10) == 2
+    budget.before_batch(2)
+    budget.committed(2)
+    with pytest.raises(ExecutionBudgetExceeded):
+        budget.batch_limit(1)
+
+
+def test_task017_incomplete_journal_tail_is_recovered(tmp_path):
+    identity = {"schema": "tail"}
+    path = tmp_path / "tail.jsonl"
+    checkpoint = Task017Checkpoint(path, identity)
+    projection = _synthetic_projection(0.275)
+    result = simulate_lif(projection, duration_ms=10.0, stimulus=_synthetic_fixtures(0.275)[0])
+    key = Task017UnitKey("R0", BASELINE_CANDIDATE_ID, "LEFT", 0, TASK010_BASELINE)
+    metadata = {
+        "key": key.as_record(),
+        "effective_model_parameters": REFERENCE_VARIANT.as_record(),
+        "schedule_fingerprint": "schedule",
+        "candidate_identity": key.candidate_id,
+        "stimulus_identity": key.stimulus_side,
+    }
+    unit_fingerprint = _digest(CHECKPOINT_UNIT_PREFIX, metadata)
+    checkpoint.put(key, unit_fingerprint=unit_fingerprint, metadata=metadata, result=result)
+    with path.open("ab") as handle:
+        handle.write(b'{"kind":"completed_unit"')
+    resumed = Task017Checkpoint(path, identity)
+    assert resumed.get(key, unit_fingerprint) is not None
+    assert path.read_bytes().endswith(b"\n")
+
+
+def test_task017_effective_parameter_and_stale_sidecar_rejection(tmp_path):
+    identity = {"schema": "reject"}
+    path = tmp_path / "reject.jsonl"
+    checkpoint = Task017Checkpoint(path, identity)
+    projection = _synthetic_projection(0.275)
+    result = simulate_lif(projection, duration_ms=10.0, stimulus=_synthetic_fixtures(0.275)[0])
+    key = Task017UnitKey("R0", BASELINE_CANDIDATE_ID, "LEFT", 0, TASK010_BASELINE)
+    metadata = {
+        "key": key.as_record(),
+        "effective_model_parameters": REFERENCE_VARIANT.as_record(),
+        "schedule_fingerprint": "schedule",
+        "candidate_identity": key.candidate_id,
+        "stimulus_identity": key.stimulus_side,
+    }
+    unit_fingerprint = _digest(CHECKPOINT_UNIT_PREFIX, metadata)
+    checkpoint.put(key, unit_fingerprint=unit_fingerprint, metadata=metadata, result=result)
+    records = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+    records[1]["metadata"]["effective_model_parameters"] = {"variant_id": "MISMATCH"}
+    path.write_text("\n".join(json.dumps(item, sort_keys=True) for item in records) + "\n", encoding="utf-8")
+    with pytest.raises(CheckpointIdentityMismatch):
+        Task017Checkpoint(path, identity)
+
+    clean_path = tmp_path / "stale.jsonl"
+    clean = Task017Checkpoint(clean_path, identity)
+    clean.artifact_dir.mkdir()
+    (clean.artifact_dir / "stale.npz").write_bytes(b"stale")
+    with pytest.raises(StaleSidecar):
+        Task017Checkpoint(clean_path, identity)
+
+
+def test_task017_duplicate_journal_record_is_rejected(tmp_path):
+    identity = {"schema": "duplicate-journal"}
+    path = tmp_path / "duplicate.jsonl"
+    checkpoint = Task017Checkpoint(path, identity)
+    projection = _synthetic_projection(0.275)
+    result = simulate_lif(projection, duration_ms=10.0, stimulus=_synthetic_fixtures(0.275)[0])
+    key = Task017UnitKey("R0", BASELINE_CANDIDATE_ID, "LEFT", 0, TASK010_BASELINE)
+    metadata = {
+        "key": key.as_record(),
+        "effective_model_parameters": REFERENCE_VARIANT.as_record(),
+        "schedule_fingerprint": "schedule",
+        "candidate_identity": key.candidate_id,
+        "stimulus_identity": key.stimulus_side,
+    }
+    checkpoint.put(key, unit_fingerprint=_digest(CHECKPOINT_UNIT_PREFIX, metadata), metadata=metadata, result=result)
+    record = path.read_text(encoding="utf-8").splitlines()[1]
+    with path.open("a", encoding="utf-8", newline="\n") as handle:
+        handle.write(record + "\n")
+    with pytest.raises(CheckpointError):
+        Task017Checkpoint(path, identity)
 
 
 def test_task017_active_cpu_silencing_and_trace_invariance():
