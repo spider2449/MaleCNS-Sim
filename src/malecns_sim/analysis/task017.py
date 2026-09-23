@@ -12,7 +12,7 @@ import sys
 import tempfile
 import time
 from dataclasses import asdict, dataclass
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from typing import Iterable, Mapping, Sequence
 
 import numpy as np
@@ -101,8 +101,10 @@ TASK017_DELIVERY_PATHS = frozenset(
     }
 )
 TASK017_EXECUTION_DOCUMENTATION = re.compile(
-    r"^docs/plans/\d{4}-\d{2}-\d{2}-task-017(?:[a-z]+)?-"
-    r"(?:bounded|continue|execute|incremental|recover|report)(?:-[a-z0-9-]+)?\.md$"
+    r"^(?:(?:\d{4}-\d{2}-\d{2})-)?task-017[a-z]*-"
+    r"(?:bounded|complete|continue|execute|incremental|recover|report)"
+    r"(?:[-_.a-z0-9]+)?\.md$",
+    re.IGNORECASE,
 )
 V020_SOURCE = "470f8274a1b002c9f27fd430984b6755c9f56759"
 TASK011_RESULT_DIGEST = "fbe9b0a7f138fdbdea7a0a8cf22e8493596a9299dd9b9f6c3537c48f550dece4"
@@ -1741,10 +1743,21 @@ def _git_state() -> dict[str, object]:
 
 
 def _is_allowed_delivery_path(path: str) -> bool:
-    """Allow only Task 017 delivery files and dated Task 017 documentation."""
+    """Allow only Task 017 delivery files and execution documentation."""
 
     normalized = path.replace("\\", "/")
-    return normalized in TASK017_DELIVERY_PATHS or TASK017_EXECUTION_DOCUMENTATION.fullmatch(normalized) is not None
+    windows_path = PureWindowsPath(normalized)
+    if windows_path.is_absolute() or windows_path.drive or normalized.startswith("/"):
+        return False
+    parts = normalized.split("/")
+    if any(part in {"", ".", ".."} for part in parts):
+        return False
+    normalized = "/".join(parts)
+    if normalized in TASK017_DELIVERY_PATHS:
+        return True
+    if not normalized.startswith("docs/plans/"):
+        return False
+    return TASK017_EXECUTION_DOCUMENTATION.fullmatch(normalized.removeprefix("docs/plans/")) is not None
 
 
 def _starting_state(task016_path: str | Path) -> dict[str, object]:

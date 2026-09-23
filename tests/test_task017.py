@@ -54,22 +54,35 @@ def _starting_state_for_delivery_path(monkeypatch, delivery_path):
 
     def fake_check_output(args, text):
         assert args == ("git", "diff", "--name-only", f"{STARTING_HEAD}..future-head")
-        return f"{delivery_path}\n"
+        return f"{delivery_path.replace(chr(92), '/')}\n"
 
     monkeypatch.setattr(task017_module.subprocess, "check_output", fake_check_output)
     return task017_module._starting_state(TASK016_PLAN)
 
 
-def test_task017_continuation_plan_is_allowed_at_resume_gate(monkeypatch):
-    assert _is_allowed_delivery_path("docs/plans/2026-09-23-task-017d-continue-v1-v2.md")
-    assert _is_allowed_delivery_path("docs/plans/2026-09-23-task-017d-report.md")
-    state = _starting_state_for_delivery_path(
-        monkeypatch,
+@pytest.mark.parametrize(
+    "delivery_path",
+    (
+        "docs/plans/2026-09-23-task-017c-incremental-v0.3-robustness-matrix.md",
         "docs/plans/2026-09-23-task-017d-continue-v1-v2.md",
+        "docs/plans/2026-09-23-task-017e-complete-frozen-v1-robustness.md",
+        "docs/plans/2027-01-02-task-017f-continue-v1.1-final-report.md",
+        "docs\\plans\\2026-09-23-task-017c-incremental-v0.3-robustness-matrix.md",
+    ),
+)
+def test_task017_execution_documentation_paths_are_allowed_at_resume_gate(monkeypatch, delivery_path):
+    assert _is_allowed_delivery_path(delivery_path)
+    state = _starting_state_for_delivery_path(monkeypatch, delivery_path)
+    assert state["delivery_paths_since_authoritative_start"] == [delivery_path.replace("\\", "/")]
+
+
+def test_task017_resume_gate_requires_normalized_repository_relative_paths():
+    assert not _is_allowed_delivery_path(
+        r"D:\\spider\\working\\MaleCNS-Sim\\docs\\plans\\2026-09-23-task-017c-incremental-v0.3-robustness-matrix.md"
     )
-    assert state["delivery_paths_since_authoritative_start"] == [
-        "docs/plans/2026-09-23-task-017d-continue-v1-v2.md"
-    ]
+    assert not _is_allowed_delivery_path(
+        "docs/plans/../plans/2026-09-23-task-017c-incremental-v0.3-robustness-matrix.md"
+    )
 
 
 @pytest.mark.parametrize(
@@ -79,7 +92,11 @@ def test_task017_continuation_plan_is_allowed_at_resume_gate(monkeypatch):
         "src/malecns_sim/analysis/task011.py",
         "src/malecns_sim/analysis/task010.py",
         "src/malecns_sim/dynamics/lif.py",
+        "src/malecns_sim/analysis/task008.py",
+        "src/malecns_sim/dynamics/stimulus.py",
         "data/provenance/male-cns-v1.0.json",
+        "data/provenance/task008a-preserved-task008.json",
+        "docs/MALECNS_RESEARCH_CHECKPOINT.md",
         "docs/plans/2026-09-23-task-017d-notes.md",
     ),
 )
