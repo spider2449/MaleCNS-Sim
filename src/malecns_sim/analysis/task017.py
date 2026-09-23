@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import platform
+import re
 import subprocess
 import sys
 import tempfile
@@ -92,13 +93,16 @@ TASK017_SCHEMA = "malecns-sim-task017-v0.3-mechanism-robustness-v1"
 TASK016_SPEC_SCHEMA = "malecns-sim-task016-frozen-specification-v1"
 TASK016_PLAN = "docs/plans/2026-09-22-task-016-v0.3-mechanism-robustness-preregistration.md"
 STARTING_HEAD = "b32c116b704cf94bcfd9d9e601eddfdd70271a2f"
-TASK017B_DELIVERY_PATHS = frozenset(
+TASK017_DELIVERY_PATHS = frozenset(
     {
-        "docs/plans/2026-09-22-task-017b-bounded-batch-delivery.md",
         "scripts/run_task017.py",
         "src/malecns_sim/analysis/task017.py",
         "tests/test_task017.py",
     }
+)
+TASK017_EXECUTION_DOCUMENTATION = re.compile(
+    r"^docs/plans/\d{4}-\d{2}-\d{2}-task-017(?:[a-z]+)?-"
+    r"(?:bounded|continue|execute|incremental|recover|report)(?:-[a-z0-9-]+)?\.md$"
 )
 V020_SOURCE = "470f8274a1b002c9f27fd430984b6755c9f56759"
 TASK011_RESULT_DIGEST = "fbe9b0a7f138fdbdea7a0a8cf22e8493596a9299dd9b9f6c3537c48f550dece4"
@@ -1736,6 +1740,13 @@ def _git_state() -> dict[str, object]:
     }
 
 
+def _is_allowed_delivery_path(path: str) -> bool:
+    """Allow only Task 017 delivery files and dated Task 017 documentation."""
+
+    normalized = path.replace("\\", "/")
+    return normalized in TASK017_DELIVERY_PATHS or TASK017_EXECUTION_DOCUMENTATION.fullmatch(normalized) is not None
+
+
 def _starting_state(task016_path: str | Path) -> dict[str, object]:
     raw = Path(task016_path).read_bytes()
     state = _git_state()
@@ -1743,7 +1754,7 @@ def _starting_state(task016_path: str | Path) -> dict[str, object]:
         return subprocess.check_output(("git", *args), text=True).strip()
 
     delivery_paths = set(run("diff", "--name-only", f"{STARTING_HEAD}..{state['head']}").splitlines())
-    if state["head"] != STARTING_HEAD and not delivery_paths.issubset(TASK017B_DELIVERY_PATHS):
+    if state["head"] != STARTING_HEAD and not all(_is_allowed_delivery_path(path) for path in delivery_paths):
         raise RuntimeError(f"Task 017 authoritative source drift: {sorted(delivery_paths)}")
     if state["origin_master"] != state["head"] or state["live_origin_master"] != state["head"]:
         raise RuntimeError("Task 017 local/remote HEAD mismatch")

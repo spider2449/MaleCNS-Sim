@@ -4,11 +4,15 @@ import json
 
 import pytest
 
+from malecns_sim.analysis import task017 as task017_module
 from malecns_sim.analysis.task017 import (
     BASELINE_CANDIDATE_ID,
     REFERENCE_VARIANT,
+    STARTING_HEAD,
+    TASK016_PLAN,
     TASK010_BASELINE,
     TASK010_INTERVENTION,
+    V020_SOURCE,
     ExecutionBudget,
     ExecutionBudgetExceeded,
     CheckpointError,
@@ -22,6 +26,7 @@ from malecns_sim.analysis.task017 import (
     _compatibility_score,
     _digest,
     _result_equal,
+    _is_allowed_delivery_path,
     _trace_equal,
     _synthetic_fixtures,
     _synthetic_projection,
@@ -34,6 +39,54 @@ from malecns_sim.analysis.task008 import PreparedNetwork
 from malecns_sim.analysis.task017 import FrozenSchedule, _run_or_reuse_series
 from malecns_sim.dynamics import simulate_lif, simulate_lif_active
 from malecns_sim.dynamics.cuda import cuda_available, simulate_cuda_batch, upload_graph
+
+
+def _starting_state_for_delivery_path(monkeypatch, delivery_path):
+    state = {
+        "head": "future-head",
+        "origin_master": "future-head",
+        "live_origin_master": "future-head",
+        "worktree_clean_before_execution": True,
+        "stash_entries_before_execution": "",
+        "v020_peel": V020_SOURCE,
+    }
+    monkeypatch.setattr(task017_module, "_git_state", lambda: state)
+
+    def fake_check_output(args, text):
+        assert args == ("git", "diff", "--name-only", f"{STARTING_HEAD}..future-head")
+        return f"{delivery_path}\n"
+
+    monkeypatch.setattr(task017_module.subprocess, "check_output", fake_check_output)
+    return task017_module._starting_state(TASK016_PLAN)
+
+
+def test_task017_continuation_plan_is_allowed_at_resume_gate(monkeypatch):
+    assert _is_allowed_delivery_path("docs/plans/2026-09-23-task-017d-continue-v1-v2.md")
+    assert _is_allowed_delivery_path("docs/plans/2026-09-23-task-017d-report.md")
+    state = _starting_state_for_delivery_path(
+        monkeypatch,
+        "docs/plans/2026-09-23-task-017d-continue-v1-v2.md",
+    )
+    assert state["delivery_paths_since_authoritative_start"] == [
+        "docs/plans/2026-09-23-task-017d-continue-v1-v2.md"
+    ]
+
+
+@pytest.mark.parametrize(
+    "drift_path",
+    (
+        TASK016_PLAN,
+        "src/malecns_sim/analysis/task011.py",
+        "src/malecns_sim/analysis/task010.py",
+        "src/malecns_sim/dynamics/lif.py",
+        "data/provenance/male-cns-v1.0.json",
+        "docs/plans/2026-09-23-task-017d-notes.md",
+    ),
+)
+def test_task017_resume_gate_rejects_authoritative_or_result_affecting_drift(monkeypatch, drift_path):
+    assert not _is_allowed_delivery_path(drift_path)
+    with pytest.raises(RuntimeError, match="authoritative source drift"):
+        _starting_state_for_delivery_path(monkeypatch, drift_path)
 
 
 def test_task017_variant_matrix_is_literal_and_exact():
