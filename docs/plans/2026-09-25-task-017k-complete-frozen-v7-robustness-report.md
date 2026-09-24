@@ -69,9 +69,9 @@ no scoring was performed. Scientific status remains `INDETERMINATE`;
 - At start, local `HEAD` matched GitHub `origin/master`; the configured second
   push URL was behind at `78d5bd721c04c6d6dd6ad406676e95dd1b138030`, an
   ancestor of the specified starting commit.
-- After push, local `HEAD`, fetched `origin/master`, and live GitHub `master`
-  matched at `8644f423fca947cdec6911ed2f49a05050c46991`; the second live push
-  URL does not match.
+- After pushing the final report update, local `HEAD`, fetched
+  `origin/master`, and live GitHub `master` matched at the latest
+  documentation-only commit; the second live push URL does not match.
 - Worktree was clean and stash empty after commit and push.
 - No scoring or Task 018 work was performed.
 
