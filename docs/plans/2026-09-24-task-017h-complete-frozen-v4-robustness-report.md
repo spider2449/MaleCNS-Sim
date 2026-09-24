@@ -78,11 +78,11 @@ were interpreted or compared across variants.
 21. Source-code-change status: no source or scientific-configuration changes.
     Only the Task 017H plan/report are intended for commit; ignored checkpoint
     data and sidecars remain uncommitted.
-22. Commit/push status: pending documentation commit and push.
-23. Local/remote `HEAD` equality: starting local, `origin/master`, and live
-    remote `master` were equal; final equality will be verified after push.
-24. Worktree/stash state: clean and empty before documentation; final state
-    will be verified after push.
+22. Commit/push status: the Task 017H plan and report were committed and
+    pushed to `origin/master` as requested.
+23. Local/remote `HEAD` equality: local `HEAD`, `origin/master`, and live
+    remote `master` were equal after push.
+24. Worktree/stash state: worktree clean; stash empty after push.
 25. `READY_TO_CONTINUE_TASK_017`: V4 is complete. V5 requires a separate
     authorization. Task 018 was not started.
 
