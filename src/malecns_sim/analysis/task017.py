@@ -685,6 +685,37 @@ def task016_specification_fingerprint() -> str:
     return _digest("malecns-sim-task016-frozen-specification-v1", frozen_specification())
 
 
+def require_recovery_for_missing_checkpoint(
+    checkpoint_path: str | Path,
+    recovery_manifest_path: str | Path | None = None,
+) -> None:
+    """Prevent silent initialization when Git declares an incomplete recovery point."""
+
+    checkpoint = Path(checkpoint_path)
+    if checkpoint.exists():
+        return
+    manifest_path = (
+        Path(recovery_manifest_path)
+        if recovery_manifest_path is not None
+        else Path(__file__).resolve().parents[3] / "artifacts/task017/recovery-manifest.json"
+    )
+    if not manifest_path.exists():
+        return
+    try:
+        recovery = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise CheckpointError(f"cannot initialize Task 017 without reading its recovery manifest: {exc}") from exc
+    if recovery.get("artifact_type") != "task017_checkpoint" or recovery.get("task") != "017":
+        return
+    completed = recovery.get("completed_units")
+    expected = recovery.get("expected_units")
+    if not isinstance(completed, int) or not isinstance(expected, int) or completed < expected:
+        raise CheckpointError(
+            "tracked Task 017 recovery point is incomplete but the local checkpoint is absent; "
+            "restore and audit the certified bundle before resuming"
+        )
+
+
 @dataclass(frozen=True, slots=True)
 class FrozenSchedule:
     trial_index: int
@@ -2105,6 +2136,8 @@ def run_task017(
 ) -> dict[str, object]:
     """Execute or deliver bounded raw units from the frozen Task 017 matrix."""
 
+    effective_checkpoint_path = checkpoint_path or Path(output_path).with_name("task017-checkpoint.jsonl")
+    require_recovery_for_missing_checkpoint(effective_checkpoint_path)
     if not cuda_available():
         raise RuntimeError("Task 017 requires the validated CUDA backend")
     if max_units is not None and max_units < 0:
@@ -2142,7 +2175,7 @@ def run_task017(
     cuda_graph_cache: dict[str, object] = {cached_network.projection.fingerprint: cached_network.cuda_graph}
     reference_network = _variant_network(REFERENCE_VARIANT, signed_shiu, cache, cache_path, cuda_graph_cache)
     checkpoint = Task017Checkpoint(
-        checkpoint_path or Path(output_path).with_name("task017-checkpoint.jsonl"),
+        effective_checkpoint_path,
         _checkpoint_identity(state, identities, reference_network),
     )
     expected_units = expected_task017_unit_keys()

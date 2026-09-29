@@ -1,0 +1,1097 @@
+{
+  "analysis_completion_counts": {
+    "task010_baseline": {
+      "completed": 480,
+      "expected": 480,
+      "pending": 0
+    },
+    "task010_intervention": {
+      "completed": 2300,
+      "expected": 2400,
+      "pending": 100
+    },
+    "task011_baseline_trace": {
+      "completed": 42,
+      "expected": 48,
+      "pending": 6
+    },
+    "task011_intervention_trace": {
+      "completed": 210,
+      "expected": 240,
+      "pending": 30
+    }
+  },
+  "artifact_type": "task017_checkpoint",
+  "bundle_filename": "task017-recovery-bundle.zip",
+  "bundle_sha256": "056e2a0593fa8e67d34b251e4143fb2f25b885452ff456b732c4526605fab19a",
+  "checkpoint_fingerprint": "8328714e2353d380f9e2cee351839c9dd9cb42d4cf93b1721b2a18c39a439f63",
+  "completed_units": 3032,
+  "cuda_driver_version": 13000,
+  "cuda_runtime_version": 12090,
+  "cupy_version": "14.2.0",
+  "expected_units": 3168,
+  "export_tool_version": "1.0.0",
+  "journal_sha256": "d085103d4c2a0b2d68930670158912294472c09565a9479ac3290665a2138d00",
+  "pending_unit_keys": [
+    {
+      "analysis_kind": "task011_baseline_trace",
+      "candidate_id": "__BASELINE__",
+      "stimulus_side": "LEFT",
+      "trial_index": 0,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_baseline_trace",
+      "candidate_id": "__BASELINE__",
+      "stimulus_side": "LEFT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_baseline_trace",
+      "candidate_id": "__BASELINE__",
+      "stimulus_side": "LEFT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "10135",
+      "stimulus_side": "LEFT",
+      "trial_index": 0,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "10313",
+      "stimulus_side": "LEFT",
+      "trial_index": 0,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "12752",
+      "stimulus_side": "LEFT",
+      "trial_index": 0,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "43765",
+      "stimulus_side": "LEFT",
+      "trial_index": 0,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "512730",
+      "stimulus_side": "LEFT",
+      "trial_index": 0,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "10135",
+      "stimulus_side": "LEFT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "10313",
+      "stimulus_side": "LEFT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "12752",
+      "stimulus_side": "LEFT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "43765",
+      "stimulus_side": "LEFT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "512730",
+      "stimulus_side": "LEFT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "10135",
+      "stimulus_side": "LEFT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "10313",
+      "stimulus_side": "LEFT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "12752",
+      "stimulus_side": "LEFT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "43765",
+      "stimulus_side": "LEFT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "512730",
+      "stimulus_side": "LEFT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 11,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 11,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 11,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 11,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 11,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 12,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 12,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 12,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 12,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 12,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 13,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 13,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 13,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 13,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 13,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 14,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 14,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 14,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 14,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 14,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 15,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 15,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 15,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 15,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 15,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 16,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 16,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 16,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 16,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 16,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 17,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 17,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 17,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 17,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 17,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 18,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 18,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 18,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 18,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 18,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 19,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 19,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 19,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 19,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 19,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 21,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 21,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 21,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 21,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 21,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 22,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 22,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 22,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 22,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 22,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 23,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 23,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 23,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 23,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 23,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 24,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 24,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 24,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 24,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 24,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 25,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 25,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 25,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 25,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 25,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 26,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 26,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 26,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 26,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 26,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 27,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 27,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 27,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 27,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 27,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 28,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 28,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 28,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 28,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 28,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 29,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 29,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 29,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 29,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task010_intervention",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 29,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_baseline_trace",
+      "candidate_id": "__BASELINE__",
+      "stimulus_side": "RIGHT",
+      "trial_index": 0,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_baseline_trace",
+      "candidate_id": "__BASELINE__",
+      "stimulus_side": "RIGHT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_baseline_trace",
+      "candidate_id": "__BASELINE__",
+      "stimulus_side": "RIGHT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 0,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 0,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 0,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 0,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 0,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 10,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "10135",
+      "stimulus_side": "RIGHT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "10313",
+      "stimulus_side": "RIGHT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "12752",
+      "stimulus_side": "RIGHT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "43765",
+      "stimulus_side": "RIGHT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    },
+    {
+      "analysis_kind": "task011_intervention_trace",
+      "candidate_id": "512730",
+      "stimulus_side": "RIGHT",
+      "trial_index": 20,
+      "variant_id": "V7_CONSERVATIVE_SIGNS"
+    }
+  ],
+  "previous_certified_backup_manifest_sha256": "3ed31e2de4ed4ca9ca147f0f2bf71b1706b7b6e754b21c92ca70d8d556b8463b",
+  "python_version": "3.14.0",
+  "recovery_manifest_sha256": "e3e4c547925b1af5861023810760cf1c08b668a6f4621dfc72bc72a125707e1a",
+  "recovery_point_id": "task017-3032-8328714e-2026-09-29-formal",
+  "remaining_units": 136,
+  "schema_version": "malecns-sim-task017-recovery-point-v1",
+  "scientific_status": "INDETERMINATE",
+  "side_completion_counts": {
+    "LEFT": {
+      "completed": 1566,
+      "expected": 1584,
+      "pending": 18
+    },
+    "RIGHT": {
+      "completed": 1466,
+      "expected": 1584,
+      "pending": 118
+    }
+  },
+  "sidecar_count": 3032,
+  "sidecar_inventory_sha256": "af3998392e0dff502875c9998ad4d75903a7b65a41e4508b104dc0a3275d26cd",
+  "source_git_head": "435f6dcfd84c537d4a81438a6fbfc8f8152cbc0a",
+  "task": "017",
+  "task016_fingerprint": "2ecfe9ffca858a404b755a2bd4f34c88ed509718bee7f296e8fdcc5eb909e1d6",
+  "variant_alias_counts": {
+    "R0": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V1": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V2": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V3": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V4": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V5": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V6": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V7": {
+      "completed": 260,
+      "expected": 396,
+      "pending": 136
+    }
+  },
+  "variant_completion_counts": {
+    "R0_REFERENCE_TASK005": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V1_TAU_MEMBRANE_FAST": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V2_TAU_MEMBRANE_SLOW": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V3_TAU_SYNAPSE_FAST": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V4_DELAY_SHORT": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V5_WEIGHT_LOW": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V6_THRESHOLD_HIGHER": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V7_CONSERVATIVE_SIGNS": {
+      "completed": 260,
+      "expected": 396,
+      "pending": 136
+    }
+  }
+}
