@@ -135,9 +135,10 @@ exactly for all 3,032 canonical records, every sidecar SHA-256, both scientific
 fingerprints, and the full ordered pending-key tuple (136 units). Restored
 counts were R0–V6 396 / 396 each, V7 260 / 396, and 136 pending; duplicate,
 missing, orphan, digest-invalid, and technical-invalid counts were all zero.
-The temporary certification copy remains in the named `C:\Temp` Task 017P
-folder because automatic safety review rejected the recursive cleanup command.
-No production checkpoint file was targeted for cleanup.
+At the time of this certification, the temporary certification copy remained
+in the named `C:\Temp` Task 017P folder because automatic safety review rejected
+the recursive cleanup command. No production checkpoint file was targeted for
+cleanup.
 
 The separate clean environment was created solely from the project lock and
 `uv sync --extra gpu --group dev`; no package was installed outside project
@@ -155,3 +156,24 @@ tracked recovery-point manifest and audited the restored alternate root.
 
 No Task 017 scientific unit was executed, no scientific result changed, no
 robustness score was computed, and Task 018 was not started.
+
+## Task 017P-C — Temporary certification cleanup closeout
+
+On 2026-09-29, the temporary certification copy at
+`C:\Temp\MaleCNS-Sim-Task017P-restore-2026-09-29` was removed manually. The
+path no longer exists. The earlier automatic cleanup failure was caused only
+by tooling/safety-policy behavior; no scientific or repository state was
+affected.
+
+The production checkpoint remains 3,032 / 3,168 complete, with V7 at 260 / 396
+and 136 units remaining. A fresh read-only audit passed. The checkpoint
+fingerprint remains
+`8328714e2353d380f9e2cee351839c9dd9cb42d4cf93b1721b2a18c39a439f63`, and the
+production journal SHA-256 remains
+`d085103d4c2a0b2d68930670158912294472c09565a9479ac3290665a2138d00`.
+Scientific status remains `INDETERMINATE`.
+
+**Final verdict: `PORTABILITY_READY_FOR_CROSS_MACHINE_RESTORE`.**
+
+No V7 unit was executed, no Task 017 robustness score was computed, and Task
+018 was not started.
