@@ -106,3 +106,31 @@ Task 018 was not started, and Task 017Q remains deferred.
   `d085103d4c2a0b2d68930670158912294472c09565a9479ac3290665a2138d00`;
   sidecar aggregate remains
   `af3998392e0dff502875c9998ad4d75903a7b65a41e4508b104dc0a3275d26cd`.
+
+### Post-commit zero-unit source-gate certification
+
+After implementation commit `a557b8a83fb652848bf35dfd32340bccb3b639d4`
+was pushed and matched local, fetched, and live `master`, the first zero-unit
+attempt reached the source gate but rejected this report's original filename,
+which did not match the established execution-document rule. The report was
+renamed to this rule-compliant filename in documentation-only commit
+`b045d31785b882251b4a127b7eadf996c963c2b5`, pushed, and verified against live
+`master` before retrying.
+
+`uv run python scripts/run_task017.py --variant V7 --max-units 0` then passed
+the authoritative-source gate and resumed the production checkpoint. It
+reported `executed_this_invocation: 0`, completed before/after `3032`, expected
+`3168`, and missing `136`; V7 remained `260 / 396`. Runner setup and gate
+preparation took 1,410.85 seconds. A post-run read-only checkpoint audit
+passed with Task 016 fingerprint
+`2ecfe9ffca858a404b755a2bd4f34c88ed509718bee7f296e8fdcc5eb909e1d6`, checkpoint
+fingerprint `8328714e2353d380f9e2cee351839c9dd9cb42d4cf93b1721b2a18c39a439f63`,
+journal SHA-256
+`d085103d4c2a0b2d68930670158912294472c09565a9479ac3290665a2138d00`, and
+sidecar aggregate
+`af3998392e0dff502875c9998ad4d75903a7b65a41e4508b104dc0a3275d26cd`. The
+journal and sidecar count stayed at 3,032; no unit record or sidecar was added.
+The zero-unit invocation wrote ignored derived delivery output only.
+
+No Task 017 unit was executed, no robustness scoring was performed, Task 018
+was not started, and Task 017Q remains deferred.
