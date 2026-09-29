@@ -1,0 +1,87 @@
+{
+  "analysis_completion_counts": {
+    "task010_baseline": {
+      "completed": 480,
+      "expected": 480,
+      "pending": 0
+    },
+    "task010_intervention": {
+      "completed": 2400,
+      "expected": 2400,
+      "pending": 0
+    },
+    "task011_baseline_trace": {
+      "completed": 48,
+      "expected": 48,
+      "pending": 0
+    },
+    "task011_intervention_trace": {
+      "completed": 240,
+      "expected": 240,
+      "pending": 0
+    }
+  },
+  "canonical_completed_key_digest": "47d160d985b46acd6a079c04906f60f99a929422a0b9cbe64f303223bc83af32",
+  "canonical_record_set_digest": "19c51e79d883915398c2d3d89c3456f3160ba0062cf75abe20e97807979b1028",
+  "checkpoint_fingerprint": "8328714e2353d380f9e2cee351839c9dd9cb42d4cf93b1721b2a18c39a439f63",
+  "complete_matrix_digest": "19c51e79d883915398c2d3d89c3456f3160ba0062cf75abe20e97807979b1028",
+  "completed": 3168,
+  "duplicate_count": 0,
+  "duplicate_sidecar_ref_count": 0,
+  "execution_source_head": "405ba38212487b1e6699cd61045893ad5eb27d38",
+  "expected": 3168,
+  "journal_sha256": "878a2b79fa442c539d4f803819e3154b060b4fbb3c6c5a2cb5a6af464503190e",
+  "metadata_failure_count": 0,
+  "missing_sidecar_count": 0,
+  "orphan_sidecar_count": 0,
+  "pending": 0,
+  "result_digest_failure_count": 0,
+  "schema": "malecns-sim-task017-complete-matrix-v1",
+  "sidecar_count": 3168,
+  "sidecar_inventory_sha256": "a24561d152e6acb9761c0b306d7a0158d487ce35e114ef02b543647326208553",
+  "task": "017",
+  "task016_fingerprint": "2ecfe9ffca858a404b755a2bd4f34c88ed509718bee7f296e8fdcc5eb909e1d6",
+  "technical_invalid_count": 0,
+  "variant_completion_counts": {
+    "R0_REFERENCE_TASK005": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V1_TAU_MEMBRANE_FAST": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V2_TAU_MEMBRANE_SLOW": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V3_TAU_SYNAPSE_FAST": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V4_DELAY_SHORT": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V5_WEIGHT_LOW": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V6_THRESHOLD_HIGHER": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    },
+    "V7_CONSERVATIVE_SIGNS": {
+      "completed": 396,
+      "expected": 396,
+      "pending": 0
+    }
+  }
+}
