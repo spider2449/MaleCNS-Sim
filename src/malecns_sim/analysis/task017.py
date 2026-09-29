@@ -93,6 +93,7 @@ TASK017_SCHEMA = "malecns-sim-task017-v0.3-mechanism-robustness-v1"
 TASK016_SPEC_SCHEMA = "malecns-sim-task016-frozen-specification-v1"
 TASK016_PLAN = "docs/plans/2026-09-22-task-016-v0.3-mechanism-robustness-preregistration.md"
 STARTING_HEAD = "b32c116b704cf94bcfd9d9e601eddfdd70271a2f"
+TASK017_CERTIFIED_INFRASTRUCTURE_BASE = "4f90e82adbff8709b389ba2f1748f110dcebb519"
 TASK017_DELIVERY_PATHS = frozenset(
     {
         "scripts/run_task017.py",
@@ -100,6 +101,19 @@ TASK017_DELIVERY_PATHS = frozenset(
         "tests/test_task017.py",
     }
 )
+TASK017_CERTIFIED_INFRASTRUCTURE_BLOBS = {
+    "artifacts/task017/recovery-manifest.json": "88a48e98b79cd4bdc779f273283240bccbf6a20a",
+    "docs/plans/2026-09-29-task-017p-portable-scientific-execution-state.md": "4ba8ac8973f141a0f3d2815e246a293430c63348",
+    "docs/plans/2026-09-29-task-017v7-filtered-checkpoint-audit.md": "d180c77c53741314254793b03cd66d54738115f4",
+    "pyproject.toml": "210f7034f5b7180bd5598ad932484aa0daf5e741",
+    "scripts/audit_task017_checkpoint.py": "4962756e8878d9128e7f8cf619a7352c7b522c73",
+    "scripts/check_gpu.py": "590b55ffaf6280efcd57ac5ecc9fcc4e4ff407cb",
+    "scripts/export_task017_checkpoint.py": "041f43aa8a05c6ef1802a9ad95c1dc5cce797a9b",
+    "scripts/import_task017_checkpoint.py": "45511eb8c50a9362de4009f1228b14565b6f312a",
+    "src/malecns_sim/analysis/task017_portability.py": "b8d7265cd7a24315faeff42ab88857a40b4c7a87",
+    "tests/test_task017_portability.py": "341200e6e8db7da94345389106027a6d415bfb56",
+    "uv.lock": "f5b74337c96149007aa1f2e89ae6fa5ec162e76d",
+}
 TASK017_EXECUTION_DOCUMENTATION = re.compile(
     r"^(?:(?:\d{4}-\d{2}-\d{2})-)?task-017[a-z]*-"
     r"(?:bounded|complete|continue|execute|incremental|recover|report)"
@@ -1791,6 +1805,35 @@ def _is_allowed_delivery_path(path: str) -> bool:
     return TASK017_EXECUTION_DOCUMENTATION.fullmatch(normalized.removeprefix("docs/plans/")) is not None
 
 
+def _is_certified_infrastructure_path(path: str, current_head: str) -> bool:
+    """Allow only exact certified Task 017P infrastructure blobs."""
+
+    normalized = path.replace("\\", "/")
+    windows_path = PureWindowsPath(normalized)
+    if windows_path.is_absolute() or windows_path.drive or normalized.startswith("/"):
+        return False
+    parts = normalized.split("/")
+    if any(part in {"", ".", ".."} for part in parts):
+        return False
+    normalized = "/".join(parts)
+    certified_blob = TASK017_CERTIFIED_INFRASTRUCTURE_BLOBS.get(normalized)
+    if certified_blob is None:
+        return False
+
+    def git_blob(revision: str) -> str | None:
+        try:
+            return subprocess.check_output(
+                ("git", "rev-parse", f"{revision}:{normalized}"), text=True, stderr=subprocess.DEVNULL
+            ).strip()
+        except subprocess.CalledProcessError:
+            return None
+
+    return (
+        git_blob(TASK017_CERTIFIED_INFRASTRUCTURE_BASE) == certified_blob
+        and git_blob(current_head) == certified_blob
+    )
+
+
 def _starting_state(task016_path: str | Path) -> dict[str, object]:
     raw = Path(task016_path).read_bytes()
     state = _git_state()
@@ -1798,7 +1841,10 @@ def _starting_state(task016_path: str | Path) -> dict[str, object]:
         return subprocess.check_output(("git", *args), text=True).strip()
 
     delivery_paths = set(run("diff", "--name-only", f"{STARTING_HEAD}..{state['head']}").splitlines())
-    if state["head"] != STARTING_HEAD and not all(_is_allowed_delivery_path(path) for path in delivery_paths):
+    if state["head"] != STARTING_HEAD and not all(
+        _is_allowed_delivery_path(path) or _is_certified_infrastructure_path(path, str(state["head"]))
+        for path in delivery_paths
+    ):
         raise RuntimeError(f"Task 017 authoritative source drift: {sorted(delivery_paths)}")
     if state["origin_master"] != state["head"] or state["live_origin_master"] != state["head"]:
         raise RuntimeError("Task 017 local/remote HEAD mismatch")

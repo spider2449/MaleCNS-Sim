@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from types import SimpleNamespace
 
 import pytest
 
@@ -9,6 +10,8 @@ from malecns_sim.analysis.task017 import (
     BASELINE_CANDIDATE_ID,
     REFERENCE_VARIANT,
     STARTING_HEAD,
+    TASK017_CERTIFIED_INFRASTRUCTURE_BASE,
+    TASK017_CERTIFIED_INFRASTRUCTURE_BLOBS,
     TASK016_PLAN,
     TASK010_BASELINE,
     TASK010_INTERVENTION,
@@ -24,9 +27,11 @@ from malecns_sim.analysis.task017 import (
     Task017UnitKey,
     VARIANT_CONFIGURATIONS,
     _compatibility_score,
+    _checkpoint_identity,
     _digest,
     _result_equal,
     _is_allowed_delivery_path,
+    _is_certified_infrastructure_path,
     _trace_equal,
     _synthetic_fixtures,
     _synthetic_projection,
@@ -52,9 +57,11 @@ def _starting_state_for_delivery_path(monkeypatch, delivery_path):
     }
     monkeypatch.setattr(task017_module, "_git_state", lambda: state)
 
-    def fake_check_output(args, text):
-        assert args == ("git", "diff", "--name-only", f"{STARTING_HEAD}..future-head")
-        return f"{delivery_path.replace(chr(92), '/')}\n"
+    def fake_check_output(args, text, **kwargs):
+        if args[:3] == ("git", "diff", "--name-only"):
+            assert args == ("git", "diff", "--name-only", f"{STARTING_HEAD}..future-head")
+            return f"{delivery_path.replace(chr(92), '/')}\n"
+        raise AssertionError(f"Unexpected git command: {args}")
 
     monkeypatch.setattr(task017_module.subprocess, "check_output", fake_check_output)
     return task017_module._starting_state(TASK016_PLAN)
@@ -83,6 +90,68 @@ def test_task017_resume_gate_requires_normalized_repository_relative_paths():
     assert not _is_allowed_delivery_path(
         "docs/plans/../plans/2026-09-23-task-017c-incremental-v0.3-robustness-matrix.md"
     )
+    certified_path = next(iter(TASK017_CERTIFIED_INFRASTRUCTURE_BLOBS))
+    assert not _is_certified_infrastructure_path(f"C:\\repo\\{certified_path}", TASK017_CERTIFIED_INFRASTRUCTURE_BASE)
+    assert not _is_certified_infrastructure_path(f"docs/plans/../{certified_path}", TASK017_CERTIFIED_INFRASTRUCTURE_BASE)
+
+
+def _starting_state_for_certified_delta(monkeypatch, paths, changed_blob_path=None):
+    state = {
+        "head": "future-head",
+        "origin_master": "future-head",
+        "live_origin_master": "future-head",
+        "worktree_clean_before_execution": True,
+        "stash_entries_before_execution": "",
+        "v020_peel": V020_SOURCE,
+    }
+    monkeypatch.setattr(task017_module, "_git_state", lambda: state)
+
+    def fake_check_output(args, text, **kwargs):
+        if args[:3] == ("git", "diff", "--name-only"):
+            assert args == ("git", "diff", "--name-only", f"{STARTING_HEAD}..future-head")
+            return "".join(f"{path}\n" for path in paths)
+        assert args[0:2] == ("git", "rev-parse")
+        revision, path = args[2].split(":", 1)
+        expected = TASK017_CERTIFIED_INFRASTRUCTURE_BLOBS[path]
+        if revision == "future-head" and path == changed_blob_path:
+            return "different-blob"
+        assert revision in {TASK017_CERTIFIED_INFRASTRUCTURE_BASE, "future-head"}
+        return expected
+
+    monkeypatch.setattr(task017_module.subprocess, "check_output", fake_check_output)
+    return task017_module._starting_state(TASK016_PLAN)
+
+
+def test_task017_resume_gate_accepts_exact_certified_infrastructure_delta(monkeypatch):
+    historical_paths = (
+        "scripts/run_task017.py",
+        "src/malecns_sim/analysis/task017.py",
+        "tests/test_task017.py",
+        "docs/plans/2026-09-29-task-017k-complete-frozen-v7-robustness-report.md",
+    )
+    paths = (*historical_paths, *TASK017_CERTIFIED_INFRASTRUCTURE_BLOBS)
+    state = _starting_state_for_certified_delta(monkeypatch, paths)
+    assert state["starting_head"] == "b32c116b704cf94bcfd9d9e601eddfdd70271a2f"
+    assert state["delivery_paths_since_authoritative_start"] == sorted(paths)
+
+
+@pytest.mark.parametrize("path", tuple(TASK017_CERTIFIED_INFRASTRUCTURE_BLOBS))
+def test_task017_resume_gate_rejects_modified_certified_infrastructure_blob(monkeypatch, path):
+    assert _is_certified_infrastructure_path(path, "future-head") is False
+    with pytest.raises(RuntimeError, match="authoritative source drift"):
+        _starting_state_for_certified_delta(monkeypatch, (path,), changed_blob_path=path)
+
+
+def test_task017_resume_gate_rejects_unexpected_new_source_file(monkeypatch):
+    with pytest.raises(RuntimeError, match="authoritative source drift"):
+        _starting_state_for_certified_delta(monkeypatch, ("src/malecns_sim/new_module.py",))
+
+
+def test_task017_execution_documentation_closure_does_not_require_recertification(monkeypatch):
+    path = "docs/plans/2026-09-30-task-017k-report-final.md"
+    assert _is_allowed_delivery_path(path)
+    state = _starting_state_for_delivery_path(monkeypatch, path)
+    assert state["delivery_paths_since_authoritative_start"] == [path]
 
 
 @pytest.mark.parametrize(
@@ -158,6 +227,27 @@ def test_task017_expected_unit_keys_are_exact_and_deterministic():
         "task011_baseline_trace",
         "task011_intervention_trace",
     }
+
+
+def test_task017_source_gate_repair_preserves_frozen_checkpoint_identity():
+    identities = SimpleNamespace(fingerprint="population-fingerprint")
+    prepared = SimpleNamespace(
+        projection=SimpleNamespace(
+            unsigned_graph_fingerprint="unsigned-graph",
+            fingerprint="effective-graph",
+        ),
+        cache_fingerprint="cache-fingerprint",
+    )
+    identity = _checkpoint_identity({}, identities, prepared)
+    assert STARTING_HEAD == "b32c116b704cf94bcfd9d9e601eddfdd70271a2f"
+    assert identity["starting_head"] == STARTING_HEAD
+    assert identity["task016_specification_fingerprint"] == "2ecfe9ffca858a404b755a2bd4f34c88ed509718bee7f296e8fdcc5eb909e1d6"
+    assert identity["expected_unit_count"] == 3168
+    assert identity["variant_definitions"] == [item.as_record() for item in VARIANT_CONFIGURATIONS]
+    assert identity["candidate_ids"] == ["10313", "10135", "12752", "512730", "43765"]
+    assert identity["task010_trial_indices"] == list(range(30))
+    assert identity["task011_trial_indices"] == [0, 10, 20]
+    assert identity["source_identity"] == V020_SOURCE
 
 
 def test_task017_checkpoint_resume_duplicate_and_fingerprint_rejection(tmp_path):
