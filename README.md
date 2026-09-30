@@ -11,6 +11,11 @@ sensory/body coupling, FlyGym, NeuroMechFly, MuJoCo, or learning system.
 
 ## Current stage
 
+MaleCNS-Sim **v0.3.0 is RELEASED**. The annotated `v0.3.0` tag peels to
+`a1a6651163840a982799b1fa82c1904e67f84660`; current `master` also contains
+later publication-control and post-release documentation commits. See the
+[Task 021 closure](docs/plans/2026-09-30-task-021-v0.3-post-release-closure.md).
+
 The v0.3 scientific scope is complete under Task 018B Decision A. The
 prospectively preregistered Task 018A asks an independent anatomical question:
 the full curated graph gives MN9_L 6,012 incoming synapses and MN9_R 556.

@@ -2,6 +2,11 @@
 
 Date: 2026-09-30
 
+Publication status: **v0.3.0 RELEASED**. The annotated tag peels to the
+authorized release source `a1a6651163840a982799b1fa82c1904e67f84660`;
+current `master` advances through publication-control and post-release
+documentation. See the [Task 021 closure](plans/2026-09-30-task-021-v0.3-post-release-closure.md).
+
 This document preserves the validated scientific state through Task 011 and
 records the completed v0.3 robustness closure in Tasks 016, 017, 017L, and
 017M and the Task 018A anatomical result. It is the authoritative research
