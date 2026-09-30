@@ -4,8 +4,8 @@ Date: 2026-09-30
 
 This document preserves the validated scientific state through Task 011 and
 records the completed v0.3 robustness closure in Tasks 016, 017, 017L, and
-017M. It is the authoritative research checkpoint for Tasks 004-011 and the
-v0.3 robustness result.
+017M and the Task 018A anatomical result. It is the authoritative research
+checkpoint for Tasks 004-011, the v0.3 robustness result, and Task 018A.
 
 ## 1. Scientific scope and nonclaims
 
@@ -472,4 +472,11 @@ generalization beyond the tested variants. `NETWORK_REDISTRIBUTION_COMPATIBLE`
 remains a model compatibility label, not biological mechanism proof. A
 connectome plus model dynamics is not a reconstructed biological brain.
 
-Task 017Q remains **DEFERRED**. Task 018 has **NOT STARTED**.
+Task 017Q remains **DEFERRED**. Task 018A subsequently executed the frozen
+Task 018 anatomical preregistration. On the full curated graph, MN9_L has
+6,012 incoming synapses and MN9_R has 556, a left-minus-right gap of 5,456.
+The exact signed partition is 4,281 from shared presynaptic bodies, 1,315
+from left-only bodies, and -140 from right-only bodies. The primary label is
+`SHARED_PARTNER_DIFFERENCE_LARGEST`. The threshold-5 sensitivity is reported
+separately and does not change this label. See the
+[Task 018A execution report](plans/2026-09-30-task-018a-mn9-anatomical-asymmetry-execution.md).

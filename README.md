@@ -11,15 +11,18 @@ sensory/body coupling, FlyGym, NeuroMechFly, MuJoCo, or learning system.
 
 ## Current stage
 
-The current scientific endpoint is the completed Task 017L preregistered
-robustness scoring, closed by Task 017M. Its final classification is
-`NOT_ROBUST` under the frozen Task 016 criteria. Task 011 remains the baseline
+The current scientific endpoint is the completed Task 018A preregistered MN9
+anatomical asymmetry decomposition. The full curated graph gives MN9_L 6,012
+incoming synapses and MN9_R 556; the 5,456 gap is classified
+`SHARED_PARTNER_DIFFERENCE_LARGEST`. This is a connectomic accounting, not a
+dynamics or biological mechanism claim. Task 017 remains `NOT_ROBUST` under
+the frozen Task 016 criteria, and Task 017Q remains deferred. Task 011 remains the baseline
 temporal mechanism audit. The validated state covers the curated MaleCNS v1.0
 graph, explicit sign policies, reference LIF dynamics, the Shiu v630 reference
 reproduction, Task 008 dynamics, Task 009 structural analysis, Task 010
 frozen-candidate perturbations, and the completed v0.3 robustness study. See
 the [authoritative research checkpoint](docs/MALECNS_RESEARCH_CHECKPOINT.md)
-and [Task 017M closure report](docs/plans/2026-09-30-task-017m-v0.3-scientific-closure.md).
+and [Task 018A execution report](docs/plans/2026-09-30-task-018a-mn9-anatomical-asymmetry-execution.md).
 
 The intended pipeline is:
 
