@@ -1,0 +1,112 @@
+{
+  "adapter_schema": "malecns-v1-feather-explicit-mapping-v2",
+  "dataset": {
+    "name": "MaleCNS",
+    "release": "v1.0"
+  },
+  "execution_timestamp_utc": "2026-09-30T03:28:10.605953+00:00",
+  "graph_definition": "full curated directed publication-superclass neuron projection; positive integer synapse counts; duplicate pairs aggregated; autapses retained",
+  "graphs": {
+    "primary": {
+      "edge_count": 25582938,
+      "node_count": 166700,
+      "total_synapses": 124177617,
+      "unsigned_graph_fingerprint": "fde3d0f58b65235da3dfefb552cfe8a3bac8429312c30287e598e289115a93d4"
+    },
+    "sensitivity_min_synapses_5": {
+      "edge_count": 6242118,
+      "node_count": 166700,
+      "total_synapses": 89860280,
+      "unsigned_graph_fingerprint": "661a07e346541da75e81fa0eac487102af496fcfc9f6bdc743c9ca957b4f4a74"
+    }
+  },
+  "integrity_status": "PASS",
+  "manifest_sha256": "e3c26d37039625e8a0623a7b6f83cb70d01663c99f8e32d4ffb2d79709b80631",
+  "mn9": {
+    "checked_annotations": {
+      "10331": {
+        "instance": "MN9_L",
+        "somaSide": "L",
+        "type": "MN9"
+      },
+      "16949": {
+        "instance": "MN9_R",
+        "somaSide": "R",
+        "type": "MN9"
+      }
+    },
+    "left_body": 10331,
+    "right_body": 16949,
+    "status": "SIDE_RESOLVED"
+  },
+  "preregistration_sha256": "4f767ab2bfcbf5e5773a803ee6fdb601e39d5521d7f30a12d35a3a5506de5bb4",
+  "primary": {
+    "classification": "SHARED_PARTNER_DIFFERENCE_LARGEST",
+    "components": {
+      "left_only": 1315,
+      "right_only": -140,
+      "shared": 4281
+    },
+    "fractions": {
+      "left_only": 0.24101906158357772,
+      "right_only": -0.025659824046920823,
+      "shared": 0.7846407624633431
+    },
+    "fractions_null_reason": null,
+    "gap": 5456,
+    "integrity_status": "PASS",
+    "left_total": 6012,
+    "partition_identity_verified": true,
+    "partner_counts": {
+      "left": 278,
+      "left_only": 213,
+      "right": 137,
+      "right_only": 72,
+      "shared": 65
+    },
+    "right_total": 556,
+    "tied_components": []
+  },
+  "raw_file_sha256": {
+    "body-annotations-male-cns-v1.0-minconf-0.5.feather": "2177e246113e4cfbf1e7772ec37c6da1955ff22e8063d0b1f833101f99a9a3b2",
+    "body-neurotransmitters-male-cns-v1.0.feather": "95c9289220663abeb3409f3ad9e5a7f8a53f8093f5139d15502cd08da8879621",
+    "connectome-weights-male-cns-v1.0-minconf-0.5.feather": "e35da783d1c686b2b58b3b87cd6a403ae43bfcfba8bff28e08ef752c1a56afc1"
+  },
+  "result_digest": "270c931a2420df475ff54ea185e7e7d03da1a868af8a35f7f68e38ebbf98f9f4",
+  "schema": "malecns-sim-task018-anatomical-asymmetry-v1",
+  "sensitivity": {
+    "classification": "LEFT_ONLY_INPUT_LARGEST",
+    "components": {
+      "left_only": 3322,
+      "right_only": -41,
+      "shared": 2032
+    },
+    "fractions": {
+      "left_only": 0.6252587991718427,
+      "right_only": -0.007716920760399021,
+      "shared": 0.38245812158855635
+    },
+    "fractions_null_reason": null,
+    "gap": 5313,
+    "integrity_status": "PASS",
+    "label": "SENSITIVITY_MIN_SYNAPSES_5",
+    "left_total": 5699,
+    "partition_identity_verified": true,
+    "partner_counts": {
+      "left": 93,
+      "left_only": 71,
+      "right": 27,
+      "right_only": 5,
+      "shared": 22
+    },
+    "right_total": 386,
+    "tied_components": []
+  },
+  "sensitivity_changes_primary_classification": false,
+  "software_versions": {
+    "numpy": "2.5.3",
+    "pyarrow": "25.0.1",
+    "python": "3.14.0"
+  },
+  "source_commit": "abb7cc8d385c6a1daa9e9bb87f7488ab5685783b"
+}

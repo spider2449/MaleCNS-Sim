@@ -7,6 +7,15 @@ records the completed v0.3 robustness closure in Tasks 016, 017, 017L, and
 017M and the Task 018A anatomical result. It is the authoritative research
 checkpoint for Tasks 004-011, the v0.3 robustness result, and Task 018A.
 
+Task 018B Decision A closes v0.3 scientific scope. The tracked Task 017
+complete-matrix, recovery, and scoring artifacts are under `artifacts/task017/`.
+The byte-identical Task 018A execution result is under
+`artifacts/task018/execution-result.json` (SHA-256
+`b112712fc747c41332ebd5772c4ba24839f1c2f771e04533e34fdc24ca490e89`;
+canonical result digest
+`270c931a2420df475ff54ea185e7e7d03da1a868af8a35f7f68e38ebbf98f9f4`).
+The original `data/derived/task018-results.json` remains ignored local output.
+
 ## 1. Scientific scope and nonclaims
 
 MaleCNS-Sim is an executable connectome simulation and research platform. It

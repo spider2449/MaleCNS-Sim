@@ -1,4 +1,5 @@
 import inspect
+from pathlib import Path
 
 import pytest
 
@@ -144,9 +145,13 @@ def test_resolved_readout_retains_laterality_provenance():
 
 
 def test_production_task007_readout_uses_only_the_resolved_mn9_body():
+    annotation_path = Path("data/raw/male-cns/v1.0/body-annotations-male-cns-v1.0-minconf-0.5.feather")
+    neurotransmitter_path = Path("data/raw/male-cns/v1.0/body-neurotransmitters-male-cns-v1.0.feather")
+    if not annotation_path.is_file() or not neurotransmitter_path.is_file():
+        pytest.skip("MaleCNS v1.0 raw Feather files are unavailable")
     result = build_task007_result(
-        "data/raw/male-cns/v1.0/body-annotations-male-cns-v1.0-minconf-0.5.feather",
-        "data/raw/male-cns/v1.0/body-neurotransmitters-male-cns-v1.0.feather",
+        annotation_path,
+        neurotransmitter_path,
     )
     assert result.mn9_readout.status is MappingStatus.SIDE_RESOLVED
     assert result.mn9_readout.candidate_body_ids == ("16949",)

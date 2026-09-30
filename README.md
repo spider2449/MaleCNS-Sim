@@ -11,18 +11,29 @@ sensory/body coupling, FlyGym, NeuroMechFly, MuJoCo, or learning system.
 
 ## Current stage
 
-The current scientific endpoint is the completed Task 018A preregistered MN9
-anatomical asymmetry decomposition. The full curated graph gives MN9_L 6,012
-incoming synapses and MN9_R 556; the 5,456 gap is classified
-`SHARED_PARTNER_DIFFERENCE_LARGEST`. This is a connectomic accounting, not a
-dynamics or biological mechanism claim. Task 017 remains `NOT_ROBUST` under
-the frozen Task 016 criteria, and Task 017Q remains deferred. Task 011 remains the baseline
+The v0.3 scientific scope is complete under Task 018B Decision A. The
+prospectively preregistered Task 018A asks an independent anatomical question:
+the full curated graph gives MN9_L 6,012 incoming synapses and MN9_R 556.
+The 5,456 gap decomposes into shared-partner difference +4,281, LEFT-only
++1,315, and signed RIGHT-only -140. Its primary classification is
+`SHARED_PARTNER_DIFFERENCE_LARGEST`. The `min_synapses=5` sensitivity is
+`LEFT_ONLY_INPUT_LARGEST` and does not replace the primary result. This is
+connectomic accounting, not a functional or biological mechanism claim. The
+full Task 017 preregistered matrix was completed and all variants were
+technically valid; its `NOT_ROBUST` result is a successful negative robustness
+result under the frozen Task 016 criteria. Task 017Q remains deferred. Task 011 remains the baseline
 temporal mechanism audit. The validated state covers the curated MaleCNS v1.0
 graph, explicit sign policies, reference LIF dynamics, the Shiu v630 reference
 reproduction, Task 008 dynamics, Task 009 structural analysis, Task 010
 frozen-candidate perturbations, and the completed v0.3 robustness study. See
 the [authoritative research checkpoint](docs/MALECNS_RESEARCH_CHECKPOINT.md)
 and [Task 018A execution report](docs/plans/2026-09-30-task-018a-mn9-anatomical-asymmetry-execution.md).
+The byte-identical Task 018A execution artifact is tracked at
+[`artifacts/task018/execution-result.json`](artifacts/task018/execution-result.json)
+for inspection from a fresh clone; the original ignored local output remains
+at `data/derived/task018-results.json`. Running `scripts/run_task018.py`
+requires the manifest-matching raw data and performs scientific analysis; it
+is not needed to inspect the tracked result.
 Task 018B closes the current v0.3 scientific scope and recommends release
 preparation; see the [Task 018B decision record](docs/plans/2026-09-30-task-018b-mn9-anatomical-asymmetry-closure.md).
 
@@ -129,7 +140,7 @@ uv run python -m compileall src scripts tests
 git diff --check
 ```
 
-The accepted checkpoint baseline is `183 passed, 1 skipped`. Unit tests use
+The v0.3 release-preparation baseline is `255 passed, 1 skipped`. Unit tests use
 small in-memory fixtures and do not download real MaleCNS data.
 
 ## Reproducing the validated analyses
