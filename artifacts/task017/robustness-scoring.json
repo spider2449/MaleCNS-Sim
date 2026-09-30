@@ -1,0 +1,1771 @@
+{
+  "provenance": {
+    "complete_matrix_digest": "19c51e79d883915398c2d3d89c3456f3160ba0062cf75abe20e97807979b1028",
+    "complete_matrix_manifest_sha256": "73c9e51ae06e7d924f80c75578536c6d1ce2b0cf5e2657041ddcfdf5a2262cd8",
+    "journal_sha256": "878a2b79fa442c539d4f803819e3154b060b4fbb3c6c5a2cb5a6af464503190e",
+    "sidecar_inventory_sha256": "a24561d152e6acb9761c0b306d7a0158d487ce35e114ef02b543647326208553"
+  },
+  "scientific_content": {
+    "cells": [
+      {
+        "candidate": "10313",
+        "category": {
+          "allowable_variants": 7,
+          "required": 6,
+          "status": "EFFECT_CATEGORY_STABLE",
+          "variants": [
+            {
+              "allowable": true,
+              "category": "major",
+              "ordinal_distance": 1,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 0,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 1,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 0,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 0,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 0,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 1,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "direction": {
+          "agreeing_variants": 7,
+          "required": 6,
+          "status": "EFFECT_DIRECTION_STABLE",
+          "variants": [
+            {
+              "effect_hz": 34.53333333333333,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "effect_hz": 5.5,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "effect_hz": 0.19999999999999973,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "effect_hz": 11.533333333333331,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "effect_hz": 7.299999999999997,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "effect_hz": 10.133333333333326,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "effect_hz": 3.299999999999997,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "mechanism": {
+          "compatible_score": 3.5,
+          "direct_short_network_swap": false,
+          "exact_stable": false,
+          "required_score": 6.0,
+          "status": "NOT_STABLE",
+          "variants": [
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 0.5,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 0.5,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 0.0,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 0.5,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 0.5,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 0.5,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "reference": {
+          "category": "moderate",
+          "effect_hz": 9.63333333333334,
+          "mechanism": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "sign": "POSITIVE"
+        },
+        "stimulus_side": "LEFT"
+      },
+      {
+        "candidate": "10313",
+        "category": {
+          "allowable_variants": 7,
+          "required": 6,
+          "status": "EFFECT_CATEGORY_STABLE",
+          "variants": [
+            {
+              "allowable": true,
+              "category": "major",
+              "ordinal_distance": 0,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 1,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 1,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 1,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 1,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 1,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "allowable": true,
+              "category": "major",
+              "ordinal_distance": 0,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "direction": {
+          "agreeing_variants": 7,
+          "required": 6,
+          "status": "EFFECT_DIRECTION_STABLE",
+          "variants": [
+            {
+              "effect_hz": 32.83333333333334,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "effect_hz": 9.5,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "effect_hz": 16.46666666666667,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "effect_hz": 8.233333333333334,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "effect_hz": 9.63333333333334,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "effect_hz": 8.36666666666666,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "effect_hz": 25.03333333333334,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "mechanism": {
+          "compatible_score": 7.0,
+          "direct_short_network_swap": false,
+          "exact_stable": true,
+          "required_score": 6.0,
+          "status": "MECHANISM_COMPATIBLE_STABLE",
+          "variants": [
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "reference": {
+          "category": "major",
+          "effect_hz": 20.366666666666674,
+          "mechanism": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "sign": "POSITIVE"
+        },
+        "stimulus_side": "RIGHT"
+      },
+      {
+        "candidate": "10135",
+        "category": {
+          "allowable_variants": 7,
+          "required": 6,
+          "status": "EFFECT_CATEGORY_STABLE",
+          "variants": [
+            {
+              "allowable": true,
+              "category": "major",
+              "ordinal_distance": 1,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 0,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "allowable": true,
+              "category": "major",
+              "ordinal_distance": 1,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 0,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "allowable": true,
+              "category": "major",
+              "ordinal_distance": 1,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "allowable": true,
+              "category": "major",
+              "ordinal_distance": 1,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 1,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "direction": {
+          "agreeing_variants": 7,
+          "required": 6,
+          "status": "EFFECT_DIRECTION_STABLE",
+          "variants": [
+            {
+              "effect_hz": 31.366666666666674,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "effect_hz": 16.266666666666673,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "effect_hz": 18.733333333333334,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "effect_hz": 18.86666666666666,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "effect_hz": 25.06666666666667,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "effect_hz": 21.96666666666667,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "effect_hz": 1.7333333333333307,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "mechanism": {
+          "compatible_score": 7.0,
+          "direct_short_network_swap": false,
+          "exact_stable": true,
+          "required_score": 6.0,
+          "status": "MECHANISM_COMPATIBLE_STABLE",
+          "variants": [
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "reference": {
+          "category": "moderate",
+          "effect_hz": 18.400000000000006,
+          "mechanism": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "sign": "POSITIVE"
+        },
+        "stimulus_side": "LEFT"
+      },
+      {
+        "candidate": "10135",
+        "category": {
+          "allowable_variants": 7,
+          "required": 6,
+          "status": "EFFECT_CATEGORY_STABLE",
+          "variants": [
+            {
+              "allowable": true,
+              "category": "major",
+              "ordinal_distance": 1,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 1,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 1,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 1,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 0,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 1,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 1,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "direction": {
+          "agreeing_variants": 5,
+          "required": 6,
+          "status": "NOT_STABLE",
+          "variants": [
+            {
+              "effect_hz": 21.933333333333337,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "effect_hz": 3.7333333333333343,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "effect_hz": 1.8333333333333286,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "effect_hz": -1.5,
+              "matches_reference": false,
+              "sign": "NEGATIVE",
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "effect_hz": 6.400000000000006,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "effect_hz": 2.2666666666666657,
+              "matches_reference": true,
+              "sign": "POSITIVE",
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "effect_hz": -1.86666666666666,
+              "matches_reference": false,
+              "sign": "NEGATIVE",
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "mechanism": {
+          "compatible_score": 4.5,
+          "direct_short_network_swap": false,
+          "exact_stable": false,
+          "required_score": 6.0,
+          "status": "NOT_STABLE",
+          "variants": [
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 0.5,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 0.5,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 0.5,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 0.5,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 0.5,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "reference": {
+          "category": "moderate",
+          "effect_hz": 9.666666666666671,
+          "mechanism": "MIXED",
+          "sign": "POSITIVE"
+        },
+        "stimulus_side": "RIGHT"
+      },
+      {
+        "candidate": "12752",
+        "category": {
+          "allowable_variants": 5,
+          "required": 6,
+          "status": "NOT_STABLE",
+          "variants": [
+            {
+              "allowable": true,
+              "category": "major",
+              "ordinal_distance": 1,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 0,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "allowable": false,
+              "category": "negligible",
+              "ordinal_distance": 2,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 1,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 0,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 1,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "allowable": false,
+              "category": "negligible",
+              "ordinal_distance": 2,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "direction": {
+          "agreeing_variants": 6,
+          "required": 6,
+          "status": "EFFECT_DIRECTION_STABLE",
+          "variants": [
+            {
+              "effect_hz": -40.13333333333334,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "effect_hz": -6.899999999999999,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "effect_hz": -0.10000000000000009,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "effect_hz": -4.466666666666669,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "effect_hz": -6.13333333333334,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "effect_hz": -2.433333333333337,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "effect_hz": 0.06666666666666643,
+              "matches_reference": false,
+              "sign": "POSITIVE",
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "mechanism": {
+          "compatible_score": 5.0,
+          "direct_short_network_swap": false,
+          "exact_stable": false,
+          "required_score": 6.0,
+          "status": "NOT_STABLE",
+          "variants": [
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 0.5,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 0.0,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 0.5,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "reference": {
+          "category": "moderate",
+          "effect_hz": -11.333333333333329,
+          "mechanism": "MIXED",
+          "sign": "NEGATIVE"
+        },
+        "stimulus_side": "LEFT"
+      },
+      {
+        "candidate": "12752",
+        "category": {
+          "allowable_variants": 6,
+          "required": 6,
+          "status": "EFFECT_CATEGORY_STABLE",
+          "variants": [
+            {
+              "allowable": false,
+              "category": "major",
+              "ordinal_distance": 2,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 1,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 0,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 1,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 0,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 1,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 0,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "direction": {
+          "agreeing_variants": 7,
+          "required": 6,
+          "status": "EFFECT_DIRECTION_STABLE",
+          "variants": [
+            {
+              "effect_hz": -47.633333333333326,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "effect_hz": -6.866666666666674,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "effect_hz": -1.4000000000000057,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "effect_hz": -5.933333333333323,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "effect_hz": -4.666666666666657,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "effect_hz": -6.266666666666666,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "effect_hz": -2.5999999999999943,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "mechanism": {
+          "compatible_score": 6.0,
+          "direct_short_network_swap": false,
+          "exact_stable": false,
+          "required_score": 6.0,
+          "status": "MECHANISM_COMPATIBLE_STABLE",
+          "variants": [
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 0.5,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 0.5,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "reference": {
+          "category": "small",
+          "effect_hz": -1.36666666666666,
+          "mechanism": "MIXED",
+          "sign": "NEGATIVE"
+        },
+        "stimulus_side": "RIGHT"
+      },
+      {
+        "candidate": "512730",
+        "category": {
+          "allowable_variants": 7,
+          "required": 6,
+          "status": "EFFECT_CATEGORY_STABLE",
+          "variants": [
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 1,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 0,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 1,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 1,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "allowable": true,
+              "category": "moderate",
+              "ordinal_distance": 1,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 0,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 1,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "direction": {
+          "agreeing_variants": 4,
+          "required": 6,
+          "status": "NOT_STABLE",
+          "variants": [
+            {
+              "effect_hz": -9.63333333333334,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "effect_hz": -4.599999999999994,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "effect_hz": -1.2000000000000002,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "effect_hz": 0.7333333333333343,
+              "matches_reference": false,
+              "sign": "POSITIVE",
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "effect_hz": -9.400000000000006,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "effect_hz": 3.1666666666666643,
+              "matches_reference": false,
+              "sign": "POSITIVE",
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "effect_hz": 0.1666666666666643,
+              "matches_reference": false,
+              "sign": "POSITIVE",
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "mechanism": {
+          "compatible_score": 7.0,
+          "direct_short_network_swap": false,
+          "exact_stable": true,
+          "required_score": 6.0,
+          "status": "MECHANISM_COMPATIBLE_STABLE",
+          "variants": [
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "reference": {
+          "category": "small",
+          "effect_hz": -1.5333333333333314,
+          "mechanism": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "sign": "NEGATIVE"
+        },
+        "stimulus_side": "LEFT"
+      },
+      {
+        "candidate": "512730",
+        "category": {
+          "allowable_variants": 7,
+          "required": 6,
+          "status": "EFFECT_CATEGORY_STABLE",
+          "variants": [
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 1,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 1,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "direction": {
+          "agreeing_variants": 4,
+          "required": 6,
+          "status": "NOT_STABLE",
+          "variants": [
+            {
+              "effect_hz": -3.6999999999999886,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "effect_hz": 0.0,
+              "matches_reference": false,
+              "sign": "ZERO",
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "effect_hz": 0.0,
+              "matches_reference": false,
+              "sign": "ZERO",
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "effect_hz": -0.23333333333333428,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "effect_hz": -0.1666666666666572,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "effect_hz": 0.3333333333333286,
+              "matches_reference": false,
+              "sign": "POSITIVE",
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "effect_hz": -1.36666666666666,
+              "matches_reference": true,
+              "sign": "NEGATIVE",
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "mechanism": {
+          "compatible_score": 5.0,
+          "direct_short_network_swap": false,
+          "exact_stable": false,
+          "required_score": 6.0,
+          "status": "NOT_STABLE",
+          "variants": [
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 0.0,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "classification": "MIXED",
+              "direct_incompatible_transition": false,
+              "score": 0.0,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "reference": {
+          "category": "negligible",
+          "effect_hz": -0.03333333333333144,
+          "mechanism": "UNRESOLVED",
+          "sign": "NEGATIVE"
+        },
+        "stimulus_side": "RIGHT"
+      },
+      {
+        "candidate": "43765",
+        "category": {
+          "allowable_variants": 7,
+          "required": 6,
+          "status": "EFFECT_CATEGORY_STABLE",
+          "variants": [
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "direction": {
+          "agreeing_variants": 6,
+          "required": 6,
+          "status": "EFFECT_DIRECTION_STABLE",
+          "variants": [
+            {
+              "effect_hz": 0.0,
+              "matches_reference": true,
+              "sign": "ZERO",
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "effect_hz": 0.0,
+              "matches_reference": true,
+              "sign": "ZERO",
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "effect_hz": 0.0,
+              "matches_reference": true,
+              "sign": "ZERO",
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "effect_hz": 0.0,
+              "matches_reference": true,
+              "sign": "ZERO",
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "effect_hz": 0.0,
+              "matches_reference": true,
+              "sign": "ZERO",
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "effect_hz": 0.0,
+              "matches_reference": true,
+              "sign": "ZERO",
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "effect_hz": 0.2666666666666657,
+              "matches_reference": false,
+              "sign": "POSITIVE",
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "mechanism": {
+          "compatible_score": 6.0,
+          "direct_short_network_swap": false,
+          "exact_stable": true,
+          "required_score": 6.0,
+          "status": "MECHANISM_COMPATIBLE_STABLE",
+          "variants": [
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 0.0,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "reference": {
+          "category": "negligible",
+          "effect_hz": 0.0,
+          "mechanism": "UNRESOLVED",
+          "sign": "ZERO"
+        },
+        "stimulus_side": "LEFT"
+      },
+      {
+        "candidate": "43765",
+        "category": {
+          "allowable_variants": 7,
+          "required": 6,
+          "status": "EFFECT_CATEGORY_STABLE",
+          "variants": [
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "allowable": true,
+              "category": "negligible",
+              "ordinal_distance": 0,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "allowable": true,
+              "category": "small",
+              "ordinal_distance": 1,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "direction": {
+          "agreeing_variants": 6,
+          "required": 6,
+          "status": "EFFECT_DIRECTION_STABLE",
+          "variants": [
+            {
+              "effect_hz": 0.0,
+              "matches_reference": true,
+              "sign": "ZERO",
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "effect_hz": 0.0,
+              "matches_reference": true,
+              "sign": "ZERO",
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "effect_hz": 0.0,
+              "matches_reference": true,
+              "sign": "ZERO",
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "effect_hz": 0.0,
+              "matches_reference": true,
+              "sign": "ZERO",
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "effect_hz": 0.0,
+              "matches_reference": true,
+              "sign": "ZERO",
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "effect_hz": 0.0,
+              "matches_reference": true,
+              "sign": "ZERO",
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "effect_hz": -1.2333333333333272,
+              "matches_reference": false,
+              "sign": "NEGATIVE",
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "mechanism": {
+          "compatible_score": 6.0,
+          "direct_short_network_swap": false,
+          "exact_stable": true,
+          "required_score": 6.0,
+          "status": "MECHANISM_COMPATIBLE_STABLE",
+          "variants": [
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V1_TAU_MEMBRANE_FAST"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V2_TAU_MEMBRANE_SLOW"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V3_TAU_SYNAPSE_FAST"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V4_DELAY_SHORT"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V5_WEIGHT_LOW"
+            },
+            {
+              "classification": "UNRESOLVED",
+              "direct_incompatible_transition": false,
+              "score": 1.0,
+              "variant_id": "V6_THRESHOLD_HIGHER"
+            },
+            {
+              "classification": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+              "direct_incompatible_transition": false,
+              "score": 0.0,
+              "variant_id": "V7_CONSERVATIVE_SIGNS"
+            }
+          ]
+        },
+        "reference": {
+          "category": "negligible",
+          "effect_hz": 0.0,
+          "mechanism": "UNRESOLVED",
+          "sign": "ZERO"
+        },
+        "stimulus_side": "RIGHT"
+      }
+    ],
+    "checkpoint_fingerprint": "8328714e2353d380f9e2cee351839c9dd9cb42d4cf93b1721b2a18c39a439f63",
+    "complete_matrix_digest": "19c51e79d883915398c2d3d89c3456f3160ba0062cf75abe20e97807979b1028",
+    "coverage": {
+      "cells_expected": 10,
+      "cells_scored": 10,
+      "nonreference_variants_evaluated": 7,
+      "nonreference_variants_expected": 7
+    },
+    "deterministic_scoring_digest": "31c7c8fc6286b6bee53a51946db6667e518ceec696622401bde98c30c7560880",
+    "execution_claims": {
+      "simulation_count": 0,
+      "task017q_status": "DEFERRED",
+      "task018_started": false
+    },
+    "global_classification": "NOT_ROBUST",
+    "global_classification_details": {
+      "effect_category_stable_cells": 9,
+      "effect_direction_stable_cells": 7,
+      "global_supporting_nonreference_variants": 3,
+      "global_supporting_requirement_partial": 5,
+      "invalid_variants": [],
+      "mechanism_compatible_stable_cells": 6,
+      "stable_cell_requirement_partial": 5,
+      "stable_cell_requirement_robust": 8
+    },
+    "global_support": [
+      {
+        "counterintuitive_network_compatible": 4,
+        "counterintuitive_required": 3,
+        "labels": {
+          "10135:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "10135:RIGHT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "10313:LEFT": "MIXED",
+          "10313:RIGHT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "12752:LEFT": "MIXED",
+          "12752:RIGHT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "512730:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE"
+        },
+        "mixed_reference_required": 2,
+        "mixed_reference_retained_or_short": 1,
+        "network_reference_direct_short_path_changes": 0,
+        "network_reference_maximum": 1,
+        "supports_global_conclusion": false,
+        "variant_id": "V1_TAU_MEMBRANE_FAST"
+      },
+      {
+        "counterintuitive_network_compatible": 4,
+        "counterintuitive_required": 3,
+        "labels": {
+          "10135:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "10135:RIGHT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "10313:LEFT": "MIXED",
+          "10313:RIGHT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "12752:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "12752:RIGHT": "MIXED",
+          "512730:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE"
+        },
+        "mixed_reference_required": 2,
+        "mixed_reference_retained_or_short": 1,
+        "network_reference_direct_short_path_changes": 0,
+        "network_reference_maximum": 1,
+        "supports_global_conclusion": false,
+        "variant_id": "V2_TAU_MEMBRANE_SLOW"
+      },
+      {
+        "counterintuitive_network_compatible": 3,
+        "counterintuitive_required": 3,
+        "labels": {
+          "10135:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "10135:RIGHT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "10313:LEFT": "UNRESOLVED",
+          "10313:RIGHT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "12752:LEFT": "UNRESOLVED",
+          "12752:RIGHT": "MIXED",
+          "512730:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE"
+        },
+        "mixed_reference_required": 2,
+        "mixed_reference_retained_or_short": 1,
+        "network_reference_direct_short_path_changes": 0,
+        "network_reference_maximum": 1,
+        "supports_global_conclusion": false,
+        "variant_id": "V3_TAU_SYNAPSE_FAST"
+      },
+      {
+        "counterintuitive_network_compatible": 4,
+        "counterintuitive_required": 3,
+        "labels": {
+          "10135:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "10135:RIGHT": "MIXED",
+          "10313:LEFT": "MIXED",
+          "10313:RIGHT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "12752:LEFT": "MIXED",
+          "12752:RIGHT": "MIXED",
+          "512730:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE"
+        },
+        "mixed_reference_required": 2,
+        "mixed_reference_retained_or_short": 3,
+        "network_reference_direct_short_path_changes": 0,
+        "network_reference_maximum": 1,
+        "supports_global_conclusion": true,
+        "variant_id": "V4_DELAY_SHORT"
+      },
+      {
+        "counterintuitive_network_compatible": 4,
+        "counterintuitive_required": 3,
+        "labels": {
+          "10135:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "10135:RIGHT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "10313:LEFT": "MIXED",
+          "10313:RIGHT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "12752:LEFT": "MIXED",
+          "12752:RIGHT": "MIXED",
+          "512730:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE"
+        },
+        "mixed_reference_required": 2,
+        "mixed_reference_retained_or_short": 2,
+        "network_reference_direct_short_path_changes": 0,
+        "network_reference_maximum": 1,
+        "supports_global_conclusion": true,
+        "variant_id": "V5_WEIGHT_LOW"
+      },
+      {
+        "counterintuitive_network_compatible": 4,
+        "counterintuitive_required": 3,
+        "labels": {
+          "10135:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "10135:RIGHT": "MIXED",
+          "10313:LEFT": "MIXED",
+          "10313:RIGHT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "12752:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "12752:RIGHT": "MIXED",
+          "512730:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE"
+        },
+        "mixed_reference_required": 2,
+        "mixed_reference_retained_or_short": 2,
+        "network_reference_direct_short_path_changes": 0,
+        "network_reference_maximum": 1,
+        "supports_global_conclusion": true,
+        "variant_id": "V6_THRESHOLD_HIGHER"
+      },
+      {
+        "counterintuitive_network_compatible": 4,
+        "counterintuitive_required": 3,
+        "labels": {
+          "10135:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "10135:RIGHT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "10313:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "10313:RIGHT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "12752:LEFT": "MIXED",
+          "12752:RIGHT": "NETWORK_REDISTRIBUTION_COMPATIBLE",
+          "512730:LEFT": "NETWORK_REDISTRIBUTION_COMPATIBLE"
+        },
+        "mixed_reference_required": 2,
+        "mixed_reference_retained_or_short": 1,
+        "network_reference_direct_short_path_changes": 0,
+        "network_reference_maximum": 1,
+        "supports_global_conclusion": false,
+        "variant_id": "V7_CONSERVATIVE_SIGNS"
+      }
+    ],
+    "global_support_variant_count": 7,
+    "global_supporting_variant_count": 3,
+    "schema": "malecns-sim-task017-preregistered-robustness-scoring-v1",
+    "stable_cell_totals": {
+      "category": 9,
+      "direction": 7,
+      "mechanism_compatible": 6
+    },
+    "task016_fingerprint": "2ecfe9ffca858a404b755a2bd4f34c88ed509718bee7f296e8fdcc5eb909e1d6"
+  }
+}
