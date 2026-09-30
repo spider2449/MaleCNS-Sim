@@ -23,6 +23,8 @@ reproduction, Task 008 dynamics, Task 009 structural analysis, Task 010
 frozen-candidate perturbations, and the completed v0.3 robustness study. See
 the [authoritative research checkpoint](docs/MALECNS_RESEARCH_CHECKPOINT.md)
 and [Task 018A execution report](docs/plans/2026-09-30-task-018a-mn9-anatomical-asymmetry-execution.md).
+Task 018B closes the current v0.3 scientific scope and recommends release
+preparation; see the [Task 018B decision record](docs/plans/2026-09-30-task-018b-mn9-anatomical-asymmetry-closure.md).
 
 The intended pipeline is:
 

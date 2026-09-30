@@ -480,3 +480,15 @@ from left-only bodies, and -140 from right-only bodies. The primary label is
 `SHARED_PARTNER_DIFFERENCE_LARGEST`. The threshold-5 sensitivity is reported
 separately and does not change this label. See the
 [Task 018A execution report](plans/2026-09-30-task-018a-mn9-anatomical-asymmetry-execution.md).
+
+## 17. Task 018B scientific closure and decision
+
+Task 018B freezes the full-graph primary classification as
+`SHARED_PARTNER_DIFFERENCE_LARGEST`. The preregistered threshold-5 sensitivity
+has `LEFT_ONLY_INPUT_LARGEST`; its changed label does not alter the primary
+classification. The remaining independent Task 015 motif and external-validation
+directions lack the fixed definitions or external evidence needed for immediate
+preregistration. **Decision A: v0.3 scientific scope complete; release
+preparation recommended.** Task 017 remains `NOT_ROBUST`, Task 017Q remains
+`DEFERRED`, and no further scientific analysis or release is authorized by this
+decision. See the [Task 018B closure](plans/2026-09-30-task-018b-mn9-anatomical-asymmetry-closure.md).
