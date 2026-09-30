@@ -11,12 +11,15 @@ sensory/body coupling, FlyGym, NeuroMechFly, MuJoCo, or learning system.
 
 ## Current stage
 
-Task 011 is the current scientific endpoint. Task 012 records the authoritative
-research checkpoint, and Task 013 prepares that checkpoint for reproducible
-release. The validated state covers the curated MaleCNS v1.0 graph, explicit
-sign policies, reference LIF dynamics, the Shiu v630 reference reproduction,
-Task 008 dynamics, Task 009 structural analysis, Task 010 frozen-candidate
-perturbations, and the Task 011 temporal mechanism audit.
+The current scientific endpoint is the completed Task 017L preregistered
+robustness scoring, closed by Task 017M. Its final classification is
+`NOT_ROBUST` under the frozen Task 016 criteria. Task 011 remains the baseline
+temporal mechanism audit. The validated state covers the curated MaleCNS v1.0
+graph, explicit sign policies, reference LIF dynamics, the Shiu v630 reference
+reproduction, Task 008 dynamics, Task 009 structural analysis, Task 010
+frozen-candidate perturbations, and the completed v0.3 robustness study. See
+the [authoritative research checkpoint](docs/MALECNS_RESEARCH_CHECKPOINT.md)
+and [Task 017M closure report](docs/plans/2026-09-30-task-017m-v0.3-scientific-closure.md).
 
 The intended pipeline is:
 

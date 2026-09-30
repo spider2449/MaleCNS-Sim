@@ -1,9 +1,11 @@
 # MaleCNS-Sim Authoritative Research Checkpoint
 
-Date: 2026-09-22
+Date: 2026-09-30
 
-This document consolidates the validated scientific state through completed
-Task 011. It is the authoritative research checkpoint for Tasks 004-011.
+This document preserves the validated scientific state through Task 011 and
+records the completed v0.3 robustness closure in Tasks 016, 017, 017L, and
+017M. It is the authoritative research checkpoint for Tasks 004-011 and the
+v0.3 robustness result.
 
 ## 1. Scientific scope and nonclaims
 
@@ -321,7 +323,11 @@ The audit supports the following model-level interpretation:
 The Task 011 result digest accepted for this checkpoint is
 `fbe9b0a7f138fdbdea7a0a8cf22e8493596a9299dd9b9f6c3537c48f550dece4`.
 
-## 12. Current strongest scientific conclusion
+## 12. Task 011 model-level conclusion (baseline result)
+
+This section records the accepted Task 011 interpretation as the baseline
+result assessed by the v0.3 robustness study; the completed robustness result
+is recorded in Section 16.
 
 Within the validated MaleCNS-Sim LIF model, anatomical prominence and short-path
 structure do not consistently predict perturbational influence on MN9_L. The
@@ -349,6 +355,9 @@ does not claim an actual-fly mechanism.
 | 009 structural asymmetry | `25286228cf050928fc7534a1603ed388d48d1053` |
 | 010 frozen-candidate perturbation | `fe4048726641a99b3cf9ed33aec406d50700f489` |
 | 011 temporal mechanism audit | `ae589a9b9726fa2510fff8f32658bc02176f66a3` |
+| 016 v0.3 robustness preregistration | `77f0c1110df766d93198275845e29749e53c9d04` |
+| 017 frozen execution identity | starting HEAD `b32c116b704cf94bcfd9d9e601eddfdd70271a2f`; sealed matrix `955b5e19d36e500cdbd148d8c5b4d70d21bf1289` |
+| 017L preregistered scoring | `51519db4e3994bd5eafbeb8ed603ac34b3a9d681` |
 
 Task 009 frozen candidate fingerprint:
 `113b9a767eeb61a56419e7b76e57b785fe26d9bb77e4ad6c9f6e2020be2f6ea9`.
@@ -384,9 +393,83 @@ These are unresolved questions, not Task 013 proposals:
 
 ## 15. Project stopping point
 
-Task 011 is the current completed scientific endpoint. Task 012 is a
-documentation and reproducibility closure task only. No new perturbation study,
-candidate discovery, model change, or scientific hypothesis is authorized by
-Task 012. Task 013 must not be started automatically; based on this checkpoint,
-no Task 013 is scientifically justified without a separately authorized scope,
-pre-registered question, and independent rationale.
+The current scientific endpoint is the completed Task 017L preregistered
+robustness scoring, with Task 017M providing its scientific closure. Task 011
+remains the accepted baseline mechanism audit, not the current endpoint. Task
+017Q remains deferred, and Task 018 has not started. No follow-up simulation or
+new scientific test is authorized by this checkpoint; any follow-up requires a
+separately designed and preregistered task.
+
+## 16. v0.3 robustness closure (Tasks 016-017M)
+
+### Frozen identities and execution integrity
+
+- Task 016 preregistration fingerprint:
+  `2ecfe9ffca858a404b755a2bd4f34c88ed509718bee7f296e8fdcc5eb909e1d6`.
+- Task 017 frozen starting HEAD:
+  `b32c116b704cf94bcfd9d9e601eddfdd70271a2f`.
+- Task 017 checkpoint fingerprint:
+  `8328714e2353d380f9e2cee351839c9dd9cb42d4cf93b1721b2a18c39a439f63`.
+- The sealed matrix is complete at 3,168 / 3,168 units, with zero pending;
+  R0 and each of V1-V7 completed 396 / 396. The complete-matrix digest is
+  `19c51e79d883915398c2d3d89c3456f3160ba0062cf75abe20e97807979b1028`.
+- The committed read-only audit reports journal SHA-256
+  `878a2b79fa442c539d4f803819e3154b060b4fbb3c6c5a2cb5a6af464503190e` and
+  sidecar inventory SHA-256
+  `a24561d152e6acb9761c0b306d7a0158d487ce35e114ef02b543647326208553`.
+- Task 017L deterministic scoring digest:
+  `31c7c8fc6286b6bee53a51946db6667e518ceec696622401bde98c30c7560880`.
+
+The Task 017M before/after read-only audit found the completion counts,
+pending count, journal hash, sidecar inventory hash, complete-matrix digest,
+checkpoint fingerprint, and tracked scoring artifact unchanged. Task 017M
+executed zero simulations and did not modify checkpoint records or sidecars.
+
+### Confirmed preregistered findings
+
+All seven non-reference variants were technically valid. The preregistered
+ten-cell aggregates are direction stability 7/10, category stability 9/10,
+and mechanism-compatible stability 6/10. Three of seven variants supported
+the frozen global conclusion: V4, V5, and V6. V1, V2, V3, and V7 did not. The
+final Task 016 classification is **NOT_ROBUST**.
+
+This is a successful preregistered negative robustness result, not a failed
+computation: the complete matrix passed its technical validity gate and the
+frozen criteria classify its outcome as NOT_ROBUST.
+
+### Descriptive failure decomposition
+
+These are descriptive observations from the already completed preregistered
+matrix, not new tests or newly confirmed mechanisms:
+
+- Effect category was comparatively stable (9/10); direction (7/10) and
+  mechanism compatibility (6/10) were less stable.
+- Candidate 512730 had direction stability 4/7 on both LEFT and RIGHT.
+- Candidate 10313 mechanism compatibility scored 3.5/7 on LEFT versus 7.0/7
+  on RIGHT. Candidate 10135 scored 7.0/7 on LEFT versus 4.5/7 on RIGHT.
+- Candidate 12752 LEFT category stability was 5/7.
+- V1, V2, V3, and V7 failed global support because the frozen mixed-reference
+  retention condition was not met. V4, V5, and V6 met all frozen global-support
+  conditions.
+
+### Future exploratory hypotheses (untested)
+
+The failure pattern may motivate later questions about why direction is less
+stable for 512730, why mechanism compatibility differs by side for 10313 and
+10135, and why V4/V5/V6 preserve global support while V1/V2/V3/V7 do not.
+These are exploratory questions, not findings, and do not authorize new
+simulation work. Any follow-up requires a separately designed and
+preregistered task.
+
+### Interpretation and nonclaims
+
+Within MaleCNS-Sim, the combined frozen Task 010/011 conclusion does not meet
+the frozen Task 016 robustness criteria across the tested model variants.
+This does not disprove a biological mechanism or biological network
+redistribution; establish or refute direct inhibition biologically; establish
+that a tested candidate is biologically necessary or unnecessary; or support
+generalization beyond the tested variants. `NETWORK_REDISTRIBUTION_COMPATIBLE`
+remains a model compatibility label, not biological mechanism proof. A
+connectome plus model dynamics is not a reconstructed biological brain.
+
+Task 017Q remains **DEFERRED**. Task 018 has **NOT STARTED**.
