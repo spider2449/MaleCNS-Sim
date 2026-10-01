@@ -388,8 +388,9 @@ environment is CuPy 14.2.0 with CUDA runtime 12.9 and the RTX 3060 setup
 recorded in Section 7. CUDA float64 is validated; float32 is not the scientific
 mode.
 
-Derived scientific artifacts under `data/derived/` are ignored by Git and are
-kept separate from tracked source and documentation. Task 010 and Task 011
+Most derived scientific artifacts under `data/derived/` are ignored by Git;
+selected compact evidence, including `data/derived/task008-results.json`, is
+tracked and integrity checked. Task 010 and Task 011
 artifacts have their own namespaces; Task 008 was not overwritten. Task 012
 does not regenerate, rewrite, or normalize any scientific-result artifact.
 
@@ -514,3 +515,7 @@ Task 025G classifies the BANC confirmatory route as **BANC_CONFIRMATORY_ROUTE_CL
 Task 018A's primary and sensitivity classifications remain unchanged, as does Task 017's **NOT_ROBUST** result. Task 017Q remains **KEEP_DEFERRED**. No replacement external-validation dataset, new scientific hypothesis, or next v0.4 scientific question has been selected. Task 025G recommended a separate v0.4 Post-BANC Research Roadmap Decision Gate, now completed as Task 026 below.
 
 Task 026 completed that result-blind gate on 2026-10-01. Its decision is **C — NO_V0_4_SCIENTIFIC_QUESTION_CURRENTLY_READY**. The [Task 026 roadmap record](plans/2026-10-01-task-026-v0.4-post-banc-research-roadmap-gate.md) audits pre-result motivations, quarantines result-derived leads, and assesses five candidate directions. It selects no next scientific task, preregistration, hypothesis, or replacement external dataset. Task 017 remains `NOT_ROBUST`, Task 018A remains unchanged, the BANC confirmatory route remains closed, and Task 017Q remains `KEEP_DEFERRED`.
+
+## 19. Task 017 archival custody and local recovery boundary
+
+The completed Task 017 journal and sidecars remain outside Git. The tracked recovery manifest pins the sealed external ZIP and manifest; Task 017P established formal export/import checks. [Task 031](plans/2026-10-01-task-031-task017-independent-archive-custody-receipt.md) verified a second copy on distinct physical storage by complete readback. This custody result did not import a checkpoint, certify cross-machine restore, or execute Task 017Q. The [current reproducibility guide](REPRODUCIBILITY.md) gives the safe recovery order and local validation commands. Task 017Q remains **Q1 / KEEP_DEFERRED**.

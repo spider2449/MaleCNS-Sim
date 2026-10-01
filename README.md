@@ -117,37 +117,25 @@ scientific state is in the
 
 ## Installation
 
-Python 3.12 or newer is required.
-
-```powershell
-uv sync --extra test
-```
-
-The optional CUDA environment used by the validated GPU analyses is:
-
-```powershell
-uv sync --extra test --extra gpu
-uv run python -c "import cupy; print(cupy.__version__, cupy.cuda.runtime.runtimeGetVersion())"
-```
-
-The GPU extra is pinned to `cupy-cuda12x==14.2.0`. Python 3.12 or newer is
-required. A pip-based CPU installation is also supported:
-
-```powershell
-python -m pip install -e ".[test]"
-```
-
-## Tests
-
-The repository currently does not use GitHub CI. Local reproducibility checks
-can be run with:
+Python 3.12 or newer and `uv` are required. For local CPU setup:
 
 ```powershell
 uv sync --frozen --group dev
-uv run --frozen pytest
-uv run --frozen python -m compileall src scripts tests
+```
+
+GPU support is optional; see the [reproducibility and recovery guide](docs/REPRODUCIBILITY.md)
+for its setup and preflight boundary.
+
+## Tests
+
+Validation is local. After setup, run the data-free tests, package build, and
+tracked-integrity check:
+
+```powershell
+uv run pytest
+uv run python -m compileall src scripts tests
 uv build
-uv run --frozen python scripts/check_tracked_integrity.py
+uv run python scripts/check_tracked_integrity.py
 git diff --check
 ```
 
