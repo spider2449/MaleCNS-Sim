@@ -519,3 +519,7 @@ Task 026 completed that result-blind gate on 2026-10-01. Its decision is **C —
 ## 19. Task 017 archival custody and local recovery boundary
 
 The completed Task 017 journal and sidecars remain outside Git. The tracked recovery manifest pins the sealed external ZIP and manifest; Task 017P established formal export/import checks. [Task 031](plans/2026-10-01-task-031-task017-independent-archive-custody-receipt.md) verified a second copy on distinct physical storage by complete readback. This custody result did not import a checkpoint, certify cross-machine restore, or execute Task 017Q. The [current reproducibility guide](REPRODUCIBILITY.md) gives the safe recovery order and local validation commands. Task 017Q remains **Q1 / KEEP_DEFERRED**.
+
+## 20. Task 033 post-v0.3 engineering roadmap decision
+
+Task 033 completed the post-v0.3 engineering decision gate on 2026-10-01. Its decision is **C — NO_ENGINEERING_TASK_CURRENTLY_JUSTIFIED**. Tasks 028–032 established and reconciled local reproducibility, tracked integrity, independent Task 017 archive custody, the no-GitHub-CI policy, and current documentation. Task 017Q remains **Q1 / KEEP_DEFERRED**; archive readback does not certify cross-machine restore. No Task 034 or engineering implementation/research task is authorized. Reopen engineering work only on a concrete maintenance trigger recorded in the [Task 033 decision](plans/2026-10-01-task-033-post-v0.3-engineering-roadmap-decision.md). Task 026's scientific pause and all scientific results remain unchanged.
