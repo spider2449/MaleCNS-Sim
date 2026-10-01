@@ -16,6 +16,10 @@ The layout has setup on the left, logical data flow and result in the center, ru
 
 The CPU and CUDA engines label spikes with `step + 1` during `range(duration_ms / dt_ms)`. For an exact grid of `N` updates, legal spike timesteps are the integers `1..N`, including the terminal timestep `N`; zero, negatives, nonintegers and values above `N` are invalid. The service checks the engine's integer arrays before conversion. The bounded browser selection receives a deterministic experiment UUID, so Validate and Run construct identical canonical `ExperimentSpec` bytes and digests. Each execution retains a separate invocation/job identity.
 
+## A004 bounded viewport (2026-10-01)
+
+The prepared signed projection used by A002 supplies immutable neuron identity, directed resolved topology, effective sign and weight, and graph fingerprint. A preparation callback creates bounded `SubgraphView` snapshots for stimulus outgoing, target incoming, and combined display context at 80 or 160 nodes and 1,200 edges. The route `/api/runs/{job}/subgraph` returns only allowlisted views under the existing local session. Candidate nodes rank by strongest absolute effective edge weight and stable body ID; induced display edges use the same weight with stable endpoint ties. Every response declares the display filter and truncation. The Canvas 2D renderer uses deterministic schematic groups, not anatomical position; the node list is keyboard reachable. A002 result activity is attached only where recorded. See [the A004 plan](../plans/2026-10-01-application-a004-interactive-subgraph-viewport.md) for the contract and certification limit.
+
 ## Evidence and reusable engine inventory
 
 | Concern | Existing module and API | Input / output, state, dependencies, assumptions | Application reuse |

@@ -135,7 +135,7 @@ def _trial(spec: ExperimentSpec, prepared, simulation: SimulationResult, schedul
     return TrialResult(index, seed, schedule.fingerprint, simulation.spike_result_digest, count, count * 1000.0 / spec.duration_ms, target_times, spikes, tuple(traces), tuple(delivery))
 
 
-def run_experiment(spec: ExperimentSpec, files: DatasetFiles, *, event_sink: Callable[[ExecutionEvent], None] | None = None, cancel_requested: Callable[[], bool] | None = None, engine: EngineAdapter | None = None) -> ExperimentResult:
+def run_experiment(spec: ExperimentSpec, files: DatasetFiles, *, event_sink: Callable[[ExecutionEvent], None] | None = None, cancel_requested: Callable[[], bool] | None = None, engine: EngineAdapter | None = None, prepared_sink: Callable[[object], None] | None = None) -> ExperimentResult:
     """Execute bounded trials; cancellation is checked before and after each opaque engine call."""
     engine = engine or ProductionEngine()
     invocation = str(uuid4())
@@ -189,6 +189,8 @@ def run_experiment(spec: ExperimentSpec, files: DatasetFiles, *, event_sink: Cal
         graph_ids = set(int(i) for i in projection.neuron_ids)
         if not set(spec.stimulus.member_ids).issubset(graph_ids) or spec.target.neuron_id not in graph_ids or not set(spec.intervention.target_ids).issubset(graph_ids) or not set(spec.observables.trace_neuron_ids).issubset(graph_ids):
             raise ApplicationError(ErrorCode.INVALID_SPEC, "requested neuron absent from curated graph", phase.value)
+        if prepared_sink is not None:
+            prepared_sink(prepared)
         _check_cancel(cancel_requested, lifecycle, 0)
         lifecycle.transition(State.RUNNING, payload={"total_trials": spec.trial_count})
         phase = lifecycle.state

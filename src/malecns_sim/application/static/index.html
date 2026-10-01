@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MaleCNS simulation workbench</title><link rel="stylesheet" href="/style.css"></head>
 <body><header><h1>MaleCNS simulation workbench</h1><span id="status">Connecting</span></header>
-<main><section class="setup"><h2>Experiment setup</h2><p id="dataset">Checking dataset</p>
+<main><section class="setup"><h2>Experiment setup</h2><p id="dataset" class="identity-value">Checking dataset</p>
 <label>Side<select id="side"><option value="L">LEFT sugar → MN9_R</option><option value="R">RIGHT sugar → MN9_L</option></select></label>
 <label>Frequency<select id="frequency"></select></label>
 <label>Mode<select id="mode"><option value="none">Baseline</option><option value="outgoing_silence">Outgoing silence: corresponding MN9</option></select></label>
@@ -10,7 +10,7 @@
 <label>Seed<input id="seed" type="number" min="0" max="4294967295" value="1555062870"></label>
 <p>Duration 100 ms · dt 0.1 ms · one trial</p><button id="validate">Validate</button><button id="run" disabled>Run</button><p id="error" role="alert"></p>
 <details><summary>Executed configuration preview</summary><pre id="preview"></pre></details></section>
-<section class="workspace"><h2>Execution and result</h2><div id="flow">Frozen sugar population → prepared network → corresponding MN9</div><div id="result">Validate an experiment to begin.</div></section>
-<aside><h2>Run inspector</h2><div id="identity">No run selected</div><h3>Recent runs</h3><div id="history"></div><a id="export" hidden>Download backend result</a></aside></main>
-<section class="timeline"><h2>Execution timeline</h2><div id="events">No events yet.</div></section>
+<section class="workspace"><h2>Execution and result</h2><div id="result" class="identity-value">Validate an experiment to begin.</div><p class="warning">Schematic connectivity view — not anatomical position</p><div class="controls"><label>Display filter<select id="view-mode"><option value="stimulus">Stimulus neighborhood</option><option value="target">Target neighborhood</option><option value="combined">Combined context</option></select></label><label>Node cap<select id="node-cap"><option selected>80</option><option>160</option></select></label><button id="fit">Fit</button><button id="zoom-in">Zoom In</button><button id="zoom-out">Zoom Out</button></div><p id="filter-label" class="identity-value">No run selected.</p><p id="truncation"></p><div class="canvas-wrap"><canvas id="graph" tabindex="0" aria-label="Schematic connectivity view; use the node list for keyboard access"></canvas><p id="graph-empty">Select a run to view its graph.</p></div><p class="legend"><span class="stimulus">● Stimulus</span> <span class="target">● Target</span> <span class="intervention">● Intervention</span> <span>● Context</span> <span class="selected">◉ Selected</span></p><label>Find displayed neuron<input id="node-search" type="search" placeholder="Neuron ID"></label><div id="node-list" class="node-list" aria-label="Displayed neurons"></div></section>
+<aside><h2>Run inspector</h2><div id="identity" class="identity-value">No run selected</div><h3>Selected neuron</h3><div id="neuron-inspector">Select a displayed neuron.</div><h3>Recent runs</h3><div id="history"></div><a id="export" hidden>Download backend result</a></aside></main>
+<section class="timeline"><h2>Execution timeline</h2><div id="events" class="identity-value">No events yet.</div></section>
 <script src="/app.js" defer></script></body></html>

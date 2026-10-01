@@ -12,13 +12,14 @@ from dataclasses import dataclass, field
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import parse_qs, urlsplit
 from uuid import uuid4
 
 from .errors import ApplicationError, ErrorCode
 from .models import canonical_bytes
 from .service import run_experiment
 from .serialization import read_result, write_result
+from .subgraph import MODES, NODE_CAPS, build_subgraph
 from .workbench import DatasetCatalog
 
 MAX_BODY = 2048
@@ -36,6 +37,7 @@ class RunRecord:
     error: dict | None = None
     export_path: Path | None = None
     export_hash: str | None = None
+    subgraphs: dict[tuple[str, int], dict] = field(default_factory=dict)
 
 
 class RunManager:
@@ -63,8 +65,16 @@ class RunManager:
             with self.lock:
                 record.events.append(event.to_dict())
                 record.state = event.phase
+        def prepared(prepared_graph):
+            snapshots = {}
+            run_id = record.events[0]["run_id"] if record.events else None
+            for mode in MODES:
+                for cap in NODE_CAPS:
+                    snapshots[(mode, cap)] = build_subgraph(prepared_graph.projection, record.spec, mode, cap, run_id=run_id)
+            with self.lock:
+                record.subgraphs = snapshots
         try:
-            result = run_experiment(record.spec, self.catalog.files, event_sink=receive, engine=self.catalog.engine)
+            result = run_experiment(record.spec, self.catalog.files, event_sink=receive, engine=self.catalog.engine, prepared_sink=prepared)
             destination = self.result_root / f"{record.job_id}.json"
             digest = write_result(result, destination)
             read_result(destination, expected_sha256=digest)
@@ -152,7 +162,8 @@ class Handler(BaseHTTPRequestHandler):
             return None
 
     def do_GET(self) -> None:
-        path = urlsplit(self.path).path
+        parsed = urlsplit(self.path)
+        path = parsed.path
         if not self._valid_request(protected=path == "/api/runs" or path.startswith("/api/runs/")):
             return
         if path == "/":
@@ -180,6 +191,33 @@ class Handler(BaseHTTPRequestHandler):
                                  "run_id": record.result.identity.run_id if record.result else (record.events[0]["run_id"] if record.events else None)})
             elif parts[4] == "events":
                 self._json(200, {"events": list(record.events)})
+            elif parts[4] == "subgraph":
+                query = parse_qs(parsed.query, keep_blank_values=True)
+                if set(query) != {"mode", "cap"} or len(query["mode"]) != 1 or len(query["cap"]) != 1 or query["mode"][0] not in MODES or query["cap"][0] not in {str(c) for c in NODE_CAPS}:
+                    self._json(400, {"error": {"code": "INVALID_FILTER", "message": "bounded mode and cap required"}})
+                elif record.state == "FAILED":
+                    self._json(409, {"error": {"code": "RUN_FAILED", "message": "run failed"}})
+                else:
+                    view = record.subgraphs.get((query["mode"][0], int(query["cap"][0])))
+                    if view is None:
+                        self._json(409, {"error": {"code": "GRAPH_PENDING", "message": "Preparing simulation graph"}})
+                    else:
+                        import copy
+                        view = copy.deepcopy(view)
+                        if record.result is not None and record.result.status == "COMPLETED" and record.result.trials:
+                            if view["graph_fingerprint"] != record.result.provenance["graph_fingerprint"] or view["run_id"] != record.result.identity.run_id or view["spec_digest"] != record.spec.digest:
+                                self._json(409, {"error": {"code": "IDENTITY_MISMATCH", "message": "graph and completed result differ"}})
+                                return
+                            trial = record.result.trials[0]
+                            counts = {}
+                            for spike in trial.spikes:
+                                counts[spike.neuron_id] = counts.get(spike.neuron_id, 0) + 1
+                            counts[record.spec.target.neuron_id] = trial.target_spikes
+                            for node in view["nodes"]:
+                                neuron = node["neuron_id"]
+                                if neuron in counts:
+                                    node["activity"] = {"available": True, "spike_count": counts[neuron], "firing_rate_hz": trial.target_rate_hz if neuron == record.spec.target.neuron_id else counts[neuron] * 1000.0 / record.spec.duration_ms}
+                        self._json(200, view)
             elif parts[4] == "result" and record.result is not None:
                 self._json(200, record.result.to_dict())
             elif parts[4] == "export" and record.export_path is not None:
