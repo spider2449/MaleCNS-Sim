@@ -506,3 +506,9 @@ preregistration. **Decision A: v0.3 scientific scope complete; release
 preparation recommended.** Task 017 remains `NOT_ROBUST`, Task 017Q remains
 `DEFERRED`, and no further scientific analysis or release is authorized by this
 decision. See the [Task 018B closure](plans/2026-09-30-task-018b-mn9-anatomical-asymmetry-closure.md).
+
+## 18. Task 025G BANC external-validation route closure
+
+Task 025G classifies the BANC confirmatory route as **BANC_CONFIRMATORY_ROUTE_CLOSED**, with exact disposition **CLOSED — IDENTITY_NOT_PROSPECTIVELY_RESOLVABLE**. The frozen label-independent MN9 identity standard cannot be met with the currently pinned BANC v888 CNS morphology. No external Task 018 endpoint was executed or independently validated; this is not a replication result. [The closure record](plans/2026-10-01-task-025g-banc-external-validation-route-closure.md) preserves the evidence chain and reopening conditions.
+
+Task 018A's primary and sensitivity classifications remain unchanged, as does Task 017's **NOT_ROBUST** result. Task 017Q remains **KEEP_DEFERRED**. No replacement external-validation dataset, new scientific hypothesis, or next v0.4 scientific question has been selected. The only recommended next action is a separate v0.4 Post-BANC Research Roadmap Decision Gate.
