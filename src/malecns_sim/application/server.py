@@ -17,6 +17,7 @@ from uuid import uuid4
 
 from .errors import ApplicationError, ErrorCode
 from .models import canonical_bytes
+from .playback import build_playback
 from .service import run_experiment
 from .serialization import read_result, write_result
 from .subgraph import MODES, NODE_CAPS, build_subgraph
@@ -168,7 +169,7 @@ class Handler(BaseHTTPRequestHandler):
             return
         if path == "/":
             self._static("index.html", "text/html; charset=utf-8")
-        elif path in ("/app.js", "/style.css"):
+        elif path in ("/app.js", "/playback.js", "/style.css"):
             self._static(path[1:], "text/javascript; charset=utf-8" if path.endswith(".js") else "text/css; charset=utf-8")
         elif path == "/api/status":
             self._json(200, {"service": "MaleCNS visual workbench", "status": "READY", "active": self.server.manager.active})
@@ -220,6 +221,17 @@ class Handler(BaseHTTPRequestHandler):
                         self._json(200, view)
             elif parts[4] == "result" and record.result is not None:
                 self._json(200, record.result.to_dict())
+            elif parts[4] == "playback":
+                if record.state != "COMPLETED" or record.result is None:
+                    self._json(409, {"error": {"code": "PLAYBACK_UNAVAILABLE", "message": "Playback available after recorded result is finalized." if record.state not in ("FAILED", "CANCELLED") else "No completed playback result."}})
+                else:
+                    try:
+                        payload, body = build_playback(record.result, record.job_id, graph_fingerprint=record.result.provenance["graph_fingerprint"])
+                    except (ValueError, KeyError) as exc:
+                        self._json(409, {"error": {"code": "PLAYBACK_UNAVAILABLE", "message": str(exc)}})
+                    else:
+                        self._headers(200, "application/json; charset=utf-8", len(body))
+                        self.wfile.write(body)
             elif parts[4] == "export" and record.export_path is not None:
                 body = record.export_path.read_bytes()
                 self._headers(200, "application/json; charset=utf-8", len(body))
