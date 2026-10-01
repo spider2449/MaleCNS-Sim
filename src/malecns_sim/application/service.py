@@ -104,13 +104,15 @@ def _trial(spec: ExperimentSpec, prepared, simulation: SimulationResult, schedul
     ids = prepared.projection.neuron_ids
     if (simulation.duration_ms != spec.duration_ms or simulation.dt_ms != spec.dt_ms or simulation.parameter_fingerprint != spec.model.fingerprint or simulation.unsigned_graph_fingerprint != prepared.projection.unsigned_graph_fingerprint or simulation.sign_policy_fingerprint != prepared.projection.signed_policy_fingerprint or simulation.stimulus_fingerprint != schedule.fingerprint):
         raise ApplicationError(ErrorCode.RESULT_SERIALIZATION, "engine result identity does not match executed inputs")
+    if simulation.spike_neuron_ids.dtype.kind not in "iu" or simulation.spike_timesteps.dtype.kind not in "iu":
+        raise ApplicationError(ErrorCode.RESULT_SERIALIZATION, "engine spike arrays must contain integers")
     spike_ids = tuple(int(i) for i in simulation.spike_neuron_ids)
     steps = tuple(int(i) for i in simulation.spike_timesteps)
     if len(spike_ids) != len(steps):
         raise ApplicationError(ErrorCode.RESULT_SERIALIZATION, "engine spike arrays differ in length")
     spikes = tuple(SpikeEvent(step, neuron) for step, neuron in zip(steps, spike_ids))
-    if any(s.timestep >= round(spec.duration_ms / spec.dt_ms) for s in spikes):
-        raise ApplicationError(ErrorCode.RESULT_SERIALIZATION, "spike timestep exceeds duration")
+    if any(not 1 <= s.timestep <= round(spec.duration_ms / spec.dt_ms) for s in spikes):
+        raise ApplicationError(ErrorCode.RESULT_SERIALIZATION, "spike timestep outside engine grid")
     known_ids = set(int(i) for i in ids)
     if any(s.neuron_id not in known_ids for s in spikes):
         raise ApplicationError(ErrorCode.RESULT_SERIALIZATION, "unknown spike neuron ID")
@@ -200,7 +202,7 @@ def run_experiment(spec: ExperimentSpec, files: DatasetFiles, *, event_sink: Cal
             _check_cancel(cancel_requested, lifecycle, len(completed))
         lifecycle.transition(State.FINALIZING)
         phase = lifecycle.state
-        result = ExperimentResult.create(identity=identity, spec=spec, invocation_id=invocation, started_at=started, finished_at=datetime.now(timezone.utc).isoformat(), provenance={"dataset": spec.to_dict()["dataset"], **_git_provenance(), "engine_version": identity.package_version, "graph_fingerprint": projection.fingerprint}, stimulus_summary={"schedule_fingerprints": identity.schedule_fingerprints, "side": spec.stimulus.side, "frequency_hz": spec.stimulus.frequency_hz}, intervention_summary={"kind": spec.intervention.kind, "target_ids": spec.intervention.target_ids, "semantics": "suppress outgoing scheduling" if spec.intervention.kind == "outgoing_silence" else "none"}, trials=tuple(completed))
+        result = ExperimentResult.create(identity=identity, spec=spec, invocation_id=invocation, started_at=started, finished_at=datetime.now(timezone.utc).isoformat(), provenance={"dataset": spec.to_dict()["dataset"], **_git_provenance(), "engine_version": identity.package_version, "graph_fingerprint": projection.fingerprint, "prepared_neuron_count": len(projection.neuron_ids), "prepared_edge_count": len(projection.source_positions)}, stimulus_summary={"schedule_fingerprints": identity.schedule_fingerprints, "side": spec.stimulus.side, "frequency_hz": spec.stimulus.frequency_hz, "member_count": len(spec.stimulus.member_ids)}, intervention_summary={"kind": spec.intervention.kind, "target_ids": spec.intervention.target_ids, "semantics": "suppress outgoing scheduling" if spec.intervention.kind == "outgoing_silence" else "none"}, trials=tuple(completed))
         lifecycle.transition(State.COMPLETED)
         lifecycle.emit(EventType.RUN_COMPLETED, {"result_digest": result.authoritative_digest, "completed_trials": len(completed)})
         return result

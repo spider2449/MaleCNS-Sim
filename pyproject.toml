@@ -26,9 +26,13 @@ dev = ["pytest>=8.0"]
 
 [project.scripts]
 malecns-sim = "malecns_sim.cli:main"
+malecns-workbench = "malecns_sim.application.server:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"malecns_sim.application" = ["static/*.html", "static/*.css", "static/*.js"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

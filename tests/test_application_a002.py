@@ -7,6 +7,7 @@ import json
 import subprocess
 import sys
 from dataclasses import replace
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
@@ -18,8 +19,9 @@ from malecns_sim.application.models import (
     RobustnessRequest, RobustnessVariant, SeedPolicy, SignPolicySpec,
     SpikeEvent, StimulusSpec, TargetSpec, TrialResult, RunIdentity,
 )
-from malecns_sim.application.service import ProductionEngine, _git_provenance
+from malecns_sim.application.service import ProductionEngine, _git_provenance, _trial
 from malecns_sim.dynamics.lif import LIFParameters
+from malecns_sim.dynamics.lif import _canonicalize_spike_events
 from malecns_sim.homology import MaleCNSCandidate, population_fingerprint
 
 
@@ -51,6 +53,52 @@ def test_spec_validation_and_canonical_identity():
     assert RunIdentity.create(spec, ("a" * 64,), "b" * 64) == RunIdentity.create(restored, ("a" * 64,), "b" * 64)
     with pytest.raises(ApplicationError):
         ExperimentSpec.from_dict({**spec.to_dict(), "unexpected": 1})
+
+
+def _grid_trial(spike_steps, spike_ids=None):
+    spec = _spec()
+    projection = SimpleNamespace(neuron_ids=np.array([100, 16949]), unsigned_graph_fingerprint=spec.dataset.projection_fingerprint)
+    prepared = SimpleNamespace(projection=projection)
+    schedule = SimpleNamespace(fingerprint="a" * 64)
+    spike_ids = [16949] * len(spike_steps) if spike_ids is None else spike_ids
+    simulation = SimpleNamespace(duration_ms=spec.duration_ms, dt_ms=spec.dt_ms,
+                                 parameter_fingerprint=spec.model.fingerprint,
+                                 unsigned_graph_fingerprint=projection.unsigned_graph_fingerprint,
+                                 sign_policy_fingerprint="signed", stimulus_fingerprint="a" * 64,
+                                 spike_neuron_ids=np.array(spike_ids), spike_timesteps=np.array(spike_steps),
+                                 spike_counts=np.array([spike_ids.count(100), spike_ids.count(16949)]), trace_v_mV=None, trace_g_mV=None,
+                                 sparse_trace=None, spike_result_digest="b" * 64)
+    projection.signed_policy_fingerprint = "signed"
+    return spec, prepared, simulation, schedule
+
+
+def test_final_grid_step_spike_is_valid():
+    spec, prepared, simulation, schedule = _grid_trial([50])
+    trial = _trial(spec, prepared, simulation, schedule, 0, 7)
+    assert trial.target_spikes == 1
+    assert trial.target_spike_timesteps == (50,)
+
+
+@pytest.mark.parametrize("step", [0, -1, 51])
+def test_spike_outside_engine_grid_is_rejected(step):
+    spec, prepared, simulation, schedule = _grid_trial([step])
+    with pytest.raises(ApplicationError) as error:
+        _trial(spec, prepared, simulation, schedule, 0, 7)
+    assert error.value.code == ErrorCode.RESULT_SERIALIZATION
+
+
+@pytest.mark.parametrize("step", [float("nan"), float("inf"), -float("inf")])
+def test_nonfinite_spike_step_is_rejected(step):
+    spec, prepared, simulation, schedule = _grid_trial([step])
+    with pytest.raises(ApplicationError) as error:
+        _trial(spec, prepared, simulation, schedule, 0, 7)
+    assert error.value.code == ErrorCode.RESULT_SERIALIZATION
+
+
+def test_equal_timestep_spikes_have_deterministic_neuron_order():
+    ids, steps = _canonicalize_spike_events(np.array([16949, 100, 16949]), np.array([50, 50, 1]))
+    assert ids.tolist() == [16949, 100, 16949]
+    assert steps.tolist() == [1, 50, 50]
 
 
 @pytest.mark.parametrize("change", [
