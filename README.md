@@ -139,8 +139,8 @@ python -m pip install -e ".[test]"
 
 ## Tests
 
-The generic CPU gate runs on GitHub Actions for pushes and pull requests. Its
-local sequence is:
+The repository currently does not use GitHub CI. Local reproducibility checks
+can be run with:
 
 ```powershell
 uv sync --frozen --group dev
@@ -151,12 +151,11 @@ uv run --frozen python scripts/check_tracked_integrity.py
 git diff --check
 ```
 
-The workflow also installs the built wheel in a temporary environment and
-imports `malecns_sim` from outside the source checkout. On a clean CPU clone,
+On a clean CPU clone,
 the raw-data and CUDA tests skip through their existing environment checks.
 The full-graph test remains opt-in with `MALECNS_TASK007C_REAL=1` and is not
-enabled by this gate. The gate certifies locked CPU installation, data-free
-tests, compilation, build/import, and offline tracked integrity. It does not
+enabled by these commands. These checks cover locked CPU installation, data-free
+tests, compilation, build, and offline tracked integrity. They do not
 certify raw-data integration, GPU/CUDA/CuPy execution, CPU/GPU parity, external
 Task 017 checkpoint restore, Task 017Q cross-machine certification, scientific
 endpoint reproduction, or Windows behavior.
