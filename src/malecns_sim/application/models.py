@@ -472,6 +472,7 @@ class ExperimentResult:
     comparison: Comparison | None
     robustness: RobustnessResult | None
     warnings: tuple[str, ...]
+    error: dict[str, Any] | None
     authoritative_digest: str
     manifest_digest: str
 
@@ -481,6 +482,8 @@ class ExperimentResult:
     def verify_integrity(self) -> None:
         if self.result_schema_version != RESULT_SCHEMA or self.identity.spec_digest != self.executed_spec.digest:
             raise ApplicationError(ErrorCode.RESULT_SERIALIZATION, "result schema or spec identity mismatch")
+        if self.status not in ("COMPLETED", "FAILED", "CANCELLED") or (self.status == "COMPLETED" and self.error is not None) or (self.status != "COMPLETED" and self.error is None):
+            raise ApplicationError(ErrorCode.RESULT_SERIALIZATION, "result terminal status/error mismatch")
         if self.authoritative_digest != _digest("malecns-application-authoritative-v1", self.authoritative_payload()):
             raise ApplicationError(ErrorCode.RESULT_SERIALIZATION, "authoritative digest mismatch")
         payload = self.to_dict()
@@ -509,13 +512,13 @@ class ExperimentResult:
         return result
 
     @classmethod
-    def create(cls, *, identity: RunIdentity, spec: ExperimentSpec, invocation_id: str, started_at: str, finished_at: str, provenance: dict[str, Any], stimulus_summary: dict[str, Any], intervention_summary: dict[str, Any], trials: tuple[TrialResult, ...], visualization: tuple[PopulationBins, ...] = (), warnings: tuple[str, ...] = ()) -> "ExperimentResult":
-        base = cls(RESULT_SCHEMA, identity, spec, "COMPLETED", invocation_id, started_at, finished_at, spec.backend, provenance, stimulus_summary, intervention_summary, trials, visualization, None, None, warnings, "", "")
+    def create(cls, *, identity: RunIdentity, spec: ExperimentSpec, invocation_id: str, started_at: str, finished_at: str, provenance: dict[str, Any], stimulus_summary: dict[str, Any], intervention_summary: dict[str, Any], trials: tuple[TrialResult, ...], visualization: tuple[PopulationBins, ...] = (), warnings: tuple[str, ...] = (), status: str = "COMPLETED", error: dict[str, Any] | None = None) -> "ExperimentResult":
+        base = cls(RESULT_SCHEMA, identity, spec, status, invocation_id, started_at, finished_at, spec.backend, provenance, stimulus_summary, intervention_summary, trials, visualization, None, None, warnings, error, "", "")
         authoritative = _digest("malecns-application-authoritative-v1", base.authoritative_payload())
         data = base.to_dict()
         data["authoritative_digest"] = authoritative
         data.pop("manifest_digest")
         manifest = _digest("malecns-application-manifest-v1", data)
-        result = cls(RESULT_SCHEMA, identity, spec, "COMPLETED", invocation_id, started_at, finished_at, spec.backend, provenance, stimulus_summary, intervention_summary, trials, visualization, None, None, warnings, authoritative, manifest)
+        result = cls(RESULT_SCHEMA, identity, spec, status, invocation_id, started_at, finished_at, spec.backend, provenance, stimulus_summary, intervention_summary, trials, visualization, None, None, warnings, error, authoritative, manifest)
         result.verify_integrity()
         return result

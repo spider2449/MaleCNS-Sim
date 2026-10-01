@@ -12,7 +12,7 @@ import numpy as np
 import pytest
 
 from malecns_sim.analysis.task008 import derive_task008_populations, prepare_network
-from malecns_sim.application import ApplicationError, DatasetFiles, ErrorCode, EventType, ExperimentResult, ExperimentSpec, Lifecycle, State, read_result, run_experiment, validate_experiment, write_result
+from malecns_sim.application import ApplicationError, DatasetFiles, ErrorCode, EventJournal, EventType, ExperimentResult, ExperimentSpec, Lifecycle, State, read_result, run_experiment, validate_experiment, write_result
 from malecns_sim.application.models import (
     Comparison, DatasetIdentity, InterventionSpec, ModelSpec, ObservablesSpec,
     RobustnessRequest, RobustnessVariant, SeedPolicy, SignPolicySpec,
@@ -147,11 +147,16 @@ def test_non_scientific_synthetic_engine_integration(tmp_path):
             return derive_task008_populations((_candidate(100, "L"), _candidate(200, "R")), enforce_task007_right=False)
 
     events = []
-    result = run_experiment(spec, files, engine=SyntheticAdapter(), event_sink=events.append)
+    journal = EventJournal(tmp_path / "events.jsonl")
+    def record(event):
+        events.append(event)
+        journal(event)
+    result = run_experiment(spec, files, engine=SyntheticAdapter(), event_sink=record)
     assert result.status == "COMPLETED"
     assert result.trials[0].engine_digest
     assert result.identity.run_id == events[0].run_id == events[-1].run_id
     assert [e.sequence for e in events] == list(range(1, len(events) + 1))
+    assert [json.loads(line)["sequence"] for line in journal.path.read_text().splitlines()] == list(range(1, len(events) + 1))
     assert all("percent" not in e.payload for e in events)
     assert [e.event_type for e in events].count(EventType.TRIAL_COMPLETED) == 1
     assert result.trials[0].seed == 7
@@ -185,3 +190,18 @@ def test_non_scientific_synthetic_engine_integration(tmp_path):
     with pytest.raises(ApplicationError) as err:
         run_experiment(spec, files, engine=SyntheticAdapter(), cancel_requested=lambda: True)
     assert err.value.code == ErrorCode.CANCELLED
+    assert err.value.partial_result.status == "CANCELLED"
+    assert err.value.partial_result.trials == ()
+    assert ExperimentResult.from_dict(err.value.partial_result.to_dict()).status == "CANCELLED"
+    completed_flag = {"value": False}
+    def note_completion(event):
+        if event.event_type == EventType.TRIAL_COMPLETED:
+            completed_flag["value"] = True
+    with pytest.raises(ApplicationError) as after_trial:
+        run_experiment(spec, files, engine=SyntheticAdapter(), event_sink=note_completion, cancel_requested=lambda: completed_flag["value"])
+    assert after_trial.value.partial_result.status == "CANCELLED"
+    assert len(after_trial.value.partial_result.trials) == 1
+    with pytest.raises(ApplicationError) as bad_data:
+        run_experiment(spec, replace(files, manifest_digest="0" * 64), engine=SyntheticAdapter())
+    assert bad_data.value.code == ErrorCode.DATASET_PROVENANCE
+    assert bad_data.value.partial_result.status == "FAILED"

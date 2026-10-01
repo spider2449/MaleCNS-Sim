@@ -5,6 +5,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from enum import StrEnum
+import json
+import os
+from pathlib import Path
 from typing import Any, Callable
 
 from .errors import ApplicationError, ErrorCode
@@ -67,6 +70,25 @@ class ExecutionEvent:
         data = {name: getattr(self, name) for name in self.__dataclass_fields__}
         canonical_bytes(data)
         return data
+
+
+class EventJournal:
+    """Durable JSONL sink under a caller-controlled application result root."""
+
+    def __init__(self, path: Path):
+        self.path = Path(path)
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        self.last_sequence = 0
+
+    def __call__(self, event: ExecutionEvent) -> None:
+        if event.sequence != self.last_sequence + 1:
+            raise ApplicationError(ErrorCode.RESULT_SERIALIZATION, "event journal sequence gap")
+        payload = json.dumps(event.to_dict(), sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8") + b"\n"
+        with self.path.open("ab") as handle:
+            handle.write(payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+        self.last_sequence = event.sequence
 
 
 class Lifecycle:

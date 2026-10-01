@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import StrEnum
+from typing import Any
 
 
 class ErrorCode(StrEnum):
@@ -23,6 +24,7 @@ class ApplicationError(Exception):
     code: ErrorCode
     message: str
     phase: str | None = None
+    partial_result: Any = None
 
     def __str__(self) -> str:
         return f"{self.code}: {self.message}"

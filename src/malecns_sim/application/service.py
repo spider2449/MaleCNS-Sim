@@ -144,6 +144,17 @@ def run_experiment(spec: ExperimentSpec, files: DatasetFiles, *, event_sink: Cal
     lifecycle.emit(EventType.RUN_STARTED, {"backend": spec.backend})
     phase = State.CREATED
     completed: list[TrialResult] = []
+
+    def partial_result(error: ApplicationError, status: str) -> ExperimentResult:
+        return ExperimentResult.create(
+            identity=identity, spec=spec, invocation_id=invocation, started_at=started,
+            finished_at=datetime.now(timezone.utc).isoformat(), status=status,
+            error=error.to_dict(), provenance={"dataset": spec.to_dict()["dataset"], **_git_provenance(), "engine_version": identity.package_version},
+            stimulus_summary={"schedule_fingerprints": identity.schedule_fingerprints, "side": spec.stimulus.side, "frequency_hz": spec.stimulus.frequency_hz},
+            intervention_summary={"kind": spec.intervention.kind, "target_ids": spec.intervention.target_ids},
+            trials=tuple(completed),
+        )
+
     try:
         lifecycle.transition(State.VALIDATING)
         phase = lifecycle.state
@@ -194,13 +205,17 @@ def run_experiment(spec: ExperimentSpec, files: DatasetFiles, *, event_sink: Cal
         lifecycle.emit(EventType.RUN_COMPLETED, {"result_digest": result.authoritative_digest, "completed_trials": len(completed)})
         return result
     except ApplicationError as exc:
+        if exc.phase is None:
+            exc.phase = lifecycle.state.value
         if lifecycle.state != State.CANCELLED and lifecycle.state not in (State.COMPLETED, State.FAILED):
             lifecycle.transition(State.FAILED, payload={"code": exc.code.value, "completed_trials": len(completed)})
             lifecycle.emit(EventType.RUN_FAILED, {"error": exc.to_dict(), "completed_trials": len(completed)})
+        exc.partial_result = partial_result(exc, "CANCELLED" if lifecycle.state == State.CANCELLED else "FAILED")
         raise
     except Exception as exc:
         code = ErrorCode.DATASET_PROVENANCE if phase == State.LOADING_DATA else ErrorCode.PREPARATION_FAILED if phase == State.PREPARING_NETWORK else ErrorCode.RESULT_SERIALIZATION if phase == State.FINALIZING else ErrorCode.SIMULATION_FAILED
         error = ApplicationError(code, f"{phase.value} failed", phase.value)
         lifecycle.transition(State.FAILED, payload={"code": code.value, "completed_trials": len(completed)})
         lifecycle.emit(EventType.RUN_FAILED, {"error": error.to_dict(), "completed_trials": len(completed)})
+        error.partial_result = partial_result(error, "FAILED")
         raise error from exc
