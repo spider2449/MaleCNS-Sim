@@ -2,6 +2,10 @@
 
 Status: A001 design, 2026-10-01. Decision: **APP1 — ARCHITECTURE_READY_FOR_IMPLEMENTATION**. Engine boundary: **E2 — THIN_APPLICATION_ADAPTER_REQUIRED**. This document specifies new application experiments; it does not revise historical Tasks 010, 011, 017, or 018. The workbench exposes connectome data, declared model assumptions, actual simulation output, and provenance. It is not a second simulator.
 
+## A002 implementation note (2026-10-01)
+
+`malecns_sim.application` now implements the A001 v1 experiment/result contracts, a bounded CPU/CUDA service, explicit lifecycle events, atomic JSON result interchange, and a synthetic engine integration test. The implementation record and exact limits are in [the A002 plan](../plans/2026-10-01-application-a002-service-contracts.md). The signed projection returned by `prepare_network` uses the reference 0.275 mV anatomical-synapse factor, so A002 rejects other projection weights before execution and verifies the sign/resolution IDs against the prepared projection. A002 computes run identity from the validated curated unsigned graph fingerprint declared in the spec; preparation verifies that fingerprint and records the actual effective projection fingerprint in result provenance. This makes `RunStarted` and every subsequent event share one stable run ID. A003 must supply registered dataset files and own the local API/session security boundary.
+
 ## Evidence and reusable engine inventory
 
 | Concern | Existing module and API | Input / output, state, dependencies, assumptions | Application reuse |
