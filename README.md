@@ -115,6 +115,17 @@ environment, and reproduction commands, is in the
 scientific state is in the
 [research checkpoint](docs/MALECNS_RESEARCH_CHECKPOINT.md).
 
+## Application workbench
+
+The local connectome simulation workbench provides experiment validation,
+execution status, schematic subgraphs, recorded playback, controlled model-output
+comparison and explicit R0–V7 robustness evidence without a default aggregate
+verdict. Start with `uv run malecns-workbench` after installation and open the
+newly printed local session URL. Real experiments require registered local data.
+See the [application user guide](docs/application/USER_GUIDE.md),
+[architecture](docs/application/ARCHITECTURE.md), and
+[application reproducibility record](docs/application/REPRODUCIBILITY.md).
+
 ## Installation
 
 Python 3.12 or newer and `uv` are required. For local CPU setup:
