@@ -17,6 +17,7 @@ from malecns_sim.dynamics.lif import SimulationResult, simulate_lif
 from malecns_sim.dynamics.stimulus import ExplicitStimulus, PoissonStimulus, SpikeSchedule
 from malecns_sim.homology import population_fingerprint
 
+from .preparation import PreparationConfig, VariantExperimentSpec
 from .errors import ApplicationError, ErrorCode
 from .events import EventType, ExecutionEvent, Lifecycle, State
 from .models import DeliverySample, ExperimentResult, ExperimentSpec, RunIdentity, SelectedTrace, SpikeEvent, TrialResult
@@ -33,7 +34,7 @@ class DatasetFiles:
 
 class EngineAdapter(Protocol):
     def identities(self, files: DatasetFiles): ...
-    def prepare(self, files: DatasetFiles, backend: str): ...
+    def prepare(self, files: DatasetFiles, backend: str, config: PreparationConfig | None = None): ...
     def simulate(self, prepared, spec: ExperimentSpec, stimulus: ExplicitStimulus) -> SimulationResult: ...
     def cuda_available(self) -> bool: ...
 
@@ -42,8 +43,9 @@ class ProductionEngine:
     def identities(self, files: DatasetFiles):
         return load_task008_identities(files.annotation, files.neurotransmitter)
 
-    def prepare(self, files: DatasetFiles, backend: str):
-        return prepare_network(files.annotation, files.neurotransmitter, files.weights, use_cuda=backend == "cuda")
+    def prepare(self, files: DatasetFiles, backend: str, config: PreparationConfig | None = None):
+        kwargs = {} if config is None else {"parameters": config.parameters, "sign_policy": config.sign_policy}
+        return prepare_network(files.annotation, files.neurotransmitter, files.weights, use_cuda=backend == "cuda", **kwargs)
 
     def cuda_available(self) -> bool:
         from malecns_sim.dynamics.cuda import cuda_available
@@ -78,10 +80,21 @@ def _git_provenance() -> dict[str, str | bool | None]:
         return {"git_commit": None, "git_dirty": None}
 
 
-def validate_experiment(spec: ExperimentSpec) -> ExperimentSpec:
-    if not isinstance(spec, ExperimentSpec):
+def validate_experiment(spec: ExperimentSpec | VariantExperimentSpec) -> ExperimentSpec | VariantExperimentSpec:
+    if not isinstance(spec, (ExperimentSpec, VariantExperimentSpec)):
         raise ApplicationError(ErrorCode.INVALID_SPEC, "ExperimentSpec required")
     return spec
+
+
+def _execution_provenance(spec, identity) -> dict:
+    base = spec.base_spec if isinstance(spec, VariantExperimentSpec) else spec
+    provenance = {"dataset": base.to_dict()["dataset"], **_git_provenance(),
+                  "engine_version": identity.package_version}
+    if isinstance(spec, VariantExperimentSpec):
+        provenance.update(preparation_variant=spec.variant.to_dict(),
+                          variant_digest=spec.variant.digest,
+                          preparation_config_digest=spec.variant.resolved_config.digest)
+    return provenance
 
 
 def _check_cancel(cancel_requested: Callable[[], bool] | None, lifecycle: Lifecycle, trial: int) -> None:
@@ -94,7 +107,7 @@ def _check_cancel(cancel_requested: Callable[[], bool] | None, lifecycle: Lifecy
 def _schedule(spec: ExperimentSpec, seed: int) -> ExplicitStimulus:
     # Generate only the active interval; shift the engine's explicit schedule to its requested start.
     active = spec.stimulus.end_ms - spec.stimulus.start_ms
-    poisson = PoissonStimulus(spec.stimulus.member_ids, rate_hz=spec.stimulus.frequency_hz, seed=seed, weight_factor=spec.stimulus.weight_factor)
+    poisson = PoissonStimulus(spec.stimulus.member_ids, rate_hz=spec.stimulus.frequency_hz, seed=seed, weight_factor=(spec.variant.resolved_config.direct_input_weight_factor if isinstance(spec, VariantExperimentSpec) else spec.stimulus.weight_factor))
     generated = poisson.generate(active, spec.dt_ms, spec.model.parameters.synaptic_weight_per_anatomical_synapse_mV)
     schedules = tuple(SpikeSchedule(item.neuron_id, tuple(t + spec.stimulus.start_ms for t in item.spike_times_ms)) for item in generated.schedules)
     return ExplicitStimulus(schedules, generated.weight_mV, generated.refractory_free_neuron_ids)
@@ -135,7 +148,7 @@ def _trial(spec: ExperimentSpec, prepared, simulation: SimulationResult, schedul
     return TrialResult(index, seed, schedule.fingerprint, simulation.spike_result_digest, count, count * 1000.0 / spec.duration_ms, target_times, spikes, tuple(traces), tuple(delivery))
 
 
-def run_experiment(spec: ExperimentSpec, files: DatasetFiles, *, event_sink: Callable[[ExecutionEvent], None] | None = None, cancel_requested: Callable[[], bool] | None = None, engine: EngineAdapter | None = None, prepared_sink: Callable[[object], None] | None = None) -> ExperimentResult:
+def run_experiment(spec: ExperimentSpec | VariantExperimentSpec, files: DatasetFiles, *, event_sink: Callable[[ExecutionEvent], None] | None = None, cancel_requested: Callable[[], bool] | None = None, engine: EngineAdapter | None = None, prepared_sink: Callable[[object], None] | None = None) -> ExperimentResult:
     """Execute bounded trials; cancellation is checked before and after each opaque engine call."""
     engine = engine or ProductionEngine()
     invocation = str(uuid4())
@@ -151,7 +164,7 @@ def run_experiment(spec: ExperimentSpec, files: DatasetFiles, *, event_sink: Cal
         return ExperimentResult.create(
             identity=identity, spec=spec, invocation_id=invocation, started_at=started,
             finished_at=datetime.now(timezone.utc).isoformat(), status=status,
-            error=error.to_dict(), provenance={"dataset": spec.to_dict()["dataset"], **_git_provenance(), "engine_version": identity.package_version},
+            error=error.to_dict(), provenance={**_execution_provenance(spec, identity)},
             stimulus_summary={"schedule_fingerprints": identity.schedule_fingerprints, "side": spec.stimulus.side, "frequency_hz": spec.stimulus.frequency_hz},
             intervention_summary={"kind": spec.intervention.kind, "target_ids": spec.intervention.target_ids},
             trials=tuple(completed),
@@ -180,7 +193,8 @@ def run_experiment(spec: ExperimentSpec, files: DatasetFiles, *, event_sink: Cal
         _check_cancel(cancel_requested, lifecycle, 0)
         lifecycle.transition(State.PREPARING_NETWORK)
         phase = lifecycle.state
-        prepared = engine.prepare(files, spec.backend)
+        prepared = (engine.prepare(files, spec.backend, spec.variant.resolved_config)
+                    if isinstance(spec, VariantExperimentSpec) else engine.prepare(files, spec.backend))
         projection = prepared.projection
         if projection.unsigned_graph_fingerprint != spec.dataset.projection_fingerprint:
             raise ApplicationError(ErrorCode.DATASET_PROVENANCE, "curated projection fingerprint mismatch", phase.value)
@@ -204,7 +218,7 @@ def run_experiment(spec: ExperimentSpec, files: DatasetFiles, *, event_sink: Cal
             _check_cancel(cancel_requested, lifecycle, len(completed))
         lifecycle.transition(State.FINALIZING)
         phase = lifecycle.state
-        result = ExperimentResult.create(identity=identity, spec=spec, invocation_id=invocation, started_at=started, finished_at=datetime.now(timezone.utc).isoformat(), provenance={"dataset": spec.to_dict()["dataset"], **_git_provenance(), "engine_version": identity.package_version, "graph_fingerprint": projection.fingerprint, "prepared_neuron_count": len(projection.neuron_ids), "prepared_edge_count": len(projection.source_positions)}, stimulus_summary={"schedule_fingerprints": identity.schedule_fingerprints, "side": spec.stimulus.side, "frequency_hz": spec.stimulus.frequency_hz, "member_count": len(spec.stimulus.member_ids)}, intervention_summary={"kind": spec.intervention.kind, "target_ids": spec.intervention.target_ids, "semantics": "suppress outgoing scheduling" if spec.intervention.kind == "outgoing_silence" else "none"}, trials=tuple(completed))
+        result = ExperimentResult.create(identity=identity, spec=spec, invocation_id=invocation, started_at=started, finished_at=datetime.now(timezone.utc).isoformat(), provenance={**_execution_provenance(spec, identity), "graph_fingerprint": projection.fingerprint, "prepared_neuron_count": len(projection.neuron_ids), "prepared_edge_count": len(projection.source_positions)}, stimulus_summary={"schedule_fingerprints": identity.schedule_fingerprints, "side": spec.stimulus.side, "frequency_hz": spec.stimulus.frequency_hz, "member_count": len(spec.stimulus.member_ids)}, intervention_summary={"kind": spec.intervention.kind, "target_ids": spec.intervention.target_ids, "semantics": "suppress outgoing scheduling" if spec.intervention.kind == "outgoing_silence" else "none"}, trials=tuple(completed))
         lifecycle.transition(State.COMPLETED)
         lifecycle.emit(EventType.RUN_COMPLETED, {"result_digest": result.authoritative_digest, "completed_trials": len(completed)})
         return result

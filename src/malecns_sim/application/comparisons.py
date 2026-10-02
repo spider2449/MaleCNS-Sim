@@ -38,7 +38,9 @@ def verify_pair(baseline, intervention) -> dict:
     _require(baseline.spec.digest == a.executed_spec.digest and intervention.spec.digest == b.executed_spec.digest, "RESULT_SPEC_MISMATCH")
     _require(a.result_schema_version == b.result_schema_version == RESULT_SCHEMA and len(a.trials) == len(b.trials) == 1, "INCOMPATIBLE_SCHEMA")
     sa, sb = a.executed_spec, b.executed_spec
-    _require(sa.dataset == sb.dataset and a.provenance.get("dataset") == b.provenance.get("dataset") == sa.to_dict()["dataset"], "DIFFERENT_DATASET")
+    va, vb = getattr(sa, "variant", None), getattr(sb, "variant", None)
+    _require((va.digest if va else None) == (vb.digest if vb else None), "DIFFERENT_PREPARATION_VARIANT")
+    _require(sa.dataset == sb.dataset and a.provenance.get("dataset") == b.provenance.get("dataset") == (sa.base_spec if va else sa).to_dict()["dataset"], "DIFFERENT_DATASET")
     _require(sa.stimulus.side == sb.stimulus.side, "DIFFERENT_SIDE")
     _require(sa.stimulus == sb.stimulus, "DIFFERENT_STIMULUS")
     _require(sa.duration_ms == sb.duration_ms, "DIFFERENT_DURATION")

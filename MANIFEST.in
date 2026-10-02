@@ -1,3 +1,4 @@
 recursive-include docs *.md
 recursive-include artifacts *.json
 recursive-include data/provenance *.json
+recursive-include tests/fixtures *.json

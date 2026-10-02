@@ -519,6 +519,8 @@ def prepare_network(
     min_synapses: int = 0,
     cache_path: str | Path | None = None,
     use_cuda: bool = False,
+    parameters: LIFParameters | None = None,
+    sign_policy=None,
 ) -> PreparedNetwork:
     """Load, curate, sign, and project once for immutable trial reuse."""
 
@@ -538,9 +540,11 @@ def prepare_network(
     if min_synapses:
         projection = threshold_curated_projection(projection, min_synapses=min_synapses)
     signed = SignedAnatomicalConnectome.from_projection(
-        projection, evidence, NeurotransmitterResolutionPolicy(), Shiu2024SignPolicy()
+        projection, evidence, NeurotransmitterResolutionPolicy(), sign_policy if sign_policy is not None else Shiu2024SignPolicy()
     )
-    prepared_projection = EffectiveSignedProjection.from_signed_connectome(signed)
+    prepared_projection = EffectiveSignedProjection.from_signed_connectome(
+        signed, synaptic_weight_mV=(parameters or LIFParameters()).synaptic_weight_per_anatomical_synapse_mV
+    )
     cache = None
     cache_target = Path(cache_path) if cache_path is not None else None
     if cache_target is not None:
@@ -586,6 +590,7 @@ def prepare_network(
                 "unsigned": signed.unsigned_graph_fingerprint,
                 "signed": signed_graph_fingerprint(signed),
                 "effective": prepared_projection.fingerprint,
+                **({"parameters": parameters.fingerprint} if parameters is not None else {}),
             },
         ),
         cache_path=str(cache_target) if cache_target is not None else None,

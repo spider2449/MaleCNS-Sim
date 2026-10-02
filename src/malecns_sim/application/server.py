@@ -20,6 +20,7 @@ from .errors import ApplicationError, ErrorCode
 from .comparisons import PairingError, build_comparison, build_comparison_playback, verify_pair
 from .models import canonical_bytes
 from .playback import build_playback
+from .retention import ParentResultStore
 from .service import run_experiment
 from .serialization import read_result, write_result
 from .subgraph import MODES, NODE_CAPS, build_subgraph
@@ -113,6 +114,11 @@ class LocalServer(ThreadingHTTPServer):
     daemon_threads = True
     allow_reuse_address = False
 
+    def server_close(self) -> None:
+        if hasattr(self, "parent_results"):
+            self.parent_results.close()
+        super().server_close()
+
     def server_bind(self) -> None:
         # Windows SO_REUSEADDR can permit multiple listeners on one port.
         if hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
@@ -125,6 +131,7 @@ class LocalServer(ThreadingHTTPServer):
         self.catalog = catalog or DatasetCatalog.local()
         self.result_root = result_root or Path(tempfile.mkdtemp(prefix="malecns-workbench-"))
         self.manager = RunManager(self.catalog, self.result_root)
+        self.parent_results = ParentResultStore(self.token)
         self.comparisons: dict[str, tuple[str, str, dict]] = {}
         super().__init__(("127.0.0.1", port), Handler)
 

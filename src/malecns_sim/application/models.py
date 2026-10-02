@@ -337,7 +337,8 @@ class RunIdentity:
     def create(cls, spec: ExperimentSpec, schedule_fingerprints: tuple[str, ...], graph_fingerprint: str, package_version: str | None = None) -> "RunIdentity":
         package = package_version or version("malecns-sim")
         payload = {"spec_digest": spec.digest, "dataset": spec.dataset, "engine_version": package, "model": spec.model, "sign_policy": spec.sign_policy, "seeds": spec.seed_policy.trial_seeds, "backend": spec.backend, "schedules": schedule_fingerprints, "graph": graph_fingerprint, "result_schema_version": RESULT_SCHEMA}
-        return cls(_digest("malecns-application-run-v1", payload), spec.digest, package, schedule_fingerprints, graph_fingerprint)
+        domain = "malecns-application-variant-run-v1" if getattr(spec, "schema_version", None) == "application-variant-experiment-v1" else "malecns-application-run-v1"
+        return cls(_digest(domain, payload), spec.digest, package, schedule_fingerprints, graph_fingerprint)
 
 
 @dataclass(frozen=True, slots=True)
@@ -482,6 +483,13 @@ class ExperimentResult:
     def verify_integrity(self) -> None:
         if self.result_schema_version != RESULT_SCHEMA or self.identity.spec_digest != self.executed_spec.digest:
             raise ApplicationError(ErrorCode.RESULT_SERIALIZATION, "result schema or spec identity mismatch")
+        if getattr(self.executed_spec, "schema_version", None) == "application-variant-experiment-v1":
+            variant = self.executed_spec.variant
+            if (self.provenance.get("variant_digest") != variant.digest
+                    or self.provenance.get("preparation_config_digest") != variant.resolved_config.digest
+                    or self.provenance.get("preparation_variant") != variant.to_dict()
+                    or self.identity != RunIdentity.create(self.executed_spec, self.identity.schedule_fingerprints, self.identity.graph_fingerprint, self.identity.package_version)):
+                raise ApplicationError(ErrorCode.RESULT_SERIALIZATION, "variant execution identity mismatch")
         if self.status not in ("COMPLETED", "FAILED", "CANCELLED") or (self.status == "COMPLETED" and self.error is not None) or (self.status != "COMPLETED" and self.error is None):
             raise ApplicationError(ErrorCode.RESULT_SERIALIZATION, "result terminal status/error mismatch")
         if self.authoritative_digest != _digest("malecns-application-authoritative-v1", self.authoritative_payload()):
@@ -498,7 +506,11 @@ class ExperimentResult:
     def from_dict(cls, raw: dict[str, Any]) -> "ExperimentResult":
         data = dict(raw)
         data["identity"] = _strict(RunIdentity, {**data["identity"], "schedule_fingerprints": tuple(data["identity"]["schedule_fingerprints"])})
-        data["executed_spec"] = ExperimentSpec.from_dict(data["executed_spec"])
+        if data["executed_spec"].get("schema_version") == "application-variant-experiment-v1":
+            from .preparation import VariantExperimentSpec
+            data["executed_spec"] = VariantExperimentSpec.from_dict(data["executed_spec"])
+        else:
+            data["executed_spec"] = ExperimentSpec.from_dict(data["executed_spec"])
         data["trials"] = tuple(_strict(TrialResult, {**t, "target_spike_timesteps": tuple(t["target_spike_timesteps"]), "spikes": tuple(_strict(SpikeEvent, s) for s in t["spikes"]), "selected_traces": tuple(_strict(SelectedTrace, {**v, "v_mV": tuple(v["v_mV"]), "g_mV": tuple(v["g_mV"])}) for v in t["selected_traces"]), "delivery_trace": tuple(_strict(DeliverySample, d) for d in t["delivery_trace"])}) for t in data["trials"])
         data["visualization"] = tuple(_strict(PopulationBins, {**v, "counts": tuple(v["counts"])}) for v in data["visualization"])
         if data["comparison"] is not None:
