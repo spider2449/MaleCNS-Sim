@@ -1,5 +1,12 @@
 "use strict";
-const token = new URLSearchParams(location.hash.slice(1)).get("token") || "";
+const urlToken = new URLSearchParams(location.hash.slice(1)).get("token");
+let token = urlToken || "";
+try {
+  if (urlToken) sessionStorage.setItem("malecns-local-session", urlToken);
+  else token = sessionStorage.getItem("malecns-local-session") || "";
+} catch (_) {
+  // Keep the URL token usable when browser storage is unavailable.
+}
 if (location.hash) window.history.replaceState(null, "", location.pathname + location.search);
 const $ = id => document.getElementById(id);
 let validSelection = null;
@@ -37,11 +44,11 @@ async function boot() {
 for (const id of ["side","frequency","mode","backend","seed"]) $(id).addEventListener("change", () => { validSelection=null;$("run").disabled=true;$("preview").textContent=""; });
 $("validate").addEventListener("click", async () => {
   error("");
-  try { const selected=selection(); const response=await api("/api/experiments/validate",selected);validSelection=selected;$("run").disabled=false;$("preview").textContent=JSON.stringify({spec_digest:response.spec_digest,...response.spec},null,2);$("result").textContent="Validated by A002. Ready to run."; }
+  try { const selected=selection(); const response=await api("/api/experiments/validate",selected);validSelection=selected;updateRunControls();$("preview").textContent=JSON.stringify({spec_digest:response.spec_digest,...response.spec},null,2);$("result").textContent="Validated by A002. Ready to run."; }
   catch(e) { validSelection=null;$("run").disabled=true;error(e.message); }
 });
-$("run").addEventListener("click",async()=>{ if(!validSelection)return;error("");$("run").disabled=true;try{const response=await api("/api/runs",validSelection);watch(response.job_id);}catch(e){error(e.message);$("run").disabled=false;} });
-async function loadRunHistory(){const data=await api("/api/runs");$("history").replaceChildren(...data.runs.map(r=>{const b=document.createElement("button");b.textContent=r.state+" · "+r.job_id.slice(0,8);b.onclick=()=>watch(r.job_id);return b;}));}
+$("run").addEventListener("click",async()=>{ if(!validSelection||runBusy())return;submittingRun=true;updateRunControls();error("");$("run").disabled=true;try{const response=await api("/api/runs",validSelection);acceptRun(response,validSelection.mode);watch(response.job_id);}catch(e){submittingRun=false;error(e.message);updateRunControls();} });
+async function loadRunHistory(){const data=await api("/api/runs");$("history").replaceChildren(...data.runs.map(r=>{const b=document.createElement("button");b.dataset.state=terminalStates.includes(r.state)?r.state:"ACTIVE";b.textContent=(terminalStates.includes(r.state)?r.state:"ACTIVE - "+r.state)+" · "+r.job_id.slice(0,8);b.onclick=()=>watch(r.job_id);return b;}));if(typeof refreshCompareRuns==="function")await refreshCompareRuns();updateRunControls();}
 function watch(job){
   if(timer)clearInterval(timer); activeJob=job; graphView=null; selectedNode=null; resetPlayback(); drawGraph();
   $("result").textContent="Loading run…"; $("identity").textContent="Loading run…"; $("export").hidden=true;

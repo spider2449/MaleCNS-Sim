@@ -16,6 +16,7 @@ from urllib.parse import parse_qs, urlsplit
 from uuid import uuid4
 
 from .errors import ApplicationError, ErrorCode
+from .comparisons import PairingError, build_comparison, build_comparison_playback, verify_pair
 from .models import canonical_bytes
 from .playback import build_playback
 from .service import run_experiment
@@ -65,7 +66,8 @@ class RunManager:
         def receive(event):
             with self.lock:
                 record.events.append(event.to_dict())
-                record.state = event.phase
+                if event.phase not in ("COMPLETED", "FAILED", "CANCELLED"):
+                    record.state = event.phase
         def prepared(prepared_graph):
             snapshots = {}
             run_id = record.events[0]["run_id"] if record.events else None
@@ -84,16 +86,19 @@ class RunManager:
                 record.export_path = destination
                 record.export_hash = digest
                 record.state = result.status
+                self.active = False
         except ApplicationError as exc:
             with self.lock:
                 record.error = exc.to_dict()
                 record.result = exc.partial_result
                 record.state = exc.partial_result.status if exc.partial_result else "FAILED"
+                self.active = False
         except Exception:
             logging.exception("Unhandled local run failure")
             with self.lock:
                 record.error = {"code": "SIMULATION_FAILED", "message": "local run failed", "phase": record.state}
                 record.state = "FAILED"
+                self.active = False
         finally:
             with self.lock:
                 self.active = False
@@ -111,6 +116,7 @@ class LocalServer(ThreadingHTTPServer):
         self.catalog = catalog or DatasetCatalog.local()
         self.result_root = result_root or Path(tempfile.mkdtemp(prefix="malecns-workbench-"))
         self.manager = RunManager(self.catalog, self.result_root)
+        self.comparisons: dict[str, tuple[str, str, dict]] = {}
         super().__init__(("127.0.0.1", port), Handler)
 
 
@@ -165,11 +171,11 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         parsed = urlsplit(self.path)
         path = parsed.path
-        if not self._valid_request(protected=path == "/api/runs" or path.startswith("/api/runs/")):
+        if not self._valid_request(protected=path == "/api/runs" or path.startswith("/api/runs/") or path.startswith("/api/comparisons")):
             return
         if path == "/":
             self._static("index.html", "text/html; charset=utf-8")
-        elif path in ("/app.js", "/playback.js", "/style.css"):
+        elif path in ("/app.js", "/run-status.js", "/playback.js", "/compare.js", "/style.css"):
             self._static(path[1:], "text/javascript; charset=utf-8" if path.endswith(".js") else "text/css; charset=utf-8")
         elif path == "/api/status":
             self._json(200, {"service": "MaleCNS visual workbench", "status": "READY", "active": self.server.manager.active})
@@ -181,7 +187,52 @@ class Handler(BaseHTTPRequestHandler):
             except ApplicationError as exc:
                 self._json(503, {"error": exc.to_dict()})
         elif path == "/api/runs":
-            self._json(200, {"runs": [{"job_id": r.job_id, "state": r.state} for r in self.server.manager.records.values()]})
+            self._json(200, {"runs": [{"job_id": r.job_id, "state": r.state, "run_id": r.result.identity.run_id if r.result else None,
+                                        "mode": r.spec.intervention.kind, "side": r.spec.stimulus.side} for r in self.server.manager.records.values()]})
+        elif path == "/api/comparisons/candidates":
+            query = parse_qs(parsed.query)
+            baseline = self.server.manager.get(query.get("baseline_job_id", [""])[0]) if set(query) == {"baseline_job_id"} and len(query["baseline_job_id"]) == 1 else None
+            if baseline is None:
+                self._json(404, {"error": {"code": "NOT_FOUND", "message": "baseline run not retained"}})
+            else:
+                candidates = []
+                for record in self.server.manager.records.values():
+                    if record.job_id == baseline.job_id:
+                        continue
+                    try:
+                        verify_pair(baseline, record)
+                        code = None
+                    except PairingError as exc:
+                        code = exc.code
+                    candidates.append({"job_id": record.job_id, "run_id": record.result.identity.run_id if record.result else None,
+                                       "eligible": code is None, "reason": code})
+                self._json(200, {"baseline_job_id": baseline.job_id, "candidates": candidates})
+        elif path.startswith("/api/comparisons/"):
+            parts = path.split("/")
+            stored = self.server.comparisons.get(parts[3]) if len(parts) in (4, 5) else None
+            if stored is None:
+                self._json(404, {"error": {"code": "NOT_FOUND", "message": "comparison not retained"}})
+            else:
+                baseline = self.server.manager.get(stored[0])
+                intervention = self.server.manager.get(stored[1])
+                try:
+                    current = build_comparison(baseline, intervention)
+                    if current != stored[2]:
+                        raise PairingError("COMPARISON_IDENTITY_MISMATCH")
+                    if len(parts) == 4:
+                        self._json(200, current)
+                    elif parts[4] == "export":
+                        self._json(200, current)
+                    elif parts[4] == "playback":
+                        query = parse_qs(parsed.query)
+                        if set(query) != {"mode", "cap"} or len(query["mode"]) != 1 or len(query["cap"]) != 1 or query["mode"][0] not in MODES or query["cap"][0] not in {str(c) for c in NODE_CAPS}:
+                            raise PairingError("INVALID_FILTER")
+                        key = (query["mode"][0], int(query["cap"][0]))
+                        self._json(200, build_comparison_playback(baseline, intervention, current, baseline.subgraphs[key], intervention.subgraphs[key]))
+                    else:
+                        self._json(404, {"error": {"code": "NOT_FOUND", "message": "route not found"}})
+                except (PairingError, ValueError, KeyError) as exc:
+                    self._json(409, {"error": {"code": getattr(exc, "code", "COMPARISON_UNAVAILABLE"), "message": str(exc)}})
         elif path.startswith("/api/runs/"):
             parts = path.split("/")
             record = self.server.manager.get(parts[3]) if len(parts) in (4, 5) else None
@@ -250,11 +301,43 @@ class Handler(BaseHTTPRequestHandler):
         if not self._valid_request(protected=True, mutating=True):
             return
         path = urlsplit(self.path).path
-        if path not in ("/api/experiments/validate", "/api/runs"):
+        if path not in ("/api/experiments/validate", "/api/runs", "/api/comparisons", "/api/runs/paired-intervention"):
             self._json(404, {"error": {"code": "NOT_FOUND", "message": "route not found"}})
             return
         selection = self._body()
         if selection is None:
+            return
+        if path == "/api/comparisons":
+            if set(selection) != {"baseline_job_id", "intervention_job_id"} or not all(isinstance(v, str) and len(v) == 32 for v in selection.values()):
+                self._json(400, {"error": {"code": "INVALID_COMPARISON_SPEC", "message": "registered job IDs required"}})
+                return
+            try:
+                baseline = self.server.manager.get(selection["baseline_job_id"])
+                intervention = self.server.manager.get(selection["intervention_job_id"])
+                comparison = build_comparison(baseline, intervention)
+                self.server.comparisons[comparison["comparison_id"]] = (baseline.job_id, intervention.job_id, comparison)
+                self._json(201, comparison)
+            except (PairingError, ValueError) as exc:
+                self._json(409, {"error": {"code": getattr(exc, "code", "COMPARISON_UNAVAILABLE"), "message": str(exc)}})
+            return
+        if path == "/api/runs/paired-intervention":
+            if set(selection) != {"baseline_job_id"} or not isinstance(selection["baseline_job_id"], str):
+                self._json(400, {"error": {"code": "INVALID_SPEC", "message": "baseline job ID required"}})
+                return
+            baseline = self.server.manager.get(selection["baseline_job_id"])
+            if baseline is None or baseline.state != "COMPLETED" or baseline.spec.intervention.kind != "none":
+                self._json(409, {"error": {"code": "RESULT_NOT_COMPLETE", "message": "completed baseline required"}})
+                return
+            source = baseline.spec
+            selection = {"dataset_key": "male-cns-v1", "side": source.stimulus.side,
+                         "frequency_hz": source.stimulus.frequency_hz, "mode": "outgoing_silence",
+                         "backend": source.backend, "seed": source.seed_policy.trial_seeds[0]}
+            try:
+                spec = self.server.catalog.spec(selection)
+                record = self.server.manager.create(spec)
+                self._json(202, {"job_id": record.job_id, "spec_digest": spec.digest, "paired_baseline_job_id": baseline.job_id})
+            except ApplicationError as exc:
+                self._json(409, {"error": exc.to_dict()})
             return
         try:
             spec = self.server.catalog.spec(selection)
