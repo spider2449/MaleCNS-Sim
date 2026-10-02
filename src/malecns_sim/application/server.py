@@ -21,6 +21,7 @@ from .comparisons import PairingError, build_comparison, build_comparison_playba
 from .models import canonical_bytes
 from .playback import build_playback
 from .retention import ParentResultStore
+from .robustness import RobustnessManager, decode_request
 from .service import run_experiment
 from .serialization import read_result, write_result
 from .subgraph import MODES, NODE_CAPS, build_subgraph
@@ -115,6 +116,8 @@ class LocalServer(ThreadingHTTPServer):
     allow_reuse_address = False
 
     def server_close(self) -> None:
+        if hasattr(self, "robustness"):
+            self.robustness.close()
         if hasattr(self, "parent_results"):
             self.parent_results.close()
         super().server_close()
@@ -132,6 +135,7 @@ class LocalServer(ThreadingHTTPServer):
         self.result_root = result_root or Path(tempfile.mkdtemp(prefix="malecns-workbench-"))
         self.manager = RunManager(self.catalog, self.result_root)
         self.parent_results = ParentResultStore(self.token)
+        self.robustness = RobustnessManager(self.manager, self.parent_results, self.token)
         self.comparisons: dict[str, tuple[str, str, dict]] = {}
         super().__init__(("127.0.0.1", port), Handler)
 
@@ -187,7 +191,7 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         parsed = urlsplit(self.path)
         path = parsed.path
-        if not self._valid_request(protected=path == "/api/runs" or path.startswith("/api/runs/") or path.startswith("/api/comparisons")):
+        if not self._valid_request(protected=path == "/api/runs" or path.startswith("/api/runs/") or path.startswith("/api/comparisons") or path.startswith("/api/robustness")):
             return
         if path == "/":
             self._static("index.html", "text/html; charset=utf-8")
@@ -202,6 +206,29 @@ class Handler(BaseHTTPRequestHandler):
                 self._json(200, self.server.catalog.options())
             except ApplicationError as exc:
                 self._json(503, {"error": exc.to_dict()})
+        elif path == "/api/robustness" or path.startswith("/api/robustness/"):
+            parts = path.split("/")
+            try:
+                query = parse_qs(parsed.query, keep_blank_values=True)
+                role = None
+                if query:
+                    if (len(parts) != 7 or parts[4] != "variants" or parts[6] not in ("playback", "subgraph")
+                            or set(query) != {"role"} or query["role"] not in (["baseline"], ["intervention"])):
+                        raise ValueError("only a bounded child role filter is supported")
+                    role = query["role"][0]
+                if path == "/api/robustness":
+                    value = {"robustness": self.server.robustness.list()}
+                elif len(parts) == 4:
+                    value = self.server.robustness.get(parts[3])
+                elif len(parts) == 5 and parts[4] in ("events", "export"):
+                    value = self.server.robustness.export(parts[3]) if parts[4] == "export" else {"events": self.server.robustness.get(parts[3])["events"]}
+                elif len(parts) in (6, 7) and parts[4] == "variants":
+                    value = self.server.robustness.variant(parts[3], parts[5]) if len(parts) == 6 else self.server.robustness.evidence(parts[3], parts[5], parts[6], role)
+                else:
+                    raise ValueError("unknown robustness route")
+                self._json(200, value)
+            except (ApplicationError, ValueError, KeyError) as exc:
+                self._json(409, {"error": {"code": "ROBUSTNESS_UNAVAILABLE", "message": str(exc)}})
         elif path == "/api/runs":
             self._json(200, {"runs": [{"job_id": r.job_id, "state": r.state, "run_id": r.result.identity.run_id if r.result else None,
                                         "mode": r.spec.intervention.kind, "side": r.spec.stimulus.side} for r in self.server.manager.records.values()]})
@@ -317,11 +344,29 @@ class Handler(BaseHTTPRequestHandler):
         if not self._valid_request(protected=True, mutating=True):
             return
         path = urlsplit(self.path).path
-        if path not in ("/api/experiments/validate", "/api/runs", "/api/comparisons", "/api/runs/paired-intervention"):
+        robustness_action = path.startswith("/api/robustness/") and len(path.split("/")) == 5 and path.split("/")[4] in ("cancel", "release")
+        if path not in ("/api/experiments/validate", "/api/runs", "/api/comparisons", "/api/runs/paired-intervention", "/api/robustness") and not robustness_action:
             self._json(404, {"error": {"code": "NOT_FOUND", "message": "route not found"}})
             return
         selection = self._body()
         if selection is None:
+            return
+        if path == "/api/robustness" or robustness_action:
+            try:
+                if urlsplit(self.path).query:
+                    raise ValueError("unexpected query")
+                if robustness_action:
+                    if selection:
+                        raise ValueError("empty action body required")
+                    parts = path.split("/")
+                    getattr(self.server.robustness, parts[4])(parts[3])
+                    self._json(200, {"robustness_id": parts[3], "action": parts[4]})
+                else:
+                    spec = decode_request(self.server.catalog, selection)
+                    identity = self.server.robustness.create(spec)
+                    self._json(202, {"robustness_id": identity, "spec_digest": spec.spec_digest})
+            except (ApplicationError, ValueError, TypeError) as exc:
+                self._json(400, {"error": {"code": "INVALID_ROBUSTNESS_SPEC", "message": str(exc)}})
             return
         if path == "/api/comparisons":
             if set(selection) != {"baseline_job_id", "intervention_job_id"} or not all(isinstance(v, str) and len(v) == 32 for v in selection.values()):

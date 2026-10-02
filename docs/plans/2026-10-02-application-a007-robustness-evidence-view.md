@@ -87,3 +87,7 @@ No commit, push, tag, release or version bump.
 ## A007A backend prerequisite resolution
 
 The original audit outcome remains A7-CONTRACT-GAP. [A007A configurable preparation and variant contract](2026-10-02-application-a007a-configurable-preparation-variant-contract.md) resolves the backend preparation, variant identity, pairing and result-retention prerequisite. The A007 matrix, orchestration, evidence API and UI remain future work. Historical identities and this audit outcome are preserved.
+
+## A007B backend orchestration resolution
+
+[A007B orchestration and evidence API](2026-10-02-application-a007b-robustness-orchestration-evidence-api.md) adds parent-owned serial R0-V7 pairs, exact reuse, actual cross-variant event-schedule evidence, A006 comparison, bounded retained graph/playback evidence, failure/cancellation/progress and deterministic export. The original audit and its validation counts remain historical. A007 overall remains A7-CONTRACT-GAP because the matrix/chart UI, identity-safe variant switching and manual UI acceptance remain unfinished. Default aggregate rule remains NO_AGGREGATE_RULE with no verdict. No real MaleCNS sweep or historical Task017 execution was performed.

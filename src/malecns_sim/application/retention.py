@@ -27,6 +27,7 @@ class ParentResultStore:
             raise ValueError("session token required")
         self._session_token = session_token
         self._parents: dict[str, dict[str, bytes]] = {}
+        self._evidence: dict[str, dict[str, bytes]] = {}
         self._lock = threading.Lock()
         self._closed = False
 
@@ -41,6 +42,7 @@ class ParentResultStore:
                 raise ApplicationError(ErrorCode.UNSUPPORTED_OPERATION, "parent retention capacity reached")
             parent = uuid4().hex
             self._parents[parent] = {}
+            self._evidence[parent] = {}
             return parent
 
     def retain(self, token: str, parent: str, result: ExperimentResult) -> str:
@@ -56,10 +58,41 @@ class ParentResultStore:
                 if children[child] != encoded:
                     raise ApplicationError(ErrorCode.INVALID_SPEC, "child identity already retained")
                 return child
-            if len(children) >= MAX_CHILDREN or sum(map(len, children.values())) + len(encoded) > MAX_PARENT_BYTES:
+            if len(children) >= MAX_CHILDREN or self._size(parent) + len(encoded) > MAX_PARENT_BYTES:
                 raise ApplicationError(ErrorCode.UNSUPPORTED_OPERATION, "parent evidence capacity reached")
             children[child] = encoded
         return child
+
+    def _size(self, parent):
+        return sum(map(len, self._parents[parent].values())) + sum(map(len, self._evidence[parent].values()))
+
+    def retained_bytes(self, token: str, parent: str) -> int:
+        self._authorize(token)
+        with self._lock:
+            self._owned(parent)
+            return self._size(parent)
+
+    def retain_evidence(self, token: str, parent: str, key: str, value: object) -> None:
+        """Byte-accounted immutable graph or parent metadata; replacements are atomic."""
+        self._authorize(token)
+        encoded = canonical_bytes(value)
+        with self._lock:
+            self._owned(parent)
+            evidence = self._evidence[parent]
+            if self._size(parent) - len(evidence.get(key, b"")) + len(encoded) > MAX_PARENT_BYTES:
+                raise ApplicationError(ErrorCode.UNSUPPORTED_OPERATION, "parent evidence capacity reached")
+            evidence[key] = encoded
+
+    def evidence(self, token: str, parent: str, key: str):
+        import json
+
+        self._authorize(token)
+        with self._lock:
+            self._owned(parent)
+            encoded = self._evidence[parent].get(key)
+            if encoded is None:
+                raise ApplicationError(ErrorCode.UNSUPPORTED_OPERATION, "unknown parent evidence")
+        return json.loads(encoded)
 
     def _owned(self, parent):
         if self._closed or not isinstance(parent, str) or parent not in self._parents:
@@ -86,8 +119,10 @@ class ParentResultStore:
         with self._lock:
             self._owned(parent)
             del self._parents[parent]
+            del self._evidence[parent]
 
     def close(self) -> None:
         with self._lock:
             self._parents.clear()
+            self._evidence.clear()
             self._closed = True
