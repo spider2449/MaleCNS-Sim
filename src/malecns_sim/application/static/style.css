@@ -6,3 +6,19 @@
 .compare-columns .compare-timeline{height:100px}
 
 #run-status{position:sticky;top:0;z-index:10;display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;padding:1rem 1.5rem;background:#233d4f;border-bottom:3px solid #8ad4f2;box-shadow:0 3px 12px #0008}#run-status[hidden],#execution-overlay[hidden]{display:none}#run-heading{color:#fff}#run-phase{font-weight:700}#run-summary{width:100%;overflow-wrap:anywhere}#run-indicator{font-size:1.5rem;color:#8ad4f2}.spinning{animation:run-pulse 1.4s ease-in-out infinite}@keyframes run-pulse{50%{opacity:.35}}#execution-overlay{position:absolute;z-index:2;top:0;left:0;right:0;margin:0;padding:1rem;background:#233d4ff2;border-bottom:2px solid #8ad4f2;font-weight:700;pointer-events:none}#active-identity{white-space:pre-wrap;padding:.8rem;border-left:4px solid #8ad4f2;background:#233d4f;margin-bottom:1rem}#active-identity:empty{display:none}#history button{display:block;margin:.4rem 0;text-align:left}#history [data-state=ACTIVE]{border:2px solid #8ad4f2;font-weight:700}#run-status[data-state=FAILED]{border-color:#ffa985}#run-status[data-state=COMPLETED]{border-color:#65d4b7}#run-status[data-state=CANCELLED]{border-color:#f3c86a}#previous-result,#compare-active,#run-wait{font-weight:700;color:#f3c86a}@media(prefers-reduced-motion:reduce){.spinning{animation:none;opacity:1}}@media(max-width:600px){#run-status{padding:.65rem;gap:.3rem .7rem;font-size:.85rem}header{flex-wrap:wrap}}
+.robustness { margin: 20px; padding: 20px; background: #20303e; border-radius: 8px; }
+#robust-status, #robust-aggregate { white-space: pre-wrap; font-weight: 600; }
+.matrix-scroll { overflow-x: auto; max-width: 100%; }
+#robust-matrix { width: 100%; min-width: 1050px; border-collapse: collapse; }
+#robust-matrix th, #robust-matrix td { padding: 10px; text-align: left; border-bottom: 1px solid #526576; }
+#robust-matrix td:nth-child(2) { min-width: 240px; }
+#robust-matrix tr[data-selected="true"] { outline: 2px solid #fff; outline-offset: -2px; background: #31495d; }
+#robust-chart { display: flex; overflow-x: auto; gap: 8px; }
+.delta-mark { flex: 1; min-width: 100px; }
+.delta-mark svg { display: block; width: 100%; height: 150px; }
+.delta-mark[aria-pressed="true"] { outline: 2px solid #fff; }
+#robust-inspector { max-height: 540px; overflow-y: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+@media (max-width: 700px) { .robustness { margin: 8px; padding: 10px; } .robustness .controls { flex-wrap: wrap; } }
+
+#robust-matrix button[aria-pressed="true"]::after { content: " - selected"; font-weight: 700; }
+#robust-status { position: sticky; top: 0; z-index: 2; padding: 12px; background: #233d4f; border-left: 4px solid #8ad4f2; }

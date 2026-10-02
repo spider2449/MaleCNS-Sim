@@ -195,7 +195,7 @@ class Handler(BaseHTTPRequestHandler):
             return
         if path == "/":
             self._static("index.html", "text/html; charset=utf-8")
-        elif path in ("/app.js", "/run-status.js", "/playback.js", "/compare.js", "/style.css"):
+        elif path in ("/app.js", "/run-status.js", "/playback.js", "/compare.js", "/robustness.js", "/style.css"):
             self._static(path[1:], "text/javascript; charset=utf-8" if path.endswith(".js") else "text/css; charset=utf-8")
         elif path == "/api/status":
             self._json(200, {"service": "MaleCNS visual workbench", "status": "READY", "active": self.server.manager.active, "server_instance_id": self.server.server_instance_id})

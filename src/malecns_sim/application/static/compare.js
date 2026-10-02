@@ -1,5 +1,6 @@
 "use strict";
 let comparison = null, pairedPlayback = null, compareCursor = 0, compareFrame = null, compareStamp = null;
+let compareGeneration = 0;
 const compareMaps = [new Map(), new Map()];
 
 async function refreshCompareRuns() {
@@ -33,8 +34,9 @@ async function refreshCompareCandidates() {
   updateRunControls();
 }
 function clearComparison() {
+  compareGeneration++;
   if (compareFrame !== null) cancelAnimationFrame(compareFrame);
-  compareFrame = null; compareStamp = null; comparison = null; pairedPlayback = null;
+  compareFrame = null; compareStamp = null; compareCursor = 0; comparison = null; pairedPlayback = null;
   compareMaps.forEach(map => map.clear()); $("compare-ready").hidden = true;
 }
 function compareIdentity(value) {
@@ -48,15 +50,27 @@ function compareMetric(name, metric) {
 }
 async function loadComparison() {
   clearComparison(); $("compare-status").textContent = "Checking backend pairing…";
+  const generation = compareGeneration;
   const started = performance.now();
-  const baseline = $("compare-baseline").value, intervention = $("compare-intervention").value;
-  if (!baseline || !intervention) throw new Error("Select completed baseline and intervention runs.");
-  const result = await api("/api/comparisons", {baseline_job_id:baseline, intervention_job_id:intervention});
-  const mode = $("view-mode").value, cap = $("node-cap").value;
-  const playback = await api("/api/comparisons/" + result.comparison_id + "/playback?mode=" + mode + "&cap=" + cap);
-  const loaded = performance.now();
-  if (playback.comparison_id !== result.comparison_id || playback.baseline.run_id !== result.baseline.run_id || playback.intervention.run_id !== result.intervention.run_id ||
-      playback.baseline.authoritative_result_digest !== result.baseline.result_digest || playback.intervention.authoritative_result_digest !== result.intervention.result_digest) throw new Error("Comparison/playback identity mismatch");
+  try {
+    const baseline = $("compare-baseline").value, intervention = $("compare-intervention").value;
+    if (!baseline || !intervention) throw new Error("Select completed baseline and intervention runs.");
+    const result = await api("/api/comparisons", {baseline_job_id:baseline, intervention_job_id:intervention});
+    if (generation !== compareGeneration) return;
+    const mode = $("view-mode").value, cap = $("node-cap").value;
+    const playback = await api("/api/comparisons/" + result.comparison_id + "/playback?mode=" + mode + "&cap=" + cap);
+    if (generation !== compareGeneration) return;
+    const loaded = performance.now();
+    if (playback.comparison_id !== result.comparison_id || playback.baseline.run_id !== result.baseline.run_id || playback.intervention.run_id !== result.intervention.run_id ||
+        playback.baseline.authoritative_result_digest !== result.baseline.result_digest || playback.intervention.authoritative_result_digest !== result.intervention.result_digest) throw new Error("Comparison/playback identity mismatch");
+    const timings = presentComparison(result, playback);
+    $("compare-status").textContent += "\nA006 certification measurement (this browser): pair request and dual playback load " + (loaded-started).toFixed(1) + " ms; dual raster indexing " + timings.indexing.toFixed(1) + " ms; union viewport preparation and initial render " + timings.render.toFixed(1) + " ms.";
+  } catch (error) {
+    if (generation === compareGeneration) throw error;
+  }
+}
+function presentComparison(result, playback) {
+  const started = performance.now();
   comparison = result; pairedPlayback = playback;
   [playback.baseline, playback.intervention].forEach((run, index) => {
     for (const event of run.sparse_spikes) {
@@ -75,9 +89,12 @@ async function loadComparison() {
   $("compare-cursor").max = playback.baseline.duration_ms; $("compare-cursor").step = playback.baseline.dt_ms;
   $("compare-export").href = "/api/comparisons/" + result.comparison_id + "/export";
   $("compare-export").download = "malecns-comparison-" + result.comparison_id + ".json";
+  const inspected = performance.now();
   $("compare-ready").hidden = false; setCompareCursor(0);
-  $("compare-status").textContent += "\nA006 certification measurement (this browser): pair request and dual playback load " + (loaded-started).toFixed(1) + " ms · dual raster indexing " + (indexed-loaded).toFixed(1) + " ms · union viewport preparation and initial render " + (performance.now()-indexed).toFixed(1) + " ms.";
+  return {indexing:indexed-started, inspector:inspected-indexed, render:performance.now()-inspected};
+
 }
+
 function compareActive(index, id) {
   if (!pairedPlayback) return false;
   const run = index ? pairedPlayback.intervention : pairedPlayback.baseline;
