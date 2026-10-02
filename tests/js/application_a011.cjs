@@ -1,0 +1,24 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const fixture=JSON.parse(fs.readFileSync(process.argv[2])),elements=new Map();
+const el=id=>{if(!elements.has(id))elements.set(id,{value:id==='speed'?'1':'',width:720,height:600,disabled:false,getContext:()=>new Proxy({},{get:()=>()=>{}}),getBoundingClientRect:()=>({left:0,top:0,width:720,height:600})});return elements.get(id)};
+let data=fixture,posts=[],timers=[],deferred=null;
+const ctx=vm.createContext({console,performance,URLSearchParams,Math,JSON,Number,Promise,Blob,URL,sessionStorage:{getItem:()=> 'test',setItem(){}},location:{hash:'',pathname:'/arena'},history:{replaceState(){}},document:{getElementById:el,createElement:()=>({click(){}})},window:{addEventListener(){}},setTimeout(fn,ms){timers.push({fn,ms});return timers.length},clearTimeout(){},fetch:async (path,options)=>{if(options.body){const body=JSON.parse(options.body);posts.push(body);if(deferred)return new Promise(resolve=>deferred.resolve=resolve);data={...data,revision:data.revision+1,running:body.command==='run'?true:body.command==='pause'?false:data.running};}return {ok:true,json:async()=>data}}});
+vm.runInContext(fs.readFileSync(process.argv[3]+'/arena.js','utf8'),ctx);
+const run=code=>vm.runInContext(code,ctx);
+(async()=>{
+ await new Promise(setImmediate);
+ assert(el('spec').textContent.includes(fixture.session_identity));
+ await el('run').onclick();assert(data.running);assert.equal(timers.at(-1).ms,20);
+ el('speed').value='2';el('speed').onchange();assert.equal(timers.at(-1).ms,10);
+ await el('pause').onclick();assert(!data.running);
+ await el('step').onclick();assert.equal(posts.at(-1).command,'step');
+ await el('reset').onclick();assert.equal(posts.at(-1).command,'reset');
+ await el('arena').onclick({clientX:180,clientY:150});assert.equal(posts.at(-1).x,.25);assert.equal(posts.at(-1).y,.25);
+ el('sx').value='.1';el('sy').value='.9';await el('move').onclick();assert.equal(posts.at(-1).x,.1);
+ el('silence3').checked=true;await el('silence3').onchange();assert.equal(posts.at(-1).neuron_id,3);
+ assert(posts.every(p=>!('v_mV' in p)&&!('dt_ms' in p)&&!('control_interval_ms' in p)));
+ deferred={};const before=run('snapshot.revision');const pending=ctx.command('step');await new Promise(setImmediate);
+ assert(el('step').disabled);await ctx.command('reset');assert.equal(posts.at(-1).command,'step');
+ deferred.resolve({ok:true,json:async()=>({...data,revision:before-1})});await pending;assert.equal(run('snapshot.revision'),before);
+ console.log(JSON.stringify({ui_update_ms:ctx.window.arenaUIUpdateMs,controls:'PASS',stale_response:'PASS',speed_clock:'PASS'}));
+})().catch(e=>{console.error(e);process.exit(1)});

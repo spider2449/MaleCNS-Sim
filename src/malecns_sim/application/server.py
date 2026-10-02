@@ -16,6 +16,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 from uuid import uuid4
 
+from .arena import ArenaSession
 from .errors import ApplicationError, ErrorCode
 from .comparisons import PairingError, build_comparison, build_comparison_playback, verify_pair
 from .models import canonical_bytes
@@ -136,6 +137,7 @@ class LocalServer(ThreadingHTTPServer):
         self.manager = RunManager(self.catalog, self.result_root)
         self.parent_results = ParentResultStore(self.token)
         self.robustness = RobustnessManager(self.manager, self.parent_results, self.token)
+        self.arena = ArenaSession()
         self.comparisons: dict[str, tuple[str, str, dict]] = {}
         super().__init__(("127.0.0.1", port), Handler)
 
@@ -191,11 +193,19 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         parsed = urlsplit(self.path)
         path = parsed.path
-        if not self._valid_request(protected=path == "/api/runs" or path.startswith("/api/runs/") or path.startswith("/api/comparisons") or path.startswith("/api/robustness")):
+        if not self._valid_request(protected=path == "/api/runs" or path.startswith("/api/runs/") or path.startswith("/api/comparisons") or path.startswith("/api/robustness") or path.startswith("/api/arena")):
             return
-        if path == "/":
+        if path == "/api/arena":
+            with self.server.arena.lock:
+                self._json(200, self.server.arena.snapshot())
+        elif path == "/api/arena/events":
+            with self.server.arena.lock:
+                self._json(200, {"spec":self.server.arena.spec,"session_identity":self.server.arena.identity,"events":self.server.arena.events})
+        elif path == "/arena":
+            self._static("arena.html", "text/html; charset=utf-8")
+        elif path == "/":
             self._static("index.html", "text/html; charset=utf-8")
-        elif path in ("/app.js", "/run-status.js", "/playback.js", "/compare.js", "/robustness.js", "/style.css"):
+        elif path in ("/arena.js", "/arena.css", "/app.js", "/run-status.js", "/playback.js", "/compare.js", "/robustness.js", "/style.css"):
             self._static(path[1:], "text/javascript; charset=utf-8" if path.endswith(".js") else "text/css; charset=utf-8")
         elif path == "/api/status":
             self._json(200, {"service": "MaleCNS visual workbench", "status": "READY", "active": self.server.manager.active, "server_instance_id": self.server.server_instance_id})
@@ -344,6 +354,14 @@ class Handler(BaseHTTPRequestHandler):
         if not self._valid_request(protected=True, mutating=True):
             return
         path = urlsplit(self.path).path
+        if path == "/api/arena":
+            body = self._body()
+            if body is not None:
+                try:
+                    self._json(200, self.server.arena.command(body))
+                except (ValueError, TypeError) as exc:
+                    self._json(409, {"error":{"code":"INVALID_ARENA_COMMAND","message":str(exc)}})
+            return
         robustness_action = path.startswith("/api/robustness/") and len(path.split("/")) == 5 and path.split("/")[4] in ("cancel", "release")
         if path not in ("/api/experiments/validate", "/api/runs", "/api/comparisons", "/api/runs/paired-intervention", "/api/robustness") and not robustness_action:
             self._json(404, {"error": {"code": "NOT_FOUND", "message": "route not found"}})

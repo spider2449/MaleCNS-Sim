@@ -318,6 +318,62 @@ def _validate_duration(duration_ms: float, dt_ms: float) -> int:
     return _exact_steps(duration, dt_ms, "duration")
 
 
+@dataclass(slots=True)
+class SimulationState:
+    """Explicit CPU state; pending slots retain absolute timestep phase."""
+
+    runtime_identity: tuple[str, str, float]
+    timestep: int
+    v_mV: np.ndarray
+    g_mV: np.ndarray
+    refractory_until: np.ndarray
+    pending: np.ndarray
+    pending_event_counts: np.ndarray
+
+
+@dataclass(frozen=True, slots=True)
+class PreparedRuntime:
+    """Resume the existing reference loop with chunk-relative explicit input.
+
+    Stochastic schedules must be generated once for their complete horizon
+    and sliced by the caller. This seam never reseeds or generates chunk RNG.
+    """
+
+    projection: EffectiveSignedProjection
+    parameters: LIFParameters = REFERENCE_LIF_PARAMETERS
+    dt_ms: float = 0.1
+
+    @property
+    def identity(self) -> tuple[str, str, float]:
+        return (self.projection.fingerprint, self.parameters.fingerprint, self.dt_ms)
+
+    def initial_state(self) -> SimulationState:
+        delay, _ = self.parameters.grid_steps(self.dt_ms)
+        n = self.projection.neuron_ids.size
+        return SimulationState(
+            self.identity, 0,
+            np.full(n, self.parameters.v_rest_mV, dtype=np.float64),
+            np.zeros(n, dtype=np.float64), np.full(n, -1, dtype=np.int64),
+            np.zeros((max(delay + 1, 1), n), dtype=np.float64),
+            np.zeros((max(delay + 1, 1), n), dtype=np.int32),
+        )
+
+    def advance(self, state: SimulationState, *, duration_ms: float,
+                stimulus: ExplicitStimulus = ExplicitStimulus(),
+                silenced_neuron_ids: Iterable[int] = (),
+                trace_neuron_ids: Iterable[int] = ()) -> SimulationResult:
+        if state.runtime_identity != self.identity:
+            raise ValueError("state belongs to another prepared runtime")
+        if not isinstance(stimulus, ExplicitStimulus):
+            raise TypeError("advance requires explicit chunk-relative events")
+        return simulate_lif(
+            self.projection, duration_ms=duration_ms, stimulus=stimulus,
+            parameters=self.parameters, dt_ms=self.dt_ms,
+            silenced_neuron_ids=silenced_neuron_ids,
+            trace_neuron_ids=trace_neuron_ids, _state=state,
+        )
+
+
 def simulate_lif(
     projection: EffectiveSignedProjection,
     *,
@@ -328,6 +384,7 @@ def simulate_lif(
     silenced_neuron_ids: Iterable[int] = (),
     trace_neuron_ids: Iterable[int] = (),
     collect_sparse_trace: bool = False,
+    _state: SimulationState | None = None,
 ) -> SimulationResult:
     """Run the reference model using active spikes and a dense delay ring.
 
@@ -373,17 +430,18 @@ def simulate_lif(
     silenced_mask = np.zeros(n, dtype=bool)
     silenced_mask[silenced] = True
     trace_positions = validate_refractory_ids(trace_ids, ids) if trace_ids else np.empty(0, dtype=np.int64)
-    v = np.full(n, parameters.v_rest_mV, dtype=np.float64)
-    g = np.zeros(n, dtype=np.float64)
-    refractory_until = np.full(n, -1, dtype=np.int64)
-    ring_size = max(delay_steps + 1, 1)
-    pending = np.zeros((ring_size, n), dtype=np.float64)
-    pending_event_counts = np.zeros((ring_size, n), dtype=np.int32)
+    state = _state or PreparedRuntime(projection, parameters, dt_ms).initial_state()
+    if state.runtime_identity != (projection.fingerprint, parameters.fingerprint, dt_ms):
+        raise ValueError("state belongs to another prepared runtime")
+    offset = state.timestep
+    v, g, refractory_until = state.v_mV, state.g_mV, state.refractory_until
+    pending, pending_event_counts = state.pending, state.pending_event_counts
+    ring_size = pending.shape[0]
     spike_ids: list[np.ndarray] = []
     spike_steps: list[np.ndarray] = []
     trace_v = np.empty((trace_positions.size, steps + 1), dtype=np.float64) if trace_positions.size else None
     trace_g = np.empty((trace_positions.size, steps + 1), dtype=np.float64) if trace_positions.size else None
-    sparse_timesteps = np.arange(steps, dtype=np.int64) if collect_sparse_trace else None
+    sparse_timesteps = np.arange(offset, offset + steps, dtype=np.int64) if collect_sparse_trace else None
     sparse_delivered_counts = np.zeros(steps, dtype=np.int64) if collect_sparse_trace else None
     sparse_delivered_weights = np.zeros(steps, dtype=np.float64) if collect_sparse_trace else None
     sparse_delivered_abs_weights = np.zeros(steps, dtype=np.float64) if collect_sparse_trace else None
@@ -394,9 +452,10 @@ def simulate_lif(
         trace_g[:, 0] = g[trace_positions]
     queued_events = 0
     delivered_events = 0
-    for step in range(steps):
-        if step in event_batches:
-            positions, _ = event_batches[step]
+    for local_step in range(steps):
+        step = offset + local_step
+        if local_step in event_batches:
+            positions, _ = event_batches[local_step]
             direct = np.bincount(positions, minlength=n).astype(np.float64) * input_weight
             direct_allowed = (~(step <= refractory_until)) | refractory_free_mask
             v[direct_allowed] += direct[direct_allowed]
@@ -405,12 +464,12 @@ def simulate_lif(
         if np.any(due) or np.any(pending_event_counts[slot]):
             if collect_sparse_trace:
                 due_counts = pending_event_counts[slot]
-                sparse_delivered_counts[step] = due_counts.sum(dtype=np.int64)
-                sparse_delivered_weights[step] = due.sum(dtype=np.float64)
-                sparse_delivered_abs_weights[step] = np.abs(due).sum(dtype=np.float64)
+                sparse_delivered_counts[local_step] = due_counts.sum(dtype=np.int64)
+                sparse_delivered_weights[local_step] = due.sum(dtype=np.float64)
+                sparse_delivered_abs_weights[local_step] = np.abs(due).sum(dtype=np.float64)
                 target_positions = np.flatnonzero(due_counts)
-                sparse_delivered_targets[step] = target_positions.size
-                sparse_delivered_target_indices[step] = np.dot(
+                sparse_delivered_targets[local_step] = target_positions.size
+                sparse_delivered_target_indices[local_step] = np.dot(
                     target_positions.astype(np.int64),
                     due_counts[target_positions].astype(np.int64),
                 )
@@ -433,7 +492,7 @@ def simulate_lif(
             g[fired_positions] = 0.0
             refractory_until[fired_positions] = step + 1 + refractory_steps
             delivery_step = step + 1 + delay_steps
-            if delivery_step < steps + ring_size:
+            if delivery_step < offset + steps + ring_size:
                 event_slot = delivery_step % ring_size
                 outgoing_allowed = ~silenced_mask[fired_positions]
                 for source_position in fired_positions[outgoing_allowed]:
@@ -444,8 +503,9 @@ def simulate_lif(
                     np.add.at(pending_event_counts[event_slot], targets, 1)
                     queued_events += int(end - start)
         if trace_v is not None:
-            trace_v[:, step + 1] = v[trace_positions]
-            trace_g[:, step + 1] = g[trace_positions]
+            trace_v[:, local_step + 1] = v[trace_positions]
+            trace_g[:, local_step + 1] = g[trace_positions]
+    state.timestep += steps
     if spike_ids:
         output_ids = np.concatenate(spike_ids)
         output_steps = np.concatenate(spike_steps)

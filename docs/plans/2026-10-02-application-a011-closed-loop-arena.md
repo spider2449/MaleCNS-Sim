@@ -1,0 +1,57 @@
+# Application A011: Closed-Loop Arena
+
+Start gate verified against local/origin/live master 57eb17f5f9711a49c40e95228cbde3c2166def1f. Clean worktree, empty stash, version 0.3.0, zero tracked workflows; A7/A8/A10-E records verified.
+
+Runtime feasibility: C2. The existing dense CPU loop owns v, g, absolute refractory deadlines, pending delay weights/counts and timestep. Extract an explicit SimulationState and PreparedRuntime seam into that same loop. No second simulator. Exact analytical integration, threshold order, sign/weights and delay/refractory rules remain shared. Explicit input is chunk-relative; Poisson input must be generated once and sliced, never reseeded per chunk.
+
+Continuity is a prerequisite to arena implementation. Require exact spikes and final state equality for 100 ms, ten 10 ms chunks, and 7/13/4/26/50 ms chunks, including pending events and refractory boundaries.
+
+All execution is synthetic. No real scientific runs, Task017/017Q units, downloads or archive writes. No biological behavior claim. Manual acceptance is required before commit/push; no tag, release or version bump.
+
+## Implemented contract
+
+- Runtime: `PreparedRuntime`, `SimulationState`; same existing dense reference loop, no duplicated simulator. The caller supplies explicit chunk-local schedules. Absolute output timestamps and refractory/delay-ring phase survive every chunk. State mutation belongs to the backend. The original active CPU and CUDA paths remain unchanged.
+- Continuity: 100 ms vs 10?10 ms and 7+13+4+26+50 ms, exact arrays, no tolerance. Full selected membrane/synaptic histories match, not merely final values. Fixture includes signed edges, refractory periods, nonzero pending queues and late spikes. A starting-commit oracle separately matches spike output, membrane/synaptic traces, sparse delivery evidence, simulation fingerprint and spike digest.
+- Clocks: 0.1 ms neural dt; 20 ms control; browser request/render clock independent. Actual wall pacing includes execution/HTTP latency and does not promise exact real-time cadence. No biological reaction-time equivalence.
+- Environment `arena-environment-v1`: normalized [0,1] arena, initial agent (0.5,0.5), heading 0, stimulus (0.8,0.25), simulation time 0; seed 0 without random draws. Heading updates first, then position advances by velocity ? 0.02 s, clamped at walls. No obstacles. Trail presentation retains last 300 positions.
+- Sensory `arena-sensory-v1`: bearing atan2 relative to heading; intensity max(0,1-distance/sqrt(2)); L/R=intensity?(1?sin(bearing))/2. Channel impulses round(24?channel), at 0/5/10/15 ms within each chunk, weight 1 mV each on synthetic IDs 1/2. All parameters are visible.
+- Synthetic signed projection: four IDs 1?4, acetylcholine labels used solely to exercise existing sign policy, edges 1?3 and 2?4, count 100 each, existing 0.275 mV weight. These are test identities, not MaleCNS body IDs.
+- Motor `arena-motor-v1`: counts from synthetic readouts 3/4 in 20 ms; drives clip(count/4,0,1); turn 3(R-L) rad/s; forward 0.25(L+R)/2 units/s. Readout masking sets a selected decoder drive to zero; neural firing remains intact. No hidden ML or trained weights.
+- Schema `application-closed-loop-v1`: canonical sorted JSON SHA-256, binds network, parameters, adapter IDs, dt/control interval, readouts, arena initialization, seed, intervention policy, manual mode and 1500-step maximum. Identity `748b22b39b1320f653eb6956aa5db3b15f0ede371487fa1251af396f54607a38`.
+- Evidence: control-step before/after arena, encoded input, selected state, bounded spikes/counts, readout mask, decoded action and warnings. Simulation-relative reset/stimulus/mask/run/pause/manual-step events. Maximum 5000 events; export is protected JSON. Reset intentionally starts a fresh log. Wall performance measurements do not enter the deterministic log/identity.
+- UI: `/arena`, protected API `/api/arena` and event export; link from normal workbench. Run/Pause/Step/Reset, click stimulus placement and keyboard coordinates, 0.25/0.5/1/2? presentation pacing, decoder readout masks. No drag implementation. Side inspector, spike history, heading/trail/action, versioned formulas and scientific boundaries. Current sensory preview and last applied input are distinguished.
+- Async protection: one browser request at a time; backend lock, generation and revision reject stale mutations; stale responses cannot replace a newer snapshot. Multiple tabs share the same session; rejected stale clients refresh before continuing. Neural arrays cannot be authored through the API.
+
+## Synthetic certification and performance
+
+Opposite stimulus placements change sensory channels, synthetic readout counts, turn sign and trajectory. Mask changes decoded drive. Reset with the same script gives exact arena/neural/log equality. Run/tick and manual Step produce identical neural/arena outcomes for the same number of intervals. Pause/tick leaves timestep unchanged.
+
+300 synthetic control steps (6 s simulated) measured 3.022 s wall time: 99.27 steps/s or 1985.42 simulated ms/wall s, excluding HTTP/render. Mean per interval: encode 0.11928 ms, neural advance 9.91916 ms, decode 0.00710 ms, environment 0.00583 ms. p95: encode 0.13590 ms, neural 10.19510 ms, decode 0.00860 ms, environment 0.00790 ms. Concurrent full-suite activity may affect measurements. Node mock-canvas UI update measured 0.0296 ms in a control harness; this excludes browser layout/paint and is not a browser performance claim. Browser surface unavailable, so sustained browser rate/render cost remain manual measurements. No extrapolation to real MaleCNS.
+
+## Real MaleCNS evaluation
+
+Read-only inspection of DatasetCatalog and preparation contracts shows the generic engine seam accepts EffectiveSignedProjection. The implemented arena deliberately hardcodes synthetic identities and rejects real readouts. A real end-to-end demonstrator is not currently supported/certified: no approved real sensory/readout adapter and no measured full-graph control-step budget. Generic engine compatibility alone does not establish interactive real-MaleCNS feasibility. No graph preparation or real neural execution was performed. Before extending this contract to a real demonstrator, separately bind exact local dataset/source/graph identity, demonstrator readout IDs, engineered formulas, clocks, measured cost and maximum duration; stop for real authorization before execution. No real execution is required next for A011 synthetic manual acceptance.
+
+## Validation and manual gate
+
+A011 targeted tests: 8 tests covering exact continuity and initial-state independence, control semantics, resets/replay, adapters/bounds, invalid identity/inputs, user/intervention logs, render-clock independence, synthetic response, protected HTTP/assets and JS controls/stale responses. JS tests exercise real asset handlers with mock DOM/canvas; they do not certify browser appearance. Existing tests were not weakened. Starting-commit CPU oracle PASS. Full suite preliminary PASS: 392 passed, 14 skipped (CUDA and opt-in full-graph gate). Final validation follows below.
+
+Fresh wheel initially failed because a no-dependencies temporary environment lacked pandas. Repeated with normal wheel dependency installation in an isolated environment: PASS; import resolved installed site-packages, synthetic runtime and server loaded, all arena and normal static assets included. No raw-data download occurred.
+
+Manual UI acceptance: **PASS**. The user explicitly reported `A011 UI 測試 OK` for the exact current A011 worktree. Acceptance covers the visible arena/agent/stimulus, click and keyboard coordinate placement, Run, Pause, Step, Reset, deterministic replay, neural and decoded-action visualization, engineered sensory/motor labels, presentation-speed invariance, allowlisted readout masks, event log and Console cleanliness. No drag requirement applies. No application behavior changed during closure.
+
+Final classification: **A11-CLOSED-LOOP-ARENA-CERTIFIED**. Certification covers the C2 resumable CPU runtime, exact regular and irregular continuity, deterministic synthetic closed-loop integration and the manually accepted interactive arena. SimulationState and PreparedRuntime resume the existing simulator; membrane, synaptic, refractory and delayed/pending-event continuity are certified. This is synthetic-only certification. Real MaleCNS closed-loop runs and scientific simulations remain 0. Real end-to-end feasibility is NOT YET ESTABLISHED. No biological fly behavior, decision making, natural locomotion, sensory transduction, motor decoding or reconstructed agency/intelligence is claimed.
+
+Closure is authorized to validate, commit the exact accepted implementation and push master. No tag/release/version bump. Exact next recommended task: a documentation-only real demonstrator feasibility proposal specifying actual real-data sensory adapter, readout selection, motor mapping, measured runtime-budget protocol, bounded duration and interpretation envelope; obtain separate authorization before any real closed-loop execution.
+
+Scientific firewall: real closed-loop runs 0; real scientific simulations 0; Task017 units 0; Task017Q 0; raw downloads 0; archive writes 0; BANC 0. Historical Task016/017 and B archive untouched. Task017 remains NOT_ROBUST. Version 0.3.0, active tracked workflows 0.
+
+Final automated validation: A011 8 passed; application/session regressions 149 passed; full pytest 392 passed, 14 skipped in 56.57 s. Skips are CUDA/unavailable-device and opt-in real full-graph gates. compileall PASS; tracked integrity PASS (9 files/internal identities); git diff --check PASS; sdist/wheel build PASS; final fresh-wheel installed-runtime/server/static smoke PASS. This prior automated result preceded manual acceptance. Closure validation is recorded below.
+
+## A011 closure validation (2026-10-02)
+
+Starting local HEAD, origin/master and live GitHub master all matched `57eb17f5f9711a49c40e95228cbde3c2166def1f`; stash empty. Full tracked diff and all untracked files reviewed: exactly 12 A011 implementation/documentation/test/smoke files, no unrelated changes. Historical scientific artifact/provenance paths have no diff. Closure changed only this plan and the architecture acceptance record; SHA-256 checks confirm all 10 accepted implementation/assets/tests/smoke files remained byte-identical.
+
+Final closure results: targeted A011 8 passed; application regressions 145 passed plus session regressions 4 passed (149 total); full pytest 392 passed, 14 skipped in 56.40 s. Skips cover unavailable CUDA and opt-in full-graph gates. compileall PASS; tracked integrity PASS (9 tracked files and internal identities); git diff --check PASS; uv build PASS (sdist and wheel). Fresh-wheel isolated dependency install/runtime/server/static smoke PASS. Additional installed-wheel HTTP smoke PASS: arena and normal workbench assets return 200, status READY, run listing loads, protected synthetic Step advances 20 ms, exact session identity matches, CuPy absent. Browser visual certification comes from the user's manual PASS, not the HTTP/Node checks.
+
+No real scientific simulation, real closed-loop run, Task017 unit, Task017Q, raw-data download, archive write or BANC action occurred. B archive was not accessed or written. Historical Task016/017 remain unchanged, with Task017 NOT_ROBUST. Package version remains 0.3.0; active tracked GitHub Actions workflows 0. Commit/push authorized after these passing checks; no tag/release/version mutation.
