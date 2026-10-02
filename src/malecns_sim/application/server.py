@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import logging
 import secrets
+import socket
 import tempfile
 import threading
 from collections import OrderedDict
@@ -110,8 +111,16 @@ class RunManager:
 
 class LocalServer(ThreadingHTTPServer):
     daemon_threads = True
+    allow_reuse_address = False
+
+    def server_bind(self) -> None:
+        # Windows SO_REUSEADDR can permit multiple listeners on one port.
+        if hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        super().server_bind()
 
     def __init__(self, port: int, catalog: DatasetCatalog | None = None, result_root: Path | None = None):
+        self.server_instance_id = uuid4().hex[:12]
         self.token = secrets.token_urlsafe(32)
         self.catalog = catalog or DatasetCatalog.local()
         self.result_root = result_root or Path(tempfile.mkdtemp(prefix="malecns-workbench-"))
@@ -148,7 +157,7 @@ class Handler(BaseHTTPRequestHandler):
             self._json(HTTPStatus.FORBIDDEN, {"error": {"code": "FORBIDDEN", "message": "invalid Origin"}})
             return False
         if protected and (self.headers.get("X-Local-Session") != self.server.token or (mutating and origin != f"http://{allowed}")):
-            self._json(HTTPStatus.FORBIDDEN, {"error": {"code": "FORBIDDEN", "message": "local session required"}})
+            self._json(HTTPStatus.FORBIDDEN, {"error": {"code": "FORBIDDEN", "message": "local session required", "session_reason": "missing" if not self.headers.get("X-Local-Session") else "rejected", "server_instance_id": self.server.server_instance_id}})
             return False
         return True
 
@@ -178,7 +187,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path in ("/app.js", "/run-status.js", "/playback.js", "/compare.js", "/style.css"):
             self._static(path[1:], "text/javascript; charset=utf-8" if path.endswith(".js") else "text/css; charset=utf-8")
         elif path == "/api/status":
-            self._json(200, {"service": "MaleCNS visual workbench", "status": "READY", "active": self.server.manager.active})
+            self._json(200, {"service": "MaleCNS visual workbench", "status": "READY", "active": self.server.manager.active, "server_instance_id": self.server.server_instance_id})
         elif path == "/api/datasets":
             self._json(200, {"datasets": [self.server.catalog.metadata()]})
         elif path == "/api/experiment/options":
@@ -355,13 +364,28 @@ class Handler(BaseHTTPRequestHandler):
 def main() -> None:
     import argparse
     parser = argparse.ArgumentParser(description="Local MaleCNS visual workbench")
-    parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--port", type=int, default=0)
+    parser.add_argument("--open", action="store_true", help="Open the session URL in the default browser")
     args = parser.parse_args()
     if not 0 <= args.port <= 65535:
         parser.error("port must be 0..65535")
-    server = LocalServer(args.port)
-    print(f"Open http://127.0.0.1:{server.server_port}/#token={server.token}", flush=True)
-    server.serve_forever()
+    try:
+        server = LocalServer(args.port)
+    except OSError as exc:
+        parser.exit(1, f"Cannot start loopback workbench on port {args.port}: {exc}. Use the default automatic port or choose an available port.\n")
+    session_url = f"http://127.0.0.1:{server.server_port}/#token={server.token}"
+    print("MaleCNS workbench", flush=True)
+    print(f"Server instance: {server.server_instance_id}", flush=True)
+    print(f"Open {session_url}", flush=True)
+    if args.open:
+        import webbrowser
+        webbrowser.open(session_url, new=2)
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print("\nMaleCNS workbench stopped.", flush=True)
+    finally:
+        server.server_close()
 
 
 if __name__ == "__main__":

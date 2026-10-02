@@ -1,13 +1,19 @@
 "use strict";
 const urlToken = new URLSearchParams(location.hash.slice(1)).get("token");
 let token = urlToken || "";
+let sessionStored = false;
 try {
   if (urlToken) sessionStorage.setItem("malecns-local-session", urlToken);
   else token = sessionStorage.getItem("malecns-local-session") || "";
+  sessionStored = Boolean(token);
 } catch (_) {
   // Keep the URL token usable when browser storage is unavailable.
 }
-if (location.hash) window.history.replaceState(null, "", location.pathname + location.search);
+if (location.hash && sessionStored) window.history.replaceState(null, "", location.pathname + location.search);
+window.addEventListener("hashchange", () => {
+  // Reload so every component uses the newly supplied session token.
+  if (new URLSearchParams(location.hash.slice(1)).get("token")) location.reload();
+});
 const $ = id => document.getElementById(id);
 let validSelection = null;
 let timer = null;
@@ -21,15 +27,15 @@ async function api(path, body) {
   const headers = {"X-Local-Session":token};
   const response = await fetch(path, body === undefined ? {headers} : {method:"POST", headers:{...headers,"Content-Type":"application/json"}, body:JSON.stringify(body)});
   const data = await response.json();
-  if (response.status === 403 && data.error?.message === "local session required") throw new Error("Local session expired. Reopen the URL printed by malecns-workbench.");
+  if (response.status === 403 && data.error?.message === "local session required") throw new Error((token ? "Local session does not match this server process." : "Local session token is missing.") + (data.error.server_instance_id ? " Server instance: " + data.error.server_instance_id + "." : "") + " Reopen the URL printed by the currently running workbench.");
   if (!response.ok) throw new Error(data.error?.code + ": " + data.error?.message);
   return data;
 }
 function error(message) { $("error").textContent = message; }
 async function boot() {
   try {
-    if (!token) throw new Error("Local session expired. Reopen the URL printed by malecns-workbench.");
-    const status = await api("/api/status"); $("status").textContent = status.status;
+    if (!token) throw new Error("Local session token is missing. Reopen the URL printed by the currently running workbench.");
+    const status = await api("/api/status"); $("status").textContent = status.status + " ? Server instance: " + status.server_instance_id;
     const catalog = await api("/api/datasets");
     const dataset = catalog.datasets[0];
     $("dataset").textContent = dataset.display_name + " · " + dataset.status + " · manifest " + dataset.manifest_digest;
