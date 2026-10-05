@@ -355,40 +355,45 @@ def worker(output):
 def supervise(output):
     require(not output.exists() and not output.with_suffix('.worker.json').exists(),
             'A013-RUNTIME-CONTRACT-GAP', 'refusing an existing evidence path; no automatic retry')
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('a014_watchdog', Path(__file__).with_name('investigate_application_a014.py'))
+    watchdog = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(watchdog)
     output.parent.mkdir(parents=True, exist_ok=True)
     child_path = output.with_suffix('.worker.json')
     started = time.perf_counter()
-    process = subprocess.Popen([sys.executable, str(Path(__file__).resolve()), '--confirm-real-data-benchmark',
-                                '--worker', '--output', str(child_path)], stdout=subprocess.PIPE,
-                               stderr=subprocess.STDOUT, text=True)
+    job = watchdog.ProcessJob([sys.executable, str(Path(__file__).resolve()), '--confirm-real-data-benchmark',
+                      '--worker', '--output', str(child_path)])
+    process = job.process
     messages = queue.Queue()
     def reader():
         for line in process.stdout:
             messages.put(line)
     thread = threading.Thread(target=reader, daemon=True)
     thread.start()
-    monitor = WindowsMemory(process.pid)
     phase, phase_at = 'startup', started
     peaks, samples, phase_peaks = {}, 0, {}
     stop = None
     logs = []
     events = []
     try:
-        while process.poll() is None:
+        while job.pids():
             while not messages.empty():
                 line = messages.get_nowait()
                 try:
                     message = json.loads(line)
-                    monitor = bind_worker_monitor(message, monitor)
+                    require(message['pid'] in job.pids(), 'A013-RUNTIME-CONTRACT-GAP',
+                            'reported worker is outside contained process tree')
                     phase, phase_at = message['phase'], message['at']
                     events.append(message)
                     print(line.strip(), flush=True)
                 except (ValueError, KeyError):
                     logs.append(line[:1000])
             try:
-                snapshot = monitor.snapshot()
+                tree_snapshot = job.snapshot()
+                snapshot = {key: tree_snapshot[key] for key in ('working_set', 'private_bytes')}
             except OSError:
-                if process.poll() is not None:
+                if not job.pids():
                     break
                 raise
             samples += 1
@@ -400,15 +405,10 @@ def supervise(output):
             time.sleep(0.1)
     except Stop as exc:
         stop = exc
-        monitor.terminate()
-        process.terminate()
     except Exception as exc:
         stop = Stop('A013-RUNTIME-CONTRACT-GAP', f'watchdog failure: {exc!r}')
-        monitor.terminate()
-        process.terminate()
     finally:
-        process.wait(timeout=10)
-        monitor.close()
+        job.close()
     evidence = json.loads(child_path.read_text()) if child_path.exists() else {}
     if stop:
         evidence.update(classification=stop.classification, stop_detail=str(stop))
@@ -417,6 +417,7 @@ def supervise(output):
     elif process.returncode != 0 and evidence.get('classification') in (None, 'RUNNING', 'A13-BENCHMARK-COMPLETE'):
         evidence.update(classification='A013-RUNTIME-CONTRACT-GAP', stop_detail=f'worker exit {process.returncode}')
     evidence['watchdog'] = {'sample_interval_seconds': 0.1, 'samples': samples, 'peaks': peaks,
+                            'memory_scope': 'aggregate contained process tree; working set and private bytes',
                             'phase_peaks': phase_peaks, 'wall_seconds': time.perf_counter() - started,
                             'worker_exit': process.returncode, 'logs': logs[-10:], 'phase_events': events}
     dump(output, evidence)
