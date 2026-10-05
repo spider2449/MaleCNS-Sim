@@ -1,0 +1,451 @@
+{
+  "classification": "A19B-BENCHMARK-CONTRACT-MISMATCH",
+  "verdict": "STOP before real source access",
+  "authorization": "?? A019B",
+  "starting_head": "545798f388c7604e8cdc396c2da689fa207b0ec0",
+  "contract_schema": "application-stateful-benchmark-v1",
+  "contract_sha256": "198b481609f490c1f4ce27f9296165c3b723c0ea660ec98d4debc4e188c4f57b",
+  "identity_schema": "preparation-identity-v1",
+  "identity_record_sha256": "ed5afbceefbf287a0e55a58118d97a5dd488e330b863769d95ca5436be6d0567",
+  "contract": {
+    "schema": "application-stateful-benchmark-v1",
+    "classification": "A19A-A",
+    "trajectory_classification": "C1",
+    "future_task": "A019B - Full-Real Stateful Advance Benchmark Execution",
+    "execution_authorized": false,
+    "preparation_count": 1,
+    "prepared_network_count": 1,
+    "prepared_runtime_count": 1,
+    "state_sequence_count": 2,
+    "runtime_construction": "PreparedRuntime(prepared.projection, dt_ms=0.1)",
+    "state_construction": "runtime.initial_state()",
+    "prepared_graph_reused": true,
+    "total_advances": 24,
+    "maximum_consecutive_advances_per_state": 12,
+    "continuous_480_ms": false,
+    "dt_ms": 0.1,
+    "memory_cap_bytes": 8589934592,
+    "preparation_timeout_s": 600,
+    "advance_timeout_s": 30,
+    "total_worker_timeout_s": 1500,
+    "available_physical_min_bytes": 12884901888,
+    "memory_sample_interval_s": 0.1,
+    "memory_scope": "aggregate contained process tree; working set and private bytes each capped throughout preparation and both sequences",
+    "retry_count": 0,
+    "backend": "cpu_reference",
+    "arena_runs": 0,
+    "preparation_identity_schema": "preparation-identity-v1",
+    "preparation_identity_record": "docs/plans/2026-10-05-application-a018uj-identity-contract.json",
+    "preparation_identity_gates": [
+      "G1",
+      "G2",
+      "G3",
+      "G4",
+      "G5",
+      "G6"
+    ],
+    "purpose": "exact deterministic replay and per-sequence/pooled timing",
+    "state_a_released_before_b": true,
+    "states_coexist": false,
+    "schedule": {
+      "side": "LEFT",
+      "population": "sugar",
+      "left_neuron_count": 42,
+      "right_neuron_count": 0,
+      "member_ids": [
+        71254,
+        78240,
+        85806,
+        93290,
+        128129,
+        130693,
+        136183,
+        140851,
+        152400,
+        159772,
+        160435,
+        167663,
+        178321,
+        178913,
+        180314,
+        187776,
+        190769,
+        203234,
+        204726,
+        236475,
+        261450,
+        262567,
+        272263,
+        312102,
+        317616,
+        512551,
+        512552,
+        516216,
+        531237,
+        933317,
+        158893964,
+        174444965,
+        349137284,
+        456838775,
+        475202322,
+        553738738,
+        581710868,
+        766547228,
+        786482749,
+        816904261,
+        884238775,
+        1026733570
+      ],
+      "left_rate_hz": 100,
+      "right_rate_hz": 0,
+      "seed": 1555062870,
+      "impulse_mV": 68.75,
+      "duration_ms": 240,
+      "event_count": 948,
+      "identity": "6be96fd6d35b9910540ed10e08f38c3e0c3bcb4e5e7171ea7698cf6afcb6de9a",
+      "generation_count": 1,
+      "window_count": 12,
+      "window_steps": 200,
+      "identical_frozen_windows": true,
+      "repack_each_call": true
+    },
+    "sequences": [
+      {
+        "name": "A",
+        "fresh_state": true,
+        "initial_timestep": 0,
+        "warmup_advances": 2,
+        "measured_advances": 10,
+        "total_advances": 12,
+        "advance_duration_ms": 20,
+        "final_horizon_ms": 240,
+        "schedule_identity": "6be96fd6d35b9910540ed10e08f38c3e0c3bcb4e5e7171ea7698cf6afcb6de9a"
+      },
+      {
+        "name": "B",
+        "fresh_state": true,
+        "initial_timestep": 0,
+        "warmup_advances": 2,
+        "measured_advances": 10,
+        "total_advances": 12,
+        "advance_duration_ms": 20,
+        "final_horizon_ms": 240,
+        "schedule_identity": "6be96fd6d35b9910540ed10e08f38c3e0c3bcb4e5e7171ea7698cf6afcb6de9a"
+      }
+    ]
+  },
+  "expected_preparation_identity": {
+    "schema": "preparation-identity-v1",
+    "historical_snapshot": "f22e7c7cf0a7e1d0799321cc3ceb8329099e9e3e",
+    "generating_clean_sha": null,
+    "serializer": "malecns-sim-task008-prepared-network-v1",
+    "envelope_inputs": {
+      "graph": "full",
+      "unsigned": "fde3d0f58b65235da3dfefb552cfe8a3bac8429312c30287e598e289115a93d4",
+      "signed": "861f07218122e122383d8465b30e65f5eb1d5b11a474b767a6312b3115ecaf25",
+      "effective": "ed1cfbbdd6841a87a82ca3b0416536d57fea4a647581dc7cb8e0b9ebf1608a2f"
+    },
+    "expected": {
+      "dataset_provenance_identity": {
+        "manifest_digest": "e3c26d37039625e8a0623a7b6f83cb70d01663c99f8e32d4ffb2d79709b80631",
+        "mapping_fingerprint": "832d8428c458e59cfff7b52fc257a4ba3fd85fdd6f3ebf47f01e02e218f50269"
+      },
+      "preparation_config_identity": "a14d75e682b5201c022043725cdac945847962ebff64888008673cca7ded6bf9",
+      "unsigned_graph_digest": "fde3d0f58b65235da3dfefb552cfe8a3bac8429312c30287e598e289115a93d4",
+      "effective_projection_fingerprint": "ed1cfbbdd6841a87a82ca3b0416536d57fea4a647581dc7cb8e0b9ebf1608a2f",
+      "prepared_network_digest": "d773107682fdc4280e91ac5aa88c8bd2a3a913ee80c85b5e7fc12d7d47ba6495",
+      "neurons": 166700,
+      "edges": 24904953
+    },
+    "provenance": {
+      "unsigned_graph_digest": "f22e7c7cf0a7e1d0799321cc3ceb8329099e9e3e:data/derived/task008-results.json#full_prepared.unsigned_graph_fingerprint",
+      "effective_projection_fingerprint": "f22e7c7cf0a7e1d0799321cc3ceb8329099e9e3e:data/derived/task008-results.json#full_prepared.effective_projection_fingerprint",
+      "prepared_network_digest": "E3 derived historical prepared-network expectation; E4 corroboration f22e7c7cf0a7e1d0799321cc3ceb8329099e9e3e:data/derived/task008-results.json#full_prepared.fingerprint",
+      "dataset_provenance_identity": "data/provenance/male-cns-v1.0.json; application/workbench.py; frozen A018UR report",
+      "preparation_config_identity": "application/preparation.py REFERENCE_CONFIG; frozen A018UR report",
+      "counts": "f22e7c7cf0a7e1d0799321cc3ceb8329099e9e3e:data/derived/task008-results.json#full_prepared"
+    },
+    "source_hashes": {
+      "body-annotations-male-cns-v1.0-minconf-0.5.feather": "2177e246113e4cfbf1e7772ec37c6da1955ff22e8063d0b1f833101f99a9a3b2",
+      "body-neurotransmitters-male-cns-v1.0.feather": "95c9289220663abeb3409f3ad9e5a7f8a53f8093f5139d15502cd08da8879621",
+      "connectome-weights-male-cns-v1.0-minconf-0.5.feather": "e35da783d1c686b2b58b3b87cd6a403ae43bfcfba8bff28e08ef752c1a56afc1"
+    }
+  },
+  "reason": "Tracked A013 worker calls ProductionEngine().prepare directly without A018UR bounded_route. The frozen A019A report requires the certified optimized route. No executable A019B harness is tracked.",
+  "source_hashes_verified": false,
+  "watchdog_preflight": "not run: earlier contract gate stopped execution",
+  "preparation_attempts": 0,
+  "source_accesses": 0,
+  "prepared_network_count": 0,
+  "prepared_runtime_count": 0,
+  "simulation_state_count": 0,
+  "advances": 0,
+  "schedule_generation_count": 0,
+  "preparation_gates": {
+    "G1": "NOT RUN",
+    "G2": "NOT RUN",
+    "G3": "NOT RUN",
+    "G4": "NOT RUN",
+    "G5": "NOT RUN",
+    "G6": "NOT RUN"
+  },
+  "performance_classification": null,
+  "measurements": null,
+  "automatic_retry": false,
+  "firewall": {
+    "simulate_lif": 0,
+    "simulate_cuda": 0,
+    "gpu": 0,
+    "arena_runs": 0,
+    "scientific_experiments": 0,
+    "downloads": 0,
+    "task017_new_units": 0,
+    "task017q": 0,
+    "archive_writes": 0,
+    "historical_task016_changed": false,
+    "historical_task017_changed": false,
+    "historical_task017_classification": "NOT_ROBUST",
+    "biological_interpretation": false
+  },
+  "next_task": "A019B executable harness contract alignment and synthetic certification; no real execution",
+  "validation": {
+    "full_pytest": "1226 passed, 14 skipped, 1 expected Feather V1 warning in 185.55 s",
+    "suites": {
+      "tests.test_application_a002": {
+        "passed": 19,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a003": {
+        "passed": 8,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a004": {
+        "passed": 7,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a005": {
+        "passed": 5,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a006": {
+        "passed": 19,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a006r": {
+        "passed": 1,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a007a": {
+        "passed": 52,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a007b": {
+        "passed": 22,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a007c": {
+        "passed": 2,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a008": {
+        "passed": 2,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a011": {
+        "passed": 8,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a013": {
+        "passed": 17,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a014": {
+        "passed": 12,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a015": {
+        "passed": 59,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a016": {
+        "passed": 68,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a017": {
+        "passed": 79,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a018": {
+        "passed": 97,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a018r": {
+        "passed": 8,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a018s": {
+        "passed": 95,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a018t": {
+        "passed": 283,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a018u": {
+        "passed": 80,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a018ui": {
+        "passed": 11,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a018uj": {
+        "passed": 13,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a018ur": {
+        "passed": 8,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_application_a019a": {
+        "passed": 4,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task001": {
+        "passed": 9,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task002": {
+        "passed": 6,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task003": {
+        "passed": 6,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task004": {
+        "passed": 29,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task005": {
+        "passed": 24,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task006": {
+        "passed": 8,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task007": {
+        "passed": 14,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task007a": {
+        "passed": 16,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task007b": {
+        "passed": 11,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task007c": {
+        "passed": 3,
+        "skipped": 12,
+        "failed": 0
+      },
+      "tests.test_task008": {
+        "passed": 11,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task008a": {
+        "passed": 7,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task009": {
+        "passed": 10,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task010": {
+        "passed": 8,
+        "skipped": 1,
+        "failed": 0
+      },
+      "tests.test_task011": {
+        "passed": 9,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task017": {
+        "passed": 45,
+        "skipped": 1,
+        "failed": 0
+      },
+      "tests.test_task017_portability": {
+        "passed": 13,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task017_scoring": {
+        "passed": 8,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_task018": {
+        "passed": 5,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_tracked_integrity": {
+        "passed": 1,
+        "skipped": 0,
+        "failed": 0
+      },
+      "tests.test_workbench_session": {
+        "passed": 4,
+        "skipped": 0,
+        "failed": 0
+      }
+    },
+    "targeted_a019b": "not applicable: documentation-only pre-access stop; no executable A019B added",
+    "compileall": "PASS",
+    "tracked_integrity": "PASS: nine files and internal identities",
+    "diff_check": "PASS",
+    "build": "PASS: 0.3.0 wheel and sdist"
+  }
+}
