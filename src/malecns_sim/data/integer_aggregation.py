@@ -65,7 +65,7 @@ def merge_integer_runs(runs, metrics=None):
 
 
 def aggregate_edge_batches(weights_path, universe, columns, max_rows_per_batch=65536,
-                           metrics=None, observer=None):
+                           metrics=None, observer=None, *, merger=merge_integer_runs):
     """Validate all rows, filter, and release raw copies after each local group.
 
     An optional synchronous observer receives arrays only for lifetime tests.
@@ -105,11 +105,12 @@ def aggregate_edge_batches(weights_path, universe, columns, max_rows_per_batch=6
             metrics["partial_accumulation_seconds"] += time.perf_counter() - started
             metrics["partial_peak_bytes"] = 24 * metrics["partial_rows"]
             del run
-    return merge_integer_runs(runs, metrics)
+    return merger(runs, metrics)
 
 
 def experimental_load_aggregated_publication_numeric(annotation_path, neurotransmitter_path,
-        weights_path, mapping, *, max_rows_per_batch=65536, metrics=None):
+        weights_path, mapping, *, max_rows_per_batch=65536, metrics=None,
+        merger=merge_integer_runs):
     """Explicit opt-in seam; production preparation dispatch remains unchanged."""
     import pyarrow.feather as feather
     from malecns_sim.data.male_cns_v1 import select_publication_neuron_ids, load_male_cns_v1_numeric
@@ -120,7 +121,8 @@ def experimental_load_aggregated_publication_numeric(annotation_path, neurotrans
     universe.flags.writeable = False
     try:
         grouped = aggregate_edge_batches(weights_path, universe,
-            (mapping.edge_source_id, mapping.edge_target_id, mapping.edge_weight), max_rows_per_batch, metrics)
+            (mapping.edge_source_id, mapping.edge_target_id, mapping.edge_weight),
+            max_rows_per_batch, metrics, merger=merger)
     except NegativeEndpointFallback:
         return load_male_cns_v1_numeric(annotation_path, neurotransmitter_path, weights_path, mapping)
     except OverflowError:
