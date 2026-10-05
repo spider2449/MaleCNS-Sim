@@ -69,10 +69,13 @@ def experimental_load_publication_numeric(annotation_path, neurotransmitter_path
 
 
 def _publication_from_retained(annotation_path, neurotransmitter_path,
-                               weights_path, mapping, universe, retained):
+                               weights_path, mapping, universe, retained, *, grouped=False):
     import pyarrow as pa
     import pyarrow.feather as feather
-    source, target, counts, _ = _aggregate_numeric_edges(*retained)
+    if grouped:
+        source, target, counts = retained
+    else:
+        source, target, counts, _ = _aggregate_numeric_edges(*retained)
     del retained
     # Reuse the production annotation/NT normalization without duplicating it.
     with tempfile.TemporaryDirectory(prefix="malecns-a015-metadata-") as directory:
