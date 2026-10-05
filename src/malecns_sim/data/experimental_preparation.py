@@ -1,13 +1,14 @@
-"""Opt-in A015 endpoint filtering prototype; never selected by production.
+"""Opt-in A015/A016 endpoint filtering; never selected by production.
 
-This all-column-buffer prototype certifies scientific content, not raw graph
-diagnostics. It deliberately leaves the bounded source-reader task separate.
+The full-column and bounded-batch routes certify publication scientific content,
+not general raw graph diagnostics.
 """
 from __future__ import annotations
 
 from dataclasses import replace
 from pathlib import Path
 import tempfile
+import time
 
 import numpy as np
 
@@ -63,6 +64,14 @@ def experimental_load_publication_numeric(annotation_path, neurotransmitter_path
     mask = endpoint_membership(source, universe) & endpoint_membership(target, universe)
     retained = (source[mask], target[mask], counts[mask])
     del table, source, target, counts, mask
+    return _publication_from_retained(annotation_path, neurotransmitter_path,
+                                      weights_path, mapping, universe, retained)
+
+
+def _publication_from_retained(annotation_path, neurotransmitter_path,
+                               weights_path, mapping, universe, retained):
+    import pyarrow as pa
+    import pyarrow.feather as feather
     source, target, counts, _ = _aggregate_numeric_edges(*retained)
     del retained
     # Reuse the production annotation/NT normalization without duplicating it.
@@ -78,3 +87,67 @@ def experimental_load_publication_numeric(annotation_path, neurotransmitter_path
                    target_ids=target, synapse_counts=counts,
                    provenance=tuple((key, str(Path(weights_path)) if key == "weights_source" else value)
                                     for key, value in metadata.provenance))
+
+
+def retain_edge_batches(weights_path, universe, columns, max_rows_per_batch=65536, metrics=None):
+    """Validate every row, then copy only retained numeric rows in source order."""
+    from malecns_sim.data.feather_batches import edge_batches
+    retained = []
+    def record(stage, started):
+        if metrics is not None:
+            metrics[stage] = metrics.get(stage, 0) + time.perf_counter() - started
+    with edge_batches(weights_path, columns, max_rows_per_batch) as batches:
+        while True:
+            started = time.perf_counter()
+            try:
+                table = next(batches)
+            except StopIteration:
+                record("source_iteration", started)
+                break
+            record("source_iteration", started)
+            started = time.perf_counter()
+            source, target, counts = (_integer_column(table, name) for name in columns)
+            if np.any(counts < 0):
+                raise ValueError("synapse counts must be non-negative")
+            # Negative endpoints require the A015 reference fallback, never
+            # a silently different aggregation algorithm.
+            if np.any(source < 0) or np.any(target < 0):
+                raise NegativeEndpointFallback()
+            record("raw_validation", started)
+            started = time.perf_counter()
+            mask = endpoint_membership(source, universe) & endpoint_membership(target, universe)
+            record("endpoint_filter", started)
+            started = time.perf_counter()
+            if mask.any():
+                retained.append((source[mask], target[mask], counts[mask]))
+            record("retained_copy", started)
+            del table, source, target, counts, mask
+    started = time.perf_counter()
+    result = tuple(np.concatenate([batch[i] for batch in retained]) if retained
+                   else np.empty(0, dtype=np.int64) for i in range(3))
+    record("retained_concatenation", started)
+    return result
+
+
+class NegativeEndpointFallback(ValueError):
+    """The reference packed-key behavior requires full-source fallback."""
+
+
+def experimental_load_batched_publication_numeric(annotation_path, neurotransmitter_path,
+                                                  weights_path, mapping, *, max_rows_per_batch=65536, metrics=None):
+    """Opt-in architecture B; retained batches concatenate before shared grouping."""
+    import pyarrow.feather as feather
+    annotations = feather.read_table(annotation_path).to_pylist()
+    universe = select_publication_neuron_ids(
+        annotations, body_id_column=mapping.annotation_body_id,
+        superclass_column=mapping.annotation_class or "superclass",
+        status_column=mapping.annotation_status,
+    ).neuron_ids
+    universe.flags.writeable = False
+    try:
+        retained = retain_edge_batches(weights_path, universe,
+            (mapping.edge_source_id, mapping.edge_target_id, mapping.edge_weight), max_rows_per_batch, metrics)
+    except NegativeEndpointFallback:
+        return load_male_cns_v1_numeric(annotation_path, neurotransmitter_path, weights_path, mapping)
+    return _publication_from_retained(annotation_path, neurotransmitter_path,
+                                      weights_path, mapping, universe, retained)
