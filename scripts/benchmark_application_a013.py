@@ -5,6 +5,7 @@ import argparse
 import ctypes
 from ctypes import wintypes
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import queue
@@ -28,7 +29,21 @@ PREPARATION_CAP = 600.0
 ADVANCE_CAP = 30.0
 TOTAL_CAP = 1500.0
 AVAILABLE_MIN = 12 * 1024**3
-PREPARED_ID = 'ed1cfbbdd6841a87a82ca3b0416536d57fea4a647581dc7cb8e0b9ebf1608a2f'
+def _load_identity_contract():
+    spec = importlib.util.spec_from_file_location(
+        "preparation_identity_contract", Path(__file__).with_name("preparation_identity_contract.py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+_identity = _load_identity_contract()
+expected_identity = _identity.expected_identity
+observe_identity = _identity.observe_identity
+compare_identity = _identity.compare_identity
+
+EXPECTED_EFFECTIVE_PROJECTION_FINGERPRINT = expected_identity()['effective_projection_fingerprint']
+EXPECTED_PREPARED_NETWORK_DIGEST = expected_identity()['prepared_network_digest']
 SCHEDULE_ID = '6be96fd6d35b9910540ed10e08f38c3e0c3bcb4e5e7171ea7698cf6afcb6de9a'
 FIELDS = ('v_mV', 'g_mV', 'refractory_until', 'pending', 'pending_event_counts')
 STAGES = ('encode', 'advance', 'readout', 'decoder', 'environment', 'total')
@@ -333,10 +348,10 @@ def worker(output):
                                 'graph_array_bytes': prepared.memory_bytes}
         checkpoint()
         require(evidence['preparation_wall_seconds'] <= PREPARATION_CAP, 'A013-PREPARATION-LIMIT', 'completed preparation exceeds limit')
-        require(prepared.fingerprint == PREPARED_ID and evidence['prepared']['neurons'] == 166700 and
-                evidence['prepared']['edges'] == 24904953 and
-                prepared.projection.unsigned_graph_fingerprint == fixture['dataset']['projection_fingerprint'],
-                'A013-DATASET-PROVENANCE-BLOCKED', 'prepared graph identity mismatch')
+        evidence['preparation_identity'] = observe_identity(prepared, catalog.files, REFERENCE_CONFIG.digest)
+        evidence['preparation_identity_gates'] = compare_identity(evidence['preparation_identity'], expected_identity())
+        require(all(evidence['preparation_identity_gates'].values()),
+                'A013-DATASET-PROVENANCE-BLOCKED', 'preparation identity layer mismatch')
         runtime = PreparedRuntime(prepared.projection, dt_ms=DT_MS)
         run_sequences(runtime, windows, ids, evidence, checkpoint, phase, monitor.snapshot)
         evidence['classification'] = 'A13-BENCHMARK-COMPLETE'

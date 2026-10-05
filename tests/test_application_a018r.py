@@ -25,10 +25,8 @@ def files_and_expected(tmp_path):
     feather.write_feather(feather.read_table(paths[2]), paths[2], chunksize=512)
     files = DatasetFiles(*paths, "synthetic", "synthetic")
     original = ProductionEngine().prepare(files, "cpu_reference")
-    expected = dict(neurons=int(original.projection.neuron_ids.size),
-        edges=int(original.projection.effective_weights_mV.size),
-        prepared_digest=original.fingerprint,
-        unsigned_digest=original.projection.unsigned_graph_fingerprint)
+    from preparation_identity_contract import observe_identity
+    expected = observe_identity(original, files, harness.CONFIG_ID)
     return files, expected
 
 
@@ -49,12 +47,12 @@ def test_success_exact_identity_no_advance_default_restored(tmp_path):
     assert any(kind == "source_access" for kind, _ in events)
     assert events[-1][0] == "cleanup"
     assert task008.load_male_cns_v1_numeric is loader
-    assert ProductionEngine().prepare(files, "cpu_reference").fingerprint == expected["prepared_digest"]
+    assert ProductionEngine().prepare(files, "cpu_reference").fingerprint == expected["prepared_network_digest"]
 
 
 def test_identity_mismatch_stops_and_cleans(tmp_path):
     files, expected = files_and_expected(tmp_path)
-    expected["prepared_digest"] = "incorrect"
+    expected["prepared_network_digest"] = "incorrect"
     events = []
     result = harness.prepare_only(files, lambda kind, **fields: events.append(kind), expected)
     assert result["classification"] == "A018R-GRAPH-IDENTITY-MISMATCH"

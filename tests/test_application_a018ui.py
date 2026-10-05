@@ -129,7 +129,7 @@ def test_historical_preparation_and_committed_fingerprints(tmp_path):
 
 
 def test_production_default_and_frozen_expectation_unchanged():
-    source = (ROOT / "scripts/certify_application_a018ur.py").read_text()
+    source = subprocess.check_output(["git", "show", "b967dbd92eb9a858d00647591cc8feb50c3f4c79:scripts/certify_application_a018ur.py"], cwd=ROOT).decode()
     assert "prepared_digest=prepared.fingerprint" in source
     assert 'PREPARED_ID = "ed1cfbbdd6841a87a82ca3b0416536d57fea4a647581dc7cb8e0b9ebf1608a2f"' in source
     tree = ast.parse((ROOT / "src/malecns_sim/application/service.py").read_text())

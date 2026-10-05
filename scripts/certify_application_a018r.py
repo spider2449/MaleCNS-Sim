@@ -14,12 +14,15 @@ from unittest.mock import patch
 
 import numpy as np
 
+from preparation_identity_contract import expected_identity, observe_identity, compare_identity
+
 from investigate_application_a014 import ProcessJob
 
 MEMORY_CAP = 8589934592
 PREPARATION_CAP = 600.0
 BATCH_ROWS = 65536
-PREPARED_ID = "ed1cfbbdd6841a87a82ca3b0416536d57fea4a647581dc7cb8e0b9ebf1608a2f"
+EXPECTED_EFFECTIVE_PROJECTION_FINGERPRINT = expected_identity()["effective_projection_fingerprint"]
+EXPECTED_PREPARED_NETWORK_DIGEST = expected_identity()["prepared_network_digest"]
 CONFIG_ID = "a14d75e682b5201c022043725cdac945847962ebff64888008673cca7ded6bf9"
 EXPECTED_NEURONS = 166700
 EXPECTED_EDGES = 24904953
@@ -167,18 +170,16 @@ def prepare_only(files, notify=emit, expected=None):
         result.update(completed=True, preparation_seconds=elapsed)
         notify("prepare_done", stage="prepared_resident", preparation_seconds=elapsed)
         projection = prepared.projection
-        observed = dict(neurons=int(projection.neuron_ids.size),
-                        edges=int(projection.effective_weights_mV.size),
-                        prepared_digest=prepared.fingerprint,
-                        unsigned_digest=projection.unsigned_graph_fingerprint)
-        expected = expected or dict(neurons=EXPECTED_NEURONS, edges=EXPECTED_EDGES,
-            prepared_digest=PREPARED_ID, unsigned_digest=PROJECTION_FINGERPRINT)
+        observed = observe_identity(prepared, files, REFERENCE_CONFIG.digest)
+        expected = expected if expected is not None else expected_identity()
+        gates = compare_identity(observed, expected)
+        identity_match = all(gates.values())
         finite = all(np.isfinite(getattr(projection, name)).all()
             for name in ("effective_weights_mV", "outgoing_weights_mV"))
         result.update(observed=observed, expected=expected, finite=bool(finite),
-                      exact_identity_match=observed == expected)
+                      gates=gates, exact_identity_match=identity_match)
         result["classification"] = ("A018R-TIME-LIMIT" if elapsed > PREPARATION_CAP else
-            "A018R-PREPARATION-CERTIFIED" if observed == expected and finite else
+            "A018R-PREPARATION-CERTIFIED" if identity_match and finite else
             "A018R-GRAPH-IDENTITY-MISMATCH")
         del projection
     except BoundedFallback as exc:
