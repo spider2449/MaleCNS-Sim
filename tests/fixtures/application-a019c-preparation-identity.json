@@ -1,0 +1,15 @@
+{
+  "schema": "preparation-identity-v1",
+  "expected": {
+    "dataset_provenance_identity": {
+      "manifest_digest": "a019c-synthetic",
+      "mapping_fingerprint": "a019c-synthetic"
+    },
+    "preparation_config_identity": "a14d75e682b5201c022043725cdac945847962ebff64888008673cca7ded6bf9",
+    "unsigned_graph_digest": "8aa49d3662fb179b629801c9a3c3bcd48ffc9738698660ad33ca986c49d0ab08",
+    "effective_projection_fingerprint": "67ab093844fde79638682b8bce8a54cce5dcd6a21c87a36b36362fc48587cb9e",
+    "prepared_network_digest": "1fddcff1d4494481ec8081103446957ca2472fee3b941df15c019561b77be8ca",
+    "neurons": 44,
+    "edges": 1248
+  }
+}

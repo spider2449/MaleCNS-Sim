@@ -1,0 +1,1493 @@
+{
+    "accounting_qualifier":  "Fail-closed guarded execution/source-access accounting, not independent native byte telemetry",
+    "nodes":  [
+                  {
+                      "node":  "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization",
+                      "passed_cases":  4,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r5_firewall.py::test_false_positive_rejected",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r5_firewall.py::test_malformed_rejected",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r5_firewall.py::test_actual_windows_audit_serialization",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r5_firewall.py::test_actual_worker_bypass_rejected",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r5_firewall.py::test_script_path_with_spaces",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r5_firewall.py::test_contained_actual_worker_startup",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r5_firewall.py::test_live_contained_descendant_cleanup",
+                      "passed_cases":  2,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r4_firewall.py::test_parent_native_control_and_categories",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r4_firewall.py::test_required_child_rejects_before_workload",
+                      "passed_cases":  4,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r4_firewall.py::test_normal_public_native_child",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r4_firewall.py::test_actual_worker_startup",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r4_firewall.py::test_inherited_activation_removed_parent_rejects",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r3_firewall.py::test_01_valid_native_synthetic_control",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r3_firewall.py::test_02_native_registered_source_denied_before_constructor",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r3_firewall.py::test_03_python_child_native_guard",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r3_firewall.py::test_04_missing_inherited_guard_fails_closed",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r2_firewall.py::test_blocked_before_content",
+                      "passed_cases":  7,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r2_firewall.py::test_generated_and_temp_and_source_allowed",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r2_firewall.py::test_subprocess_guard",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r2_firewall.py::test_child_cannot_drop_guard",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r2_firewall.py::test_native_reader_denies_synthetic_sentinel",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c.py::test_full_structure_route_lifetime_replay_and_defaults",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c.py::test_each_gate_stops_before_runtime_one_preparation",
+                      "passed_cases":  7,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c.py::test_cross_layer_rejected",
+                      "passed_cases":  2,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c.py::test_fallback_hard_stop",
+                      "passed_cases":  2,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c.py::test_induced_failure_no_retry",
+                      "passed_cases":  6,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c.py::test_exact_resource_limits",
+                      "passed_cases":  5,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c.py::test_contained_tree_forced_stops_no_orphan",
+                      "passed_cases":  4,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c.py::test_synthetic_cli_contained_success",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c.py::test_synthetic_source_guard_before_access",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c.py::test_timing_structure_and_historical_default",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c.py::test_completed_preparation_deadline_before_runtime",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c.py::test_completed_call_deadline_no_retry",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c.py::test_watchdog_instrumentation_failure_terminates_tree",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c.py::test_contract_schema_matches_success_evidence",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c.py::test_watchdog_child_memory_stop_aggregate_and_cleanup",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019a.py::test_frozen_two_state_contract",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019a.py::test_historical_schedule_from_tracked_metadata_only",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019a.py::test_b_starts_fresh_after_a_released_using_same_runtime_and_graph",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019a.py::test_a019a_checks_have_no_real_execution_and_preserve_defaults",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018uj.py::test_independent_frozen_artifact_reconstruction_and_provenance",
+                      "passed_cases":  0,
+                      "result":  "NOT RUN",
+                      "class":  "S2"
+                  },
+                  {
+                      "node":  "tests/test_application_a018uj.py::test_each_mandatory_layer_mismatch_fails",
+                      "passed_cases":  7,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018uj.py::test_correct_tuple_and_cross_layer_rejection",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018uj.py::test_ambiguous_legacy_fields_rejected",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018uj.py::test_no_real_execution_and_scientific_default_unchanged",
+                      "passed_cases":  0,
+                      "result":  "NOT RUN",
+                      "class":  "S2"
+                  },
+                  {
+                      "node":  "tests/test_application_a018ui.py::test_historical_identity_layer_reconstruction",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a018ui.py::test_historical_current_components_exact",
+                      "passed_cases":  6,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a018ui.py::test_metadata_and_diagnostic_bytes",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018ui.py::test_effective_digest_field_order",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018ui.py::test_historical_preparation_and_committed_fingerprints",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a018ui.py::test_production_default_and_frozen_expectation_unchanged",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a018ur.py::test_success_exact_identity_no_advance_default_restored",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018ur.py::test_identity_mismatch_stops_and_cleans",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018ur.py::test_failure_cleanup_and_fallback_prevented",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018ur.py::test_exact_frozen_constants_and_no_execution_entrypoints",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018ur.py::test_supervisor_time_failure_cleans_without_retry",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018ur.py::test_supervisor_success_boundary_handshake",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018u.py::test_instrumented_oracle_exact",
+                      "passed_cases":  72,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018u.py::test_missing_metadata_and_policy_contract",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018u.py::test_large_safe_exact",
+                      "passed_cases":  2,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018u.py::test_large_integer_identity",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018u.py::test_default_has_no_probe",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018u.py::test_synthetic_bounds",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018t.py::test_exact_oracle_ownership_release",
+                      "passed_cases":  22,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018t.py::test_prepared_scientific_oracle",
+                      "passed_cases":  198,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018t.py::test_compaction_releases_capacity",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018t.py::test_many_small_schedule_determinism",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018t.py::test_partition_and_stage_release",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018t.py::test_overflow_reference_fallback",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018t.py::test_production_default",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018t.py::test_closed_boundaries",
+                      "passed_cases":  48,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018t.py::test_large_ids_and_invalid_block",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018t.py::test_equal_key_on_either_slice_endpoint",
+                      "passed_cases":  6,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018t.py::test_seeded_partition_block_invariance",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018s.py::test_exact_oracle_ownership_release",
+                      "passed_cases":  22,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018s.py::test_prepared_scientific_oracle",
+                      "passed_cases":  66,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018s.py::test_compaction_releases_capacity",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018s.py::test_many_small_schedule_determinism",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018s.py::test_partition_and_stage_release",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018s.py::test_overflow_reference_fallback",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018s.py::test_production_default",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018.py::test_runs_exact_deterministic_and_lifetime",
+                      "passed_cases":  20,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018.py::test_downstream_partition_exact",
+                      "passed_cases":  66,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018.py::test_overflow_rejection",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018.py::test_completed_stage_inputs_reclaimable",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018.py::test_overflow_loader_fallback",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018.py::test_schedule_partition_invariance",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018.py::test_fan_in_composition_invariance",
+                      "passed_cases":  4,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a018.py::test_production_default",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a017.py::test_exact_downstream",
+                      "passed_cases":  66,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a017.py::test_integer_domain_and_merge",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a017.py::test_lifetime_bounds_and_no_partial_threshold",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a017.py::test_invalid_excluded_upstream",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a017.py::test_scale_exact",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a017.py::test_production_dispatch_unchanged",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a017.py::test_overflow_oracle_fallback",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a017.py::test_high_cardinality_exact",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a016.py::test_boundaries_exact",
+                      "passed_cases":  54,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a016.py::test_invalid_boundary",
+                      "passed_cases":  6,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a016.py::test_reader_projection_admission_lifetime",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a016.py::test_v1_rejected",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a016.py::test_scale_exact",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a016.py::test_masks_released_numeric_ownership",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a016.py::test_noninteger_schema_rejected",
+                      "passed_cases":  2,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a015.py::test_exact_adversarial",
+                      "passed_cases":  51,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a015.py::test_high_exclusion_scale",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a015.py::test_membership_exact",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a015.py::test_authoritative_membership_and_no_identity_collapse",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a015.py::test_invalid_excluded_rows_rejected",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a014.py::test_tree_memory_enforcement",
+                      "passed_cases":  8,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a014.py::test_aggregate_limit_without_individual_offender",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a014.py::test_normal_exit",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a014.py::test_accounting_failure_stops_tree",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a014.py::test_instrumentation_opt_in_and_exact_identity",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a013.py::test_limits_and_cpu_only",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a013.py::test_one_preparation",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a013.py::test_watchdog_stops",
+                      "passed_cases":  5,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a013.py::test_percentiles_and_warmup_exclusion",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a013.py::test_schedule_is_complete_grid_slices_and_reused",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a013.py::test_two_fresh_states_exact_twenty_four_advances_and_replay",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a013.py::test_mismatch_fails_at_first_component",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a013.py::test_canonical_digest_exact_and_endian_stable",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a013.py::test_pending_guard",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a013.py::test_no_download_arena_gpu_or_import_execution",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a013.py::test_refuse_existing_output",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a013.py::test_watchdog_binds_worker_not_launcher",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a013.py::test_native_watchdog_can_terminate_actual_redirected_python",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a011.py::test_exact_continuity",
+                      "passed_cases":  2,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a011.py::test_initial_state_and_identity",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a011.py::test_clocks_controls_reset_replay",
+                      "passed_cases":  0,
+                      "result":  "NOT RUN",
+                      "class":  "N"
+                  },
+                  {
+                      "node":  "tests/test_application_a011.py::test_encoder_decoder_bounds_and_invalid_contracts",
+                      "passed_cases":  0,
+                      "result":  "NOT RUN",
+                      "class":  "N"
+                  },
+                  {
+                      "node":  "tests/test_application_a011.py::test_synthetic_visible_response_and_intervention",
+                      "passed_cases":  0,
+                      "result":  "NOT RUN",
+                      "class":  "N"
+                  },
+                  {
+                      "node":  "tests/test_application_a011.py::test_render_speed_cannot_change_backend",
+                      "passed_cases":  0,
+                      "result":  "NOT RUN",
+                      "class":  "N"
+                  },
+                  {
+                      "node":  "tests/test_application_a011.py::test_http_ui_assets_and_commands",
+                      "passed_cases":  0,
+                      "result":  "NOT RUN",
+                      "class":  "N"
+                  },
+                  {
+                      "node":  "tests/test_application_a008.py::test_reproducibility_contracts_and_packaged_assets",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a008.py::test_application_docs_are_portable_and_do_not_embed_session_urls",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007c.py::test_synthetic_production_api_and_assets",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a007c.py::test_authoritative_backend_firewall_and_packaging",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_spec_serialization_identity_and_no_verdict",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_invalid_variant_allowlist",
+                      "passed_cases":  5,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_cross_variant_event_schedule",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_full_sweep_and_retention_stress",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_exact_reuse_and_mixed_provenance",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_cancel_preserves_completed_evidence",
+                      "passed_cases":  2,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_stop_on_failure",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_mixed_child_reuse_after_cancellation",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_parent_byte_bound_preserves_earlier_evidence",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_identity_and_graph_mismatch_rejected",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_session_host_origin_and_synthetic_api",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_cpu_startup_cuda_lazy",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_schedule_gap_stops_before_execution",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_all_children_reused_without_execution",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_cancel_before_first_child",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_child_capacity_and_parent_limits",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007b.py::test_strict_request_contract",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_exact_variant_contract",
+                      "passed_cases":  8,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_reference_and_weight_coupling",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_allowlisted_sign_policy",
+                      "passed_cases":  2,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_invalid_preparation",
+                      "passed_cases":  6,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_nonfinite_parameters",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_reject_unbounded_client_input",
+                      "passed_cases":  5,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_true_preparation_and_execution",
+                      "passed_cases":  8,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_ordinary_reference_bytes_and_known_certified_identities",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_same_variant_pairing",
+                      "passed_cases":  8,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_cross_variant_rejected",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_sixteen_children_survive_recent_eviction",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_parent_byte_limit_and_snapshot",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_no_historical_runner_dependency",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_cuda_receives_equivalent_configuration",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_variant_cuda_unavailable_is_explicit",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_closed_session_cannot_admit_parent",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_frozen_preset_digest",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_parent_child_capacity",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a007a.py::test_derived_input_must_remain_finite",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a006r.py::test_visible_run_transitions",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a006.py::test_pair_metrics_digest_and_zero_baseline",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a006.py::test_nonzero_deltas_and_deterministic_identity",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a006.py::test_mismatch_rejected",
+                      "passed_cases":  14,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a006.py::test_schedule_and_incomplete_rejected",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a006.py::test_union_playback_and_recorded_zero",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a006.py::test_comparison_api_session_and_backend_export",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a005.py::test_post_update_spike_time_grid",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a005.py::test_sparse_payload_identity_digest_and_no_fabricated_events",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a005.py::test_deterministic_raster_order",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a005.py::test_payload_rejects_nonfinite_trace_and_size_cap",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a005.py::test_playback_endpoint_session_and_completion_gate",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a004.py::test_long_identity_layout_has_shared_wrap_rule",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a004.py::test_view_determinism_identity_and_cap",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a004.py::test_target_and_combined_context",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a004.py::test_rejects_unbounded_or_unknown_filter",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a004.py::test_subgraph_route_bounds_session_failure_and_pending",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a003.py::test_loopback_catalog_security_and_ui",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a003.py::test_previous_process_token_is_rejected",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a003.py::test_history_limit_is_fixed",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a003.py::test_selection_uses_stable_a002_digest_and_rejects_extra_fields",
+                      "passed_cases":  0,
+                      "result":  "NOT RUN",
+                      "class":  "S2"
+                  },
+                  {
+                      "node":  "tests/test_application_a003.py::test_validate_and_run_requests_share_exact_spec_identity",
+                      "passed_cases":  0,
+                      "result":  "NOT RUN",
+                      "class":  "S2"
+                  },
+                  {
+                      "node":  "tests/test_application_a003.py::test_manager_retains_safe_failure",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a003.py::test_manager_evicts_oldest_completed_job",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a003.py::test_result_events_and_backend_export_routes",
+                      "passed_cases":  0,
+                      "result":  "NOT RUN",
+                      "class":  "S2"
+                  },
+                  {
+                      "node":  "tests/test_application_a002.py::test_spec_validation_and_canonical_identity",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a002.py::test_final_grid_step_spike_is_valid",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a002.py::test_spike_outside_engine_grid_is_rejected",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a002.py::test_nonfinite_spike_step_is_rejected",
+                      "passed_cases":  3,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a002.py::test_equal_timestep_spikes_have_deterministic_neuron_order",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a002.py::test_invalid_top_level",
+                      "passed_cases":  4,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a002.py::test_invalid_stimulus_and_finite_values",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a002.py::test_state_events_and_no_fake_progress",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a002.py::test_comparison_spikes_and_robustness_contract",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a002.py::test_optional_git_provenance",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a002.py::test_cpu_only_import_and_cuda_unavailable",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a002.py::test_non_scientific_synthetic_engine_integration",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_reference_parameters_are_explicit_and_grid_is_exact",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_linear_update_matches_analytical_solution",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_resting_neuron_and_synaptic_decay",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_positive_and_negative_direct_impulses_have_expected_polarity",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_threshold_reset_and_g_reset",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_refractory_blocks_input_until_strictly_after_2_2_ms",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_incoming_event_during_refractory_is_ignored_and_poisson_targets_can_opt_out",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_exact_delay_and_signed_sparse_propagation",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_self_edge_and_two_neuron_inhibitory_edge_are_supported",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_multiple_and_simultaneous_events_sum_deterministically",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_unresolved_edges_are_excluded_and_anatomy_is_unchanged",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_explicit_stimulus_is_sorted_reproducible_and_validates_ids_and_grid",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_seeded_poisson_is_reproducible_and_uses_reference_scaling",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_silencing_disables_outgoing_only",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_fingerprints_and_result_digest_are_deterministic_and_identity_sensitive",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_effective_weight_preserves_anatomical_count_boundary",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_effective_inhibitory_weight_uses_presynaptic_sign",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_two_neuron_chain_keeps_spike_output_compact",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_simulation_reports_identity_metadata",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_parameter_identity_changes_simulation_configuration",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_duration_must_be_on_the_discrete_clock",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_duplicate_schedule_times_are_additive",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_poisson_rejects_more_than_one_expected_event_per_step",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_task005.py::test_trace_requires_an_explicit_small_subset",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S0"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r16_firewall.py::test_exact_node_grammar_and_negative_controls",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r17_firewall.py::test_historical_inline_equivalence",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r17_firewall.py::test_a006r_exact_node_controls",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r12_firewall.py::test_direct_control_rejects_alternatives",
+                      "passed_cases":  5,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r12_firewall.py::test_exact_direct_control_identity",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r12_firewall.py::test_shell_flag_rejected",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r18_firewall.py::test_git_execution_remains_denied",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r18_firewall.py::test_historical_code_fixture_is_fixed_and_verified",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  },
+                  {
+                      "node":  "tests/test_application_a019c_r18_firewall.py::test_production_provenance_rejection_is_optional",
+                      "passed_cases":  1,
+                      "result":  "PASS",
+                      "class":  "S1"
+                  }
+              ],
+    "accepted_reads":  {
+                           "accepted_real_mapping_reads":  0,
+                           "accepted_real_annotation_reads":  0,
+                           "accepted_real_provenance_reads":  0,
+                           "accepted_real_connectivity_reads":  0,
+                           "accepted_real_neurotransmitter_reads":  0,
+                           "accepted_other_registered_reads":  0,
+                           "accepted_real_metadata_reads":  0
+                       },
+    "schema":  "a019c-r18-validation-manifest-v1",
+    "exclusions":  {
+                       "B2":  "NOT RUN",
+                       "J2":  "NOT RUN",
+                       "unfiltered_pytest":  "NOT RUN",
+                       "I2":  "NOT RUN"
+                   },
+    "method":  "Per-function final evidence; parameterized cases combined from guarded R18 JUnit runs. Earlier reproduced failures remain historical, resolved by targeted/local/tail runs.",
+    "baseline":  "60c900b0c8e5a02ea95efc7340fd190193edf7e9"
+}

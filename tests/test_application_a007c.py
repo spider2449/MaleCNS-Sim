@@ -48,8 +48,19 @@ def test_synthetic_production_api_and_assets(review, tmp_path):
         with urlopen(base + "/" + asset) as response: assert response.status == 200
     data = tmp_path / "evidence.json"
     data.write_text(json.dumps({"snapshot":snapshot,"partial":partial,"evidence":evidence}), encoding="utf-8")
-    result = subprocess.run(["node",str(ROOT / "tests/js/application_a007c.cjs"),str(data),str(STATIC)],capture_output=True,text=True)
+    import os
+    if os.environ.get('MALECNS_A019C_R2_FIREWALL') == '1':
+        from a007c_node import command, environment
+        result = subprocess.run(command(data), env=environment(), cwd=str(ROOT),
+                                capture_output=True, text=True, timeout=30, close_fds=True)
+        assert 'A007C guard ACTIVE; script-start;' in result.stdout
+        assert 'A007C workload-start' in result.stdout
+        assert 'A007C descendant payload probe BLOCKED' in result.stdout
+        assert 'A007C registered-payload probe BLOCKED' in result.stdout
+    else:
+        result = subprocess.run(["node",str(ROOT / "tests/js/application_a007c.cjs"),str(data),str(STATIC)],capture_output=True,text=True)
     assert result.returncode == 0, result.stdout + result.stderr
+    assert 'A007C DOM/API contract checks PASS' in result.stdout
     print(result.stdout)
 
 

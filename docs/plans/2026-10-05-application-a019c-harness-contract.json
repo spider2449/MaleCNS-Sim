@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "application-stateful-benchmark-evidence-v1",
+  "description": "Forward A019 successful worker evidence; stop reports retain available fields and primary classification. P1/P2 remain null for synthetic certification.",
+  "type": "object",
+  "required": ["schema", "benchmark_contract_schema", "benchmark_contract_identity", "preparation_identity_schema", "preparation_route", "bounded_route_enabled", "batch_rows", "merge_block_size", "fallback", "attempt_count", "attempt_boundary", "source_access_started", "gates", "prepared_network_count", "prepared_runtime_count", "simulation_state_count", "steps", "schedule", "distributions_seconds", "final_states", "replay", "replay_sequence_identity", "cleanup", "classification", "P1", "P2", "limits", "timing_boundaries", "firewall"],
+  "properties": {
+    "schema": {"const": "application-stateful-benchmark-evidence-v1"},
+    "benchmark_contract_schema": {"const": "application-stateful-benchmark-v1"},
+    "preparation_identity_schema": {"const": "preparation-identity-v1"},
+    "bounded_route_enabled": {"const": true},
+    "batch_rows": {"const": 65536},
+    "merge_block_size": {"const": 16384},
+    "attempt_count": {"type": "integer", "minimum": 0, "maximum": 1},
+    "prepared_network_count": {"const": 1},
+    "prepared_runtime_count": {"const": 1},
+    "simulation_state_count": {"const": 2},
+    "steps": {"type": "array", "minItems": 24, "maxItems": 24},
+    "classification": {"const": "A19C-A"},
+    "watchdog_preflight": {"type": "string"},
+    "watchdog": {"type": "object"}
+  },
+  "x-supervised-required": ["watchdog_preflight", "watchdog"],
+  "x-stop-required": ["schema", "classification", "attempt_count"],
+  "x-future-task": "A019D — Full-Real Stateful Advance Benchmark Execution",
+  "x-real-cli-enabled": false
+}

@@ -3,6 +3,7 @@ import ast
 import hashlib
 import importlib.util
 import json
+import os
 import subprocess
 from pathlib import Path
 from unittest.mock import patch
@@ -22,8 +23,30 @@ audit = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(audit)
 
 
-def historical_source(path):
-    return subprocess.check_output(["git", "show", f"{HISTORICAL}:{path}"], cwd=ROOT).decode("utf-8")
+PINNED_CODE_HASHES = {
+    HISTORICAL + ':src/malecns_sim/dynamics/lif.py': '445e226b9bfccb48484de163c7f205c3c65a5dd52817c2472d2143208f017225',
+    HISTORICAL + ':src/malecns_sim/analysis/task008.py': 'e6356b1500487ca9c4185e182dff25db330b9eb48b7e32f91cdcde9b72322507',
+    HISTORICAL + ':src/malecns_sim/graph/signed.py': 'a3dc095f484eb593e225ed2b15251d7c9c8bbcc28f723109c5cbdd317c7e17f8',
+    HISTORICAL + ':src/malecns_sim/graph/fingerprint.py': '908ba81186b70bd6aa8b2663b909661c08b2aa1a5e1eb5ff77da3a85481e5917',
+    HISTORICAL + ':src/malecns_sim/sign.py': 'fddf6995122397ca9d6afc6c722a4cafbee4654efb089bceb032b6669b00d044',
+    HISTORICAL + ':src/malecns_sim/data/neurotransmitter.py': 'aecb861b526c0ca66ee63c1643eb8eb5180b457ffe0624ba4b0884c308709ac2',
+    'b967dbd92eb9a858d00647591cc8feb50c3f4c79:scripts/certify_application_a018ur.py': '2c91d9715629efb432a2abe44519ad629ef3dca5a43fa60130f76fd0f5168b62',
+}
+
+
+def historical_source(path, revision=HISTORICAL):
+    key = f'{revision}:{path}'
+    if os.environ.get('MALECNS_A019C_R2_FIREWALL') == '1':
+        # Fixed historical code bytes retain the independent synthetic oracle.
+        expected = PINNED_CODE_HASHES[key]
+        fixture = json.loads((ROOT / 'tests/fixtures/application-a019c-historical-code.json').read_text())
+        assert fixture['schema'] == 'a019c-pinned-code-sources-v1'
+        assert set(fixture['sources']) == set(PINNED_CODE_HASHES)
+        entry = fixture['sources'][key]
+        assert entry['sha256'] == expected
+        assert hashlib.sha256(entry['source'].encode('utf-8')).hexdigest() == expected
+        return entry['source']
+    return subprocess.check_output(["git", "show", key], cwd=ROOT).decode("utf-8")
 
 
 def historical_projection():
@@ -129,7 +152,7 @@ def test_historical_preparation_and_committed_fingerprints(tmp_path):
 
 
 def test_production_default_and_frozen_expectation_unchanged():
-    source = subprocess.check_output(["git", "show", "b967dbd92eb9a858d00647591cc8feb50c3f4c79:scripts/certify_application_a018ur.py"], cwd=ROOT).decode()
+    source = historical_source('scripts/certify_application_a018ur.py', 'b967dbd92eb9a858d00647591cc8feb50c3f4c79')
     assert "prepared_digest=prepared.fingerprint" in source
     assert 'PREPARED_ID = "ed1cfbbdd6841a87a82ca3b0416536d57fea4a647581dc7cb8e0b9ebf1608a2f"' in source
     tree = ast.parse((ROOT / "src/malecns_sim/application/service.py").read_text())

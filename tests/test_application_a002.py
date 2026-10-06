@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+from pathlib import Path
 import subprocess
 import sys
 from dataclasses import replace
@@ -146,8 +148,31 @@ def test_comparison_spikes_and_robustness_contract():
 
 
 def test_optional_git_provenance(monkeypatch):
-    assert _git_provenance()["git_commit"]
     import malecns_sim.application.service as service
+    if os.environ.get("MALECNS_A019C_R2_FIREWALL") == "1":
+        # Exercise production metadata parsing without admitting a Git process.
+        root = Path(service.__file__).resolve().parents[3]
+        commit = "0123456789abcdef0123456789abcdef01234567"
+        calls = []
+
+        def metadata_fixture(argv, **kwargs):
+            calls.append((argv, kwargs["cwd"]))
+            assert kwargs == dict(cwd=kwargs["cwd"], capture_output=True,
+                                  text=True, timeout=2, check=True)
+            expected = [
+                (["git", "rev-parse", "--show-toplevel"], Path(service.__file__).resolve().parent, str(root)),
+                (["git", "rev-parse", "HEAD"], str(root), commit),
+                (["git", "status", "--porcelain"], str(root), " M synthetic-fixture"),
+            ]
+            command, cwd, stdout = expected[len(calls) - 1]
+            assert argv == command and kwargs["cwd"] == cwd
+            return subprocess.CompletedProcess(argv, 0, stdout=stdout + "\n")
+
+        monkeypatch.setattr(service.subprocess, "run", metadata_fixture)
+        assert _git_provenance() == {"git_commit": commit, "git_dirty": True}
+        assert len(calls) == 3
+    else:
+        assert _git_provenance()["git_commit"]
     monkeypatch.setattr(service.subprocess, "run", lambda *args, **kwargs: (_ for _ in ()).throw(FileNotFoundError()))
     assert _git_provenance() == {"git_commit": None, "git_dirty": None}
 

@@ -159,20 +159,56 @@ def test_watchdog_binds_worker_not_launcher():
 
 @pytest.mark.skipif(sys.platform != 'win32',reason='Windows native worker PID and termination test')
 def test_native_watchdog_can_terminate_actual_redirected_python():
-    process = subprocess.Popen([sys.executable,'-u','-c',
-        'import os,time; print(os.getpid(),flush=True); time.sleep(10)'],stdout=subprocess.PIPE,text=True)
+    # Preserve unbuffered IO without an interpreter option in the guarded payload.
+    environment = dict(os.environ, PYTHONUNBUFFERED='1')
+    code = '''import os,time
+if os.environ.get('MALECNS_A019C_R2_FIREWALL') == '1':
+    import validation_firewall as guard
+    assert guard.ACTIVE
+    guard.record('a013_workload_start', executable=__import__('sys').executable,
+                 unbuffered=os.environ.get('PYTHONUNBUFFERED'))
+print(os.getpid(),flush=True)
+time.sleep(10)
+'''
+    process = subprocess.Popen([sys.executable,'-c',code],
+                               stdout=subprocess.PIPE,text=True,env=environment)
     monitor = None
     try:
         actual_pid = int(process.stdout.readline())
         monitor = bench.WindowsMemory(actual_pid)
         assert monitor.pid == actual_pid
         assert actual_pid != os.getpid()
+        assert actual_pid != process.pid, 'control must exercise the redirected worker'
+        import ctypes
+        from ctypes import wintypes
+        image = ctypes.create_unicode_buffer(32768)
+        size = wintypes.DWORD(len(image))
+        query = monitor.kernel.QueryFullProcessImageNameW
+        query.argtypes = (wintypes.HANDLE, wintypes.DWORD, wintypes.LPWSTR,
+                          ctypes.POINTER(wintypes.DWORD))
+        assert query(monitor.handle, 0, image, ctypes.byref(size))
+        assert Path(image.value).resolve() == Path(sys._base_executable).resolve()
         assert monitor.snapshot()['working_set'] > 0
+        active = os.environ.get('MALECNS_A019C_R2_FIREWALL') == '1'
+        if active:
+            import validation_firewall as guard
+            guard.record('a013_watchdog_armed', launcher_pid=process.pid,
+                         actual_pid=actual_pid, actual_image=image.value)
         monitor.terminate()
-        assert process.wait(timeout=5) != 0
+        assert process.wait(timeout=5) == 1
+        exit_code = wintypes.DWORD()
+        get_exit = monitor.kernel.GetExitCodeProcess
+        get_exit.argtypes = (wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD))
+        assert get_exit(monitor.handle, ctypes.byref(exit_code))
+        assert exit_code.value == 1, 'actual worker must have terminated'
+        if active:
+            guard.record('a013_watchdog_terminated', launcher_pid=process.pid,
+                         actual_pid=actual_pid, launcher_exit=process.returncode,
+                         worker_exit=exit_code.value, attempts=1, retry=False)
     finally:
         if monitor is not None:
             monitor.close()
         if process.poll() is None:
             process.terminate()
             process.wait(timeout=5)
+        process.stdout.close()

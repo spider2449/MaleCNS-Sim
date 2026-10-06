@@ -1,0 +1,2996 @@
+{
+  "P1": null,
+  "P2": null,
+  "advances_completed": 24,
+  "advances_started": 24,
+  "attempt_boundary": "first bounded real edge-source access",
+  "attempt_count": 0,
+  "automatic_retry": false,
+  "batch_rows": 65536,
+  "benchmark_contract_identity": "95c5d61654cfc8b944dd8ffad987c0e3129c8eef2fa24512f57d7e90f997336a",
+  "benchmark_contract_schema": "application-stateful-benchmark-v1",
+  "bounded_route_enabled": true,
+  "classification": "A19C-A",
+  "cleanup": "released",
+  "distributions_seconds": {
+    "A": {
+      "advance": {
+        "max": 0.0152384,
+        "mean": 0.01471914,
+        "min": 0.0141773,
+        "p50": 0.0146337,
+        "p95": 0.015212165
+      },
+      "decoder": {
+        "max": 1.3e-06,
+        "mean": 9.299999999999999e-07,
+        "min": 7e-07,
+        "p50": 9e-07,
+        "p95": 1.3e-06
+      },
+      "encode": {
+        "max": 0.0002348,
+        "mean": 0.00021165,
+        "min": 0.0001914,
+        "p50": 0.000213,
+        "p95": 0.000229985
+      },
+      "environment": {
+        "max": 9e-07,
+        "mean": 7.699999999999999e-07,
+        "min": 7e-07,
+        "p50": 7.5e-07,
+        "p95": 9e-07
+      },
+      "readout": {
+        "max": 6.1e-06,
+        "mean": 5.0999999999999995e-06,
+        "min": 4.2e-06,
+        "p50": 5.15e-06,
+        "p95": 5.829999999999999e-06
+      },
+      "total": {
+        "max": 0.0154802,
+        "mean": 0.01493759,
+        "min": 0.0143829,
+        "p50": 0.0148424,
+        "p95": 0.015449105
+      }
+    },
+    "B": {
+      "advance": {
+        "max": 0.0153084,
+        "mean": 0.01486257,
+        "min": 0.0142753,
+        "p50": 0.014910050000000001,
+        "p95": 0.01523892
+      },
+      "decoder": {
+        "max": 1.5e-06,
+        "mean": 1.0299999999999999e-06,
+        "min": 8e-07,
+        "p50": 9.5e-07,
+        "p95": 1.4549999999999998e-06
+      },
+      "encode": {
+        "max": 0.0002208,
+        "mean": 0.00020971000000000002,
+        "min": 0.0001945,
+        "p50": 0.00021234999999999998,
+        "p95": 0.00021954
+      },
+      "environment": {
+        "max": 1.3e-06,
+        "mean": 8.3e-07,
+        "min": 7e-07,
+        "p50": 8e-07,
+        "p95": 1.1199999999999997e-06
+      },
+      "readout": {
+        "max": 5.8e-06,
+        "mean": 4.65e-06,
+        "min": 3.7e-06,
+        "p50": 4.5500000000000005e-06,
+        "p95": 5.484999999999999e-06
+      },
+      "total": {
+        "max": 0.015533,
+        "mean": 0.01507879,
+        "min": 0.0144826,
+        "p50": 0.0151302,
+        "p95": 0.015465005
+      }
+    },
+    "pooled": {
+      "advance": {
+        "max": 0.0153084,
+        "mean": 0.014790855,
+        "min": 0.0141773,
+        "p50": 0.0148388,
+        "p95": 0.0152419
+      },
+      "decoder": {
+        "max": 1.5e-06,
+        "mean": 9.8e-07,
+        "min": 7e-07,
+        "p50": 9e-07,
+        "p95": 1.405e-06
+      },
+      "encode": {
+        "max": 0.0002348,
+        "mean": 0.00021068000000000004,
+        "min": 0.0001914,
+        "p50": 0.00021234999999999998,
+        "p95": 0.000224635
+      },
+      "environment": {
+        "max": 1.3e-06,
+        "mean": 8e-07,
+        "min": 7e-07,
+        "p50": 8e-07,
+        "p95": 9.200000000000003e-07
+      },
+      "readout": {
+        "max": 6.1e-06,
+        "mean": 4.875e-06,
+        "min": 3.7e-06,
+        "p50": 4.849999999999999e-06,
+        "p95": 5.815e-06
+      },
+      "total": {
+        "max": 0.015533,
+        "mean": 0.015008190000000001,
+        "min": 0.0143829,
+        "p50": 0.0150582,
+        "p95": 0.01548284
+      }
+    }
+  },
+  "fallback": null,
+  "final_horizons_ms": [
+    240,
+    240
+  ],
+  "final_states": [
+    {
+      "arrays": {
+        "g_mV": "573db36e6558f6614e1cafc3eb7461b2588a6aa24329bfe2ff71f779c218cd92",
+        "pending": "1bb444990ac3c59023a6c5e4c65886a44f82fe87e6f50cad82f6d5e373b7f61d",
+        "pending_event_counts": "83cc349398be831c7b5ccd87c589f26cd34ca617e0074c9384f75d183267cedc",
+        "refractory_until": "b2cb98e5964bd5158ad4d74ac242d50ef06cdc1b73f5d85594be3de169958fdf",
+        "v_mV": "6192de060fa0bbced97463e619811066094aa1d7d5baa20779677211b2698489"
+      },
+      "timestep": 2400
+    },
+    {
+      "arrays": {
+        "g_mV": "573db36e6558f6614e1cafc3eb7461b2588a6aa24329bfe2ff71f779c218cd92",
+        "pending": "1bb444990ac3c59023a6c5e4c65886a44f82fe87e6f50cad82f6d5e373b7f61d",
+        "pending_event_counts": "83cc349398be831c7b5ccd87c589f26cd34ca617e0074c9384f75d183267cedc",
+        "refractory_until": "b2cb98e5964bd5158ad4d74ac242d50ef06cdc1b73f5d85594be3de169958fdf",
+        "v_mV": "6192de060fa0bbced97463e619811066094aa1d7d5baa20779677211b2698489"
+      },
+      "timestep": 2400
+    }
+  ],
+  "firewall": {
+    "archive_writes": 0,
+    "full_real_preparations": 0,
+    "full_real_source_accesses": 0,
+    "gpu": 0,
+    "raw_downloads": 0,
+    "real_advances": 0,
+    "real_arena_runs": 0,
+    "real_experiments": 0
+  },
+  "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": true,
+    "G5": true,
+    "G6": true
+  },
+  "initial_memory": {
+    "A": {
+      "commit_bytes": 733114368,
+      "peak_commit_bytes": 733114368,
+      "peak_working_set": 110063616,
+      "private_bytes": 733114368,
+      "working_set": 110059520
+    },
+    "B": {
+      "commit_bytes": 733114368,
+      "peak_commit_bytes": 733114368,
+      "peak_working_set": 110272512,
+      "private_bytes": 733114368,
+      "working_set": 110268416
+    }
+  },
+  "initial_state": {
+    "arrays": {
+      "g_mV": "73065f4173d50fc3c14e1a39aa42b9030f6056d8ff6a9e89e8fe0f062edd7c15",
+      "pending": "784300a8c7d6a87fce127a44d94c57001288e2a84dcc0a70b2a14addce7e2576",
+      "pending_event_counts": "ee4b808764799a1bb3c0ff98e3636651698425e24ffd5c7a425b78dbf14079d8",
+      "refractory_until": "cb95d46d42984a637ebc6262c278026f5cb9d89ddabe5c221819973be92c99a2",
+      "v_mV": "52a2a7d9189d906579dd7875ea092bf774c968adc08567ddc581761693f404d9"
+    },
+    "timestep": 0
+  },
+  "limits": {
+    "advance_s": 30,
+    "preparation_s": 600,
+    "private_bytes": 8589934592,
+    "worker_s": 1500,
+    "working_set": 8589934592
+  },
+  "max_consecutive_calls": 12,
+  "merge_block_size": 16384,
+  "preparation_identity": {
+    "dataset_provenance_identity": {
+      "manifest_digest": "a019c-synthetic",
+      "mapping_fingerprint": "a019c-synthetic"
+    },
+    "edges": 1248,
+    "effective_projection_fingerprint": "67ab093844fde79638682b8bce8a54cce5dcd6a21c87a36b36362fc48587cb9e",
+    "neurons": 44,
+    "preparation_config_identity": "a14d75e682b5201c022043725cdac945847962ebff64888008673cca7ded6bf9",
+    "prepared_network_digest": "1fddcff1d4494481ec8081103446957ca2472fee3b941df15c019561b77be8ca",
+    "unsigned_graph_digest": "8aa49d3662fb179b629801c9a3c3bcd48ffc9738698660ad33ca986c49d0ab08"
+  },
+  "preparation_identity_schema": "preparation-identity-v1",
+  "preparation_route": "A015/A016/A017/A018/A018T/A018U/A018UJ",
+  "preparation_seconds": 0.03702329999941867,
+  "preparations": 1,
+  "prepared_network_count": 1,
+  "prepared_runtime_count": 1,
+  "replay": "exact pass",
+  "replay_sequence_identity": "a9f5af0c2ea0b8d1932f932bfea68b8fe8fbfa2c7424bf56f4ca39456b229ec1",
+  "retained_json_bytes": 47111,
+  "route_metrics": {
+    "array_header_bytes": 1344,
+    "block_operations": 5,
+    "block_rows": 3329,
+    "block_workspace_bound_bytes": 2097152,
+    "chunk_aggregate_peak_bytes": 10776,
+    "chunk_retained_peak_bytes": 12288,
+    "compaction_rows_read": 2810,
+    "compaction_rows_written": 2810,
+    "container_header_allowance_bytes": 10240,
+    "final_grouped_bytes": 29952,
+    "first_scan_rows": 3329,
+    "initial_partial_bytes": 42408,
+    "local_grouping_seconds": 0.0007518000202253461,
+    "mask_peak_bytes": 512,
+    "max_active_input_runs": 2,
+    "max_block_rows": 1561,
+    "max_completed_next_stage_bytes": 37488,
+    "max_group_input_bytes": 37488,
+    "max_output_bytes": 29952,
+    "max_resident_payload_bytes": 104928,
+    "merge_groups_per_stage": [
+      2,
+      1
+    ],
+    "merge_seconds": 0.0006659000064246356,
+    "merge_stages": 2,
+    "partial_accumulation_seconds": 2.2000021999701858e-06,
+    "partial_peak_bytes": 42408,
+    "partial_rows": 1767,
+    "resident_bound_bytes": 2242808,
+    "retained_rows": 2000,
+    "row_touches": 11759,
+    "rows_read": 3329,
+    "rows_written": 2810,
+    "scalar_workspace_allowance_bytes": 4096,
+    "schedule": [
+      [
+        0,
+        0,
+        449,
+        447
+      ],
+      [
+        0,
+        2,
+        448,
+        423
+      ],
+      [
+        1,
+        0,
+        786,
+        776
+      ]
+    ],
+    "search_operations": 18,
+    "second_scan_rows": 0,
+    "sort_operations": 3,
+    "source_peak_bytes": 12288,
+    "timings": {
+      "bounded_loader": 0.010983,
+      "downstream_projection_csr": 0.0006029,
+      "effective_weights_outgoing_csr": 0.0010771,
+      "endpoint_membership": 0.00015769999999999998,
+      "local_aggregation": 0.0007447,
+      "metadata_normalization": 0.0053141,
+      "publication_universe": 6.91e-05,
+      "sign_construction": 0.0013396,
+      "source_iteration": 0.0002629,
+      "staged_merge": 0.0006702
+    }
+  },
+  "schedule": {
+    "event_count": 948,
+    "generation_count": 1,
+    "horizon_ms": 240,
+    "identity": "6be96fd6d35b9910540ed10e08f38c3e0c3bcb4e5e7171ea7698cf6afcb6de9a",
+    "impulses_mV": 68.75,
+    "seed": 1555062870,
+    "windows": [
+      "aad29220d091b5f531f281058264acb7539a5b571eaceba4c42fdaf177b31e05",
+      "f070562761876eef3e09021aa8abbb4a12a0c7249424c4d45399267d1136f571",
+      "82663250463e87e188c775ed4511fffea05a3c62284e91cf9aa6733b03bd5a38",
+      "213722b4be57af54672965cd064a46bd4ff567b8a36d556d8b98d918b628469d",
+      "db2f6c76d2349ca200be3d735ba3d21cf4155b6293fcdbdc3686773fe8c805a9",
+      "bf5ae3e9c04803d32bc807476a729fb11d01f6f47d87e2de80999d74a518f244",
+      "44c659300485dca9212627fd6726d876019ee9272e6f5434eb68fdca33aa8832",
+      "f63d74516a000c1ead65c3df13b26915bed704c490fd9fd5b10e0ad7be60040f",
+      "26f7738af4bcf264db9a5b09dc5d98eee2cf00bb8143c387843c43204eb19fa0",
+      "a2bd40461cbc385dbc59160813df37f397cebea551fd3a0503d7f8f504d22988",
+      "b95a499105680904df7ee5f7a79a6bd11492b7dc6650ca7275540a0e7dafc6a2",
+      "f5ddd71da19c01810a71cffa5a0515bf3c8807882d7328b69c77f11aec354620"
+    ]
+  },
+  "schema": "application-stateful-benchmark-evidence-v1",
+  "simulation_state_count": 2,
+  "source_access_started": true,
+  "state_a_released_before_b": true,
+  "state_array_bytes": {
+    "g_mV": 352,
+    "pending": 6688,
+    "pending_event_counts": 3344,
+    "refractory_until": 352,
+    "v_mV": 352
+  },
+  "states_coexist": false,
+  "steps": [
+    {
+      "delivered_events": 3130,
+      "instrumentation_seconds": 0.0004103,
+      "interval": 1,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110137344,
+        "private_bytes": 733114368,
+        "working_set": 110133248
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1048,
+        "spike_timesteps": 1048
+      },
+      "pending": {
+        "max": 4,
+        "min": 0,
+        "nonzero_counts": 399,
+        "nonzero_weights": 399,
+        "occupied_slots": 12,
+        "ring_index": 10,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 573
+      },
+      "queued_events": 3703,
+      "readout_counts": [
+        1,
+        1
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "9271e0b87d845494804fc0d91c4dc016bd5f53912c4990fd55790f8f9acb43fc",
+          "pending": "16e97dac5c0212a44387cce55285e125b1dde0e0bb36a79715b3770b03f858e0",
+          "pending_event_counts": "786b8b48549b8ed4a4b2dc4b2237999e93bbbeadd5e1912582c56e4a0f0acd79",
+          "refractory_until": "7e544de5582443ebf094ee95e38876ba351ec5c9d4cc9543d9d479e33379d47e",
+          "v_mV": "e9f49f9d873d2ea35f8cd8f323e42285f9fe07dc537c09b1454ae3ba5b3f624d"
+        },
+        "dummy": [
+          0.505,
+          0.5,
+          0.25
+        ],
+        "input": "aad29220d091b5f531f281058264acb7539a5b571eaceba4c42fdaf177b31e05",
+        "output": {
+          "spike_counts": "16561a8ec1a3645e0bdb32ad3f35500fb8b78a8dd146fccc795dbd1d3dbe267f",
+          "spike_neuron_ids": "9f0c892853851bf57fc3b5af1f96432047aecad4b1acd85b6eb31cfb6304080b",
+          "spike_timesteps": "5893efbdf4cac03f3ad43bf4ed4fc9f121e04d04fc1401a730505b08991bd904"
+        },
+        "pending": {
+          "max": 4,
+          "min": 0,
+          "nonzero_counts": 399,
+          "nonzero_weights": 399,
+          "occupied_slots": 12,
+          "ring_index": 10,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 573
+        },
+        "readout": [
+          1,
+          1
+        ],
+        "timestep": 200
+      },
+      "seconds": {
+        "advance": 0.0137853,
+        "decoder": 1.4e-06,
+        "encode": 0.0002221,
+        "environment": 1.3e-06,
+        "readout": 5.4e-06,
+        "total": 0.0140155
+      },
+      "sequence": "A",
+      "warmup": true,
+      "whole_network_spikes": 131
+    },
+    {
+      "delivered_events": 6398,
+      "instrumentation_seconds": 0.0003384,
+      "interval": 2,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110178304,
+        "private_bytes": 733114368,
+        "working_set": 110174208
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1776,
+        "spike_timesteps": 1776
+      },
+      "pending": {
+        "max": 3,
+        "min": 0,
+        "nonzero_counts": 366,
+        "nonzero_weights": 366,
+        "occupied_slots": 11,
+        "ring_index": 1,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 481
+      },
+      "queued_events": 6306,
+      "readout_counts": [
+        3,
+        3
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "2b817d3750c5c931ad240682af643f7f777d668f62ddc1a595c311021ce7182c",
+          "pending": "df9c606f56739cca45b100b89d8775c3c35bafe4ff10d8a7f6583a75062d8b4f",
+          "pending_event_counts": "1e638629b7decb0c2d38e27f8edc3ee87d1e7ddd8f4fcf6bbb10a7e38eeeb2bf",
+          "refractory_until": "bb4be0530d20fbbcb68d795b1fcb59ccfb2f5df5d58344e23c598fb5b8019702",
+          "v_mV": "8fdfe131f3b26dd6341c7d20fa7b060760d774f6c0bc393dce01cd374dc95caa"
+        },
+        "dummy": [
+          0.51,
+          0.5,
+          0.25
+        ],
+        "input": "f070562761876eef3e09021aa8abbb4a12a0c7249424c4d45399267d1136f571",
+        "output": {
+          "spike_counts": "0ee28674e3c55d80fd1c6771caf9b12b5c34b55a1ba23dfe1cec491eeddd0c0c",
+          "spike_neuron_ids": "c4ec07d9974b06b1a02d4e52f3d2aec40d55f9cb64610189b9a450f531a86ee1",
+          "spike_timesteps": "6b2b5d8905d71fd3c71decfd528d5329f491e784e85c66ebd20d5237b7c854b4"
+        },
+        "pending": {
+          "max": 3,
+          "min": 0,
+          "nonzero_counts": 366,
+          "nonzero_weights": 366,
+          "occupied_slots": 11,
+          "ring_index": 1,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 481
+        },
+        "readout": [
+          3,
+          3
+        ],
+        "timestep": 400
+      },
+      "seconds": {
+        "advance": 0.0153677,
+        "decoder": 9e-07,
+        "encode": 0.0002323,
+        "environment": 1.7e-06,
+        "readout": 4.7e-06,
+        "total": 0.0156073
+      },
+      "sequence": "A",
+      "warmup": true,
+      "whole_network_spikes": 222
+    },
+    {
+      "delivered_events": 5592,
+      "instrumentation_seconds": 0.0003251,
+      "interval": 3,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110186496,
+        "private_bytes": 733114368,
+        "working_set": 110182400
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1568,
+        "spike_timesteps": 1568
+      },
+      "pending": {
+        "max": 2,
+        "min": 0,
+        "nonzero_counts": 389,
+        "nonzero_weights": 389,
+        "occupied_slots": 12,
+        "ring_index": 11,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 455
+      },
+      "queued_events": 5566,
+      "readout_counts": [
+        3,
+        2
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "eecb04adb9bb516b80f3a6c2310c20618c32281289b82bd6da7fbc18ab418e1d",
+          "pending": "d8cd7490dd26164194271095027e7737d8fe029ae51a1d2f3d7b6df1d687c7f8",
+          "pending_event_counts": "a1cab87984cd16f8e660393a8a45b5a5ad6ce2bea3bde588348420b8e04d59a5",
+          "refractory_until": "cc1b591017efe441f0bd82ddd4cafcd8bb5aa4e4e0f06eb77a0fbc24eb392756",
+          "v_mV": "cb4190bc121fd9800cad11283c82eb8896bb0f8c2aa9331c263b3096b0c0650f"
+        },
+        "dummy": [
+          0.515,
+          0.5,
+          0.25
+        ],
+        "input": "82663250463e87e188c775ed4511fffea05a3c62284e91cf9aa6733b03bd5a38",
+        "output": {
+          "spike_counts": "5b2ee448d813b8ba6237edeb1ed2982b2dc2974932cf815729491212013a0599",
+          "spike_neuron_ids": "ddeada8f91e9d5c010f3a76303874844472181a1e3e4eb0b907898320648c04f",
+          "spike_timesteps": "4556dbe839cf930538047268a5d0dbc1db667e5896765868197fe581ad9307df"
+        },
+        "pending": {
+          "max": 2,
+          "min": 0,
+          "nonzero_counts": 389,
+          "nonzero_weights": 389,
+          "occupied_slots": 12,
+          "ring_index": 11,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 455
+        },
+        "readout": [
+          3,
+          2
+        ],
+        "timestep": 600
+      },
+      "seconds": {
+        "advance": 0.0146159,
+        "decoder": 8e-07,
+        "encode": 0.0001965,
+        "environment": 7e-07,
+        "readout": 4.8e-06,
+        "total": 0.0148187
+      },
+      "sequence": "A",
+      "warmup": false,
+      "whole_network_spikes": 196
+    },
+    {
+      "delivered_events": 5457,
+      "instrumentation_seconds": 0.0003501,
+      "interval": 4,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110260224,
+        "private_bytes": 733114368,
+        "working_set": 110256128
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1592,
+        "spike_timesteps": 1592
+      },
+      "pending": {
+        "max": 3,
+        "min": 0,
+        "nonzero_counts": 480,
+        "nonzero_weights": 480,
+        "occupied_slots": 15,
+        "ring_index": 2,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 608
+      },
+      "queued_events": 5610,
+      "readout_counts": [
+        2,
+        3
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "9e3623bcd041ea0b9d9cd64529ee7d34011c59806c512daeec5b858ea46aedb3",
+          "pending": "56943aab0abf824ac0b986bcf46bb762e782d9913b4a31763ddbe396d33aeed5",
+          "pending_event_counts": "ba99bf426bb5b7b95ba6b6b09466d7f8a90a2deb579e5ea87b1971267bf43cf2",
+          "refractory_until": "b8097884e7d2b543ddfdfc8a23b805b398f77ad4652adac511817cda57d8a593",
+          "v_mV": "0d45d9d75e6a2dbeb43e8b769231d0ef2e829f638991a993aa9ab22900c208c9"
+        },
+        "dummy": [
+          0.52,
+          0.5,
+          0.25
+        ],
+        "input": "213722b4be57af54672965cd064a46bd4ff567b8a36d556d8b98d918b628469d",
+        "output": {
+          "spike_counts": "69b0e9c3321d24c469312cbc288f4c347d5b807a90cb32fd0fb5bfb55058867d",
+          "spike_neuron_ids": "88dc54f3195723a0a06814a6a9b99ed4fb3a3ad62814b797f3cb1b90ee680850",
+          "spike_timesteps": "2745137d4411649862020518cf1fad8f8a4cd2ccdf4074cf51412084a2a9b9d7"
+        },
+        "pending": {
+          "max": 3,
+          "min": 0,
+          "nonzero_counts": 480,
+          "nonzero_weights": 480,
+          "occupied_slots": 15,
+          "ring_index": 2,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 608
+        },
+        "readout": [
+          2,
+          3
+        ],
+        "timestep": 800
+      },
+      "seconds": {
+        "advance": 0.0145282,
+        "decoder": 8e-07,
+        "encode": 0.0001914,
+        "environment": 7e-07,
+        "readout": 4.2e-06,
+        "total": 0.0147253
+      },
+      "sequence": "A",
+      "warmup": false,
+      "whole_network_spikes": 199
+    },
+    {
+      "delivered_events": 5974,
+      "instrumentation_seconds": 0.0003686,
+      "interval": 5,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110264320,
+        "private_bytes": 733114368,
+        "working_set": 110260224
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1648,
+        "spike_timesteps": 1648
+      },
+      "pending": {
+        "max": 2,
+        "min": 0,
+        "nonzero_counts": 398,
+        "nonzero_weights": 398,
+        "occupied_slots": 12,
+        "ring_index": 12,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 482
+      },
+      "queued_events": 5848,
+      "readout_counts": [
+        3,
+        2
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "535063c37e4d07716671f1c2bc0d0a463af40bb18bdfcac583c5824eaba59964",
+          "pending": "91b31a71807c1e35c5e19c6c03da98d772bd57173aa74fb4e11f18acc23fe18a",
+          "pending_event_counts": "2b41e38085d2861553b5f18dec34c1bf29bbd52db351474f57a8c745e0c89414",
+          "refractory_until": "c3092e956b3f2431d690c68f4767d75463f3ce7ef97d12f87dc6413f72b16c93",
+          "v_mV": "b11dccfce1ff927e7c119e0d87eeddc327448e90790aa149ba984ec69e2003fc"
+        },
+        "dummy": [
+          0.525,
+          0.5,
+          0.25
+        ],
+        "input": "db2f6c76d2349ca200be3d735ba3d21cf4155b6293fcdbdc3686773fe8c805a9",
+        "output": {
+          "spike_counts": "9ab05d370e97dd8c90320670156fa628bb6c036ccd8bbedeb83cc5c15c3df0dc",
+          "spike_neuron_ids": "6b155cb1c11f1d2b61bcea55cf64e3a4a3d1f770e16f66505bfd93840f6ee10c",
+          "spike_timesteps": "5e57e97a84164ee6e2b7baa52ad7adb16a9a711107e754e3458783e30395dc3e"
+        },
+        "pending": {
+          "max": 2,
+          "min": 0,
+          "nonzero_counts": 398,
+          "nonzero_weights": 398,
+          "occupied_slots": 12,
+          "ring_index": 12,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 482
+        },
+        "readout": [
+          3,
+          2
+        ],
+        "timestep": 1000
+      },
+      "seconds": {
+        "advance": 0.0144151,
+        "decoder": 1e-06,
+        "encode": 0.0002218,
+        "environment": 7e-07,
+        "readout": 5.2e-06,
+        "total": 0.0146438
+      },
+      "sequence": "A",
+      "warmup": false,
+      "whole_network_spikes": 206
+    },
+    {
+      "delivered_events": 5242,
+      "instrumentation_seconds": 0.0003554,
+      "interval": 6,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110264320,
+        "private_bytes": 733114368,
+        "working_set": 110260224
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1472,
+        "spike_timesteps": 1472
+      },
+      "pending": {
+        "max": 2,
+        "min": 0,
+        "nonzero_counts": 379,
+        "nonzero_weights": 379,
+        "occupied_slots": 12,
+        "ring_index": 3,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 454
+      },
+      "queued_events": 5214,
+      "readout_counts": [
+        2,
+        3
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "23121665f61ef64a18e96c3fbe4b6b0a0192a071a8caf57dfb40f76405d23533",
+          "pending": "61c2838265ec33b9624c09610fa7375488bd7d329224c80a3e4d2508b0f37e86",
+          "pending_event_counts": "baced53b562a7dede3702a4da95ead85421ead3a44f2baa542a1ac210ce9d9e1",
+          "refractory_until": "d2b323d125c1404e98d6983a1439315e9adb3ed5eaf5067443d28df5c9379af2",
+          "v_mV": "be9cf8ac18566f67e1113462b35cc5e249f1030421c8a69d2ed60e6c9732e2de"
+        },
+        "dummy": [
+          0.53,
+          0.5,
+          0.25
+        ],
+        "input": "bf5ae3e9c04803d32bc807476a729fb11d01f6f47d87e2de80999d74a518f244",
+        "output": {
+          "spike_counts": "a1403ea9be3740d248ffa3050000e6de9d2819728e2475813bc9901d3cb2407a",
+          "spike_neuron_ids": "332eb761da473981b8672228da8732c06643756b268bc5786214c3a963344e72",
+          "spike_timesteps": "20af370e67101891e0e8d061bed24bb3319360ffd47b7f27e601c23a41e8228c"
+        },
+        "pending": {
+          "max": 2,
+          "min": 0,
+          "nonzero_counts": 379,
+          "nonzero_weights": 379,
+          "occupied_slots": 12,
+          "ring_index": 3,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 454
+        },
+        "readout": [
+          2,
+          3
+        ],
+        "timestep": 1200
+      },
+      "seconds": {
+        "advance": 0.0143964,
+        "decoder": 7e-07,
+        "encode": 0.0002039,
+        "environment": 8e-07,
+        "readout": 4.7e-06,
+        "total": 0.0146065
+      },
+      "sequence": "A",
+      "warmup": false,
+      "whole_network_spikes": 184
+    },
+    {
+      "delivered_events": 5364,
+      "instrumentation_seconds": 0.0003593,
+      "interval": 7,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110264320,
+        "private_bytes": 733114368,
+        "working_set": 110260224
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1616,
+        "spike_timesteps": 1616
+      },
+      "pending": {
+        "max": 5,
+        "min": 0,
+        "nonzero_counts": 523,
+        "nonzero_weights": 523,
+        "occupied_slots": 14,
+        "ring_index": 13,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 847
+      },
+      "queued_events": 5757,
+      "readout_counts": [
+        3,
+        2
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "851a43488293f4fa3bc735ad1bf4d6745d8c5815d4f034b311da228539c236f9",
+          "pending": "b3c20207875f82fe6ea9ca15ed2ccedd84ef5f00ad278b6a7485a5d5875024c1",
+          "pending_event_counts": "3ade3ee52eb08284aa008c9ebfaf7fd0447b2e3932d9cd0fb5c6a63e1e6ef8d8",
+          "refractory_until": "d33a6abb3b0f23808bba0e4686abd9aaeee1455f0e50143931bb3faf42c4c6d3",
+          "v_mV": "8ed01cd5733eb43c3996e0e40e4d9eeb953eb39568378525ccc16f214e2725f9"
+        },
+        "dummy": [
+          0.535,
+          0.5,
+          0.25
+        ],
+        "input": "44c659300485dca9212627fd6726d876019ee9272e6f5434eb68fdca33aa8832",
+        "output": {
+          "spike_counts": "13a7e35a338fdf166777ea6a1b553f45e70f5a6f182eccf939679cc2375bbd4d",
+          "spike_neuron_ids": "c81af4bdbc9af6962d4583ef766dbf4ed72e265e4bc74283126e81c476fcbf17",
+          "spike_timesteps": "653febf7f2ae60df68d56021305846d1ab557b82d1ea908f960bde72d0a6c4c1"
+        },
+        "pending": {
+          "max": 5,
+          "min": 0,
+          "nonzero_counts": 523,
+          "nonzero_weights": 523,
+          "occupied_slots": 14,
+          "ring_index": 13,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 847
+        },
+        "readout": [
+          3,
+          2
+        ],
+        "timestep": 1400
+      },
+      "seconds": {
+        "advance": 0.0152384,
+        "decoder": 9e-07,
+        "encode": 0.0002348,
+        "environment": 8e-07,
+        "readout": 5.3e-06,
+        "total": 0.0154802
+      },
+      "sequence": "A",
+      "warmup": false,
+      "whole_network_spikes": 202
+    },
+    {
+      "delivered_events": 6072,
+      "instrumentation_seconds": 0.0003636,
+      "interval": 8,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110268416,
+        "private_bytes": 733114368,
+        "working_set": 110264320
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1664,
+        "spike_timesteps": 1664
+      },
+      "pending": {
+        "max": 2,
+        "min": 0,
+        "nonzero_counts": 527,
+        "nonzero_weights": 527,
+        "occupied_slots": 16,
+        "ring_index": 4,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 659
+      },
+      "queued_events": 5884,
+      "readout_counts": [
+        2,
+        3
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "d6b5ffc78d5b5e1c48110da60ab703b85c6f0634453fcf2fff999089f007031e",
+          "pending": "cbb74e46b01116b0e854fa122ccaa2e8784656db20cf922761fbac29c12e1259",
+          "pending_event_counts": "bb3518e6978f5a8ecc5ab792821b56d9a2d8839b49d99de9b73830b42d5a1a0f",
+          "refractory_until": "8e35a31d52f54c053cf3a3d08938f4cbea9a9f2736dfd6a1088626edff39e22c",
+          "v_mV": "bc9742b76a8b18d6c62af6fc70051a4128d77cb7f051ffa292949f7f66b940f1"
+        },
+        "dummy": [
+          0.54,
+          0.5,
+          0.25
+        ],
+        "input": "f63d74516a000c1ead65c3df13b26915bed704c490fd9fd5b10e0ad7be60040f",
+        "output": {
+          "spike_counts": "38c1502f0fc3373d4a5a9db492d9771be5eddf991e8492190bfb937f18b95da4",
+          "spike_neuron_ids": "b3651367e1ef1fc67ded4e27c48171128e95fb26ee04573acf7469d10cdc0351",
+          "spike_timesteps": "94d11a79a8bb8e6a00fcc5c77580510e71cfb8ea5cf4ba81085f6dc26ec55330"
+        },
+        "pending": {
+          "max": 2,
+          "min": 0,
+          "nonzero_counts": 527,
+          "nonzero_weights": 527,
+          "occupied_slots": 16,
+          "ring_index": 4,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 659
+        },
+        "readout": [
+          2,
+          3
+        ],
+        "timestep": 1600
+      },
+      "seconds": {
+        "advance": 0.0151801,
+        "decoder": 9e-07,
+        "encode": 0.0002241,
+        "environment": 9e-07,
+        "readout": 5.1e-06,
+        "total": 0.0154111
+      },
+      "sequence": "A",
+      "warmup": false,
+      "whole_network_spikes": 208
+    },
+    {
+      "delivered_events": 6033,
+      "instrumentation_seconds": 0.0003572,
+      "interval": 9,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110268416,
+        "private_bytes": 733114368,
+        "working_set": 110264320
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1672,
+        "spike_timesteps": 1672
+      },
+      "pending": {
+        "max": 4,
+        "min": 0,
+        "nonzero_counts": 359,
+        "nonzero_weights": 359,
+        "occupied_slots": 10,
+        "ring_index": 14,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 547
+      },
+      "queued_events": 5921,
+      "readout_counts": [
+        3,
+        3
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "0c3298bf366ed1a2640641a58a48887142d2e7f6c15b69b39c3ae0e188ee7b15",
+          "pending": "c945544f679f89aae977bf2895846cfcb6545fbe011d0a809fddc0a3cb4e22b2",
+          "pending_event_counts": "e5f7148817010bf216ed56e5d49e1fd2dd762aa87798a3b64e4c837ee306ee1c",
+          "refractory_until": "9685c6c714f1df9cbaeaf3e7db38bd0c8314c7d159c757d2b9557227c400dce7",
+          "v_mV": "e0a438b2341ee0e0f5bf8e099f8c893015405dc3baa1298d53ae637b65573cf4"
+        },
+        "dummy": [
+          0.545,
+          0.5,
+          0.25
+        ],
+        "input": "26f7738af4bcf264db9a5b09dc5d98eee2cf00bb8143c387843c43204eb19fa0",
+        "output": {
+          "spike_counts": "4dddf96e9521b490c465d5e9f22e4fb1e98132af8ca7ff95e113896083bdfa03",
+          "spike_neuron_ids": "ff23916d55a87ecb48d43af69b484ea5257a85063dfe84d0055963113bd30d78",
+          "spike_timesteps": "93ad7168af37b3199298db193a72f0028bb3197cf2eb0f30523a6ef0affc0030"
+        },
+        "pending": {
+          "max": 4,
+          "min": 0,
+          "nonzero_counts": 359,
+          "nonzero_weights": 359,
+          "occupied_slots": 10,
+          "ring_index": 14,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 547
+        },
+        "readout": [
+          3,
+          3
+        ],
+        "timestep": 1800
+      },
+      "seconds": {
+        "advance": 0.0149848,
+        "decoder": 1.3e-06,
+        "encode": 0.0002201,
+        "environment": 9e-07,
+        "readout": 5.5e-06,
+        "total": 0.0152126
+      },
+      "sequence": "A",
+      "warmup": false,
+      "whole_network_spikes": 209
+    },
+    {
+      "delivered_events": 5494,
+      "instrumentation_seconds": 0.0003461,
+      "interval": 10,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110272512,
+        "private_bytes": 733114368,
+        "working_set": 110268416
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1576,
+        "spike_timesteps": 1576
+      },
+      "pending": {
+        "max": 3,
+        "min": 0,
+        "nonzero_counts": 423,
+        "nonzero_weights": 423,
+        "occupied_slots": 13,
+        "ring_index": 5,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 594
+      },
+      "queued_events": 5541,
+      "readout_counts": [
+        3,
+        2
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "2a5fa491f69be255e8f8d1bfdbc700a7752539f5fc023911ffc2174f0abd9680",
+          "pending": "c38a630425333c3fc62fb598cd8a90c31b1a9114dfa5b3170bab91f8f4cecf05",
+          "pending_event_counts": "1886a24e4abfa64ac161b1acea055d8c3bef622f40b7bceb23e706a4c7eb1320",
+          "refractory_until": "c8f530346cf6ea898a34afe732aec25bccb61ba3f01ee0cd8f544a8fce20fb12",
+          "v_mV": "1dc05cead4db89c8d4f95b1cb7d2ca381a3658d0a4f916e6aad0b5a38eceaf04"
+        },
+        "dummy": [
+          0.55,
+          0.5,
+          0.25
+        ],
+        "input": "a2bd40461cbc385dbc59160813df37f397cebea551fd3a0503d7f8f504d22988",
+        "output": {
+          "spike_counts": "f826d891685b6a83c6ea3f050f41a0dcaf3d8f29421e578c5aefc7ad5494fb59",
+          "spike_neuron_ids": "f635c4473d160f55b507dbe9651ddf3ed621b1d979875c57a351d7d98cb7601b",
+          "spike_timesteps": "352e9a7186d9c3312c2f00e2e6f45a2b17570c94528fc9bb692cc5e8c2dfc7dc"
+        },
+        "pending": {
+          "max": 3,
+          "min": 0,
+          "nonzero_counts": 423,
+          "nonzero_weights": 423,
+          "occupied_slots": 13,
+          "ring_index": 5,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 594
+        },
+        "readout": [
+          3,
+          2
+        ],
+        "timestep": 2000
+      },
+      "seconds": {
+        "advance": 0.0146515,
+        "decoder": 7e-07,
+        "encode": 0.0002083,
+        "environment": 7e-07,
+        "readout": 4.9e-06,
+        "total": 0.0148661
+      },
+      "sequence": "A",
+      "warmup": false,
+      "whole_network_spikes": 197
+    },
+    {
+      "delivered_events": 6174,
+      "instrumentation_seconds": 0.0003499,
+      "interval": 11,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110272512,
+        "private_bytes": 733114368,
+        "working_set": 110268416
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1672,
+        "spike_timesteps": 1672
+      },
+      "pending": {
+        "max": 2,
+        "min": 0,
+        "nonzero_counts": 265,
+        "nonzero_weights": 265,
+        "occupied_slots": 8,
+        "ring_index": 15,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 337
+      },
+      "queued_events": 5917,
+      "readout_counts": [
+        2,
+        3
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "e5a03ff30849809692f2cdcec1d9c2eff797a5c619e1263a24555f99ad2c91d5",
+          "pending": "ded50a055c95a30f83d58a26c955bdb933f0b8b44b4caf1cfb21e68124357a38",
+          "pending_event_counts": "541d2e9dd2c5b0dc3d130a64558a65815fe8a1925dc591a2c56d114134f4162d",
+          "refractory_until": "c8f9c2a5d5255c1d52cb40513fd7e023f03d50160071d1a3fe894a5b94689765",
+          "v_mV": "ec1505446ceedec5939a48e1cf21a8bae694cbefc5b03c73cc898b13fe5d4315"
+        },
+        "dummy": [
+          0.555,
+          0.5,
+          0.25
+        ],
+        "input": "b95a499105680904df7ee5f7a79a6bd11492b7dc6650ca7275540a0e7dafc6a2",
+        "output": {
+          "spike_counts": "f5bf9ca5ddd82ca0ecaeac43561eb792b6d38f536d98d1f1cc7698514b4e912f",
+          "spike_neuron_ids": "03cffc6e83dcfcce7137752d7dd8e19b7c78f72264e86c9d99582d3ebe366336",
+          "spike_timesteps": "68f47d273bc8c74457576383c27c83bc7353eeee6bf13b0a8ffc421db1dae281"
+        },
+        "pending": {
+          "max": 2,
+          "min": 0,
+          "nonzero_counts": 265,
+          "nonzero_weights": 265,
+          "occupied_slots": 8,
+          "ring_index": 15,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 337
+        },
+        "readout": [
+          2,
+          3
+        ],
+        "timestep": 2200
+      },
+      "seconds": {
+        "advance": 0.0150037,
+        "decoder": 1.3e-06,
+        "encode": 0.0002177,
+        "environment": 8e-07,
+        "readout": 5.2e-06,
+        "total": 0.0152287
+      },
+      "sequence": "A",
+      "warmup": false,
+      "whole_network_spikes": 209
+    },
+    {
+      "delivered_events": 5176,
+      "instrumentation_seconds": 0.000389,
+      "interval": 12,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110272512,
+        "private_bytes": 733114368,
+        "working_set": 110268416
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1536,
+        "spike_timesteps": 1536
+      },
+      "pending": {
+        "max": 3,
+        "min": 0,
+        "nonzero_counts": 478,
+        "nonzero_weights": 478,
+        "occupied_slots": 14,
+        "ring_index": 6,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 615
+      },
+      "queued_events": 5454,
+      "readout_counts": [
+        3,
+        2
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "573db36e6558f6614e1cafc3eb7461b2588a6aa24329bfe2ff71f779c218cd92",
+          "pending": "1bb444990ac3c59023a6c5e4c65886a44f82fe87e6f50cad82f6d5e373b7f61d",
+          "pending_event_counts": "83cc349398be831c7b5ccd87c589f26cd34ca617e0074c9384f75d183267cedc",
+          "refractory_until": "b2cb98e5964bd5158ad4d74ac242d50ef06cdc1b73f5d85594be3de169958fdf",
+          "v_mV": "6192de060fa0bbced97463e619811066094aa1d7d5baa20779677211b2698489"
+        },
+        "dummy": [
+          0.56,
+          0.5,
+          0.25
+        ],
+        "input": "f5ddd71da19c01810a71cffa5a0515bf3c8807882d7328b69c77f11aec354620",
+        "output": {
+          "spike_counts": "881eb4944caf5ffe1b3a9691ba60cc555c81b3889527f598a059f2717acd7548",
+          "spike_neuron_ids": "c58f13187c4d9670576b63e50b8ac46ce1b26325aeaaaab723207ea325f7fd34",
+          "spike_timesteps": "ed31adf4ac4d8dc2452410a89634c581cb4c1b8419d38c8660e7b20da88d88ae"
+        },
+        "pending": {
+          "max": 3,
+          "min": 0,
+          "nonzero_counts": 478,
+          "nonzero_weights": 478,
+          "occupied_slots": 14,
+          "ring_index": 6,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 615
+        },
+        "readout": [
+          3,
+          2
+        ],
+        "timestep": 2400
+      },
+      "seconds": {
+        "advance": 0.0141773,
+        "decoder": 9e-07,
+        "encode": 0.0001979,
+        "environment": 7e-07,
+        "readout": 6.1e-06,
+        "total": 0.0143829
+      },
+      "sequence": "A",
+      "warmup": false,
+      "whole_network_spikes": 192
+    },
+    {
+      "delivered_events": 3130,
+      "instrumentation_seconds": 0.0003764,
+      "interval": 1,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110272512,
+        "private_bytes": 733114368,
+        "working_set": 110268416
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1048,
+        "spike_timesteps": 1048
+      },
+      "pending": {
+        "max": 4,
+        "min": 0,
+        "nonzero_counts": 399,
+        "nonzero_weights": 399,
+        "occupied_slots": 12,
+        "ring_index": 10,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 573
+      },
+      "queued_events": 3703,
+      "readout_counts": [
+        1,
+        1
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "9271e0b87d845494804fc0d91c4dc016bd5f53912c4990fd55790f8f9acb43fc",
+          "pending": "16e97dac5c0212a44387cce55285e125b1dde0e0bb36a79715b3770b03f858e0",
+          "pending_event_counts": "786b8b48549b8ed4a4b2dc4b2237999e93bbbeadd5e1912582c56e4a0f0acd79",
+          "refractory_until": "7e544de5582443ebf094ee95e38876ba351ec5c9d4cc9543d9d479e33379d47e",
+          "v_mV": "e9f49f9d873d2ea35f8cd8f323e42285f9fe07dc537c09b1454ae3ba5b3f624d"
+        },
+        "dummy": [
+          0.505,
+          0.5,
+          0.25
+        ],
+        "input": "aad29220d091b5f531f281058264acb7539a5b571eaceba4c42fdaf177b31e05",
+        "output": {
+          "spike_counts": "16561a8ec1a3645e0bdb32ad3f35500fb8b78a8dd146fccc795dbd1d3dbe267f",
+          "spike_neuron_ids": "9f0c892853851bf57fc3b5af1f96432047aecad4b1acd85b6eb31cfb6304080b",
+          "spike_timesteps": "5893efbdf4cac03f3ad43bf4ed4fc9f121e04d04fc1401a730505b08991bd904"
+        },
+        "pending": {
+          "max": 4,
+          "min": 0,
+          "nonzero_counts": 399,
+          "nonzero_weights": 399,
+          "occupied_slots": 12,
+          "ring_index": 10,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 573
+        },
+        "readout": [
+          1,
+          1
+        ],
+        "timestep": 200
+      },
+      "seconds": {
+        "advance": 0.0138007,
+        "decoder": 9e-07,
+        "encode": 0.0002511,
+        "environment": 9e-07,
+        "readout": 5.5e-06,
+        "total": 0.0140591
+      },
+      "sequence": "B",
+      "warmup": true,
+      "whole_network_spikes": 131
+    },
+    {
+      "delivered_events": 6398,
+      "instrumentation_seconds": 0.000374,
+      "interval": 2,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110272512,
+        "private_bytes": 733114368,
+        "working_set": 110268416
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1776,
+        "spike_timesteps": 1776
+      },
+      "pending": {
+        "max": 3,
+        "min": 0,
+        "nonzero_counts": 366,
+        "nonzero_weights": 366,
+        "occupied_slots": 11,
+        "ring_index": 1,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 481
+      },
+      "queued_events": 6306,
+      "readout_counts": [
+        3,
+        3
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "2b817d3750c5c931ad240682af643f7f777d668f62ddc1a595c311021ce7182c",
+          "pending": "df9c606f56739cca45b100b89d8775c3c35bafe4ff10d8a7f6583a75062d8b4f",
+          "pending_event_counts": "1e638629b7decb0c2d38e27f8edc3ee87d1e7ddd8f4fcf6bbb10a7e38eeeb2bf",
+          "refractory_until": "bb4be0530d20fbbcb68d795b1fcb59ccfb2f5df5d58344e23c598fb5b8019702",
+          "v_mV": "8fdfe131f3b26dd6341c7d20fa7b060760d774f6c0bc393dce01cd374dc95caa"
+        },
+        "dummy": [
+          0.51,
+          0.5,
+          0.25
+        ],
+        "input": "f070562761876eef3e09021aa8abbb4a12a0c7249424c4d45399267d1136f571",
+        "output": {
+          "spike_counts": "0ee28674e3c55d80fd1c6771caf9b12b5c34b55a1ba23dfe1cec491eeddd0c0c",
+          "spike_neuron_ids": "c4ec07d9974b06b1a02d4e52f3d2aec40d55f9cb64610189b9a450f531a86ee1",
+          "spike_timesteps": "6b2b5d8905d71fd3c71decfd528d5329f491e784e85c66ebd20d5237b7c854b4"
+        },
+        "pending": {
+          "max": 3,
+          "min": 0,
+          "nonzero_counts": 366,
+          "nonzero_weights": 366,
+          "occupied_slots": 11,
+          "ring_index": 1,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 481
+        },
+        "readout": [
+          3,
+          3
+        ],
+        "timestep": 400
+      },
+      "seconds": {
+        "advance": 0.0160009,
+        "decoder": 1.3e-06,
+        "encode": 0.0002405,
+        "environment": 1.6e-06,
+        "readout": 5.1e-06,
+        "total": 0.0162494
+      },
+      "sequence": "B",
+      "warmup": true,
+      "whole_network_spikes": 222
+    },
+    {
+      "delivered_events": 5592,
+      "instrumentation_seconds": 0.0003483,
+      "interval": 3,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110272512,
+        "private_bytes": 733114368,
+        "working_set": 110268416
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1568,
+        "spike_timesteps": 1568
+      },
+      "pending": {
+        "max": 2,
+        "min": 0,
+        "nonzero_counts": 389,
+        "nonzero_weights": 389,
+        "occupied_slots": 12,
+        "ring_index": 11,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 455
+      },
+      "queued_events": 5566,
+      "readout_counts": [
+        3,
+        2
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "eecb04adb9bb516b80f3a6c2310c20618c32281289b82bd6da7fbc18ab418e1d",
+          "pending": "d8cd7490dd26164194271095027e7737d8fe029ae51a1d2f3d7b6df1d687c7f8",
+          "pending_event_counts": "a1cab87984cd16f8e660393a8a45b5a5ad6ce2bea3bde588348420b8e04d59a5",
+          "refractory_until": "cc1b591017efe441f0bd82ddd4cafcd8bb5aa4e4e0f06eb77a0fbc24eb392756",
+          "v_mV": "cb4190bc121fd9800cad11283c82eb8896bb0f8c2aa9331c263b3096b0c0650f"
+        },
+        "dummy": [
+          0.515,
+          0.5,
+          0.25
+        ],
+        "input": "82663250463e87e188c775ed4511fffea05a3c62284e91cf9aa6733b03bd5a38",
+        "output": {
+          "spike_counts": "5b2ee448d813b8ba6237edeb1ed2982b2dc2974932cf815729491212013a0599",
+          "spike_neuron_ids": "ddeada8f91e9d5c010f3a76303874844472181a1e3e4eb0b907898320648c04f",
+          "spike_timesteps": "4556dbe839cf930538047268a5d0dbc1db667e5896765868197fe581ad9307df"
+        },
+        "pending": {
+          "max": 2,
+          "min": 0,
+          "nonzero_counts": 389,
+          "nonzero_weights": 389,
+          "occupied_slots": 12,
+          "ring_index": 11,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 455
+        },
+        "readout": [
+          3,
+          2
+        ],
+        "timestep": 600
+      },
+      "seconds": {
+        "advance": 0.0147869,
+        "decoder": 1.4e-06,
+        "encode": 0.0002129,
+        "environment": 7e-07,
+        "readout": 4.5e-06,
+        "total": 0.0150064
+      },
+      "sequence": "B",
+      "warmup": false,
+      "whole_network_spikes": 196
+    },
+    {
+      "delivered_events": 5457,
+      "instrumentation_seconds": 0.0003397,
+      "interval": 4,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110272512,
+        "private_bytes": 733114368,
+        "working_set": 110268416
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1592,
+        "spike_timesteps": 1592
+      },
+      "pending": {
+        "max": 3,
+        "min": 0,
+        "nonzero_counts": 480,
+        "nonzero_weights": 480,
+        "occupied_slots": 15,
+        "ring_index": 2,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 608
+      },
+      "queued_events": 5610,
+      "readout_counts": [
+        2,
+        3
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "9e3623bcd041ea0b9d9cd64529ee7d34011c59806c512daeec5b858ea46aedb3",
+          "pending": "56943aab0abf824ac0b986bcf46bb762e782d9913b4a31763ddbe396d33aeed5",
+          "pending_event_counts": "ba99bf426bb5b7b95ba6b6b09466d7f8a90a2deb579e5ea87b1971267bf43cf2",
+          "refractory_until": "b8097884e7d2b543ddfdfc8a23b805b398f77ad4652adac511817cda57d8a593",
+          "v_mV": "0d45d9d75e6a2dbeb43e8b769231d0ef2e829f638991a993aa9ab22900c208c9"
+        },
+        "dummy": [
+          0.52,
+          0.5,
+          0.25
+        ],
+        "input": "213722b4be57af54672965cd064a46bd4ff567b8a36d556d8b98d918b628469d",
+        "output": {
+          "spike_counts": "69b0e9c3321d24c469312cbc288f4c347d5b807a90cb32fd0fb5bfb55058867d",
+          "spike_neuron_ids": "88dc54f3195723a0a06814a6a9b99ed4fb3a3ad62814b797f3cb1b90ee680850",
+          "spike_timesteps": "2745137d4411649862020518cf1fad8f8a4cd2ccdf4074cf51412084a2a9b9d7"
+        },
+        "pending": {
+          "max": 3,
+          "min": 0,
+          "nonzero_counts": 480,
+          "nonzero_weights": 480,
+          "occupied_slots": 15,
+          "ring_index": 2,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 608
+        },
+        "readout": [
+          2,
+          3
+        ],
+        "timestep": 800
+      },
+      "seconds": {
+        "advance": 0.0146028,
+        "decoder": 1.2e-06,
+        "encode": 0.0002061,
+        "environment": 7e-07,
+        "readout": 4.6e-06,
+        "total": 0.0148154
+      },
+      "sequence": "B",
+      "warmup": false,
+      "whole_network_spikes": 199
+    },
+    {
+      "delivered_events": 5974,
+      "instrumentation_seconds": 0.0003773,
+      "interval": 5,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110272512,
+        "private_bytes": 733114368,
+        "working_set": 110268416
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1648,
+        "spike_timesteps": 1648
+      },
+      "pending": {
+        "max": 2,
+        "min": 0,
+        "nonzero_counts": 398,
+        "nonzero_weights": 398,
+        "occupied_slots": 12,
+        "ring_index": 12,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 482
+      },
+      "queued_events": 5848,
+      "readout_counts": [
+        3,
+        2
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "535063c37e4d07716671f1c2bc0d0a463af40bb18bdfcac583c5824eaba59964",
+          "pending": "91b31a71807c1e35c5e19c6c03da98d772bd57173aa74fb4e11f18acc23fe18a",
+          "pending_event_counts": "2b41e38085d2861553b5f18dec34c1bf29bbd52db351474f57a8c745e0c89414",
+          "refractory_until": "c3092e956b3f2431d690c68f4767d75463f3ce7ef97d12f87dc6413f72b16c93",
+          "v_mV": "b11dccfce1ff927e7c119e0d87eeddc327448e90790aa149ba984ec69e2003fc"
+        },
+        "dummy": [
+          0.525,
+          0.5,
+          0.25
+        ],
+        "input": "db2f6c76d2349ca200be3d735ba3d21cf4155b6293fcdbdc3686773fe8c805a9",
+        "output": {
+          "spike_counts": "9ab05d370e97dd8c90320670156fa628bb6c036ccd8bbedeb83cc5c15c3df0dc",
+          "spike_neuron_ids": "6b155cb1c11f1d2b61bcea55cf64e3a4a3d1f770e16f66505bfd93840f6ee10c",
+          "spike_timesteps": "5e57e97a84164ee6e2b7baa52ad7adb16a9a711107e754e3458783e30395dc3e"
+        },
+        "pending": {
+          "max": 2,
+          "min": 0,
+          "nonzero_counts": 398,
+          "nonzero_weights": 398,
+          "occupied_slots": 12,
+          "ring_index": 12,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 482
+        },
+        "readout": [
+          3,
+          2
+        ],
+        "timestep": 1000
+      },
+      "seconds": {
+        "advance": 0.015154,
+        "decoder": 1.5e-06,
+        "encode": 0.0002208,
+        "environment": 8e-07,
+        "readout": 4.8e-06,
+        "total": 0.0153819
+      },
+      "sequence": "B",
+      "warmup": false,
+      "whole_network_spikes": 206
+    },
+    {
+      "delivered_events": 5242,
+      "instrumentation_seconds": 0.0003397,
+      "interval": 6,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110338048,
+        "private_bytes": 733114368,
+        "working_set": 110333952
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1472,
+        "spike_timesteps": 1472
+      },
+      "pending": {
+        "max": 2,
+        "min": 0,
+        "nonzero_counts": 379,
+        "nonzero_weights": 379,
+        "occupied_slots": 12,
+        "ring_index": 3,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 454
+      },
+      "queued_events": 5214,
+      "readout_counts": [
+        2,
+        3
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "23121665f61ef64a18e96c3fbe4b6b0a0192a071a8caf57dfb40f76405d23533",
+          "pending": "61c2838265ec33b9624c09610fa7375488bd7d329224c80a3e4d2508b0f37e86",
+          "pending_event_counts": "baced53b562a7dede3702a4da95ead85421ead3a44f2baa542a1ac210ce9d9e1",
+          "refractory_until": "d2b323d125c1404e98d6983a1439315e9adb3ed5eaf5067443d28df5c9379af2",
+          "v_mV": "be9cf8ac18566f67e1113462b35cc5e249f1030421c8a69d2ed60e6c9732e2de"
+        },
+        "dummy": [
+          0.53,
+          0.5,
+          0.25
+        ],
+        "input": "bf5ae3e9c04803d32bc807476a729fb11d01f6f47d87e2de80999d74a518f244",
+        "output": {
+          "spike_counts": "a1403ea9be3740d248ffa3050000e6de9d2819728e2475813bc9901d3cb2407a",
+          "spike_neuron_ids": "332eb761da473981b8672228da8732c06643756b268bc5786214c3a963344e72",
+          "spike_timesteps": "20af370e67101891e0e8d061bed24bb3319360ffd47b7f27e601c23a41e8228c"
+        },
+        "pending": {
+          "max": 2,
+          "min": 0,
+          "nonzero_counts": 379,
+          "nonzero_weights": 379,
+          "occupied_slots": 12,
+          "ring_index": 3,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 454
+        },
+        "readout": [
+          2,
+          3
+        ],
+        "timestep": 1200
+      },
+      "seconds": {
+        "advance": 0.0142753,
+        "decoder": 1e-06,
+        "encode": 0.0002011,
+        "environment": 8e-07,
+        "readout": 4.4e-06,
+        "total": 0.0144826
+      },
+      "sequence": "B",
+      "warmup": false,
+      "whole_network_spikes": 184
+    },
+    {
+      "delivered_events": 5364,
+      "instrumentation_seconds": 0.0003323,
+      "interval": 7,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110338048,
+        "private_bytes": 733114368,
+        "working_set": 110333952
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1616,
+        "spike_timesteps": 1616
+      },
+      "pending": {
+        "max": 5,
+        "min": 0,
+        "nonzero_counts": 523,
+        "nonzero_weights": 523,
+        "occupied_slots": 14,
+        "ring_index": 13,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 847
+      },
+      "queued_events": 5757,
+      "readout_counts": [
+        3,
+        2
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "851a43488293f4fa3bc735ad1bf4d6745d8c5815d4f034b311da228539c236f9",
+          "pending": "b3c20207875f82fe6ea9ca15ed2ccedd84ef5f00ad278b6a7485a5d5875024c1",
+          "pending_event_counts": "3ade3ee52eb08284aa008c9ebfaf7fd0447b2e3932d9cd0fb5c6a63e1e6ef8d8",
+          "refractory_until": "d33a6abb3b0f23808bba0e4686abd9aaeee1455f0e50143931bb3faf42c4c6d3",
+          "v_mV": "8ed01cd5733eb43c3996e0e40e4d9eeb953eb39568378525ccc16f214e2725f9"
+        },
+        "dummy": [
+          0.535,
+          0.5,
+          0.25
+        ],
+        "input": "44c659300485dca9212627fd6726d876019ee9272e6f5434eb68fdca33aa8832",
+        "output": {
+          "spike_counts": "13a7e35a338fdf166777ea6a1b553f45e70f5a6f182eccf939679cc2375bbd4d",
+          "spike_neuron_ids": "c81af4bdbc9af6962d4583ef766dbf4ed72e265e4bc74283126e81c476fcbf17",
+          "spike_timesteps": "653febf7f2ae60df68d56021305846d1ab557b82d1ea908f960bde72d0a6c4c1"
+        },
+        "pending": {
+          "max": 5,
+          "min": 0,
+          "nonzero_counts": 523,
+          "nonzero_weights": 523,
+          "occupied_slots": 14,
+          "ring_index": 13,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 847
+        },
+        "readout": [
+          3,
+          2
+        ],
+        "timestep": 1400
+      },
+      "seconds": {
+        "advance": 0.0150364,
+        "decoder": 9e-07,
+        "encode": 0.000214,
+        "environment": 7e-07,
+        "readout": 4.1e-06,
+        "total": 0.0152561
+      },
+      "sequence": "B",
+      "warmup": false,
+      "whole_network_spikes": 202
+    },
+    {
+      "delivered_events": 6072,
+      "instrumentation_seconds": 0.0003373,
+      "interval": 8,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110338048,
+        "private_bytes": 733114368,
+        "working_set": 110333952
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1664,
+        "spike_timesteps": 1664
+      },
+      "pending": {
+        "max": 2,
+        "min": 0,
+        "nonzero_counts": 527,
+        "nonzero_weights": 527,
+        "occupied_slots": 16,
+        "ring_index": 4,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 659
+      },
+      "queued_events": 5884,
+      "readout_counts": [
+        2,
+        3
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "d6b5ffc78d5b5e1c48110da60ab703b85c6f0634453fcf2fff999089f007031e",
+          "pending": "cbb74e46b01116b0e854fa122ccaa2e8784656db20cf922761fbac29c12e1259",
+          "pending_event_counts": "bb3518e6978f5a8ecc5ab792821b56d9a2d8839b49d99de9b73830b42d5a1a0f",
+          "refractory_until": "8e35a31d52f54c053cf3a3d08938f4cbea9a9f2736dfd6a1088626edff39e22c",
+          "v_mV": "bc9742b76a8b18d6c62af6fc70051a4128d77cb7f051ffa292949f7f66b940f1"
+        },
+        "dummy": [
+          0.54,
+          0.5,
+          0.25
+        ],
+        "input": "f63d74516a000c1ead65c3df13b26915bed704c490fd9fd5b10e0ad7be60040f",
+        "output": {
+          "spike_counts": "38c1502f0fc3373d4a5a9db492d9771be5eddf991e8492190bfb937f18b95da4",
+          "spike_neuron_ids": "b3651367e1ef1fc67ded4e27c48171128e95fb26ee04573acf7469d10cdc0351",
+          "spike_timesteps": "94d11a79a8bb8e6a00fcc5c77580510e71cfb8ea5cf4ba81085f6dc26ec55330"
+        },
+        "pending": {
+          "max": 2,
+          "min": 0,
+          "nonzero_counts": 527,
+          "nonzero_weights": 527,
+          "occupied_slots": 16,
+          "ring_index": 4,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 659
+        },
+        "readout": [
+          2,
+          3
+        ],
+        "timestep": 1600
+      },
+      "seconds": {
+        "advance": 0.0148907,
+        "decoder": 8e-07,
+        "encode": 0.0002118,
+        "environment": 9e-07,
+        "readout": 5.8e-06,
+        "total": 0.01511
+      },
+      "sequence": "B",
+      "warmup": false,
+      "whole_network_spikes": 208
+    },
+    {
+      "delivered_events": 6033,
+      "instrumentation_seconds": 0.0003502,
+      "interval": 9,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110338048,
+        "private_bytes": 733114368,
+        "working_set": 110333952
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1672,
+        "spike_timesteps": 1672
+      },
+      "pending": {
+        "max": 4,
+        "min": 0,
+        "nonzero_counts": 359,
+        "nonzero_weights": 359,
+        "occupied_slots": 10,
+        "ring_index": 14,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 547
+      },
+      "queued_events": 5921,
+      "readout_counts": [
+        3,
+        3
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "0c3298bf366ed1a2640641a58a48887142d2e7f6c15b69b39c3ae0e188ee7b15",
+          "pending": "c945544f679f89aae977bf2895846cfcb6545fbe011d0a809fddc0a3cb4e22b2",
+          "pending_event_counts": "e5f7148817010bf216ed56e5d49e1fd2dd762aa87798a3b64e4c837ee306ee1c",
+          "refractory_until": "9685c6c714f1df9cbaeaf3e7db38bd0c8314c7d159c757d2b9557227c400dce7",
+          "v_mV": "e0a438b2341ee0e0f5bf8e099f8c893015405dc3baa1298d53ae637b65573cf4"
+        },
+        "dummy": [
+          0.545,
+          0.5,
+          0.25
+        ],
+        "input": "26f7738af4bcf264db9a5b09dc5d98eee2cf00bb8143c387843c43204eb19fa0",
+        "output": {
+          "spike_counts": "4dddf96e9521b490c465d5e9f22e4fb1e98132af8ca7ff95e113896083bdfa03",
+          "spike_neuron_ids": "ff23916d55a87ecb48d43af69b484ea5257a85063dfe84d0055963113bd30d78",
+          "spike_timesteps": "93ad7168af37b3199298db193a72f0028bb3197cf2eb0f30523a6ef0affc0030"
+        },
+        "pending": {
+          "max": 4,
+          "min": 0,
+          "nonzero_counts": 359,
+          "nonzero_weights": 359,
+          "occupied_slots": 10,
+          "ring_index": 14,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 547
+        },
+        "readout": [
+          3,
+          3
+        ],
+        "timestep": 1800
+      },
+      "seconds": {
+        "advance": 0.0149294,
+        "decoder": 1e-06,
+        "encode": 0.0002162,
+        "environment": 8e-07,
+        "readout": 3.7e-06,
+        "total": 0.0151511
+      },
+      "sequence": "B",
+      "warmup": false,
+      "whole_network_spikes": 209
+    },
+    {
+      "delivered_events": 5494,
+      "instrumentation_seconds": 0.0003606,
+      "interval": 10,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110338048,
+        "private_bytes": 733114368,
+        "working_set": 110333952
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1576,
+        "spike_timesteps": 1576
+      },
+      "pending": {
+        "max": 3,
+        "min": 0,
+        "nonzero_counts": 423,
+        "nonzero_weights": 423,
+        "occupied_slots": 13,
+        "ring_index": 5,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 594
+      },
+      "queued_events": 5541,
+      "readout_counts": [
+        3,
+        2
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "2a5fa491f69be255e8f8d1bfdbc700a7752539f5fc023911ffc2174f0abd9680",
+          "pending": "c38a630425333c3fc62fb598cd8a90c31b1a9114dfa5b3170bab91f8f4cecf05",
+          "pending_event_counts": "1886a24e4abfa64ac161b1acea055d8c3bef622f40b7bceb23e706a4c7eb1320",
+          "refractory_until": "c8f530346cf6ea898a34afe732aec25bccb61ba3f01ee0cd8f544a8fce20fb12",
+          "v_mV": "1dc05cead4db89c8d4f95b1cb7d2ca381a3658d0a4f916e6aad0b5a38eceaf04"
+        },
+        "dummy": [
+          0.55,
+          0.5,
+          0.25
+        ],
+        "input": "a2bd40461cbc385dbc59160813df37f397cebea551fd3a0503d7f8f504d22988",
+        "output": {
+          "spike_counts": "f826d891685b6a83c6ea3f050f41a0dcaf3d8f29421e578c5aefc7ad5494fb59",
+          "spike_neuron_ids": "f635c4473d160f55b507dbe9651ddf3ed621b1d979875c57a351d7d98cb7601b",
+          "spike_timesteps": "352e9a7186d9c3312c2f00e2e6f45a2b17570c94528fc9bb692cc5e8c2dfc7dc"
+        },
+        "pending": {
+          "max": 3,
+          "min": 0,
+          "nonzero_counts": 423,
+          "nonzero_weights": 423,
+          "occupied_slots": 13,
+          "ring_index": 5,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 594
+        },
+        "readout": [
+          3,
+          2
+        ],
+        "timestep": 2000
+      },
+      "seconds": {
+        "advance": 0.014942,
+        "decoder": 8e-07,
+        "encode": 0.0002017,
+        "environment": 8e-07,
+        "readout": 5.1e-06,
+        "total": 0.0151504
+      },
+      "sequence": "B",
+      "warmup": false,
+      "whole_network_spikes": 197
+    },
+    {
+      "delivered_events": 6174,
+      "instrumentation_seconds": 0.0003571,
+      "interval": 11,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110338048,
+        "private_bytes": 733114368,
+        "working_set": 110333952
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1672,
+        "spike_timesteps": 1672
+      },
+      "pending": {
+        "max": 2,
+        "min": 0,
+        "nonzero_counts": 265,
+        "nonzero_weights": 265,
+        "occupied_slots": 8,
+        "ring_index": 15,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 337
+      },
+      "queued_events": 5917,
+      "readout_counts": [
+        2,
+        3
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "e5a03ff30849809692f2cdcec1d9c2eff797a5c619e1263a24555f99ad2c91d5",
+          "pending": "ded50a055c95a30f83d58a26c955bdb933f0b8b44b4caf1cfb21e68124357a38",
+          "pending_event_counts": "541d2e9dd2c5b0dc3d130a64558a65815fe8a1925dc591a2c56d114134f4162d",
+          "refractory_until": "c8f9c2a5d5255c1d52cb40513fd7e023f03d50160071d1a3fe894a5b94689765",
+          "v_mV": "ec1505446ceedec5939a48e1cf21a8bae694cbefc5b03c73cc898b13fe5d4315"
+        },
+        "dummy": [
+          0.555,
+          0.5,
+          0.25
+        ],
+        "input": "b95a499105680904df7ee5f7a79a6bd11492b7dc6650ca7275540a0e7dafc6a2",
+        "output": {
+          "spike_counts": "f5bf9ca5ddd82ca0ecaeac43561eb792b6d38f536d98d1f1cc7698514b4e912f",
+          "spike_neuron_ids": "03cffc6e83dcfcce7137752d7dd8e19b7c78f72264e86c9d99582d3ebe366336",
+          "spike_timesteps": "68f47d273bc8c74457576383c27c83bc7353eeee6bf13b0a8ffc421db1dae281"
+        },
+        "pending": {
+          "max": 2,
+          "min": 0,
+          "nonzero_counts": 265,
+          "nonzero_weights": 265,
+          "occupied_slots": 8,
+          "ring_index": 15,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 337
+        },
+        "readout": [
+          2,
+          3
+        ],
+        "timestep": 2200
+      },
+      "seconds": {
+        "advance": 0.0153084,
+        "decoder": 8e-07,
+        "encode": 0.000218,
+        "environment": 8e-07,
+        "readout": 5e-06,
+        "total": 0.015533
+      },
+      "sequence": "B",
+      "warmup": false,
+      "whole_network_spikes": 209
+    },
+    {
+      "delivered_events": 5176,
+      "instrumentation_seconds": 0.0003606,
+      "interval": 12,
+      "memory": {
+        "commit_bytes": 733114368,
+        "peak_commit_bytes": 733114368,
+        "peak_working_set": 110338048,
+        "private_bytes": 733114368,
+        "working_set": 110333952
+      },
+      "output_array_bytes": {
+        "spike_counts": 352,
+        "spike_neuron_ids": 1536,
+        "spike_timesteps": 1536
+      },
+      "pending": {
+        "max": 3,
+        "min": 0,
+        "nonzero_counts": 478,
+        "nonzero_weights": 478,
+        "occupied_slots": 14,
+        "ring_index": 6,
+        "shape": [
+          19,
+          44
+        ],
+        "sum": 615
+      },
+      "queued_events": 5454,
+      "readout_counts": [
+        3,
+        2
+      ],
+      "replay": {
+        "arrays": {
+          "g_mV": "573db36e6558f6614e1cafc3eb7461b2588a6aa24329bfe2ff71f779c218cd92",
+          "pending": "1bb444990ac3c59023a6c5e4c65886a44f82fe87e6f50cad82f6d5e373b7f61d",
+          "pending_event_counts": "83cc349398be831c7b5ccd87c589f26cd34ca617e0074c9384f75d183267cedc",
+          "refractory_until": "b2cb98e5964bd5158ad4d74ac242d50ef06cdc1b73f5d85594be3de169958fdf",
+          "v_mV": "6192de060fa0bbced97463e619811066094aa1d7d5baa20779677211b2698489"
+        },
+        "dummy": [
+          0.56,
+          0.5,
+          0.25
+        ],
+        "input": "f5ddd71da19c01810a71cffa5a0515bf3c8807882d7328b69c77f11aec354620",
+        "output": {
+          "spike_counts": "881eb4944caf5ffe1b3a9691ba60cc555c81b3889527f598a059f2717acd7548",
+          "spike_neuron_ids": "c58f13187c4d9670576b63e50b8ac46ce1b26325aeaaaab723207ea325f7fd34",
+          "spike_timesteps": "ed31adf4ac4d8dc2452410a89634c581cb4c1b8419d38c8660e7b20da88d88ae"
+        },
+        "pending": {
+          "max": 3,
+          "min": 0,
+          "nonzero_counts": 478,
+          "nonzero_weights": 478,
+          "occupied_slots": 14,
+          "ring_index": 6,
+          "shape": [
+            19,
+            44
+          ],
+          "sum": 615
+        },
+        "readout": [
+          3,
+          2
+        ],
+        "timestep": 2400
+      },
+      "seconds": {
+        "advance": 0.0146998,
+        "decoder": 9e-07,
+        "encode": 0.0001945,
+        "environment": 1.3e-06,
+        "readout": 4.5e-06,
+        "total": 0.014901
+      },
+      "sequence": "B",
+      "warmup": false,
+      "whole_network_spikes": 192
+    }
+  ],
+  "synthetic_source_accesses": 1,
+  "timing_boundaries": {
+    "output_assembly": "advance",
+    "readout": "total",
+    "repacking": "encode/total",
+    "slicing": "outside core timing",
+    "verification": "outside timing",
+    "warmups": "individually timed; excluded from measured statistics"
+  },
+  "watchdog": {
+    "launches": 1,
+    "limits": {
+      "advance_s": 30,
+      "preparation_s": 600,
+      "private_bytes": 8589934592,
+      "worker_s": 1500,
+      "working_set": 8589934592
+    },
+    "orphans": [],
+    "peaks": {
+      "private_bytes": 733986816,
+      "working_set": 114651136
+    },
+    "phase_events": [
+      {
+        "at": 98210.6219612,
+        "phase": "prepare",
+        "pid": 3124
+      },
+      {
+        "at": 98210.6268777,
+        "attempt_count": 0,
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "stage",
+        "stage": "bounded_loader"
+      },
+      {
+        "at": 98210.6285735,
+        "attempt_count": 0,
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "stage",
+        "stage": "publication_universe"
+      },
+      {
+        "at": 98210.6286838,
+        "attempt_count": 0,
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "boundary",
+        "stage": "publication_universe",
+        "timings": {
+          "publication_universe": 6.91e-05
+        }
+      },
+      {
+        "at": 98210.6287354,
+        "attempt_count": 0,
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "source_access",
+        "stage": "source_batches"
+      },
+      {
+        "at": 98210.6316736,
+        "attempt_count": 0,
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "boundary",
+        "stage": "source_processing",
+        "timings": {
+          "endpoint_membership": 0.00015769999999999998,
+          "local_aggregation": 0.0007447,
+          "publication_universe": 6.91e-05,
+          "source_iteration": 0.0002629
+        }
+      },
+      {
+        "at": 98210.6317533,
+        "attempt_count": 0,
+        "metrics": {
+          "chunk_aggregate_peak_bytes": 10776,
+          "chunk_retained_peak_bytes": 12288,
+          "local_grouping_seconds": 0.0007518000202253461,
+          "mask_peak_bytes": 512,
+          "partial_accumulation_seconds": 2.2000021999701858e-06,
+          "partial_peak_bytes": 42408,
+          "partial_rows": 1767,
+          "retained_rows": 2000,
+          "source_peak_bytes": 12288,
+          "timings": {
+            "endpoint_membership": 0.00015769999999999998,
+            "local_aggregation": 0.0007447,
+            "publication_universe": 6.91e-05,
+            "source_iteration": 0.0002629
+          }
+        },
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "stage",
+        "stage": "staged_merge"
+      },
+      {
+        "at": 98210.6324565,
+        "attempt_count": 0,
+        "metrics": {
+          "array_header_bytes": 1344,
+          "block_operations": 5,
+          "block_rows": 3329,
+          "block_workspace_bound_bytes": 2097152,
+          "chunk_aggregate_peak_bytes": 10776,
+          "chunk_retained_peak_bytes": 12288,
+          "compaction_rows_read": 2810,
+          "compaction_rows_written": 2810,
+          "container_header_allowance_bytes": 10240,
+          "final_grouped_bytes": 29952,
+          "first_scan_rows": 3329,
+          "initial_partial_bytes": 42408,
+          "local_grouping_seconds": 0.0007518000202253461,
+          "mask_peak_bytes": 512,
+          "max_active_input_runs": 2,
+          "max_block_rows": 1561,
+          "max_completed_next_stage_bytes": 37488,
+          "max_group_input_bytes": 37488,
+          "max_output_bytes": 29952,
+          "max_resident_payload_bytes": 104928,
+          "merge_groups_per_stage": [
+            2,
+            1
+          ],
+          "merge_seconds": 0.0006659000064246356,
+          "merge_stages": 2,
+          "partial_accumulation_seconds": 2.2000021999701858e-06,
+          "partial_peak_bytes": 42408,
+          "partial_rows": 1767,
+          "resident_bound_bytes": 2242808,
+          "retained_rows": 2000,
+          "row_touches": 11759,
+          "rows_read": 3329,
+          "rows_written": 2810,
+          "scalar_workspace_allowance_bytes": 4096,
+          "schedule": [
+            [
+              0,
+              0,
+              449,
+              447
+            ],
+            [
+              0,
+              2,
+              448,
+              423
+            ],
+            [
+              1,
+              0,
+              786,
+              776
+            ]
+          ],
+          "search_operations": 18,
+          "second_scan_rows": 0,
+          "sort_operations": 3,
+          "source_peak_bytes": 12288,
+          "timings": {
+            "endpoint_membership": 0.00015769999999999998,
+            "local_aggregation": 0.0007447,
+            "publication_universe": 6.91e-05,
+            "source_iteration": 0.0002629,
+            "staged_merge": 0.0006702
+          }
+        },
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "boundary",
+        "stage": "staged_merge",
+        "timings": {
+          "endpoint_membership": 0.00015769999999999998,
+          "local_aggregation": 0.0007447,
+          "publication_universe": 6.91e-05,
+          "source_iteration": 0.0002629,
+          "staged_merge": 0.0006702
+        }
+      },
+      {
+        "at": 98210.6325152,
+        "attempt_count": 0,
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "stage",
+        "stage": "metadata_normalization"
+      },
+      {
+        "at": 98210.6378468,
+        "attempt_count": 0,
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "boundary",
+        "stage": "metadata_normalization",
+        "timings": {
+          "endpoint_membership": 0.00015769999999999998,
+          "local_aggregation": 0.0007447,
+          "metadata_normalization": 0.0053141,
+          "publication_universe": 6.91e-05,
+          "source_iteration": 0.0002629,
+          "staged_merge": 0.0006702
+        }
+      },
+      {
+        "at": 98210.6378962,
+        "attempt_count": 0,
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "boundary",
+        "stage": "bounded_loader",
+        "timings": {
+          "bounded_loader": 0.010983,
+          "endpoint_membership": 0.00015769999999999998,
+          "local_aggregation": 0.0007447,
+          "metadata_normalization": 0.0053141,
+          "publication_universe": 6.91e-05,
+          "source_iteration": 0.0002629,
+          "staged_merge": 0.0006702
+        }
+      },
+      {
+        "at": 98210.655247,
+        "attempt_count": 0,
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "stage",
+        "stage": "downstream_projection_csr"
+      },
+      {
+        "at": 98210.6559115,
+        "attempt_count": 0,
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "boundary",
+        "stage": "downstream_projection_csr",
+        "timings": {
+          "bounded_loader": 0.010983,
+          "downstream_projection_csr": 0.0006029,
+          "endpoint_membership": 0.00015769999999999998,
+          "local_aggregation": 0.0007447,
+          "metadata_normalization": 0.0053141,
+          "publication_universe": 6.91e-05,
+          "source_iteration": 0.0002629,
+          "staged_merge": 0.0006702
+        }
+      },
+      {
+        "at": 98210.6559714,
+        "attempt_count": 0,
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "stage",
+        "stage": "sign_construction"
+      },
+      {
+        "at": 98210.6573282,
+        "attempt_count": 0,
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "boundary",
+        "stage": "sign_construction",
+        "timings": {
+          "bounded_loader": 0.010983,
+          "downstream_projection_csr": 0.0006029,
+          "endpoint_membership": 0.00015769999999999998,
+          "local_aggregation": 0.0007447,
+          "metadata_normalization": 0.0053141,
+          "publication_universe": 6.91e-05,
+          "sign_construction": 0.0013396,
+          "source_iteration": 0.0002629,
+          "staged_merge": 0.0006702
+        }
+      },
+      {
+        "at": 98210.6574001,
+        "attempt_count": 0,
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "stage",
+        "stage": "effective_weights_outgoing_csr"
+      },
+      {
+        "at": 98210.6584965,
+        "attempt_count": 0,
+        "phase": "prepare",
+        "pid": 3124,
+        "route_event": "boundary",
+        "stage": "effective_weights_outgoing_csr",
+        "timings": {
+          "bounded_loader": 0.010983,
+          "downstream_projection_csr": 0.0006029,
+          "effective_weights_outgoing_csr": 0.0010771,
+          "endpoint_membership": 0.00015769999999999998,
+          "local_aggregation": 0.0007447,
+          "metadata_normalization": 0.0053141,
+          "publication_universe": 6.91e-05,
+          "sign_construction": 0.0013396,
+          "source_iteration": 0.0002629,
+          "staged_merge": 0.0006702
+        }
+      },
+      {
+        "at": 98210.6589836,
+        "phase": "identity",
+        "pid": 3124
+      },
+      {
+        "at": 98210.6623628,
+        "phase": "initial_state",
+        "pid": 3124
+      },
+      {
+        "at": 98210.6627922,
+        "interval": 1,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "A"
+      },
+      {
+        "at": 98210.6768635,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.6773533,
+        "interval": 2,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "A"
+      },
+      {
+        "at": 98210.6930098,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.6934551,
+        "interval": 3,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "A"
+      },
+      {
+        "at": 98210.7083219,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.7087539,
+        "interval": 4,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "A"
+      },
+      {
+        "at": 98210.7235297,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.7240228,
+        "interval": 5,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "A"
+      },
+      {
+        "at": 98210.7387259,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.739236,
+        "interval": 6,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "A"
+      },
+      {
+        "at": 98210.7538973,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.7544114,
+        "interval": 7,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "A"
+      },
+      {
+        "at": 98210.7699467,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.7704836,
+        "interval": 8,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "A"
+      },
+      {
+        "at": 98210.7859499,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.7865054,
+        "interval": 9,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "A"
+      },
+      {
+        "at": 98210.8017744,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.802337,
+        "interval": 10,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "A"
+      },
+      {
+        "at": 98210.8172595,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.8178375,
+        "interval": 11,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "A"
+      },
+      {
+        "at": 98210.8331182,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.833716,
+        "interval": 12,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "A"
+      },
+      {
+        "at": 98210.8481528,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.8488186,
+        "phase": "initial_state",
+        "pid": 3124
+      },
+      {
+        "at": 98210.8491177,
+        "interval": 1,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "B"
+      },
+      {
+        "at": 98210.8632348,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.8638825,
+        "interval": 2,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "B"
+      },
+      {
+        "at": 98210.8801876,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.8808572,
+        "interval": 3,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "B"
+      },
+      {
+        "at": 98210.8959196,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.8965745,
+        "interval": 4,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "B"
+      },
+      {
+        "at": 98210.9114421,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.9121081,
+        "interval": 5,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "B"
+      },
+      {
+        "at": 98210.9275396,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.9282605,
+        "interval": 6,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "B"
+      },
+      {
+        "at": 98210.9427971,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.9435057,
+        "interval": 7,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "B"
+      },
+      {
+        "at": 98210.9588117,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.9595247,
+        "interval": 8,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "B"
+      },
+      {
+        "at": 98210.9746827,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.9754082,
+        "interval": 9,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "B"
+      },
+      {
+        "at": 98210.9906098,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98210.9913571,
+        "interval": 10,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "B"
+      },
+      {
+        "at": 98211.0065632,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98211.0073364,
+        "interval": 11,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "B"
+      },
+      {
+        "at": 98211.0229246,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98211.0237291,
+        "interval": 12,
+        "phase": "advance",
+        "pid": 3124,
+        "sequence": "B"
+      },
+      {
+        "at": 98211.0386834,
+        "phase": "verification",
+        "pid": 3124
+      },
+      {
+        "at": 98211.0774844,
+        "phase": "finished",
+        "pid": 3124
+      }
+    ],
+    "process_containment": "Windows Job Object",
+    "samples": 166
+  },
+  "watchdog_preflight": "contained suspended launch before source access"
+}

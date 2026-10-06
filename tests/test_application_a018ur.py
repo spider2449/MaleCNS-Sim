@@ -3,6 +3,7 @@ import ast
 import importlib.util
 from pathlib import Path
 import sys
+import time
 from unittest.mock import patch
 
 import pyarrow as pa
@@ -92,11 +93,43 @@ def test_exact_frozen_constants_and_no_execution_entrypoints():
 @pytest.mark.skipif(sys.platform != "win32", reason="Windows contained process tree")
 def test_supervisor_time_failure_cleans_without_retry(tmp_path, monkeypatch):
     monkeypatch.setattr(harness, "PREPARATION_CAP", 0.15)
-    code = 'import json,os,time; print(json.dumps(dict(kind="prepare_start",pid=os.getpid(),started_ns=time.perf_counter_ns(),clock_ns=time.perf_counter_ns(),stage="synthetic")),flush=True); time.sleep(5)'
+    ready = tmp_path / "guarded-ready"
+    release = tmp_path / "workload-release"
+    code = f'''import json,os,time,pathlib
+if os.environ.get("MALECNS_A019C_R2_FIREWALL") == "1":
+ import validation_firewall
+ assert validation_firewall.ACTIVE
+pathlib.Path({str(ready)!r}).write_text("ready", encoding="utf-8")
+while not pathlib.Path({str(release)!r}).exists(): time.sleep(0.001)
+print(json.dumps(dict(kind="prepare_start",pid=os.getpid(),started_ns=time.perf_counter_ns(),clock_ns=time.perf_counter_ns(),stage="synthetic")),flush=True)
+time.sleep(5)
+'''
+    process_job = harness.ProcessJob
+
+    def ready_job(command):
+        # Complete mandatory interpreter/guard activation before the short
+        # synthetic preparation clock; retain the real contained ProcessJob.
+        job = process_job(command)
+        deadline = time.monotonic() + 10
+        try:
+            while not ready.exists():
+                if job.process.poll() is not None or time.monotonic() >= deadline:
+                    raise AssertionError("synthetic child did not become ready")
+                time.sleep(0.01)
+            release.write_text("release", encoding="utf-8")
+            return job
+        except BaseException:
+            job.close()
+            raise
+
+    monkeypatch.setattr(harness, "ProcessJob", ready_job)
     result = harness.supervise([sys.executable, "-c", code], tmp_path / "result.json")
     assert result["classification"] == "A018UR-TIME-LIMIT", result
     assert result["attempts"] == 0
     assert result["orphans"] == []
+    assert [event["kind"] for event in result["events"]] == ["prepare_start"]
+    assert result["interrupted_preparation_seconds"] >= 0.15
+    assert result["exit_code"] is not None
 
 
 @pytest.mark.skipif(sys.platform != "win32", reason="Windows contained process tree")
