@@ -1,4 +1,4 @@
-﻿# A019H bounded synthetic linear-local instrumentation
+# A019H bounded synthetic linear-local instrumentation
 
 Authorization: user explicitly authorized A019H, including terminal commit/push.
 Starting local HEAD, origin/master and live GitHub master:
@@ -90,4 +90,3 @@ Targeted A019F/G/H suite: 18 passed. Includes OFF defaults, exact ON/OFF, starti
 Counters: full-real preparations=0; real advances=0; A019D reruns=0; GPU runs=0; Arena runs=0; interventions=0; downloads=0; archive writes=0. All seven accepted registered-source read categories=0. Deliberate firewall denial tests are blocked before content reads. Qualifier: **fail-closed guarded accounting, not independent native byte telemetry**. Synthetic evidence writes are report artifacts.
 
 Limitations: timer entry/accounting and reference cleanup remain residual; no calibrated confidence intervals, independent native allocation telemetry, edge-only scaling or full-real inference. No optimization, semantics change, benchmark-contract change, tag, release or version bump. Authorized terminal closure commits these five task files and pushes origin master. Exact final local/origin/live identity and clean worktree/staging/stash are verified after push and reported externally to avoid self-hash recursion. Version remains 0.3.0; tracked workflows remain zero.
-
