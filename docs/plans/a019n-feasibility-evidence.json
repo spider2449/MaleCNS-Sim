@@ -1,0 +1,311 @@
+{
+  "schema": "a019n-feasibility-v1",
+  "classification": "A019N-B",
+  "probes": [
+    {
+      "case": "A1",
+      "intermediates": [
+        {
+          "value": 0.0,
+          "dt": 0.1,
+          "step": 0,
+          "reconstructed": 0.0,
+          "aligned": true
+        },
+        {
+          "value": 5.0,
+          "dt": 0.1,
+          "step": 50,
+          "reconstructed": 5.0,
+          "aligned": true
+        },
+        {
+          "value": 19.9,
+          "dt": 0.1,
+          "step": 199,
+          "reconstructed": 19.900000000000002,
+          "aligned": true
+        }
+      ],
+      "result": [
+        "ok",
+        "5321705c2c43a5bef2255a1b797cb08a189f961e66305fb2489c6b1d717ee1bf"
+      ],
+      "grid_calls": 3,
+      "dt_number_calls": 3,
+      "packing_array_count": 6,
+      "result_identity_reused": false
+    },
+    {
+      "case": "A2",
+      "intermediates": [
+        {
+          "value": 0.0,
+          "dt": 0.1,
+          "step": 0,
+          "reconstructed": 0.0,
+          "aligned": true
+        },
+        {
+          "value": 5.0,
+          "dt": 0.1,
+          "step": 50,
+          "reconstructed": 5.0,
+          "aligned": true
+        },
+        {
+          "value": 19.9,
+          "dt": 0.1,
+          "step": 199,
+          "reconstructed": 19.900000000000002,
+          "aligned": true
+        }
+      ],
+      "result": [
+        "ok",
+        "5321705c2c43a5bef2255a1b797cb08a189f961e66305fb2489c6b1d717ee1bf"
+      ],
+      "grid_calls": 3,
+      "dt_number_calls": 3,
+      "packing_array_count": 6,
+      "result_identity_reused": false
+    },
+    {
+      "case": "B_fresh_state",
+      "intermediates": [
+        {
+          "value": 0.0,
+          "dt": 0.1,
+          "step": 0,
+          "reconstructed": 0.0,
+          "aligned": true
+        },
+        {
+          "value": 5.0,
+          "dt": 0.1,
+          "step": 50,
+          "reconstructed": 5.0,
+          "aligned": true
+        },
+        {
+          "value": 19.9,
+          "dt": 0.1,
+          "step": 199,
+          "reconstructed": 19.900000000000002,
+          "aligned": true
+        }
+      ],
+      "result": [
+        "ok",
+        "5321705c2c43a5bef2255a1b797cb08a189f961e66305fb2489c6b1d717ee1bf"
+      ],
+      "grid_calls": 3,
+      "dt_number_calls": 3,
+      "packing_array_count": 6,
+      "result_identity_reused": false
+    },
+    {
+      "case": "C_count",
+      "intermediates": [
+        {
+          "value": 0.0,
+          "dt": 0.1,
+          "step": 0,
+          "reconstructed": 0.0,
+          "aligned": true
+        },
+        {
+          "value": 5.0,
+          "dt": 0.1,
+          "step": 50,
+          "reconstructed": 5.0,
+          "aligned": true
+        },
+        {
+          "value": 5.0,
+          "dt": 0.1,
+          "step": 50,
+          "reconstructed": 5.0,
+          "aligned": true
+        },
+        {
+          "value": 19.9,
+          "dt": 0.1,
+          "step": 199,
+          "reconstructed": 19.900000000000002,
+          "aligned": true
+        }
+      ],
+      "result": [
+        "ok",
+        "ba6ad92ae218e1a5792b5942734a874abc95ec216da3da5f606ae19da36ae169"
+      ],
+      "grid_calls": 4,
+      "dt_number_calls": 4,
+      "packing_array_count": 6,
+      "result_identity_reused": false
+    },
+    {
+      "case": "D_times",
+      "intermediates": [
+        {
+          "value": 0.0,
+          "dt": 0.1,
+          "step": 0,
+          "reconstructed": 0.0,
+          "aligned": true
+        },
+        {
+          "value": 6.0,
+          "dt": 0.1,
+          "step": 60,
+          "reconstructed": 6.0,
+          "aligned": true
+        },
+        {
+          "value": 19.9,
+          "dt": 0.1,
+          "step": 199,
+          "reconstructed": 19.900000000000002,
+          "aligned": true
+        }
+      ],
+      "result": [
+        "ok",
+        "0de53879068c1dc01c4905a3ad842e1bd3a6ab3c4ea2bc6d6a4a562931fbf795"
+      ],
+      "grid_calls": 3,
+      "dt_number_calls": 3,
+      "packing_array_count": 6,
+      "result_identity_reused": false
+    },
+    {
+      "case": "E_dt",
+      "intermediates": [
+        {
+          "value": 0.0,
+          "dt": 0.2,
+          "step": 0,
+          "reconstructed": 0.0,
+          "aligned": true
+        },
+        {
+          "value": 5.0,
+          "dt": 0.2,
+          "step": 25,
+          "reconstructed": 5.0,
+          "aligned": true
+        },
+        {
+          "value": 19.8,
+          "dt": 0.2,
+          "step": 99,
+          "reconstructed": 19.8,
+          "aligned": true
+        }
+      ],
+      "result": [
+        "ok",
+        "db92e9f295cf226f0d23aebc249fbc025e5e6ccf4e34745f21be6b434154cbd1"
+      ],
+      "grid_calls": 3,
+      "dt_number_calls": 3,
+      "packing_array_count": 6,
+      "result_identity_reused": false
+    },
+    {
+      "case": "window",
+      "intermediates": [
+        {
+          "value": 0.0,
+          "dt": 0.1,
+          "step": 0,
+          "reconstructed": 0.0,
+          "aligned": true
+        },
+        {
+          "value": 5.0,
+          "dt": 0.1,
+          "step": 50,
+          "reconstructed": 5.0,
+          "aligned": true
+        },
+        {
+          "value": 19.9,
+          "dt": 0.1,
+          "step": 199,
+          "reconstructed": 19.900000000000002,
+          "aligned": true
+        }
+      ],
+      "result": [
+        "ValueError",
+        "stimulus spike time must be before the simulation endpoint"
+      ],
+      "grid_calls": 3,
+      "dt_number_calls": 3,
+      "packing_array_count": 0,
+      "result_identity_reused": false
+    }
+  ],
+  "boundary_outcome_pairs": 55,
+  "replay": [
+    {
+      "delay_ms": 0.0,
+      "chunk": 0,
+      "exact": true,
+      "pending_events": 8
+    },
+    {
+      "delay_ms": 0.0,
+      "chunk": 1,
+      "exact": true,
+      "pending_events": 8
+    },
+    {
+      "delay_ms": 1.8,
+      "chunk": 0,
+      "exact": true,
+      "pending_events": 8
+    },
+    {
+      "delay_ms": 1.8,
+      "chunk": 1,
+      "exact": true,
+      "pending_events": 8
+    },
+    {
+      "delay_ms": 20.0,
+      "chunk": 0,
+      "exact": true,
+      "pending_events": 32
+    },
+    {
+      "delay_ms": 20.0,
+      "chunk": 1,
+      "exact": true,
+      "pending_events": 40
+    }
+  ],
+  "prototype": "isolated valid-float dt split; admission still checked per event",
+  "allocation_accounting": "source-level array constructions only; no allocator telemetry",
+  "synthetic_advances": 12,
+  "full_real_preparations": 0,
+  "real_advances": 0,
+  "reruns_a019d_a019l": 0,
+  "gpu_runs": 0,
+  "arena_runs": 0,
+  "interventions": 0,
+  "downloads": 0,
+  "archive_writes": 0,
+  "accepted_registered_reads": {
+    "REAL_MAPPING": 0,
+    "REAL_PROVENANCE": 0,
+    "REAL_NEUROTRANSMITTER": 0,
+    "REAL_ANNOTATION": 0,
+    "REAL_CONNECTIVITY": 0,
+    "REAL_NEURON_METADATA": 0,
+    "REAL_OTHER_REGISTERED_DATA": 0
+  },
+  "qualifier": "fail-closed guarded accounting, not independent native byte telemetry"
+}
