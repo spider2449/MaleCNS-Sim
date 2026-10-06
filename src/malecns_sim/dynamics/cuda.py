@@ -5,7 +5,8 @@ from __future__ import annotations
 import hashlib
 import json
 import math
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from threading import Lock
 from time import perf_counter
 from typing import Iterable
 
@@ -18,6 +19,7 @@ from malecns_sim.dynamics.lif import (
     SimulationResult,
     SparseTrace,
     _canonicalize_spike_events,
+    _freeze,
     _validate_duration,
 )
 from malecns_sim.dynamics.stimulus import (
@@ -74,6 +76,368 @@ class CudaGraph:
     weights_mV: object
     neuron_count: int
     edge_count: int
+
+
+_ORDERED_SCHEDULE_SOURCE = r"""
+extern "C" __global__ void schedule_ordered(
+    const bool* fired, const bool* silenced,
+    const long long* offsets, const int* sources,
+    const long long* ordinals, const double* weights,
+    double* pending, int* counts, long long* queued,
+    long long n, long long slot
+) {
+    long long target = (long long)blockDim.x * blockIdx.x + threadIdx.x;
+    if (target >= n) return;
+    long long index = slot * n + target;
+    double value = pending[index];
+    int count = counts[index];
+    long long added = 0;
+    for (long long i = offsets[target]; i < offsets[target + 1]; ++i) {
+        int source = sources[i];
+        if (fired[source] && !silenced[source]) {
+            value += weights[ordinals[i]];
+            ++count;
+            ++added;
+        }
+    }
+    pending[index] = value;
+    counts[index] = count;
+    queued[target] = added;
+}
+"""
+
+
+@dataclass(frozen=True, slots=True)
+class _GPUBacking:
+    """Shared static buffers and serialized device execution resources."""
+
+    graph: CudaGraph
+    incoming_offsets: object
+    incoming_sources: object
+    incoming_ordinals: object
+    stream: object
+    kernel: object
+    lock: object = field(default_factory=Lock)
+
+
+@dataclass(slots=True)
+class _GPULifetime:
+    backing: _GPUBacking | None = None
+    closed: bool = False
+    failed: bool = False
+
+
+@dataclass(slots=True)
+class GPUSimulationState:
+    """Private device dynamics retained across calls; close is idempotent.
+
+    Like CPU SimulationState, arrays are observable for explicit inspection.
+    Callers must not replace/mutate buffers, ownership or canonical time.
+    """
+
+    runtime_identity: tuple[str, str, float]
+    device_id: int
+    timestep: int
+    v_mV: object
+    g_mV: object
+    refractory_until: object
+    pending: object
+    pending_event_counts: object
+    _owner: object = field(repr=False)
+    _backing: _GPUBacking | None = field(repr=False)
+    status: str = "ready"
+
+    def close(self) -> None:
+        """Drop only this state's buffers, never shared/global pool storage."""
+        backing = self._backing
+        if backing is None:
+            return
+        if not backing.lock.acquire(blocking=False):
+            raise RuntimeError("GPU runtime is busy")
+        try:
+            with _cupy().cuda.Device(self.device_id):
+                backing.stream.synchronize()
+        finally:
+            self.status = "released"
+            self.v_mV = self.g_mV = self.refractory_until = None
+            self.pending = self.pending_event_counts = None
+            self._backing = None
+            backing.lock.release()
+
+
+@dataclass(frozen=True, slots=True)
+class GPUPreparedRuntime:
+    """CPU-isomorphic resumable seam with device-specific concrete storage.
+
+    The CPU concrete state assumes NumPy buffers and has no device lifecycle;
+    this backend therefore uses separate concrete types with the same public
+    initial_state/advance boundary. Static buffers are never written by advance.
+    """
+
+    projection: EffectiveSignedProjection
+    parameters: LIFParameters = REFERENCE_LIF_PARAMETERS
+    dt_ms: float = 0.1
+    device_id: int = field(init=False)
+    backend_identity: tuple[str, str, int] = field(init=False)
+    delay_steps: int = field(init=False)
+    refractory_steps: int = field(init=False)
+    ring_size: int = field(init=False)
+    _coefficients: tuple[float, float, float] = field(init=False, repr=False)
+    _owner: object = field(default_factory=object, init=False, repr=False)
+    _lifetime: _GPULifetime = field(default_factory=_GPULifetime, init=False, repr=False)
+
+    def __post_init__(self) -> None:
+        p = self.projection
+        parameters = self.parameters
+        delay, refractory = parameters.grid_steps(self.dt_ms)
+        if not np.isclose(p.synaptic_weight_mV,
+                          parameters.synaptic_weight_per_anatomical_synapse_mV,
+                          rtol=0.0, atol=1e-15):
+            raise ValueError("projection synaptic weight does not match LIF parameters")
+        n, e = int(p.neuron_ids.size), int(p.outgoing_targets.size)
+        limit = np.iinfo(np.int32).max
+        if n > limit or e > limit:
+            raise ValueError("GPU CSR exceeds int32 index bounds")
+        if (p.outgoing_indptr.dtype.kind not in "iu" or p.outgoing_targets.dtype.kind not in "iu"
+                or p.outgoing_indptr.shape != (n + 1,) or p.outgoing_indptr[0] != 0
+                or p.outgoing_indptr[-1] != e or np.any(np.diff(p.outgoing_indptr) < 0)
+                or np.any(p.outgoing_targets < 0) or np.any(p.outgoing_targets >= n)
+                or p.outgoing_weights_mV.shape != (e,)
+                or not np.all(np.isfinite(p.outgoing_weights_mV))):
+            raise ValueError("invalid GPU CSR topology or weights")
+        if delay + 1 > np.iinfo(np.int64).max or refractory > np.iinfo(np.int64).max:
+            raise ValueError("GPU delay/refractory exceeds int64 bounds")
+        sources = np.repeat(np.arange(n, dtype=np.int32), np.diff(p.outgoing_indptr))
+        # Stable target grouping retains ascending source/outgoing CSR ordinal.
+        ordinals = np.argsort(p.outgoing_targets, kind="stable").astype(np.int64)
+        incoming_counts = np.bincount(p.outgoing_targets, minlength=n)
+        # R=D+1 makes each enqueue reuse the just-cleared slot. Each slot
+        # contains at most one step's incoming edges, bounded by E <= INT_MAX.
+        offsets = np.concatenate(([0], np.cumsum(incoming_counts, dtype=np.int64)))
+        cp = _cupy()
+        device = int(cp.cuda.runtime.getDevice())
+        stream = cp.cuda.Stream(non_blocking=True)
+        with stream:
+            graph = CudaGraph(cp.asarray(p.outgoing_indptr, dtype=cp.int32),
+                              cp.asarray(p.outgoing_targets, dtype=cp.int32),
+                              cp.asarray(p.outgoing_weights_mV, dtype=cp.float64), n, e)
+            backing = _GPUBacking(graph, cp.asarray(offsets, dtype=cp.int64),
+                                  cp.asarray(sources[ordinals], dtype=cp.int32),
+                                  cp.asarray(ordinals, dtype=cp.int64), stream,
+                                  cp.RawKernel(_ORDERED_SCHEDULE_SOURCE, "schedule_ordered",
+                                               options=("--fmad=false",)))
+            backing.kernel.compile()
+        stream.synchronize()
+        exp_m = float(np.exp(-self.dt_ms / parameters.tau_membrane_ms))
+        exp_s = float(np.exp(-self.dt_ms / parameters.tau_synapse_ms))
+        coefficient = ((self.dt_ms / parameters.tau_membrane_ms) * exp_m
+                       if np.isclose(parameters.tau_membrane_ms, parameters.tau_synapse_ms)
+                       else (exp_s - exp_m) / (1.0 - parameters.tau_membrane_ms / parameters.tau_synapse_ms))
+        for name, value in (("device_id", device), ("backend_identity", ("cupy", cp.__version__, device)),
+                            ("delay_steps", delay), ("refractory_steps", refractory),
+                            ("ring_size", max(delay + 1, 1)), ("_coefficients", (exp_m, exp_s, coefficient))):
+            object.__setattr__(self, name, value)
+        self._lifetime.backing = backing
+
+    @property
+    def identity(self) -> tuple[str, str, float]:
+        return (self.projection.fingerprint, self.parameters.fingerprint, self.dt_ms)
+
+    def _checked_backing(self) -> _GPUBacking:
+        if self._lifetime.closed or self._lifetime.failed:
+            raise RuntimeError("GPU runtime is closed or failed")
+        cp = _cupy()
+        if int(cp.cuda.runtime.getDevice()) != self.device_id:
+            raise ValueError("GPU runtime device mismatch")
+        return self._lifetime.backing
+
+    def _execution_failure(self, exc: BaseException) -> None:
+        # CUDA context-fatal errors prohibit further runtime device work.
+        if getattr(exc, "status", None) in (700, 710, 719):
+            self._lifetime.failed = True
+
+    def initial_state(self) -> GPUSimulationState:
+        backing = self._checked_backing()
+        if not backing.lock.acquire(blocking=False):
+            raise RuntimeError("GPU runtime is busy")
+        cp, n = _cupy(), self.projection.neuron_ids.size
+        try:
+            if self._checked_backing() is not backing:
+                raise RuntimeError("GPU runtime backing changed")
+            with backing.stream:
+                state = GPUSimulationState(
+                    self.identity, self.device_id, 0,
+                    cp.full(n, self.parameters.v_rest_mV, dtype=cp.float64),
+                    cp.zeros(n, dtype=cp.float64), cp.full(n, -1, dtype=cp.int64),
+                    cp.zeros((self.ring_size, n), dtype=cp.float64),
+                    cp.zeros((self.ring_size, n), dtype=cp.int32), self._owner, backing)
+            backing.stream.synchronize()
+            return state
+        except BaseException as exc:
+            self._execution_failure(exc)
+            raise
+        finally:
+            backing.lock.release()
+
+    def close(self) -> None:
+        """Reject future calls; live states retain backing until their close."""
+        backing = self._lifetime.backing
+        if backing is None:
+            return
+        if not backing.lock.acquire(blocking=False):
+            raise RuntimeError("GPU runtime is busy")
+        try:
+            with _cupy().cuda.Device(self.device_id):
+                backing.stream.synchronize()
+        finally:
+            self._lifetime.closed = True
+            self._lifetime.backing = None
+            backing.lock.release()
+
+    def advance(self, state: GPUSimulationState, *, duration_ms: float,
+                stimulus: ExplicitStimulus = ExplicitStimulus(),
+                silenced_neuron_ids: Iterable[int] = (),
+                trace_neuron_ids: Iterable[int] = ()) -> SimulationResult:
+        """Validate local input, mutate retained device state, return host output."""
+        backing = self._checked_backing()
+        if (not isinstance(state, GPUSimulationState) or state._owner is not self._owner
+                or state.runtime_identity != self.identity or state._backing is not backing):
+            raise ValueError("state belongs to another GPU prepared runtime or is released")
+        if state.status != "ready":
+            raise RuntimeError("GPU state is released or failed")
+        if state.device_id != self.device_id:
+            raise ValueError("GPU state device mismatch")
+        if not isinstance(stimulus, ExplicitStimulus):
+            raise TypeError("advance requires explicit chunk-relative events")
+        steps = _validate_duration(duration_ms, self.dt_ms)
+        limit = np.iinfo(np.int64).max
+        if (type(state.timestep) is not int or state.timestep < 0
+                or state.timestep + steps + max(self.delay_steps, self.refractory_steps) > limit
+                or (steps + self.ring_size) * self.projection.outgoing_targets.size > limit):
+            raise ValueError("GPU timestep or event counter exceeds int64 bounds")
+        ids = self.projection.neuron_ids
+        _, fingerprint, batches, free = _stimulus_inputs(
+            stimulus, duration_ms=duration_ms, dt_ms=self.dt_ms,
+            parameters=self.parameters, neuron_ids=ids)
+        silenced = validate_refractory_ids(silenced_neuron_ids, ids)
+        trace = validate_refractory_ids(trace_neuron_ids, ids)
+        packed = {}
+        for step, (positions, _) in batches.items():
+            unique, counts = np.unique(positions, return_counts=True)
+            packed[step] = (unique, counts.astype(np.int64))
+        if not backing.lock.acquire(blocking=False):
+            raise RuntimeError("GPU runtime is busy")
+        launched = False
+        try:
+            if self._checked_backing() is not backing:
+                raise RuntimeError("GPU runtime backing changed")
+            if state.status != "ready" or state._backing is not backing:
+                raise RuntimeError("GPU state is released or failed")
+            if state.timestep + steps + max(self.delay_steps, self.refractory_steps) > limit:
+                raise ValueError("GPU timestep exceeds int64 bounds")
+            launched = True
+            with backing.stream:
+                result = self._advance_device(state, steps, duration_ms, stimulus,
+                                              fingerprint, packed, free, silenced, trace)
+            backing.stream.synchronize()
+            state.timestep += steps
+            return result
+        except BaseException as exc:
+            if launched:
+                state.status = "failed"
+                self._execution_failure(exc)
+            raise
+        finally:
+            backing.lock.release()
+
+    def _advance_device(self, state, steps, duration_ms, stimulus, fingerprint,
+                        packed, free, silenced, trace) -> SimulationResult:
+        cp, p, parameters = _cupy(), self.projection, self.parameters
+        backing, n, offset = state._backing, p.neuron_ids.size, state.timestep
+        v, g, deadlines = state.v_mV, state.g_mV, state.refractory_until
+        pending, pending_counts = state.pending, state.pending_event_counts
+        free_mask, silenced_mask = cp.zeros(n, dtype=cp.bool_), cp.zeros(n, dtype=cp.bool_)
+        free_mask[cp.asarray(free)] = True
+        silenced_mask[cp.asarray(silenced)] = True
+        trace_positions = cp.asarray(trace)
+        trace_v = cp.empty((trace.size, steps + 1), dtype=cp.float64) if trace.size else None
+        trace_g = cp.empty_like(trace_v) if trace.size else None
+        if trace.size:
+            trace_v[:, 0], trace_g[:, 0] = v[trace_positions], g[trace_positions]
+        scratch_v, scratch_g = cp.empty_like(v), cp.empty_like(g)
+        queued_by_target = cp.zeros(n, dtype=cp.int64)
+        queued, delivered = cp.zeros(1, dtype=cp.int64), cp.zeros(1, dtype=cp.int64)
+        spike_positions, spike_steps = [], []
+        exp_m, exp_s, coefficient = self._coefficients
+        weight = parameters.synaptic_weight_per_anatomical_synapse_mV if stimulus.weight_mV is None else stimulus.weight_mV
+        device_events = {step: (cp.asarray(pos), cp.asarray(counts)) for step, (pos, counts) in packed.items()}
+        for local_step in range(steps):
+            step = offset + local_step
+            allowed = (step > deadlines) | free_mask
+            if local_step in device_events:
+                positions, counts = device_events[local_step]
+                admitted = allowed[positions]
+                selected = positions[admitted]
+                v[selected] += counts[admitted].astype(cp.float64) * weight
+            slot = step % self.ring_size
+            due, counts = pending[slot], pending_counts[slot]
+            g[allowed] += due[allowed]
+            delivered += cp.sum(counts, dtype=cp.int64)
+            due.fill(0.0)
+            counts.fill(0)
+            # Separate ufunc stages preserve the frozen equation operation order.
+            cp.subtract(v, parameters.v_rest_mV, out=scratch_v)
+            cp.multiply(scratch_v, exp_m, out=scratch_v)
+            cp.add(parameters.v_rest_mV, scratch_v, out=scratch_v)
+            cp.multiply(g, coefficient, out=scratch_g)
+            cp.add(scratch_v, scratch_g, out=scratch_v)
+            cp.multiply(g, exp_s, out=scratch_g)
+            v[allowed], g[allowed] = scratch_v[allowed], scratch_g[allowed]
+            fired = allowed & (v > parameters.v_threshold_mV)
+            positions = cp.flatnonzero(fired)
+            if positions.size:
+                spike_positions.append(positions)
+                spike_steps.append(cp.full(positions.size, step + 1, dtype=cp.int64))
+            v[fired], g[fired] = parameters.v_reset_mV, 0.0
+            deadlines[fired] = step + 1 + self.refractory_steps
+            if n:
+                backing.kernel(((n + 255) // 256,), (256,),
+                               (fired, silenced_mask, backing.incoming_offsets,
+                                backing.incoming_sources, backing.incoming_ordinals,
+                                backing.graph.weights_mV, pending, pending_counts,
+                                queued_by_target, np.int64(n),
+                                np.int64((step + 1 + self.delay_steps) % self.ring_size)))
+                queued += cp.sum(queued_by_target, dtype=cp.int64)
+            if trace.size:
+                trace_v[:, local_step + 1], trace_g[:, local_step + 1] = v[trace_positions], g[trace_positions]
+        positions = cp.asnumpy(cp.concatenate(spike_positions)) if spike_positions else np.empty(0, dtype=np.int64)
+        times = cp.asnumpy(cp.concatenate(spike_steps)) if spike_steps else np.empty(0, dtype=np.int64)
+        output_ids, times = _canonicalize_spike_events(p.neuron_ids[positions], times)
+        counts = np.bincount(positions, minlength=n).astype(np.int64)
+        trace_ids = p.neuron_ids[trace].copy()
+        host_v = cp.asnumpy(trace_v) if trace.size else None
+        host_g = cp.asnumpy(trace_g) if trace.size else None
+        for array in (output_ids, times, counts, trace_ids, host_v, host_g):
+            if array is not None:
+                _freeze(array)
+        digest = hashlib.sha256(b"malecns-sim-spike-result-v1" + output_ids.tobytes()
+                                + times.tobytes() + counts.tobytes()).hexdigest()
+        return SimulationResult(
+            spike_neuron_ids=output_ids, spike_timesteps=times, spike_counts=counts,
+            duration_ms=float(duration_ms), dt_ms=float(self.dt_ms),
+            parameter_fingerprint=parameters.fingerprint,
+            unsigned_graph_fingerprint=p.unsigned_graph_fingerprint,
+            sign_policy_fingerprint=p.signed_policy_fingerprint,
+            stimulus_fingerprint=fingerprint,
+            simulation_fingerprint=_simulation_fingerprint(
+                p, parameters, dt_ms=self.dt_ms, duration_ms=duration_ms,
+                delay_steps=self.delay_steps, refractory_steps=self.refractory_steps,
+                stimulus_fingerprint=fingerprint, silenced=tuple(int(p.neuron_ids[i]) for i in silenced)),
+            spike_result_digest=digest, emitted_spike_count=int(output_ids.size),
+            active_neuron_count=int(np.count_nonzero(counts)),
+            queued_synaptic_event_count=int(cp.asnumpy(queued)[0]),
+            delivered_synaptic_event_count=int(cp.asnumpy(delivered)[0]),
+            trace_neuron_ids=trace_ids, trace_v_mV=host_v, trace_g_mV=host_g)
 
 
 @dataclass(frozen=True, slots=True)
