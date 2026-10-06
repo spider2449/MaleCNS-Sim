@@ -159,8 +159,13 @@ def linear_state_update(
     g_next = np.asarray(g_mV) * exp_s
     if _timing is not None:
         _timing.substop("linear_update", "synaptic_decay")
+        _timing.substart()
     if np.ndim(v_mV) == 0:
+        if _timing is not None:
+            _timing.substop("linear_update", "return_shape_check")
         return float(v_next), float(g_next)
+    if _timing is not None:
+        _timing.substop("linear_update", "return_shape_check")
     return v_next, g_next
 
 
@@ -348,7 +353,8 @@ ADVANCE_STAGES = (
     "spike_reset_enqueue", "trace", "output",
 )
 ADVANCE_SUBSTAGES = {
-    "linear_update": ("mask", "coefficients", "membrane", "synaptic_decay", "writeback"),
+    "linear_update": ("mask", "coefficients", "membrane", "synaptic_decay", "writeback",
+                      "allowed_reduction", "input_gather", "return_shape_check"),
     "event_schedule": ("lookup", "grid_validation", "append", "packing"),
 }
 
@@ -579,8 +585,18 @@ def simulate_lif(
         allowed = (step > refractory_until) | refractory_free_mask
         if _timing is not None:
             _timing.substop("linear_update", "mask")
-        if np.any(allowed):
-            updated_v, updated_g = linear_state_update(v[allowed], g[allowed], parameters=parameters, dt_ms=dt_ms, _timing=_timing)
+            _timing.substart()
+        any_allowed = np.any(allowed)
+        if _timing is not None:
+            _timing.substop("linear_update", "allowed_reduction")
+        if any_allowed:
+            if _timing is not None:
+                _timing.substart()
+            input_v, input_g = v[allowed], g[allowed]
+            if _timing is not None:
+                _timing.substop("linear_update", "input_gather")
+            updated_v, updated_g = linear_state_update(input_v, input_g, parameters=parameters, dt_ms=dt_ms, _timing=_timing)
+            del input_v, input_g
             if _timing is not None:
                 _timing.substart()
             v[allowed] = updated_v
