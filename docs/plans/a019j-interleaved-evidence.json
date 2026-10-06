@@ -1,0 +1,725 @@
+{
+  "cases": [
+    {
+      "case": "G1",
+      "events": 60,
+      "graph_identity": "cb6b2f8d081a743325a68fde7fe76d3bf6e4d8a506b078c57fd8546dbe79e49c",
+      "stimulus_identity": "26f55d2f71e58fbfdd23cf6961e977de3d1916ec2ddc5c7785b2adac31a8ee69",
+      "warmups": 3,
+      "repeats": 10,
+      "raw": [
+        {
+          "repeat": 0,
+          "baseline": {
+            "wall_ns": 10392300,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "optimized": {
+            "wall_ns": 10350500,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 1,
+          "optimized": {
+            "wall_ns": 10532400,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "baseline": {
+            "wall_ns": 10382500,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 2,
+          "baseline": {
+            "wall_ns": 10287100,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "optimized": {
+            "wall_ns": 10377200,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 3,
+          "optimized": {
+            "wall_ns": 10269300,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "baseline": {
+            "wall_ns": 10699100,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 4,
+          "baseline": {
+            "wall_ns": 10822700,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "optimized": {
+            "wall_ns": 10331200,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 5,
+          "optimized": {
+            "wall_ns": 10409300,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "baseline": {
+            "wall_ns": 10445100,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 6,
+          "baseline": {
+            "wall_ns": 10125500,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "optimized": {
+            "wall_ns": 10130300,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 7,
+          "optimized": {
+            "wall_ns": 10306100,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "baseline": {
+            "wall_ns": 10738600,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 8,
+          "baseline": {
+            "wall_ns": 10515400,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "optimized": {
+            "wall_ns": 10561000,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 9,
+          "optimized": {
+            "wall_ns": 10100900,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "baseline": {
+            "wall_ns": 10489800,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        }
+      ],
+      "summaries": {
+        "baseline": {
+          "median": 10467450.0,
+          "mean": 10489810,
+          "min": 10125500,
+          "max": 10822700
+        },
+        "optimized": {
+          "median": 10340850.0,
+          "mean": 10336820,
+          "min": 10100900,
+          "max": 10561000
+        }
+      },
+      "paired_delta_ns": {
+        "median": -38800.0,
+        "mean": -152990,
+        "min": -491500,
+        "max": 149900
+      }
+    },
+    {
+      "case": "G2",
+      "events": 60,
+      "graph_identity": "936fdabb280271e1c8dcd7e390d2dde21eb1545383423eb26017706cf6a36eb9",
+      "stimulus_identity": "26f55d2f71e58fbfdd23cf6961e977de3d1916ec2ddc5c7785b2adac31a8ee69",
+      "warmups": 3,
+      "repeats": 10,
+      "raw": [
+        {
+          "repeat": 0,
+          "baseline": {
+            "wall_ns": 17226500,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "optimized": {
+            "wall_ns": 16155300,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 1,
+          "optimized": {
+            "wall_ns": 16560800,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "baseline": {
+            "wall_ns": 17306400,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 2,
+          "baseline": {
+            "wall_ns": 16989100,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "optimized": {
+            "wall_ns": 16295200,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 3,
+          "optimized": {
+            "wall_ns": 16635700,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "baseline": {
+            "wall_ns": 16918600,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 4,
+          "baseline": {
+            "wall_ns": 17319900,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "optimized": {
+            "wall_ns": 16584200,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 5,
+          "optimized": {
+            "wall_ns": 16794200,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "baseline": {
+            "wall_ns": 17430400,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 6,
+          "baseline": {
+            "wall_ns": 17194900,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "optimized": {
+            "wall_ns": 16587100,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 7,
+          "optimized": {
+            "wall_ns": 16501300,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "baseline": {
+            "wall_ns": 16937900,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 8,
+          "baseline": {
+            "wall_ns": 17266900,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "optimized": {
+            "wall_ns": 16613400,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 9,
+          "optimized": {
+            "wall_ns": 16434400,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "baseline": {
+            "wall_ns": 17692200,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        }
+      ],
+      "summaries": {
+        "baseline": {
+          "median": 17246700.0,
+          "mean": 17228280,
+          "min": 16918600,
+          "max": 17692200
+        },
+        "optimized": {
+          "median": 16572500.0,
+          "mean": 16516160,
+          "min": 16155300,
+          "max": 16794200
+        }
+      },
+      "paired_delta_ns": {
+        "median": -673700.0,
+        "mean": -712120,
+        "min": -1257800,
+        "max": -282900
+      }
+    },
+    {
+      "case": "G3",
+      "events": 60,
+      "graph_identity": "eaeb6e4e3698ba175ea5e38e037e6c7d962f1dc312d6dd83ec1811287d47a909",
+      "stimulus_identity": "26f55d2f71e58fbfdd23cf6961e977de3d1916ec2ddc5c7785b2adac31a8ee69",
+      "warmups": 3,
+      "repeats": 10,
+      "raw": [
+        {
+          "repeat": 0,
+          "baseline": {
+            "wall_ns": 77722100,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "optimized": {
+            "wall_ns": 72387000,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 1,
+          "optimized": {
+            "wall_ns": 72969600,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "baseline": {
+            "wall_ns": 78481400,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 2,
+          "baseline": {
+            "wall_ns": 77300100,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "optimized": {
+            "wall_ns": 74353100,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 3,
+          "optimized": {
+            "wall_ns": 74373000,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "baseline": {
+            "wall_ns": 80088900,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 4,
+          "baseline": {
+            "wall_ns": 85230300,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "optimized": {
+            "wall_ns": 73237400,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 5,
+          "optimized": {
+            "wall_ns": 74187100,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "baseline": {
+            "wall_ns": 79685200,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 6,
+          "baseline": {
+            "wall_ns": 79125400,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "optimized": {
+            "wall_ns": 75320600,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 7,
+          "optimized": {
+            "wall_ns": 74640300,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "baseline": {
+            "wall_ns": 79527400,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 8,
+          "baseline": {
+            "wall_ns": 77789300,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "optimized": {
+            "wall_ns": 73794400,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 9,
+          "optimized": {
+            "wall_ns": 74406000,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "baseline": {
+            "wall_ns": 78732200,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        }
+      ],
+      "summaries": {
+        "baseline": {
+          "median": 78928800.0,
+          "mean": 79368230,
+          "min": 77300100,
+          "max": 85230300
+        },
+        "optimized": {
+          "median": 74270100.0,
+          "mean": 73966850,
+          "min": 72387000,
+          "max": 75320600
+        }
+      },
+      "paired_delta_ns": {
+        "median": -5111100.0,
+        "mean": -5401380,
+        "min": -11992900,
+        "max": -2947000
+      }
+    }
+  ],
+  "limitation": "Frozen expression wrapper and optimized advance scratch setup are included in both routes; corroboration only, primary baseline is pre-edit production."
+}

@@ -1,0 +1,1761 @@
+{
+  "schema": "a019j-membrane-o1-evidence-v1",
+  "starting_sha": "4e6d88b8ee7ad2c38ea339038c912b305c969a5f",
+  "classification": "A019J-A",
+  "performance_classification": "JPERF-A",
+  "exact_replay": "PASS",
+  "cross_state_isolation": "PASS",
+  "frozen_expression_sha256": "50614005be558b32e9ea2712e2b2475c7a29565ddebdc58751fe9eff79d7e478",
+  "scratch": {
+    "owner": "simulate_lif dense advance call",
+    "allocation": "two np.empty(N, dtype=float64) during state_setup",
+    "resizing": "never resized; recreated for every advance; sliced to K on each update",
+    "lifetime": "one advance; overwritten only after ordered v then g writeback; released on return",
+    "prepared_runtime_owned": false,
+    "simulation_state_owned": false,
+    "persists_across_20ms_calls": false,
+    "no_stale_data": "all selected lanes overwritten before consumption",
+    "no_alias": "fresh independent buffers; gathered inputs remain independent copies; no globals or state buffer storage"
+  },
+  "accounting": "source-derived ndarray payload counts and observed out= call sequence; not native allocator telemetry; view headers and iterator/internal allocations excluded",
+  "cases": [
+    {
+      "case": "G1-12",
+      "neurons": 128,
+      "off_advance": {
+        "median": {
+          "baseline": 10720200.0,
+          "optimized": 10187300.0,
+          "delta": -532900.0,
+          "delta_percent": -4.9709893472136715
+        },
+        "mean": {
+          "baseline": 11026560,
+          "optimized": 10302140,
+          "delta": -724420,
+          "delta_percent": -6.569773347263335
+        }
+      },
+      "on_advance": {
+        "median": {
+          "baseline": 12202350.0,
+          "optimized": 11930650.0,
+          "delta": -271700.0,
+          "delta_percent": -2.2266202821587644
+        },
+        "mean": {
+          "baseline": 13243010,
+          "optimized": 11906830,
+          "delta": -1336180,
+          "delta_percent": -10.089700151249602
+        }
+      },
+      "stages": {
+        "preparation": {
+          "median": {
+            "baseline": 129500.0,
+            "optimized": 115600.0,
+            "delta": -13900.0,
+            "delta_percent": -10.733590733590734
+          },
+          "mean": {
+            "baseline": 130730,
+            "optimized": 116620,
+            "delta": -14110,
+            "delta_percent": -10.793237971391417
+          }
+        },
+        "event_schedule": {
+          "median": {
+            "baseline": 1132950.0,
+            "optimized": 1046550.0,
+            "delta": -86400.0,
+            "delta_percent": -7.626108830928108
+          },
+          "mean": {
+            "baseline": 1112780,
+            "optimized": 1061010,
+            "delta": -51770,
+            "delta_percent": -4.652312227034994
+          }
+        },
+        "state_setup": {
+          "median": {
+            "baseline": 43150.0,
+            "optimized": 41300.0,
+            "delta": -1850.0,
+            "delta_percent": -4.287369640787949
+          },
+          "mean": {
+            "baseline": 43980,
+            "optimized": 40500,
+            "delta": -3480,
+            "delta_percent": -7.91268758526603
+          }
+        },
+        "direct_input": {
+          "median": {
+            "baseline": 116500.0,
+            "optimized": 113500.0,
+            "delta": -3000.0,
+            "delta_percent": -2.575107296137339
+          },
+          "mean": {
+            "baseline": 131180,
+            "optimized": 117080,
+            "delta": -14100,
+            "delta_percent": -10.748589724043299
+          }
+        },
+        "pending_delivery": {
+          "median": {
+            "baseline": 1543750.0,
+            "optimized": 1523700.0,
+            "delta": -20050.0,
+            "delta_percent": -1.2987854251012145
+          },
+          "mean": {
+            "baseline": 1705100,
+            "optimized": 1531170,
+            "delta": -173930,
+            "delta_percent": -10.200574746349188
+          }
+        },
+        "linear_update": {
+          "median": {
+            "baseline": 7451050.0,
+            "optimized": 7267500.0,
+            "delta": -183550.0,
+            "delta_percent": -2.463411197079606
+          },
+          "mean": {
+            "baseline": 8125300,
+            "optimized": 7261590,
+            "delta": -863710,
+            "delta_percent": -10.629884435036244
+          }
+        },
+        "spike_reset_enqueue": {
+          "median": {
+            "baseline": 1352900.0,
+            "optimized": 1347700.0,
+            "delta": -5200.0,
+            "delta_percent": -0.3843595239855126
+          },
+          "mean": {
+            "baseline": 1489600,
+            "optimized": 1343000,
+            "delta": -146600,
+            "delta_percent": -9.84156820622986
+          }
+        },
+        "trace": {
+          "median": {
+            "baseline": 36950.0,
+            "optimized": 38200.0,
+            "delta": 1250.0,
+            "delta_percent": 3.3829499323410013
+          },
+          "mean": {
+            "baseline": 39620,
+            "optimized": 39010,
+            "delta": -610,
+            "delta_percent": -1.5396264512872286
+          }
+        },
+        "output": {
+          "median": {
+            "baseline": 118100.0,
+            "optimized": 96850.0,
+            "delta": -21250.0,
+            "delta_percent": -17.993226079593565
+          },
+          "mean": {
+            "baseline": 127040,
+            "optimized": 98720,
+            "delta": -28320,
+            "delta_percent": -22.292191435768263
+          }
+        }
+      },
+      "linear_substages": {
+        "mask": {
+          "median": {
+            "baseline": 505700.0,
+            "optimized": 487150.0,
+            "delta": -18550.0,
+            "delta_percent": -3.6681827170259047
+          },
+          "mean": {
+            "baseline": 557000,
+            "optimized": 490440,
+            "delta": -66560,
+            "delta_percent": -11.949730700179533
+          }
+        },
+        "coefficients": {
+          "median": {
+            "baseline": 3709400.0,
+            "optimized": 3633150.0,
+            "delta": -76250.0,
+            "delta_percent": -2.0555885048794953
+          },
+          "mean": {
+            "baseline": 4039130,
+            "optimized": 3636000,
+            "delta": -403130,
+            "delta_percent": -9.98061463731051
+          }
+        },
+        "membrane": {
+          "median": {
+            "baseline": 1164450.0,
+            "optimized": 1101900.0,
+            "delta": -62550.0,
+            "delta_percent": -5.371634677315471
+          },
+          "mean": {
+            "baseline": 1256380,
+            "optimized": 1101660,
+            "delta": -154720,
+            "delta_percent": -12.314745538770117
+          }
+        },
+        "synaptic_decay": {
+          "median": {
+            "baseline": 252450.0,
+            "optimized": 230750.0,
+            "delta": -21700.0,
+            "delta_percent": -8.595761536938008
+          },
+          "mean": {
+            "baseline": 270590,
+            "optimized": 232890,
+            "delta": -37700,
+            "delta_percent": -13.932517831405447
+          }
+        },
+        "writeback": {
+          "median": {
+            "baseline": 289100.0,
+            "optimized": 296250.0,
+            "delta": 7150.0,
+            "delta_percent": 2.4731926668972672
+          },
+          "mean": {
+            "baseline": 313610,
+            "optimized": 296450,
+            "delta": -17160,
+            "delta_percent": -5.4717642932304456
+          }
+        },
+        "allowed_reduction": {
+          "median": {
+            "baseline": 464150.0,
+            "optimized": 434400.0,
+            "delta": -29750.0,
+            "delta_percent": -6.409565873101368
+          },
+          "mean": {
+            "baseline": 494010,
+            "optimized": 436140,
+            "delta": -57870,
+            "delta_percent": -11.714337766441975
+          }
+        },
+        "input_gather": {
+          "median": {
+            "baseline": 318900.0,
+            "optimized": 325650.0,
+            "delta": 6750.0,
+            "delta_percent": 2.116650987770461
+          },
+          "mean": {
+            "baseline": 340500,
+            "optimized": 322960,
+            "delta": -17540,
+            "delta_percent": -5.151248164464024
+          }
+        },
+        "return_shape_check": {
+          "median": {
+            "baseline": 111750.0,
+            "optimized": 115950.0,
+            "delta": 4200.0,
+            "delta_percent": 3.7583892617449663
+          },
+          "mean": {
+            "baseline": 124960,
+            "optimized": 116150,
+            "delta": -8810,
+            "delta_percent": -7.050256081946223
+          }
+        },
+        "residual": {
+          "median": {
+            "baseline": 660750.0,
+            "optimized": 631100.0,
+            "delta": -29650.0,
+            "delta_percent": -4.4873250094589485
+          },
+          "mean": {
+            "baseline": 729120,
+            "optimized": 628900,
+            "delta": -100220,
+            "delta_percent": -13.745336844415185
+          }
+        }
+      },
+      "variability": {
+        "baseline_off_range_ns": [
+          10423300,
+          12903200
+        ],
+        "optimized_off_range_ns": [
+          10140900,
+          10736800
+        ],
+        "baseline_linear_range_ns": [
+          7339100,
+          13909500
+        ],
+        "optimized_linear_range_ns": [
+          6942100,
+          7503900
+        ]
+      },
+      "instrumentation_overhead_percent": {
+        "baseline": 13.825768175966866,
+        "optimized": 17.112973997035525
+      },
+      "structural": {
+        "k_bound": 128,
+        "old_membrane_passes": 5,
+        "new_membrane_passes": 5,
+        "old_decay_passes": 1,
+        "new_decay_passes": 1,
+        "old_membrane_array_allocations_per_update": 5,
+        "new_membrane_array_allocations_per_update": 0,
+        "old_decay_array_allocations_per_update": 1,
+        "new_decay_array_allocations_per_update": 0,
+        "old_membrane_cumulative_payload_bytes": 5120,
+        "old_decay_payload_bytes": 1024,
+        "new_result_payload_allocation_bytes_per_update": 0,
+        "scratch_payload_bytes_per_advance": 2048,
+        "scratch_array_allocations_per_advance": 2,
+        "persistent_scratch_bytes_between_advances": 0
+      }
+    },
+    {
+      "case": "G2-12",
+      "neurons": 4096,
+      "off_advance": {
+        "median": {
+          "baseline": 17988550.0,
+          "optimized": 16515050.0,
+          "delta": -1473500.0,
+          "delta_percent": -8.19132170186035
+        },
+        "mean": {
+          "baseline": 18279660,
+          "optimized": 16817010,
+          "delta": -1462650,
+          "delta_percent": -8.001516439583668
+        }
+      },
+      "on_advance": {
+        "median": {
+          "baseline": 19579500.0,
+          "optimized": 18098950.0,
+          "delta": -1480550.0,
+          "delta_percent": -7.561735488648842
+        },
+        "mean": {
+          "baseline": 20113200,
+          "optimized": 18131630,
+          "delta": -1981570,
+          "delta_percent": -9.852087186524273
+        }
+      },
+      "stages": {
+        "preparation": {
+          "median": {
+            "baseline": 141450.0,
+            "optimized": 132800.0,
+            "delta": -8650.0,
+            "delta_percent": -6.115235065394132
+          },
+          "mean": {
+            "baseline": 154280,
+            "optimized": 133460,
+            "delta": -20820,
+            "delta_percent": -13.49494425719471
+          }
+        },
+        "event_schedule": {
+          "median": {
+            "baseline": 1110750.0,
+            "optimized": 1092300.0,
+            "delta": -18450.0,
+            "delta_percent": -1.6610398379473328
+          },
+          "mean": {
+            "baseline": 1263850,
+            "optimized": 1091040,
+            "delta": -172810,
+            "delta_percent": -13.673299837797208
+          }
+        },
+        "state_setup": {
+          "median": {
+            "baseline": 47550.0,
+            "optimized": 47550.0,
+            "delta": 0.0,
+            "delta_percent": 0.0
+          },
+          "mean": {
+            "baseline": 77310,
+            "optimized": 46470,
+            "delta": -30840,
+            "delta_percent": -39.89134652696934
+          }
+        },
+        "direct_input": {
+          "median": {
+            "baseline": 243200.0,
+            "optimized": 222350.0,
+            "delta": -20850.0,
+            "delta_percent": -8.573190789473685
+          },
+          "mean": {
+            "baseline": 251670,
+            "optimized": 222300,
+            "delta": -29370,
+            "delta_percent": -11.670044105376087
+          }
+        },
+        "pending_delivery": {
+          "median": {
+            "baseline": 3023850.0,
+            "optimized": 2820750.0,
+            "delta": -203100.0,
+            "delta_percent": -6.716603006101493
+          },
+          "mean": {
+            "baseline": 3095520,
+            "optimized": 2828630,
+            "delta": -266890,
+            "delta_percent": -8.62181475164108
+          }
+        },
+        "linear_update": {
+          "median": {
+            "baseline": 12640200.0,
+            "optimized": 11543200.0,
+            "delta": -1097000.0,
+            "delta_percent": -8.678660147782471
+          },
+          "mean": {
+            "baseline": 12782210,
+            "optimized": 11547790,
+            "delta": -1234420,
+            "delta_percent": -9.657328427556736
+          }
+        },
+        "spike_reset_enqueue": {
+          "median": {
+            "baseline": 1838400.0,
+            "optimized": 1702150.0,
+            "delta": -136250.0,
+            "delta_percent": -7.411335944299391
+          },
+          "mean": {
+            "baseline": 1880530,
+            "optimized": 1698800,
+            "delta": -181730,
+            "delta_percent": -9.663765002419531
+          }
+        },
+        "trace": {
+          "median": {
+            "baseline": 37800.0,
+            "optimized": 38500.0,
+            "delta": 700.0,
+            "delta_percent": 1.8518518518518519
+          },
+          "mean": {
+            "baseline": 38540,
+            "optimized": 38600,
+            "delta": 60,
+            "delta_percent": 0.15568240788790866
+          }
+        },
+        "output": {
+          "median": {
+            "baseline": 231100.0,
+            "optimized": 212000.0,
+            "delta": -19100.0,
+            "delta_percent": -8.264820424058849
+          },
+          "mean": {
+            "baseline": 232850,
+            "optimized": 210620,
+            "delta": -22230,
+            "delta_percent": -9.546918617135495
+          }
+        }
+      },
+      "linear_substages": {
+        "mask": {
+          "median": {
+            "baseline": 895100.0,
+            "optimized": 864100.0,
+            "delta": -31000.0,
+            "delta_percent": -3.4633001899229137
+          },
+          "mean": {
+            "baseline": 914420,
+            "optimized": 862840,
+            "delta": -51580,
+            "delta_percent": -5.6407340171912255
+          }
+        },
+        "coefficients": {
+          "median": {
+            "baseline": 4030500.0,
+            "optimized": 3857350.0,
+            "delta": -173150.0,
+            "delta_percent": -4.295993052971095
+          },
+          "mean": {
+            "baseline": 4115600,
+            "optimized": 3859900,
+            "delta": -255700,
+            "delta_percent": -6.212945864515502
+          }
+        },
+        "membrane": {
+          "median": {
+            "baseline": 2525650.0,
+            "optimized": 1932950.0,
+            "delta": -592700.0,
+            "delta_percent": -23.467226258586898
+          },
+          "mean": {
+            "baseline": 2551660,
+            "optimized": 1928620,
+            "delta": -623040,
+            "delta_percent": -24.41704615818722
+          }
+        },
+        "synaptic_decay": {
+          "median": {
+            "baseline": 489150.0,
+            "optimized": 423650.0,
+            "delta": -65500.0,
+            "delta_percent": -13.390575488091587
+          },
+          "mean": {
+            "baseline": 493710,
+            "optimized": 422840,
+            "delta": -70870,
+            "delta_percent": -14.354580624253105
+          }
+        },
+        "writeback": {
+          "median": {
+            "baseline": 1498400.0,
+            "optimized": 1424200.0,
+            "delta": -74200.0,
+            "delta_percent": -4.95194874532835
+          },
+          "mean": {
+            "baseline": 1503210,
+            "optimized": 1419560,
+            "delta": -83650,
+            "delta_percent": -5.564758084366123
+          }
+        },
+        "allowed_reduction": {
+          "median": {
+            "baseline": 510750.0,
+            "optimized": 489750.0,
+            "delta": -21000.0,
+            "delta_percent": -4.1116005873715125
+          },
+          "mean": {
+            "baseline": 518100,
+            "optimized": 490350,
+            "delta": -27750,
+            "delta_percent": -5.356108859293573
+          }
+        },
+        "input_gather": {
+          "median": {
+            "baseline": 1742800.0,
+            "optimized": 1701300.0,
+            "delta": -41500.0,
+            "delta_percent": -2.381225613954556
+          },
+          "mean": {
+            "baseline": 1756920,
+            "optimized": 1690990,
+            "delta": -65930,
+            "delta_percent": -3.7525897593515927
+          }
+        },
+        "return_shape_check": {
+          "median": {
+            "baseline": 127250.0,
+            "optimized": 128650.0,
+            "delta": 1400.0,
+            "delta_percent": 1.100196463654224
+          },
+          "mean": {
+            "baseline": 132290,
+            "optimized": 130680,
+            "delta": -1610,
+            "delta_percent": -1.2170232065915791
+          }
+        },
+        "residual": {
+          "median": {
+            "baseline": 780150.0,
+            "optimized": 739150.0,
+            "delta": -41000.0,
+            "delta_percent": -5.255399602640518
+          },
+          "mean": {
+            "baseline": 796300,
+            "optimized": 742010,
+            "delta": -54290,
+            "delta_percent": -6.817782242873289
+          }
+        }
+      },
+      "variability": {
+        "baseline_off_range_ns": [
+          17191800,
+          21385300
+        ],
+        "optimized_off_range_ns": [
+          15840100,
+          18997600
+        ],
+        "baseline_linear_range_ns": [
+          12016800,
+          15171200
+        ],
+        "optimized_linear_range_ns": [
+          11041200,
+          11925500
+        ]
+      },
+      "instrumentation_overhead_percent": {
+        "baseline": 8.844237028554275,
+        "optimized": 9.590646107641213
+      },
+      "structural": {
+        "k_bound": 4096,
+        "old_membrane_passes": 5,
+        "new_membrane_passes": 5,
+        "old_decay_passes": 1,
+        "new_decay_passes": 1,
+        "old_membrane_array_allocations_per_update": 5,
+        "new_membrane_array_allocations_per_update": 0,
+        "old_decay_array_allocations_per_update": 1,
+        "new_decay_array_allocations_per_update": 0,
+        "old_membrane_cumulative_payload_bytes": 163840,
+        "old_decay_payload_bytes": 32768,
+        "new_result_payload_allocation_bytes_per_update": 0,
+        "scratch_payload_bytes_per_advance": 65536,
+        "scratch_array_allocations_per_advance": 2,
+        "persistent_scratch_bytes_between_advances": 0
+      }
+    },
+    {
+      "case": "G3-12",
+      "neurons": 32768,
+      "off_advance": {
+        "median": {
+          "baseline": 77891650.0,
+          "optimized": 71374450.0,
+          "delta": -6517200.0,
+          "delta_percent": -8.36700724660474
+        },
+        "mean": {
+          "baseline": 78315420,
+          "optimized": 72351280,
+          "delta": -5964140,
+          "delta_percent": -7.615537272225572
+        }
+      },
+      "on_advance": {
+        "median": {
+          "baseline": 80152900.0,
+          "optimized": 73335950.0,
+          "delta": -6816950.0,
+          "delta_percent": -8.50493244785903
+        },
+        "mean": {
+          "baseline": 80173840,
+          "optimized": 73283990,
+          "delta": -6889850,
+          "delta_percent": -8.59363852348846
+        }
+      },
+      "stages": {
+        "preparation": {
+          "median": {
+            "baseline": 138600.0,
+            "optimized": 135250.0,
+            "delta": -3350.0,
+            "delta_percent": -2.417027417027417
+          },
+          "mean": {
+            "baseline": 137380,
+            "optimized": 134260,
+            "delta": -3120,
+            "delta_percent": -2.2710729363808415
+          }
+        },
+        "event_schedule": {
+          "median": {
+            "baseline": 1091650.0,
+            "optimized": 1066400.0,
+            "delta": -25250.0,
+            "delta_percent": -2.3130124124032427
+          },
+          "mean": {
+            "baseline": 1069420,
+            "optimized": 1038490,
+            "delta": -30930,
+            "delta_percent": -2.8922219520861776
+          }
+        },
+        "state_setup": {
+          "median": {
+            "baseline": 50550.0,
+            "optimized": 51700.0,
+            "delta": 1150.0,
+            "delta_percent": 2.274975272007913
+          },
+          "mean": {
+            "baseline": 51510,
+            "optimized": 50860,
+            "delta": -650,
+            "delta_percent": -1.2618908949718501
+          }
+        },
+        "direct_input": {
+          "median": {
+            "baseline": 1268550.0,
+            "optimized": 1124100.0,
+            "delta": -144450.0,
+            "delta_percent": -11.387016672578929
+          },
+          "mean": {
+            "baseline": 1257170,
+            "optimized": 1117060,
+            "delta": -140110,
+            "delta_percent": -11.144873008423682
+          }
+        },
+        "pending_delivery": {
+          "median": {
+            "baseline": 16674950.0,
+            "optimized": 15860250.0,
+            "delta": -814700.0,
+            "delta_percent": -4.885771771429599
+          },
+          "mean": {
+            "baseline": 16745020,
+            "optimized": 15926650,
+            "delta": -818370,
+            "delta_percent": -4.887244088093057
+          }
+        },
+        "linear_update": {
+          "median": {
+            "baseline": 54429950.0,
+            "optimized": 48777100.0,
+            "delta": -5652850.0,
+            "delta_percent": -10.385550602196034
+          },
+          "mean": {
+            "baseline": 54475850,
+            "optimized": 48661410,
+            "delta": -5814440,
+            "delta_percent": -10.673426848777945
+          }
+        },
+        "spike_reset_enqueue": {
+          "median": {
+            "baseline": 5226200.0,
+            "optimized": 4994100.0,
+            "delta": -232100.0,
+            "delta_percent": -4.441085300983506
+          },
+          "mean": {
+            "baseline": 5219070,
+            "optimized": 4985730,
+            "delta": -233340,
+            "delta_percent": -4.470911484229949
+          }
+        },
+        "trace": {
+          "median": {
+            "baseline": 42300.0,
+            "optimized": 43550.0,
+            "delta": 1250.0,
+            "delta_percent": 2.955082742316785
+          },
+          "mean": {
+            "baseline": 43110,
+            "optimized": 44420,
+            "delta": 1310,
+            "delta_percent": 3.0387381118070054
+          }
+        },
+        "output": {
+          "median": {
+            "baseline": 771800.0,
+            "optimized": 946500.0,
+            "delta": 174700.0,
+            "delta_percent": 22.63539777144338
+          },
+          "mean": {
+            "baseline": 762400,
+            "optimized": 940770,
+            "delta": 178370,
+            "delta_percent": 23.39585519412382
+          }
+        }
+      },
+      "linear_substages": {
+        "mask": {
+          "median": {
+            "baseline": 3530500.0,
+            "optimized": 3330250.0,
+            "delta": -200250.0,
+            "delta_percent": -5.672001132983997
+          },
+          "mean": {
+            "baseline": 3556700,
+            "optimized": 3302020,
+            "delta": -254680,
+            "delta_percent": -7.1605701914696205
+          }
+        },
+        "coefficients": {
+          "median": {
+            "baseline": 5159650.0,
+            "optimized": 5012450.0,
+            "delta": -147200.0,
+            "delta_percent": -2.8529066894072272
+          },
+          "mean": {
+            "baseline": 5185310,
+            "optimized": 4997500,
+            "delta": -187810,
+            "delta_percent": -3.62196281418083
+          }
+        },
+        "membrane": {
+          "median": {
+            "baseline": 13767250.0,
+            "optimized": 11384350.0,
+            "delta": -2382900.0,
+            "delta_percent": -17.308467558880675
+          },
+          "mean": {
+            "baseline": 13784950,
+            "optimized": 11307170,
+            "delta": -2477780,
+            "delta_percent": -17.974530194161023
+          }
+        },
+        "synaptic_decay": {
+          "median": {
+            "baseline": 2799950.0,
+            "optimized": 1532350.0,
+            "delta": -1267600.0,
+            "delta_percent": -45.27223700423222
+          },
+          "mean": {
+            "baseline": 2796300,
+            "optimized": 1541450,
+            "delta": -1254850,
+            "delta_percent": -44.87537102599864
+          }
+        },
+        "writeback": {
+          "median": {
+            "baseline": 12116100.0,
+            "optimized": 10953800.0,
+            "delta": -1162300.0,
+            "delta_percent": -9.593020856546248
+          },
+          "mean": {
+            "baseline": 12186720,
+            "optimized": 10977000,
+            "delta": -1209720,
+            "delta_percent": -9.92654299105912
+          }
+        },
+        "allowed_reduction": {
+          "median": {
+            "baseline": 597150.0,
+            "optimized": 585000.0,
+            "delta": -12150.0,
+            "delta_percent": -2.0346646571213265
+          },
+          "mean": {
+            "baseline": 602290,
+            "optimized": 585620,
+            "delta": -16670,
+            "delta_percent": -2.767769679058261
+          }
+        },
+        "input_gather": {
+          "median": {
+            "baseline": 15114300.0,
+            "optimized": 14821050.0,
+            "delta": -293250.0,
+            "delta_percent": -1.9402155574522142
+          },
+          "mean": {
+            "baseline": 15092160,
+            "optimized": 14803450,
+            "delta": -288710,
+            "delta_percent": -1.9129799843097344
+          }
+        },
+        "return_shape_check": {
+          "median": {
+            "baseline": 229350.0,
+            "optimized": 203950.0,
+            "delta": -25400.0,
+            "delta_percent": -11.074776542402441
+          },
+          "mean": {
+            "baseline": 228340,
+            "optimized": 204590,
+            "delta": -23750,
+            "delta_percent": -10.401156170622755
+          }
+        },
+        "residual": {
+          "median": {
+            "baseline": 1048450.0,
+            "optimized": 946150.0,
+            "delta": -102300.0,
+            "delta_percent": -9.757260718203062
+          },
+          "mean": {
+            "baseline": 1043080,
+            "optimized": 942610,
+            "delta": -100470,
+            "delta_percent": -9.63205123288722
+          }
+        }
+      },
+      "variability": {
+        "baseline_off_range_ns": [
+          77194900,
+          80637000
+        ],
+        "optimized_off_range_ns": [
+          70784300,
+          80011500
+        ],
+        "baseline_linear_range_ns": [
+          53331000,
+          55406800
+        ],
+        "optimized_linear_range_ns": [
+          47873900,
+          49566400
+        ]
+      },
+      "instrumentation_overhead_percent": {
+        "baseline": 2.9030711250820853,
+        "optimized": 2.748182297726988
+      },
+      "structural": {
+        "k_bound": 32768,
+        "old_membrane_passes": 5,
+        "new_membrane_passes": 5,
+        "old_decay_passes": 1,
+        "new_decay_passes": 1,
+        "old_membrane_array_allocations_per_update": 5,
+        "new_membrane_array_allocations_per_update": 0,
+        "old_decay_array_allocations_per_update": 1,
+        "new_decay_array_allocations_per_update": 0,
+        "old_membrane_cumulative_payload_bytes": 1310720,
+        "old_decay_payload_bytes": 262144,
+        "new_result_payload_allocation_bytes_per_update": 0,
+        "scratch_payload_bytes_per_advance": 524288,
+        "scratch_array_allocations_per_advance": 2,
+        "persistent_scratch_bytes_between_advances": 0
+      }
+    }
+  ],
+  "cost_shift": "No meaningful cost shifted into linear residual, gathers, writeback, total linear or total advance. Scratch allocation is included in state_setup and total wall. Unchanged-stage decreases are not separately attributed to this optimization.",
+  "basis": "G2/G3 membrane median and mean improve; total-linear observed ranges are disjoint. Interleaved OFF corroboration wins 10/10 at both sizes with disjoint total-wall ranges. G1 effect is small/noisy. No post-hoc fixed percentage threshold or calibrated confidence claim.",
+  "instrumentation": "OFF default unchanged. ON overhead at G1 is material; no G1 end-to-end conclusion. G2/G3 same hooks before/after, with OFF corroboration supporting trustworthy direction and bounded benefit.",
+  "corroboration": {
+    "cases": [
+      {
+        "case": "G1",
+        "events": 60,
+        "graph_identity": "cb6b2f8d081a743325a68fde7fe76d3bf6e4d8a506b078c57fd8546dbe79e49c",
+        "stimulus_identity": "26f55d2f71e58fbfdd23cf6961e977de3d1916ec2ddc5c7785b2adac31a8ee69",
+        "warmups": 3,
+        "repeats": 10,
+        "raw": [
+          {
+            "repeat": 0,
+            "baseline": {
+              "wall_ns": 10392300,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "optimized": {
+              "wall_ns": 10350500,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 1,
+            "optimized": {
+              "wall_ns": 10532400,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "baseline": {
+              "wall_ns": 10382500,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 2,
+            "baseline": {
+              "wall_ns": 10287100,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "optimized": {
+              "wall_ns": 10377200,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 3,
+            "optimized": {
+              "wall_ns": 10269300,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "baseline": {
+              "wall_ns": 10699100,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 4,
+            "baseline": {
+              "wall_ns": 10822700,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "optimized": {
+              "wall_ns": 10331200,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 5,
+            "optimized": {
+              "wall_ns": 10409300,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "baseline": {
+              "wall_ns": 10445100,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 6,
+            "baseline": {
+              "wall_ns": 10125500,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "optimized": {
+              "wall_ns": 10130300,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 7,
+            "optimized": {
+              "wall_ns": 10306100,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "baseline": {
+              "wall_ns": 10738600,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 8,
+            "baseline": {
+              "wall_ns": 10515400,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "optimized": {
+              "wall_ns": 10561000,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 9,
+            "optimized": {
+              "wall_ns": 10100900,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "baseline": {
+              "wall_ns": 10489800,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          }
+        ],
+        "summaries": {
+          "baseline": {
+            "median": 10467450.0,
+            "mean": 10489810,
+            "min": 10125500,
+            "max": 10822700
+          },
+          "optimized": {
+            "median": 10340850.0,
+            "mean": 10336820,
+            "min": 10100900,
+            "max": 10561000
+          }
+        },
+        "paired_delta_ns": {
+          "median": -38800.0,
+          "mean": -152990,
+          "min": -491500,
+          "max": 149900
+        }
+      },
+      {
+        "case": "G2",
+        "events": 60,
+        "graph_identity": "936fdabb280271e1c8dcd7e390d2dde21eb1545383423eb26017706cf6a36eb9",
+        "stimulus_identity": "26f55d2f71e58fbfdd23cf6961e977de3d1916ec2ddc5c7785b2adac31a8ee69",
+        "warmups": 3,
+        "repeats": 10,
+        "raw": [
+          {
+            "repeat": 0,
+            "baseline": {
+              "wall_ns": 17226500,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "optimized": {
+              "wall_ns": 16155300,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 1,
+            "optimized": {
+              "wall_ns": 16560800,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "baseline": {
+              "wall_ns": 17306400,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 2,
+            "baseline": {
+              "wall_ns": 16989100,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "optimized": {
+              "wall_ns": 16295200,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 3,
+            "optimized": {
+              "wall_ns": 16635700,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "baseline": {
+              "wall_ns": 16918600,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 4,
+            "baseline": {
+              "wall_ns": 17319900,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "optimized": {
+              "wall_ns": 16584200,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 5,
+            "optimized": {
+              "wall_ns": 16794200,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "baseline": {
+              "wall_ns": 17430400,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 6,
+            "baseline": {
+              "wall_ns": 17194900,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "optimized": {
+              "wall_ns": 16587100,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 7,
+            "optimized": {
+              "wall_ns": 16501300,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "baseline": {
+              "wall_ns": 16937900,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 8,
+            "baseline": {
+              "wall_ns": 17266900,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "optimized": {
+              "wall_ns": 16613400,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 9,
+            "optimized": {
+              "wall_ns": 16434400,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "baseline": {
+              "wall_ns": 17692200,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          }
+        ],
+        "summaries": {
+          "baseline": {
+            "median": 17246700.0,
+            "mean": 17228280,
+            "min": 16918600,
+            "max": 17692200
+          },
+          "optimized": {
+            "median": 16572500.0,
+            "mean": 16516160,
+            "min": 16155300,
+            "max": 16794200
+          }
+        },
+        "paired_delta_ns": {
+          "median": -673700.0,
+          "mean": -712120,
+          "min": -1257800,
+          "max": -282900
+        }
+      },
+      {
+        "case": "G3",
+        "events": 60,
+        "graph_identity": "eaeb6e4e3698ba175ea5e38e037e6c7d962f1dc312d6dd83ec1811287d47a909",
+        "stimulus_identity": "26f55d2f71e58fbfdd23cf6961e977de3d1916ec2ddc5c7785b2adac31a8ee69",
+        "warmups": 3,
+        "repeats": 10,
+        "raw": [
+          {
+            "repeat": 0,
+            "baseline": {
+              "wall_ns": 77722100,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "optimized": {
+              "wall_ns": 72387000,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 1,
+            "optimized": {
+              "wall_ns": 72969600,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "baseline": {
+              "wall_ns": 78481400,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 2,
+            "baseline": {
+              "wall_ns": 77300100,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "optimized": {
+              "wall_ns": 74353100,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 3,
+            "optimized": {
+              "wall_ns": 74373000,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "baseline": {
+              "wall_ns": 80088900,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 4,
+            "baseline": {
+              "wall_ns": 85230300,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "optimized": {
+              "wall_ns": 73237400,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 5,
+            "optimized": {
+              "wall_ns": 74187100,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "baseline": {
+              "wall_ns": 79685200,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 6,
+            "baseline": {
+              "wall_ns": 79125400,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "optimized": {
+              "wall_ns": 75320600,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 7,
+            "optimized": {
+              "wall_ns": 74640300,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "baseline": {
+              "wall_ns": 79527400,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 8,
+            "baseline": {
+              "wall_ns": 77789300,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "optimized": {
+              "wall_ns": 73794400,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          },
+          {
+            "repeat": 9,
+            "optimized": {
+              "wall_ns": 74406000,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            },
+            "baseline": {
+              "wall_ns": 78732200,
+              "timing": null,
+              "pending_before": 96,
+              "pending_after": 96,
+              "queued": 384,
+              "delivered": 384,
+              "spikes": 48
+            }
+          }
+        ],
+        "summaries": {
+          "baseline": {
+            "median": 78928800.0,
+            "mean": 79368230,
+            "min": 77300100,
+            "max": 85230300
+          },
+          "optimized": {
+            "median": 74270100.0,
+            "mean": 73966850,
+            "min": 72387000,
+            "max": 75320600
+          }
+        },
+        "paired_delta_ns": {
+          "median": -5111100.0,
+          "mean": -5401380,
+          "min": -11992900,
+          "max": -2947000
+        }
+      }
+    ],
+    "limitation": "Frozen expression wrapper and optimized advance scratch setup are included in both routes; corroboration only, primary baseline is pre-edit production."
+  },
+  "counters": {
+    "full_real_preparations": 0,
+    "real_advances": 0,
+    "a019d_reruns": 0,
+    "gpu_runs": 0,
+    "arena_runs": 0,
+    "scientific_interventions": 0,
+    "downloads": 0,
+    "archive_writes": 0
+  },
+  "accepted_registered_reads": {
+    "REAL_CONNECTIVITY": 0,
+    "REAL_ANNOTATION": 0,
+    "REAL_NEUROTRANSMITTER": 0,
+    "REAL_NEURON_METADATA": 0,
+    "REAL_MAPPING": 0,
+    "REAL_PROVENANCE": 0,
+    "REAL_OTHER_REGISTERED_DATA": 0
+  },
+  "firewall_qualifier": "fail-closed guarded accounting, not independent native byte telemetry",
+  "full_real_relevance_claimed": false,
+  "next_task": "A019K \u2014 evidence-only gate for full-real CPU rebenchmark authorization",
+  "validation": {
+    "targeted_tests": "64 passed; no skipped tests in final run",
+    "compileall": "PASS: uv run python -m compileall -q src scripts tests",
+    "diff_check": "PASS",
+    "frozen_expression_source_match": "PASS: exact text extracted from starting-SHA lif.py",
+    "full_starting_sha_module_replay": "PASS via test_application_a019h.py::test_starting_commit_exact_replay"
+  }
+}

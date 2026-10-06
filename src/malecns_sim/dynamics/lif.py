@@ -133,6 +133,7 @@ def linear_state_update(
     parameters: LIFParameters = REFERENCE_LIF_PARAMETERS,
     dt_ms: float = 0.1,
     _timing: AdvanceTiming | None = None,
+    _scratch: tuple[np.ndarray, np.ndarray] | None = None,
 ) -> tuple[np.ndarray | float, np.ndarray | float]:
     """Analytically integrate both coupled linear states over one timestep."""
 
@@ -152,11 +153,24 @@ def linear_state_update(
     if _timing is not None:
         _timing.substop("linear_update", "coefficients")
         _timing.substart()
-    v_next = parameters.v_rest_mV + (np.asarray(v_mV) - parameters.v_rest_mV) * exp_m + np.asarray(g_mV) * g_coefficient
+    if _scratch is None:
+        v_next = parameters.v_rest_mV + (np.asarray(v_mV) - parameters.v_rest_mV) * exp_m + np.asarray(g_mV) * g_coefficient
+    else:
+        # Dense caller owns two disjoint float64 buffers for this advance only.
+        v_next, g_next = _scratch[0][:v_mV.size], _scratch[1][:g_mV.size]
+        np.subtract(v_mV, parameters.v_rest_mV, out=v_next)
+        np.multiply(v_next, exp_m, out=v_next)
+        np.add(parameters.v_rest_mV, v_next, out=v_next)
+        np.multiply(g_mV, g_coefficient, out=g_next)
+        np.add(v_next, g_next, out=v_next)
     if _timing is not None:
         _timing.substop("linear_update", "membrane")
         _timing.substart()
-    g_next = np.asarray(g_mV) * exp_s
+    if _scratch is None:
+        g_next = np.asarray(g_mV) * exp_s
+    else:
+        # The final membrane addition has consumed the g contribution.
+        np.multiply(g_mV, exp_s, out=g_next)
     if _timing is not None:
         _timing.substop("linear_update", "synaptic_decay")
         _timing.substart()
@@ -542,6 +556,8 @@ def simulate_lif(
     if trace_v is not None:
         trace_v[:, 0] = v[trace_positions]
         trace_g[:, 0] = g[trace_positions]
+    # Scratch never escapes this advance or aliases persistent state.
+    membrane_scratch = (np.empty(n, dtype=np.float64), np.empty(n, dtype=np.float64))
     queued_events = 0
     delivered_events = 0
     if _timing is not None:
@@ -595,7 +611,7 @@ def simulate_lif(
             input_v, input_g = v[allowed], g[allowed]
             if _timing is not None:
                 _timing.substop("linear_update", "input_gather")
-            updated_v, updated_g = linear_state_update(input_v, input_g, parameters=parameters, dt_ms=dt_ms, _timing=_timing)
+            updated_v, updated_g = linear_state_update(input_v, input_g, parameters=parameters, dt_ms=dt_ms, _timing=_timing, _scratch=membrane_scratch)
             del input_v, input_g
             if _timing is not None:
                 _timing.substart()

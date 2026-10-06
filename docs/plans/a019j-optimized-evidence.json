@@ -1,0 +1,2573 @@
+{
+  "cases": [
+    {
+      "case": "G1-12",
+      "neurons": 128,
+      "edges": 1024,
+      "density": 0.0625,
+      "input_events": 60,
+      "duration_ms": 20,
+      "seed": 1906,
+      "graph_identity": "cb6b2f8d081a743325a68fde7fe76d3bf6e4d8a506b078c57fd8546dbe79e49c",
+      "stimulus_identity": "26f55d2f71e58fbfdd23cf6961e977de3d1916ec2ddc5c7785b2adac31a8ee69",
+      "warmups": 3,
+      "repeats": 10,
+      "replay": "exact bytes/state/output: two chunks",
+      "raw": [
+        {
+          "repeat": 0,
+          "off": {
+            "wall_ns": 10163600,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 12032200,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 12028200,
+              "stages_ns": {
+                "preparation": 122700,
+                "event_schedule": 1074300,
+                "state_setup": 37900,
+                "direct_input": 117600,
+                "pending_delivery": 1516800,
+                "linear_update": 7365600,
+                "spike_reset_enqueue": 1351300,
+                "trace": 40100,
+                "output": 97700
+              },
+              "stage_sum_ns": 11724000,
+              "residual_ns": 304200,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 521300,
+                  "coefficients": 3699600,
+                  "membrane": 1111300,
+                  "synaptic_decay": 228200,
+                  "writeback": 297100,
+                  "allowed_reduction": 435300,
+                  "input_gather": 332200,
+                  "return_shape_check": 115900
+                },
+                "event_schedule": {
+                  "lookup": 35900,
+                  "grid_validation": 958400,
+                  "append": 19400,
+                  "packing": 16700
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 624700,
+                "event_schedule": 43900
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 1,
+          "on": {
+            "wall_ns": 11509100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 11506500,
+              "stages_ns": {
+                "preparation": 123800,
+                "event_schedule": 1116200,
+                "state_setup": 41300,
+                "direct_input": 113800,
+                "pending_delivery": 1461700,
+                "linear_update": 6942100,
+                "spike_reset_enqueue": 1292900,
+                "trace": 38200,
+                "output": 88700
+              },
+              "stage_sum_ns": 11218700,
+              "residual_ns": 287800,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 480900,
+                  "coefficients": 3460000,
+                  "membrane": 1046900,
+                  "synaptic_decay": 219400,
+                  "writeback": 293400,
+                  "allowed_reduction": 414800,
+                  "input_gather": 304500,
+                  "return_shape_check": 115500
+                },
+                "event_schedule": {
+                  "lookup": 47000,
+                  "grid_validation": 985300,
+                  "append": 18300,
+                  "packing": 19000
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 606700,
+                "event_schedule": 46600
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 10391300,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 2,
+          "off": {
+            "wall_ns": 10284900,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 12239000,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 12235800,
+              "stages_ns": {
+                "preparation": 122900,
+                "event_schedule": 1114200,
+                "state_setup": 42700,
+                "direct_input": 147000,
+                "pending_delivery": 1534100,
+                "linear_update": 7424500,
+                "spike_reset_enqueue": 1391400,
+                "trace": 50200,
+                "output": 107700
+              },
+              "stage_sum_ns": 11934700,
+              "residual_ns": 301100,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 493400,
+                  "coefficients": 3748100,
+                  "membrane": 1131700,
+                  "synaptic_decay": 233200,
+                  "writeback": 295800,
+                  "allowed_reduction": 440100,
+                  "input_gather": 329800,
+                  "return_shape_check": 120000
+                },
+                "event_schedule": {
+                  "lookup": 38000,
+                  "grid_validation": 992000,
+                  "append": 17900,
+                  "packing": 18900
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 632400,
+                "event_schedule": 47400
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 3,
+          "on": {
+            "wall_ns": 11888600,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 11885000,
+              "stages_ns": {
+                "preparation": 115300,
+                "event_schedule": 1031700,
+                "state_setup": 41500,
+                "direct_input": 115500,
+                "pending_delivery": 1519000,
+                "linear_update": 7238800,
+                "spike_reset_enqueue": 1366800,
+                "trace": 38600,
+                "output": 110500
+              },
+              "stage_sum_ns": 11577700,
+              "residual_ns": 307300,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 483400,
+                  "coefficients": 3639100,
+                  "membrane": 1090900,
+                  "synaptic_decay": 238200,
+                  "writeback": 304200,
+                  "allowed_reduction": 430200,
+                  "input_gather": 334500,
+                  "return_shape_check": 113300
+                },
+                "event_schedule": {
+                  "lookup": 35100,
+                  "grid_validation": 915200,
+                  "append": 21600,
+                  "packing": 17500
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 605000,
+                "event_schedule": 42300
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 10736800,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 4,
+          "off": {
+            "wall_ns": 10200500,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 11682100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 11678300,
+              "stages_ns": {
+                "preparation": 115900,
+                "event_schedule": 1037700,
+                "state_setup": 37900,
+                "direct_input": 119300,
+                "pending_delivery": 1495200,
+                "linear_update": 7122100,
+                "spike_reset_enqueue": 1316300,
+                "trace": 35600,
+                "output": 94800
+              },
+              "stage_sum_ns": 11374800,
+              "residual_ns": 303500,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 476900,
+                  "coefficients": 3580500,
+                  "membrane": 1073300,
+                  "synaptic_decay": 222500,
+                  "writeback": 284100,
+                  "allowed_reduction": 426500,
+                  "input_gather": 329100,
+                  "return_shape_check": 112700
+                },
+                "event_schedule": {
+                  "lookup": 34500,
+                  "grid_validation": 925900,
+                  "append": 17600,
+                  "packing": 16600
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 616500,
+                "event_schedule": 43100
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 5,
+          "on": {
+            "wall_ns": 11972700,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 11968800,
+              "stages_ns": {
+                "preparation": 109700,
+                "event_schedule": 996500,
+                "state_setup": 38000,
+                "direct_input": 109300,
+                "pending_delivery": 1590000,
+                "linear_update": 7334800,
+                "spike_reset_enqueue": 1356600,
+                "trace": 38200,
+                "output": 100200
+              },
+              "stage_sum_ns": 11673300,
+              "residual_ns": 295500,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 490300,
+                  "coefficients": 3684000,
+                  "membrane": 1109800,
+                  "synaptic_decay": 228300,
+                  "writeback": 296700,
+                  "allowed_reduction": 437300,
+                  "input_gather": 326400,
+                  "return_shape_check": 116100
+                },
+                "event_schedule": {
+                  "lookup": 33800,
+                  "grid_validation": 886700,
+                  "append": 15800,
+                  "packing": 16600
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 645900,
+                "event_schedule": 43600
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 10605800,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 6,
+          "off": {
+            "wall_ns": 10171100,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 11696200,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 11693400,
+              "stages_ns": {
+                "preparation": 111300,
+                "event_schedule": 1053700,
+                "state_setup": 41800,
+                "direct_input": 110400,
+                "pending_delivery": 1518100,
+                "linear_update": 7149100,
+                "spike_reset_enqueue": 1296700,
+                "trace": 36500,
+                "output": 94400
+              },
+              "stage_sum_ns": 11412000,
+              "residual_ns": 281400,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 487800,
+                  "coefficients": 3552900,
+                  "membrane": 1078300,
+                  "synaptic_decay": 241900,
+                  "writeback": 288400,
+                  "allowed_reduction": 428300,
+                  "input_gather": 312100,
+                  "return_shape_check": 115200
+                },
+                "event_schedule": {
+                  "lookup": 34400,
+                  "grid_validation": 940000,
+                  "append": 16800,
+                  "packing": 18600
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 644200,
+                "event_schedule": 43900
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 7,
+          "on": {
+            "wall_ns": 12174600,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 12171700,
+              "stages_ns": {
+                "preparation": 109800,
+                "event_schedule": 1004700,
+                "state_setup": 38100,
+                "direct_input": 113200,
+                "pending_delivery": 1574100,
+                "linear_update": 7503900,
+                "spike_reset_enqueue": 1393400,
+                "trace": 38400,
+                "output": 104200
+              },
+              "stage_sum_ns": 11879800,
+              "residual_ns": 291900,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 498800,
+                  "coefficients": 3750300,
+                  "membrane": 1152400,
+                  "synaptic_decay": 246000,
+                  "writeback": 298300,
+                  "allowed_reduction": 473400,
+                  "input_gather": 324900,
+                  "return_shape_check": 120700
+                },
+                "event_schedule": {
+                  "lookup": 34200,
+                  "grid_validation": 894400,
+                  "append": 16700,
+                  "packing": 16400
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 639100,
+                "event_schedule": 43000
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 10152400,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 8,
+          "off": {
+            "wall_ns": 10140900,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 11881700,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 11878400,
+              "stages_ns": {
+                "preparation": 112600,
+                "event_schedule": 1039400,
+                "state_setup": 41300,
+                "direct_input": 112800,
+                "pending_delivery": 1574300,
+                "linear_update": 7257000,
+                "spike_reset_enqueue": 1320500,
+                "trace": 37400,
+                "output": 96000
+              },
+              "stage_sum_ns": 11591300,
+              "residual_ns": 287100,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 485100,
+                  "coefficients": 3627200,
+                  "membrane": 1128000,
+                  "synaptic_decay": 227100,
+                  "writeback": 292900,
+                  "allowed_reduction": 433500,
+                  "input_gather": 317300,
+                  "return_shape_check": 116100
+                },
+                "event_schedule": {
+                  "lookup": 34800,
+                  "grid_validation": 910700,
+                  "append": 32500,
+                  "packing": 17800
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 629800,
+                "event_schedule": 43600
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 9,
+          "on": {
+            "wall_ns": 11992100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 11989300,
+              "stages_ns": {
+                "preparation": 122200,
+                "event_schedule": 1141700,
+                "state_setup": 44500,
+                "direct_input": 111900,
+                "pending_delivery": 1528400,
+                "linear_update": 7278000,
+                "spike_reset_enqueue": 1344100,
+                "trace": 36900,
+                "output": 93000
+              },
+              "stage_sum_ns": 11700700,
+              "residual_ns": 288600,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 486500,
+                  "coefficients": 3618300,
+                  "membrane": 1094000,
+                  "synaptic_decay": 244100,
+                  "writeback": 313600,
+                  "allowed_reduction": 442000,
+                  "input_gather": 318800,
+                  "return_shape_check": 116000
+                },
+                "event_schedule": {
+                  "lookup": 38300,
+                  "grid_validation": 1018900,
+                  "append": 18900,
+                  "packing": 18700
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 644700,
+                "event_schedule": 46900
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 10174100,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        }
+      ],
+      "off_wall_ns": {
+        "median": 10187300.0,
+        "mean": 10302140,
+        "min": 10140900,
+        "max": 10736800
+      },
+      "on_wall_ns": {
+        "median": 11930650.0,
+        "mean": 11906830,
+        "min": 11509100,
+        "max": 12239000
+      },
+      "overhead_ns": 1743350.0,
+      "overhead_percent": 17.112973997035525,
+      "total_ns": {
+        "median": 11926900.0,
+        "mean": 11903540,
+        "min": 11506500,
+        "max": 12235800
+      },
+      "stages": {
+        "preparation": {
+          "median": 115600.0,
+          "mean": 116620,
+          "min": 109700,
+          "max": 123800,
+          "mean_share": 0.009797085572863198
+        },
+        "event_schedule": {
+          "median": 1046550.0,
+          "mean": 1061010,
+          "min": 996500,
+          "max": 1141700,
+          "mean_share": 0.08913398871260146
+        },
+        "state_setup": {
+          "median": 41300.0,
+          "mean": 40500,
+          "min": 37900,
+          "max": 44500,
+          "mean_share": 0.0034023492171236457
+        },
+        "direct_input": {
+          "median": 113500.0,
+          "mean": 117080,
+          "min": 109300,
+          "max": 147000,
+          "mean_share": 0.009835729539279912
+        },
+        "pending_delivery": {
+          "median": 1523700.0,
+          "mean": 1531170,
+          "min": 1461700,
+          "max": 1590000,
+          "mean_share": 0.12863148273538796
+        },
+        "linear_update": {
+          "median": 7267500.0,
+          "mean": 7261590,
+          "min": 6942100,
+          "max": 7503900,
+          "mean_share": 0.610036174112911
+        },
+        "spike_reset_enqueue": {
+          "median": 1347700.0,
+          "mean": 1343000,
+          "min": 1292900,
+          "max": 1393400,
+          "mean_share": 0.11282358021227298
+        },
+        "trace": {
+          "median": 38200.0,
+          "mean": 39010,
+          "min": 35600,
+          "max": 50200,
+          "mean_share": 0.0032771763693825533
+        },
+        "output": {
+          "median": 96850.0,
+          "mean": 98720,
+          "min": 88700,
+          "max": 110500,
+          "mean_share": 0.008293331227517192
+        }
+      },
+      "residual_ns": {
+        "median": 293700.0,
+        "mean": 294840,
+        "min": 281400,
+        "max": 307300,
+        "mean_share": 0.02476910230066014
+      },
+      "edges_per_neuron": 8,
+      "substage_summary": {
+        "linear_update": {
+          "mask": {
+            "median": 487150.0,
+            "mean": 490440,
+            "min": 476900,
+            "max": 521300,
+            "parent_share": 0.06753892742498543,
+            "full_share": 0.04120118889002767
+          },
+          "coefficients": {
+            "median": 3633150.0,
+            "mean": 3636000,
+            "min": 3460000,
+            "max": 3750300,
+            "parent_share": 0.5007167851668849,
+            "full_share": 0.30545535193732287
+          },
+          "membrane": {
+            "median": 1101900.0,
+            "mean": 1101660,
+            "min": 1046900,
+            "max": 1152400,
+            "parent_share": 0.1517105757829897,
+            "full_share": 0.09254893922312186
+          },
+          "synaptic_decay": {
+            "median": 230750.0,
+            "mean": 232890,
+            "min": 219400,
+            "max": 246000,
+            "parent_share": 0.03207148847566442,
+            "full_share": 0.019564768127800638
+          },
+          "writeback": {
+            "median": 296250.0,
+            "mean": 296450,
+            "min": 284100,
+            "max": 313600,
+            "parent_share": 0.04082439245399423,
+            "full_share": 0.024904356183118634
+          },
+          "allowed_reduction": {
+            "median": 434400.0,
+            "mean": 436140,
+            "min": 414800,
+            "max": 473400,
+            "parent_share": 0.06006122626036447,
+            "full_share": 0.03663952068040264
+          },
+          "input_gather": {
+            "median": 325650.0,
+            "mean": 322960,
+            "min": 304500,
+            "max": 334500,
+            "parent_share": 0.04447510806861858,
+            "full_share": 0.027131424769438334
+          },
+          "return_shape_check": {
+            "median": 115950.0,
+            "mean": 116150,
+            "min": 112700,
+            "max": 120700,
+            "parent_share": 0.01599511952616438,
+            "full_share": 0.009757601520220035
+          },
+          "residual": {
+            "median": 631100.0,
+            "mean": 628900,
+            "min": 605000,
+            "max": 645900,
+            "parent_share": 0.08660637684033387,
+            "full_share": 0.05283302278145829
+          }
+        },
+        "event_schedule": {
+          "lookup": {
+            "median": 34950.0,
+            "mean": 36600,
+            "min": 33800,
+            "max": 47000,
+            "parent_share": 0.03449543359629033,
+            "full_share": 0.0030747155888080353
+          },
+          "grid_validation": {
+            "median": 932950.0,
+            "mean": 942750,
+            "min": 886700,
+            "max": 1018900,
+            "parent_share": 0.8885401645601833,
+            "full_share": 0.07919912899860042
+          },
+          "append": {
+            "median": 18100.0,
+            "mean": 19550,
+            "min": 15800,
+            "max": 32500,
+            "parent_share": 0.018425839530258906,
+            "full_share": 0.001642368572710303
+          },
+          "packing": {
+            "median": 17650.0,
+            "mean": 17680,
+            "min": 16400,
+            "max": 19000,
+            "parent_share": 0.016663367923016748,
+            "full_share": 0.0014852724483641001
+          },
+          "residual": {
+            "median": 43750.0,
+            "mean": 44430,
+            "min": 42300,
+            "max": 47400,
+            "parent_share": 0.0418751943902508,
+            "full_share": 0.003732503104118607
+          }
+        }
+      },
+      "overhead_class": "OHD-C",
+      "linear_local_summary": {
+        "previous_named_sum": {
+          "median": 5758400.0,
+          "mean": 5757440,
+          "min": 5500600,
+          "max": 5945800,
+          "parent_share": 0.7928621693045187
+        },
+        "newly_explained": {
+          "median": 877400.0,
+          "mean": 875250,
+          "min": 834800,
+          "max": 919000,
+          "parent_share": 0.12053145385514742
+        },
+        "parent": {
+          "median": 7267500.0,
+          "mean": 7261590,
+          "min": 6942100,
+          "max": 7503900
+        },
+        "remaining": {
+          "median": 631100.0,
+          "mean": 628900,
+          "min": 605000,
+          "max": 645900,
+          "parent_share": 0.08660637684033387,
+          "full_share": 0.05283302278145829
+        }
+      }
+    },
+    {
+      "case": "G2-12",
+      "neurons": 4096,
+      "edges": 32768,
+      "density": 0.001953125,
+      "input_events": 60,
+      "duration_ms": 20,
+      "seed": 1906,
+      "graph_identity": "936fdabb280271e1c8dcd7e390d2dde21eb1545383423eb26017706cf6a36eb9",
+      "stimulus_identity": "26f55d2f71e58fbfdd23cf6961e977de3d1916ec2ddc5c7785b2adac31a8ee69",
+      "warmups": 3,
+      "repeats": 10,
+      "replay": "exact bytes/state/output: two chunks",
+      "raw": [
+        {
+          "repeat": 0,
+          "off": {
+            "wall_ns": 16494700,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 17895000,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 17891100,
+              "stages_ns": {
+                "preparation": 130400,
+                "event_schedule": 1067800,
+                "state_setup": 46500,
+                "direct_input": 220600,
+                "pending_delivery": 2798000,
+                "linear_update": 11362100,
+                "spike_reset_enqueue": 1722600,
+                "trace": 37700,
+                "output": 202700
+              },
+              "stage_sum_ns": 17588400,
+              "residual_ns": 302700,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 825300,
+                  "coefficients": 3832600,
+                  "membrane": 1915100,
+                  "synaptic_decay": 427000,
+                  "writeback": 1389600,
+                  "allowed_reduction": 481200,
+                  "input_gather": 1647000,
+                  "return_shape_check": 126800
+                },
+                "event_schedule": {
+                  "lookup": 37300,
+                  "grid_validation": 948100,
+                  "append": 18600,
+                  "packing": 20500
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 717500,
+                "event_schedule": 43300
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 1,
+          "on": {
+            "wall_ns": 17401400,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 17397900,
+              "stages_ns": {
+                "preparation": 125600,
+                "event_schedule": 1109500,
+                "state_setup": 47700,
+                "direct_input": 205700,
+                "pending_delivery": 2694400,
+                "linear_update": 11041200,
+                "spike_reset_enqueue": 1616400,
+                "trace": 36900,
+                "output": 222700
+              },
+              "stage_sum_ns": 17100100,
+              "residual_ns": 297800,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 817400,
+                  "coefficients": 3692100,
+                  "membrane": 1864000,
+                  "synaptic_decay": 398900,
+                  "writeback": 1354800,
+                  "allowed_reduction": 480500,
+                  "input_gather": 1614100,
+                  "return_shape_check": 126300
+                },
+                "event_schedule": {
+                  "lookup": 39800,
+                  "grid_validation": 985700,
+                  "append": 20100,
+                  "packing": 21500
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 693100,
+                "event_schedule": 42400
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 16374500,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 2,
+          "off": {
+            "wall_ns": 17012900,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 18544100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 18540600,
+              "stages_ns": {
+                "preparation": 136400,
+                "event_schedule": 1121500,
+                "state_setup": 48300,
+                "direct_input": 225400,
+                "pending_delivery": 2980600,
+                "linear_update": 11712900,
+                "spike_reset_enqueue": 1728500,
+                "trace": 38600,
+                "output": 223000
+              },
+              "stage_sum_ns": 18215200,
+              "residual_ns": 325400,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 874800,
+                  "coefficients": 3890100,
+                  "membrane": 1970200,
+                  "synaptic_decay": 424200,
+                  "writeback": 1443100,
+                  "allowed_reduction": 506200,
+                  "input_gather": 1710800,
+                  "return_shape_check": 128800
+                },
+                "event_schedule": {
+                  "lookup": 38600,
+                  "grid_validation": 989400,
+                  "append": 19100,
+                  "packing": 20300
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 764700,
+                "event_schedule": 54100
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 3,
+          "on": {
+            "wall_ns": 18425900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 18421000,
+              "stages_ns": {
+                "preparation": 135400,
+                "event_schedule": 1086700,
+                "state_setup": 48000,
+                "direct_input": 229200,
+                "pending_delivery": 2863200,
+                "linear_update": 11727100,
+                "spike_reset_enqueue": 1737000,
+                "trace": 40400,
+                "output": 221800
+              },
+              "stage_sum_ns": 18088800,
+              "residual_ns": 332200,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 890000,
+                  "coefficients": 3921300,
+                  "membrane": 1975600,
+                  "synaptic_decay": 422500,
+                  "writeback": 1437300,
+                  "allowed_reduction": 493300,
+                  "input_gather": 1717400,
+                  "return_shape_check": 129200
+                },
+                "event_schedule": {
+                  "lookup": 38600,
+                  "grid_validation": 963800,
+                  "append": 18600,
+                  "packing": 23000
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 740500,
+                "event_schedule": 42700
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 18997600,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 4,
+          "off": {
+            "wall_ns": 17763700,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 18056100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 18050900,
+              "stages_ns": {
+                "preparation": 138500,
+                "event_schedule": 1097900,
+                "state_setup": 48500,
+                "direct_input": 224600,
+                "pending_delivery": 2781400,
+                "linear_update": 11515400,
+                "spike_reset_enqueue": 1686900,
+                "trace": 38400,
+                "output": 216700
+              },
+              "stage_sum_ns": 17748300,
+              "residual_ns": 302600,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 849300,
+                  "coefficients": 3858600,
+                  "membrane": 1937200,
+                  "synaptic_decay": 424100,
+                  "writeback": 1411100,
+                  "allowed_reduction": 490500,
+                  "input_gather": 1679000,
+                  "return_shape_check": 127800
+                },
+                "event_schedule": {
+                  "lookup": 41100,
+                  "grid_validation": 974200,
+                  "append": 18000,
+                  "packing": 19900
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 737800,
+                "event_schedule": 44700
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 5,
+          "on": {
+            "wall_ns": 18141800,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 18136900,
+              "stages_ns": {
+                "preparation": 126700,
+                "event_schedule": 1073100,
+                "state_setup": 46100,
+                "direct_input": 222600,
+                "pending_delivery": 2843500,
+                "linear_update": 11571000,
+                "spike_reset_enqueue": 1699800,
+                "trace": 39200,
+                "output": 207300
+              },
+              "stage_sum_ns": 17829300,
+              "residual_ns": 307600,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 853400,
+                  "coefficients": 3856100,
+                  "membrane": 1928700,
+                  "synaptic_decay": 420400,
+                  "writeback": 1456500,
+                  "allowed_reduction": 489000,
+                  "input_gather": 1699800,
+                  "return_shape_check": 129300
+                },
+                "event_schedule": {
+                  "lookup": 38400,
+                  "grid_validation": 952000,
+                  "append": 18100,
+                  "packing": 21300
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 737800,
+                "event_schedule": 43300
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 16808200,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 6,
+          "off": {
+            "wall_ns": 16535400,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 18685200,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 18681200,
+              "stages_ns": {
+                "preparation": 151500,
+                "event_schedule": 1108200,
+                "state_setup": 48700,
+                "direct_input": 219300,
+                "pending_delivery": 2929900,
+                "linear_update": 11925500,
+                "spike_reset_enqueue": 1733300,
+                "trace": 40200,
+                "output": 216700
+              },
+              "stage_sum_ns": 18373300,
+              "residual_ns": 307900,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 890700,
+                  "coefficients": 3983200,
+                  "membrane": 1963500,
+                  "synaptic_decay": 441400,
+                  "writeback": 1465800,
+                  "allowed_reduction": 497600,
+                  "input_gather": 1782000,
+                  "return_shape_check": 130800
+                },
+                "event_schedule": {
+                  "lookup": 41100,
+                  "grid_validation": 980100,
+                  "append": 19200,
+                  "packing": 21200
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 770500,
+                "event_schedule": 46600
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 7,
+          "on": {
+            "wall_ns": 18511500,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 18507700,
+              "stages_ns": {
+                "preparation": 135200,
+                "event_schedule": 1115200,
+                "state_setup": 47400,
+                "direct_input": 222100,
+                "pending_delivery": 2919500,
+                "linear_update": 11793200,
+                "spike_reset_enqueue": 1704500,
+                "trace": 39000,
+                "output": 206700
+              },
+              "stage_sum_ns": 18182800,
+              "residual_ns": 324900,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 889500,
+                  "coefficients": 3940400,
+                  "membrane": 1956100,
+                  "synaptic_decay": 431400,
+                  "writeback": 1451800,
+                  "allowed_reduction": 505000,
+                  "input_gather": 1724600,
+                  "return_shape_check": 128500
+                },
+                "event_schedule": {
+                  "lookup": 40000,
+                  "grid_validation": 986300,
+                  "append": 19900,
+                  "packing": 22200
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 765900,
+                "event_schedule": 46800
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 16466800,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 8,
+          "off": {
+            "wall_ns": 15876200,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 17690500,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 17687100,
+              "stages_ns": {
+                "preparation": 128600,
+                "event_schedule": 1048200,
+                "state_setup": 41700,
+                "direct_input": 214900,
+                "pending_delivery": 2703900,
+                "linear_update": 11335600,
+                "spike_reset_enqueue": 1689100,
+                "trace": 37200,
+                "output": 191700
+              },
+              "stage_sum_ns": 17390900,
+              "residual_ns": 296200,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 900400,
+                  "coefficients": 3796600,
+                  "membrane": 1886700,
+                  "synaptic_decay": 415300,
+                  "writeback": 1375500,
+                  "allowed_reduction": 479500,
+                  "input_gather": 1632400,
+                  "return_shape_check": 124600
+                },
+                "event_schedule": {
+                  "lookup": 36700,
+                  "grid_validation": 931400,
+                  "append": 17500,
+                  "packing": 19800
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 724600,
+                "event_schedule": 42800
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 9,
+          "on": {
+            "wall_ns": 17964800,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 17961600,
+              "stages_ns": {
+                "preparation": 126300,
+                "event_schedule": 1082300,
+                "state_setup": 41800,
+                "direct_input": 238600,
+                "pending_delivery": 2771900,
+                "linear_update": 11493900,
+                "spike_reset_enqueue": 1669900,
+                "trace": 38400,
+                "output": 196900
+              },
+              "stage_sum_ns": 17660000,
+              "residual_ns": 301600,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 837600,
+                  "coefficients": 3828000,
+                  "membrane": 1889100,
+                  "synaptic_decay": 423200,
+                  "writeback": 1410100,
+                  "allowed_reduction": 480700,
+                  "input_gather": 1702800,
+                  "return_shape_check": 154700
+                },
+                "event_schedule": {
+                  "lookup": 38200,
+                  "grid_validation": 960500,
+                  "append": 18000,
+                  "packing": 19800
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 767700,
+                "event_schedule": 45800
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 15840100,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        }
+      ],
+      "off_wall_ns": {
+        "median": 16515050.0,
+        "mean": 16817010,
+        "min": 15840100,
+        "max": 18997600
+      },
+      "on_wall_ns": {
+        "median": 18098950.0,
+        "mean": 18131630,
+        "min": 17401400,
+        "max": 18685200
+      },
+      "overhead_ns": 1583900.0,
+      "overhead_percent": 9.590646107641213,
+      "total_ns": {
+        "median": 18093900.0,
+        "mean": 18127600,
+        "min": 17397900,
+        "max": 18681200
+      },
+      "stages": {
+        "preparation": {
+          "median": 132800.0,
+          "mean": 133460,
+          "min": 125600,
+          "max": 151500,
+          "mean_share": 0.007362254242150091
+        },
+        "event_schedule": {
+          "median": 1092300.0,
+          "mean": 1091040,
+          "min": 1048200,
+          "max": 1121500,
+          "mean_share": 0.06018667666982943
+        },
+        "state_setup": {
+          "median": 47550.0,
+          "mean": 46470,
+          "min": 41700,
+          "max": 48700,
+          "mean_share": 0.0025634943401222445
+        },
+        "direct_input": {
+          "median": 222350.0,
+          "mean": 222300,
+          "min": 205700,
+          "max": 238600,
+          "mean_share": 0.01226306847017807
+        },
+        "pending_delivery": {
+          "median": 2820750.0,
+          "mean": 2828630,
+          "min": 2694400,
+          "max": 2980600,
+          "mean_share": 0.1560399611641916
+        },
+        "linear_update": {
+          "median": 11543200.0,
+          "mean": 11547790,
+          "min": 11041200,
+          "max": 11925500,
+          "mean_share": 0.637028067697875
+        },
+        "spike_reset_enqueue": {
+          "median": 1702150.0,
+          "mean": 1698800,
+          "min": 1616400,
+          "max": 1737000,
+          "mean_share": 0.09371345351839185
+        },
+        "trace": {
+          "median": 38500.0,
+          "mean": 38600,
+          "min": 36900,
+          "max": 40400,
+          "mean_share": 0.0021293497208676273
+        },
+        "output": {
+          "median": 212000.0,
+          "mean": 210620,
+          "min": 191700,
+          "max": 223000,
+          "mean_share": 0.011618747103863722
+        }
+      },
+      "residual_ns": {
+        "median": 305150.0,
+        "mean": 309890,
+        "min": 296200,
+        "max": 332200,
+        "mean_share": 0.017094927072530287
+      },
+      "edges_per_neuron": 8,
+      "substage_summary": {
+        "linear_update": {
+          "mask": {
+            "median": 864100.0,
+            "mean": 862840,
+            "min": 817400,
+            "max": 900400,
+            "parent_share": 0.07471905879826356,
+            "full_share": 0.04759813764646175
+          },
+          "coefficients": {
+            "median": 3857350.0,
+            "mean": 3859900,
+            "min": 3692100,
+            "max": 3983200,
+            "parent_share": 0.3342544330993203,
+            "full_share": 0.21292945563670868
+          },
+          "membrane": {
+            "median": 1932950.0,
+            "mean": 1928620,
+            "min": 1864000,
+            "max": 1975600,
+            "parent_share": 0.16701204299697173,
+            "full_share": 0.10639135903263532
+          },
+          "synaptic_decay": {
+            "median": 423650.0,
+            "mean": 422840,
+            "min": 398900,
+            "max": 441400,
+            "parent_share": 0.03661653008930713,
+            "full_share": 0.023325757408592423
+          },
+          "writeback": {
+            "median": 1424200.0,
+            "mean": 1419560,
+            "min": 1354800,
+            "max": 1465800,
+            "parent_share": 0.12292914921383226,
+            "full_share": 0.07830931838743133
+          },
+          "allowed_reduction": {
+            "median": 489750.0,
+            "mean": 490350,
+            "min": 479500,
+            "max": 506200,
+            "parent_share": 0.04246267034644724,
+            "full_share": 0.027049912840089146
+          },
+          "input_gather": {
+            "median": 1701300.0,
+            "mean": 1690990,
+            "min": 1614100,
+            "max": 1782000,
+            "parent_share": 0.14643407959445054,
+            "full_share": 0.09328261876916967
+          },
+          "return_shape_check": {
+            "median": 128650.0,
+            "mean": 130680,
+            "min": 124600,
+            "max": 154700,
+            "parent_share": 0.01131645102656006,
+            "full_share": 0.00720889693064719
+          },
+          "residual": {
+            "median": 739150.0,
+            "mean": 742010,
+            "min": 693100,
+            "max": 770500,
+            "parent_share": 0.06425558483484718,
+            "full_share": 0.040932611046139586
+          }
+        },
+        "event_schedule": {
+          "lookup": {
+            "median": 38600.0,
+            "mean": 38980,
+            "min": 36700,
+            "max": 41100,
+            "parent_share": 0.03572737938114093,
+            "full_share": 0.0021503122310730597
+          },
+          "grid_validation": {
+            "median": 969000.0,
+            "mean": 967150,
+            "min": 931400,
+            "max": 989400,
+            "parent_share": 0.8864477929315149,
+            "full_share": 0.053352346697853
+          },
+          "append": {
+            "median": 18600.0,
+            "mean": 18710,
+            "min": 17500,
+            "max": 20100,
+            "parent_share": 0.0171487754802757,
+            "full_share": 0.0010321278051148525
+          },
+          "packing": {
+            "median": 20850.0,
+            "mean": 20950,
+            "min": 19800,
+            "max": 23000,
+            "parent_share": 0.019201862443173484,
+            "full_share": 0.0011556962863258236
+          },
+          "residual": {
+            "median": 44000.0,
+            "mean": 45250,
+            "min": 42400,
+            "max": 54100,
+            "parent_share": 0.041474189763895,
+            "full_share": 0.002496193649462698
+          }
+        }
+      },
+      "overhead_class": "OHD-B",
+      "linear_local_summary": {
+        "previous_named_sum": {
+          "median": 8497700.0,
+          "mean": 8493760,
+          "min": 8127200,
+          "max": 8744600,
+          "parent_share": 0.735531214197695
+        },
+        "newly_explained": {
+          "median": 2328150.0,
+          "mean": 2312020,
+          "min": 2220900,
+          "max": 2410400,
+          "parent_share": 0.20021320096745784
+        },
+        "parent": {
+          "median": 11543200.0,
+          "mean": 11547790,
+          "min": 11041200,
+          "max": 11925500
+        },
+        "remaining": {
+          "median": 739150.0,
+          "mean": 742010,
+          "min": 693100,
+          "max": 770500,
+          "parent_share": 0.06425558483484718,
+          "full_share": 0.040932611046139586
+        }
+      }
+    },
+    {
+      "case": "G3-12",
+      "neurons": 32768,
+      "edges": 262144,
+      "density": 0.000244140625,
+      "input_events": 60,
+      "duration_ms": 20,
+      "seed": 1906,
+      "graph_identity": "eaeb6e4e3698ba175ea5e38e037e6c7d962f1dc312d6dd83ec1811287d47a909",
+      "stimulus_identity": "26f55d2f71e58fbfdd23cf6961e977de3d1916ec2ddc5c7785b2adac31a8ee69",
+      "warmups": 3,
+      "repeats": 10,
+      "replay": "exact bytes/state/output: two chunks",
+      "raw": [
+        {
+          "repeat": 0,
+          "off": {
+            "wall_ns": 72589900,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 73435900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 73431900,
+              "stages_ns": {
+                "preparation": 145600,
+                "event_schedule": 1103600,
+                "state_setup": 52700,
+                "direct_input": 1127600,
+                "pending_delivery": 15870700,
+                "linear_update": 48755500,
+                "spike_reset_enqueue": 4990100,
+                "trace": 43600,
+                "output": 965200
+              },
+              "stage_sum_ns": 73054600,
+              "residual_ns": 377300,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 3342600,
+                  "coefficients": 4954700,
+                  "membrane": 11395400,
+                  "synaptic_decay": 1536100,
+                  "writeback": 10941300,
+                  "allowed_reduction": 571700,
+                  "input_gather": 14838000,
+                  "return_shape_check": 201000
+                },
+                "event_schedule": {
+                  "lookup": 41400,
+                  "grid_validation": 975300,
+                  "append": 20700,
+                  "packing": 23100
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 974700,
+                "event_schedule": 43100
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 1,
+          "on": {
+            "wall_ns": 75227100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 75222800,
+              "stages_ns": {
+                "preparation": 138000,
+                "event_schedule": 1082500,
+                "state_setup": 53700,
+                "direct_input": 1183500,
+                "pending_delivery": 16785600,
+                "linear_update": 49566400,
+                "spike_reset_enqueue": 5009100,
+                "trace": 42700,
+                "output": 969000
+              },
+              "stage_sum_ns": 74830500,
+              "residual_ns": 392300,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 3352400,
+                  "coefficients": 5095500,
+                  "membrane": 11598000,
+                  "synaptic_decay": 1594000,
+                  "writeback": 11214800,
+                  "allowed_reduction": 599700,
+                  "input_gather": 14954800,
+                  "return_shape_check": 208400
+                },
+                "event_schedule": {
+                  "lookup": 42200,
+                  "grid_validation": 956800,
+                  "append": 18300,
+                  "packing": 22900
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 948800,
+                "event_schedule": 42300
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 70810600,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 2,
+          "off": {
+            "wall_ns": 71381700,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 73467000,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 73461500,
+              "stages_ns": {
+                "preparation": 133900,
+                "event_schedule": 1090600,
+                "state_setup": 54000,
+                "direct_input": 1137700,
+                "pending_delivery": 15825600,
+                "linear_update": 48931600,
+                "spike_reset_enqueue": 4964400,
+                "trace": 43900,
+                "output": 895400
+              },
+              "stage_sum_ns": 73077100,
+              "residual_ns": 384400,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 3329000,
+                  "coefficients": 4892800,
+                  "membrane": 11539100,
+                  "synaptic_decay": 1549900,
+                  "writeback": 10930200,
+                  "allowed_reduction": 556800,
+                  "input_gather": 15016300,
+                  "return_shape_check": 197600
+                },
+                "event_schedule": {
+                  "lookup": 41800,
+                  "grid_validation": 965300,
+                  "append": 19600,
+                  "packing": 21200
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 919900,
+                "event_schedule": 42700
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 3,
+          "on": {
+            "wall_ns": 73599800,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 73595200,
+              "stages_ns": {
+                "preparation": 136600,
+                "event_schedule": 1074800,
+                "state_setup": 52300,
+                "direct_input": 1082900,
+                "pending_delivery": 15987600,
+                "linear_update": 48913100,
+                "spike_reset_enqueue": 5037400,
+                "trace": 42800,
+                "output": 884400
+              },
+              "stage_sum_ns": 73211900,
+              "residual_ns": 383300,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 3396600,
+                  "coefficients": 5031100,
+                  "membrane": 11402000,
+                  "synaptic_decay": 1528600,
+                  "writeback": 10988700,
+                  "allowed_reduction": 584600,
+                  "input_gather": 14858400,
+                  "return_shape_check": 202300
+                },
+                "event_schedule": {
+                  "lookup": 40700,
+                  "grid_validation": 936500,
+                  "append": 17900,
+                  "packing": 21900
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 920800,
+                "event_schedule": 57800
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 72234000,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 4,
+          "off": {
+            "wall_ns": 72077500,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 72558500,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 72553100,
+              "stages_ns": {
+                "preparation": 123000,
+                "event_schedule": 964800,
+                "state_setup": 48000,
+                "direct_input": 1120600,
+                "pending_delivery": 15881900,
+                "linear_update": 48133900,
+                "spike_reset_enqueue": 4914900,
+                "trace": 43500,
+                "output": 963600
+              },
+              "stage_sum_ns": 72194200,
+              "residual_ns": 358900,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 3197900,
+                  "coefficients": 5007000,
+                  "membrane": 10999700,
+                  "synaptic_decay": 1518800,
+                  "writeback": 10975300,
+                  "allowed_reduction": 585400,
+                  "input_gather": 14692400,
+                  "return_shape_check": 207100
+                },
+                "event_schedule": {
+                  "lookup": 37600,
+                  "grid_validation": 846200,
+                  "append": 17600,
+                  "packing": 20000
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 950300,
+                "event_schedule": 43400
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 5,
+          "on": {
+            "wall_ns": 72002500,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 71998000,
+              "stages_ns": {
+                "preparation": 122600,
+                "event_schedule": 958800,
+                "state_setup": 48300,
+                "direct_input": 1056600,
+                "pending_delivery": 15636900,
+                "linear_update": 47873900,
+                "spike_reset_enqueue": 4932800,
+                "trace": 53600,
+                "output": 942700
+              },
+              "stage_sum_ns": 71626200,
+              "residual_ns": 371800,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 3200900,
+                  "coefficients": 4962400,
+                  "membrane": 10974400,
+                  "synaptic_decay": 1513800,
+                  "writeback": 10966300,
+                  "allowed_reduction": 596300,
+                  "input_gather": 14531600,
+                  "return_shape_check": 205300
+                },
+                "event_schedule": {
+                  "lookup": 36800,
+                  "grid_validation": 845500,
+                  "append": 17200,
+                  "packing": 19800
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 922900,
+                "event_schedule": 39500
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 70784300,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 6,
+          "off": {
+            "wall_ns": 70937600,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 72846300,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 72838900,
+              "stages_ns": {
+                "preparation": 154600,
+                "event_schedule": 1058000,
+                "state_setup": 51100,
+                "direct_input": 1146100,
+                "pending_delivery": 15849800,
+                "linear_update": 48168800,
+                "spike_reset_enqueue": 5018500,
+                "trace": 42600,
+                "output": 975100
+              },
+              "stage_sum_ns": 72464600,
+              "residual_ns": 374300,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 3255600,
+                  "coefficients": 5017900,
+                  "membrane": 11120900,
+                  "synaptic_decay": 1515000,
+                  "writeback": 10933500,
+                  "allowed_reduction": 587200,
+                  "input_gather": 14597600,
+                  "return_shape_check": 210600
+                },
+                "event_schedule": {
+                  "lookup": 38700,
+                  "grid_validation": 938400,
+                  "append": 17800,
+                  "packing": 21000
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 930500,
+                "event_schedule": 42100
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 7,
+          "on": {
+            "wall_ns": 73236000,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 73231000,
+              "stages_ns": {
+                "preparation": 137600,
+                "event_schedule": 1098600,
+                "state_setup": 54200,
+                "direct_input": 1135400,
+                "pending_delivery": 15792200,
+                "linear_update": 48666200,
+                "spike_reset_enqueue": 4957500,
+                "trace": 43600,
+                "output": 950300
+              },
+              "stage_sum_ns": 72835600,
+              "residual_ns": 395400,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 3280400,
+                  "coefficients": 5041800,
+                  "membrane": 11219400,
+                  "synaptic_decay": 1584400,
+                  "writeback": 11064300,
+                  "allowed_reduction": 572000,
+                  "input_gather": 14750000,
+                  "return_shape_check": 209100
+                },
+                "event_schedule": {
+                  "lookup": 40900,
+                  "grid_validation": 966400,
+                  "append": 24600,
+                  "packing": 22400
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 944800,
+                "event_schedule": 44300
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 80011500,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 8,
+          "off": {
+            "wall_ns": 71318500,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 73491500,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 73486400,
+              "stages_ns": {
+                "preparation": 125000,
+                "event_schedule": 972500,
+                "state_setup": 47100,
+                "direct_input": 1102100,
+                "pending_delivery": 16027800,
+                "linear_update": 48798700,
+                "spike_reset_enqueue": 5034500,
+                "trace": 43400,
+                "output": 931600
+              },
+              "stage_sum_ns": 73082700,
+              "residual_ns": 403700,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 3331500,
+                  "coefficients": 5026700,
+                  "membrane": 11449500,
+                  "synaptic_decay": 1561300,
+                  "writeback": 10894200,
+                  "allowed_reduction": 581300,
+                  "input_gather": 14804100,
+                  "return_shape_check": 202600
+                },
+                "event_schedule": {
+                  "lookup": 37400,
+                  "grid_validation": 854100,
+                  "append": 18700,
+                  "packing": 19600
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 947500,
+                "event_schedule": 42700
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        },
+        {
+          "repeat": 9,
+          "on": {
+            "wall_ns": 72975300,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 72970700,
+              "stages_ns": {
+                "preparation": 125700,
+                "event_schedule": 980700,
+                "state_setup": 47200,
+                "direct_input": 1078100,
+                "pending_delivery": 15608400,
+                "linear_update": 48806000,
+                "spike_reset_enqueue": 4998100,
+                "trace": 44500,
+                "output": 930400
+              },
+              "stage_sum_ns": 72619100,
+              "residual_ns": 351600,
+              "substages_ns": {
+                "linear_update": {
+                  "mask": 3333300,
+                  "coefficients": 4945100,
+                  "membrane": 11373300,
+                  "synaptic_decay": 1512600,
+                  "writeback": 10861400,
+                  "allowed_reduction": 621200,
+                  "input_gather": 14991300,
+                  "return_shape_check": 201900
+                },
+                "event_schedule": {
+                  "lookup": 37900,
+                  "grid_validation": 864000,
+                  "append": 16200,
+                  "packing": 21400
+                }
+              },
+              "substage_residual_ns": {
+                "linear_update": 965900,
+                "event_schedule": 41200
+              }
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 71367200,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          }
+        }
+      ],
+      "off_wall_ns": {
+        "median": 71374450.0,
+        "mean": 72351280,
+        "min": 70784300,
+        "max": 80011500
+      },
+      "on_wall_ns": {
+        "median": 73335950.0,
+        "mean": 73283990,
+        "min": 72002500,
+        "max": 75227100
+      },
+      "overhead_ns": 1961500.0,
+      "overhead_percent": 2.748182297726988,
+      "total_ns": {
+        "median": 73331450.0,
+        "mean": 73278950,
+        "min": 71998000,
+        "max": 75222800
+      },
+      "stages": {
+        "preparation": {
+          "median": 135250.0,
+          "mean": 134260,
+          "min": 122600,
+          "max": 154600,
+          "mean_share": 0.0018321769075566722
+        },
+        "event_schedule": {
+          "median": 1066400.0,
+          "mean": 1038490,
+          "min": 958800,
+          "max": 1103600,
+          "mean_share": 0.014171736903981293
+        },
+        "state_setup": {
+          "median": 51700.0,
+          "mean": 50860,
+          "min": 47100,
+          "max": 54200,
+          "mean_share": 0.000694060163252885
+        },
+        "direct_input": {
+          "median": 1124100.0,
+          "mean": 1117060,
+          "min": 1056600,
+          "max": 1183500,
+          "mean_share": 0.015243941131798422
+        },
+        "pending_delivery": {
+          "median": 15860250.0,
+          "mean": 15926650,
+          "min": 15608400,
+          "max": 16785600,
+          "mean_share": 0.21734277033172555
+        },
+        "linear_update": {
+          "median": 48777100.0,
+          "mean": 48661410,
+          "min": 47873900,
+          "max": 49566400,
+          "mean_share": 0.6640571405567356
+        },
+        "spike_reset_enqueue": {
+          "median": 4994100.0,
+          "mean": 4985730,
+          "min": 4914900,
+          "max": 5037400,
+          "mean_share": 0.06803768340021248
+        },
+        "trace": {
+          "median": 43550.0,
+          "mean": 44420,
+          "min": 42600,
+          "max": 53600,
+          "mean_share": 0.0006061768079373408
+        },
+        "output": {
+          "median": 946500.0,
+          "mean": 940770,
+          "min": 884400,
+          "max": 975100,
+          "mean_share": 0.012838202512454122
+        }
+      },
+      "residual_ns": {
+        "median": 380300.0,
+        "mean": 379300,
+        "min": 351600,
+        "max": 403700,
+        "mean_share": 0.0051761112843456405
+      },
+      "edges_per_neuron": 8,
+      "substage_summary": {
+        "linear_update": {
+          "mask": {
+            "median": 3330250.0,
+            "mean": 3302020,
+            "min": 3197900,
+            "max": 3396600,
+            "parent_share": 0.06785705551894201,
+            "full_share": 0.045060962254508286
+          },
+          "coefficients": {
+            "median": 5012450.0,
+            "mean": 4997500,
+            "min": 4892800,
+            "max": 5095500,
+            "parent_share": 0.1026994491117294,
+            "full_share": 0.068198302513887
+          },
+          "membrane": {
+            "median": 11384350.0,
+            "mean": 11307170,
+            "min": 10974400,
+            "max": 11598000,
+            "parent_share": 0.23236420810658795,
+            "full_share": 0.15430311160299104
+          },
+          "synaptic_decay": {
+            "median": 1532350.0,
+            "mean": 1541450,
+            "min": 1512600,
+            "max": 1594000,
+            "parent_share": 0.031677051692501304,
+            "full_share": 0.02103537236819032
+          },
+          "writeback": {
+            "median": 10953800.0,
+            "mean": 10977000,
+            "min": 10861400,
+            "max": 11214800,
+            "parent_share": 0.2255791601599707,
+            "full_share": 0.14979745206502004
+          },
+          "allowed_reduction": {
+            "median": 585000.0,
+            "mean": 585620,
+            "min": 556800,
+            "max": 621200,
+            "parent_share": 0.012034587571547968,
+            "full_share": 0.007991653810541772
+          },
+          "input_gather": {
+            "median": 14821050.0,
+            "mean": 14803450,
+            "min": 14531600,
+            "max": 15016300,
+            "parent_share": 0.30421333865993605,
+            "full_share": 0.20201503978973498
+          },
+          "return_shape_check": {
+            "median": 203950.0,
+            "mean": 204590,
+            "min": 197600,
+            "max": 210600,
+            "parent_share": 0.00420435823787268,
+            "full_share": 0.0027919341093178875
+          },
+          "residual": {
+            "median": 946150.0,
+            "mean": 942610,
+            "min": 919900,
+            "max": 974700,
+            "parent_share": 0.019370790940911906,
+            "full_share": 0.012863312042544277
+          }
+        },
+        "event_schedule": {
+          "lookup": {
+            "median": 39700.0,
+            "mean": 39540,
+            "min": 36800,
+            "max": 42200,
+            "parent_share": 0.03807451203189246,
+            "full_share": 0.0005395819672634501
+          },
+          "grid_validation": {
+            "median": 937450.0,
+            "mean": 914850,
+            "min": 845500,
+            "max": 975300,
+            "parent_share": 0.8809425223160551,
+            "full_share": 0.012484485653792801
+          },
+          "append": {
+            "median": 18100.0,
+            "mean": 18860,
+            "min": 16200,
+            "max": 24600,
+            "parent_share": 0.01816098373600131,
+            "full_share": 0.0002573726834240938
+          },
+          "packing": {
+            "median": 21300.0,
+            "mean": 21330,
+            "min": 19600,
+            "max": 23100,
+            "parent_share": 0.02053943706728038,
+            "full_share": 0.00029107949827337864
+          },
+          "residual": {
+            "median": 42700.0,
+            "mean": 43910,
+            "min": 39500,
+            "max": 57800,
+            "parent_share": 0.04228254484877081,
+            "full_share": 0.0005992171012275695
+          }
+        }
+      },
+      "overhead_class": "OHD-A",
+      "linear_local_summary": {
+        "previous_named_sum": {
+          "median": 32180200.0,
+          "mean": 32125140,
+          "min": 31617800,
+          "max": 32854700,
+          "parent_share": 0.6601769245897313
+        },
+        "newly_explained": {
+          "median": 15599350.0,
+          "mean": 15593660,
+          "min": 15333200,
+          "max": 15814400,
+          "parent_share": 0.32045228446935675
+        },
+        "parent": {
+          "median": 48777100.0,
+          "mean": 48661410,
+          "min": 47873900,
+          "max": 49566400
+        },
+        "remaining": {
+          "median": 946150.0,
+          "mean": 942610,
+          "min": 919900,
+          "max": 974700,
+          "parent_share": 0.019370790940911906,
+          "full_share": 0.012863312042544277
+        }
+      }
+    }
+  ],
+  "accounting": "fail-closed guarded accounting, not independent native byte telemetry",
+  "counters": {
+    "full_real_preparations": 0,
+    "real_advances": 0,
+    "a019d_reruns": 0,
+    "gpu_runs": 0,
+    "arena_runs": 0,
+    "scientific_interventions": 0,
+    "downloads": 0,
+    "archive_writes": 0
+  },
+  "accepted_registered_reads": {
+    "REAL_CONNECTIVITY": 0,
+    "REAL_ANNOTATION": 0,
+    "REAL_NEUROTRANSMITTER": 0,
+    "REAL_NEURON_METADATA": 0,
+    "REAL_MAPPING": 0,
+    "REAL_PROVENANCE": 0,
+    "REAL_OTHER_REGISTERED_DATA": 0
+  },
+  "starting_sha": "4e6d88b8ee7ad2c38ea339038c912b305c969a5f",
+  "schema": "a019j-synthetic-measurement-v1",
+  "phase": "optimized",
+  "runner": "benchmark_application_a019h.run with CASES[:3]",
+  "instrumentation_default": "OFF"
+}

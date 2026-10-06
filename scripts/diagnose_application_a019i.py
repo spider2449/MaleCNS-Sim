@@ -16,7 +16,7 @@ class Workspace:
         self.g = np.empty(capacity, dtype=np.float64)
 
     def update(self, v, g, *, parameters=lif.REFERENCE_LIF_PARAMETERS,
-               dt_ms=0.1, _timing=None):
+               dt_ms=0.1, _timing=None, _scratch=None):
         # Scope is the dense runtime's contiguous float64 gathered arrays only.
         assert v.dtype == g.dtype == np.float64 and v.shape == g.shape
         assert v.ndim == 1 and v.size <= self.v.size and _timing is None
