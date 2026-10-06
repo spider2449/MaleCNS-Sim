@@ -164,26 +164,43 @@ def schedule_events(
     neuron_positions: np.ndarray,
     duration_steps: int,
     dt_ms: float,
+    _timing=None,
 ) -> dict[int, tuple[np.ndarray, np.ndarray]]:
     """Validate and pack schedules into deterministic timestep event batches."""
 
     batches: dict[int, list[tuple[int, float]]] = {}
     for schedule in stimulus.schedules:
+        if _timing is not None:
+            _timing.substart()
         position = int(np.searchsorted(neuron_positions, schedule.neuron_id))
         if position >= neuron_positions.size or int(neuron_positions[position]) != schedule.neuron_id:
             raise KeyError(f"unknown neuron ID: {schedule.neuron_id}")
+        if _timing is not None:
+            _timing.substop("event_schedule", "lookup")
         for time_ms in schedule.spike_times_ms:
+            if _timing is not None:
+                _timing.substart()
             step = _grid_steps(time_ms, dt_ms, "spike time")
             if step >= duration_steps:
                 raise ValueError("stimulus spike time must be before the simulation endpoint")
+            if _timing is not None:
+                _timing.substop("event_schedule", "grid_validation")
+                _timing.substart()
             batches.setdefault(step, []).append((position, 1.0))
-    return {
+            if _timing is not None:
+                _timing.substop("event_schedule", "append")
+    if _timing is not None:
+        _timing.substart()
+    result = {
         step: (
             np.asarray([item[0] for item in events], dtype=np.int64),
             np.asarray([item[1] for item in events], dtype=np.float64),
         )
         for step, events in sorted(batches.items())
     }
+    if _timing is not None:
+        _timing.substop("event_schedule", "packing")
+    return result
 
 
 def validate_refractory_ids(

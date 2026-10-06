@@ -132,9 +132,12 @@ def linear_state_update(
     *,
     parameters: LIFParameters = REFERENCE_LIF_PARAMETERS,
     dt_ms: float = 0.1,
+    _timing: AdvanceTiming | None = None,
 ) -> tuple[np.ndarray | float, np.ndarray | float]:
     """Analytically integrate both coupled linear states over one timestep."""
 
+    if _timing is not None:
+        _timing.substart()
     dt = _finite(dt_ms, "dt_ms")
     if dt <= 0.0:
         raise ValueError("dt_ms must be positive")
@@ -146,8 +149,16 @@ def linear_state_update(
         g_coefficient = (
             exp_s - exp_m
         ) / (1.0 - parameters.tau_membrane_ms / parameters.tau_synapse_ms)
+    if _timing is not None:
+        _timing.substop("linear_update", "coefficients")
+        _timing.substart()
     v_next = parameters.v_rest_mV + (np.asarray(v_mV) - parameters.v_rest_mV) * exp_m + np.asarray(g_mV) * g_coefficient
+    if _timing is not None:
+        _timing.substop("linear_update", "membrane")
+        _timing.substart()
     g_next = np.asarray(g_mV) * exp_s
+    if _timing is not None:
+        _timing.substop("linear_update", "synaptic_decay")
     if np.ndim(v_mV) == 0:
         return float(v_next), float(g_next)
     return v_next, g_next
@@ -336,6 +347,10 @@ ADVANCE_STAGES = (
     "preparation", "event_schedule", "state_setup", "direct_input", "pending_delivery", "linear_update",
     "spike_reset_enqueue", "trace", "output",
 )
+ADVANCE_SUBSTAGES = {
+    "linear_update": ("mask", "coefficients", "membrane", "synaptic_decay", "writeback"),
+    "event_schedule": ("lookup", "grid_validation", "append", "packing"),
+}
 
 
 @dataclass(slots=True)
@@ -352,11 +367,21 @@ class AdvanceTiming:
     residual_ns: int = 0
     _started: int = 0
     _stage_started: int = 0
+    _sub_started: int = 0
+    substages_ns: dict[str, dict[str, int]] = field(default_factory=dict)
 
     def begin(self) -> None:
         self._started = perf_counter_ns()
         self.stages_ns = dict.fromkeys(ADVANCE_STAGES, 0)
         self.total_ns = self.residual_ns = 0
+        self.substages_ns = {parent: dict.fromkeys(names, 0) for parent, names in ADVANCE_SUBSTAGES.items()}
+
+    def substart(self) -> None:
+        self._sub_started = perf_counter_ns()
+
+    def substop(self, parent: str, name: str) -> None:
+        ended = perf_counter_ns()
+        self.substages_ns[parent][name] += ended - self._sub_started
 
     def start(self) -> None:
         self._stage_started = perf_counter_ns()
@@ -372,7 +397,9 @@ class AdvanceTiming:
     def record(self) -> dict:
         return {"schema": "cpu-advance-timing-v1", "total_ns": self.total_ns,
                 "stages_ns": dict(self.stages_ns), "stage_sum_ns": sum(self.stages_ns.values()),
-                "residual_ns": self.residual_ns}
+                "residual_ns": self.residual_ns,
+                "substages_ns": {p: dict(v) for p, v in self.substages_ns.items()},
+                "substage_residual_ns": {p: self.stages_ns[p] - sum(v.values()) for p, v in self.substages_ns.items()}}
 
 
 @dataclass(frozen=True, slots=True)
@@ -476,7 +503,7 @@ def simulate_lif(
     if _timing is not None:
         _timing.stop("preparation")
         _timing.start()
-    event_batches = schedule_events(explicit, neuron_positions=ids, duration_steps=steps, dt_ms=dt_ms)
+    event_batches = schedule_events(explicit, neuron_positions=ids, duration_steps=steps, dt_ms=dt_ms, _timing=_timing)
     if _timing is not None:
         _timing.stop("event_schedule")
         _timing.start()
@@ -547,11 +574,19 @@ def simulate_lif(
         if _timing is not None:
             _timing.stop("pending_delivery")
             _timing.start()
+        if _timing is not None:
+            _timing.substart()
         allowed = (step > refractory_until) | refractory_free_mask
+        if _timing is not None:
+            _timing.substop("linear_update", "mask")
         if np.any(allowed):
-            updated_v, updated_g = linear_state_update(v[allowed], g[allowed], parameters=parameters, dt_ms=dt_ms)
+            updated_v, updated_g = linear_state_update(v[allowed], g[allowed], parameters=parameters, dt_ms=dt_ms, _timing=_timing)
+            if _timing is not None:
+                _timing.substart()
             v[allowed] = updated_v
             g[allowed] = updated_g
+            if _timing is not None:
+                _timing.substop("linear_update", "writeback")
         if _timing is not None:
             _timing.stop("linear_update")
             _timing.start()
