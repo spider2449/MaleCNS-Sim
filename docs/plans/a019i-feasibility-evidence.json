@@ -1,0 +1,118 @@
+{
+  "schema": "a019i-feasibility-v1",
+  "cases": [
+    {
+      "case": "G1",
+      "n": 128,
+      "events": 60,
+      "selections": [
+        {
+          "mode": "empty",
+          "k": 0,
+          "gather_bytes": 0,
+          "mask_bytes": 128,
+          "shares_state": false
+        },
+        {
+          "mode": "full",
+          "k": 128,
+          "gather_bytes": 2048,
+          "mask_bytes": 128,
+          "shares_state": false
+        },
+        {
+          "mode": "mixed",
+          "k": 85,
+          "gather_bytes": 1360,
+          "mask_bytes": 128,
+          "shares_state": false
+        }
+      ],
+      "full_selection_gather_bytes": 2048,
+      "membrane_output_bytes": 1024,
+      "membrane_cumulative_array_payload_bytes": 5120,
+      "decay_array_payload_bytes": 1024,
+      "workspace_bytes": 2048,
+      "replay": "two chunks exact state/result bytes"
+    },
+    {
+      "case": "G2",
+      "n": 4096,
+      "events": 60,
+      "selections": [
+        {
+          "mode": "empty",
+          "k": 0,
+          "gather_bytes": 0,
+          "mask_bytes": 4096,
+          "shares_state": false
+        },
+        {
+          "mode": "full",
+          "k": 4096,
+          "gather_bytes": 65536,
+          "mask_bytes": 4096,
+          "shares_state": false
+        },
+        {
+          "mode": "mixed",
+          "k": 2730,
+          "gather_bytes": 43680,
+          "mask_bytes": 4096,
+          "shares_state": false
+        }
+      ],
+      "full_selection_gather_bytes": 65536,
+      "membrane_output_bytes": 32768,
+      "membrane_cumulative_array_payload_bytes": 163840,
+      "decay_array_payload_bytes": 32768,
+      "workspace_bytes": 65536,
+      "replay": "two chunks exact state/result bytes"
+    },
+    {
+      "case": "G3",
+      "n": 32768,
+      "events": 60,
+      "selections": [
+        {
+          "mode": "empty",
+          "k": 0,
+          "gather_bytes": 0,
+          "mask_bytes": 32768,
+          "shares_state": false
+        },
+        {
+          "mode": "full",
+          "k": 32768,
+          "gather_bytes": 524288,
+          "mask_bytes": 32768,
+          "shares_state": false
+        },
+        {
+          "mode": "mixed",
+          "k": 21845,
+          "gather_bytes": 349520,
+          "mask_bytes": 32768,
+          "shares_state": false
+        }
+      ],
+      "full_selection_gather_bytes": 524288,
+      "membrane_output_bytes": 262144,
+      "membrane_cumulative_array_payload_bytes": 1310720,
+      "decay_array_payload_bytes": 262144,
+      "workspace_bytes": 524288,
+      "replay": "two chunks exact state/result bytes"
+    }
+  ],
+  "accounting": "ndarray nbytes and source-derived payload counts; not allocator telemetry",
+  "classification": "A019I-B",
+  "accepted_registered_reads": {
+    "REAL_MAPPING": 0,
+    "REAL_PROVENANCE": 0,
+    "REAL_NEUROTRANSMITTER": 0,
+    "REAL_ANNOTATION": 0,
+    "REAL_CONNECTIVITY": 0,
+    "REAL_NEURON_METADATA": 0,
+    "REAL_OTHER_REGISTERED_DATA": 0
+  }
+}
