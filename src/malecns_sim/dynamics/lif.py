@@ -6,6 +6,7 @@ import hashlib
 import json
 from dataclasses import dataclass, field
 from typing import Iterable
+from time import perf_counter_ns
 
 import numpy as np
 
@@ -331,6 +332,49 @@ class SimulationState:
     pending_event_counts: np.ndarray
 
 
+ADVANCE_STAGES = (
+    "preparation", "event_schedule", "state_setup", "direct_input", "pending_delivery", "linear_update",
+    "spike_reset_enqueue", "trace", "output",
+)
+
+
+@dataclass(slots=True)
+class AdvanceTiming:
+    """Opt-in exclusive CPU observations, one record per advance call.
+
+    Stage intervals include their closing branch/call entry, but exclude
+    accumulator bookkeeping. Residual includes hooks, loop control, runtime
+    identity checks and return plumbing. No stage is nested.
+    """
+
+    stages_ns: dict[str, int] = field(default_factory=lambda: dict.fromkeys(ADVANCE_STAGES, 0))
+    total_ns: int = 0
+    residual_ns: int = 0
+    _started: int = 0
+    _stage_started: int = 0
+
+    def begin(self) -> None:
+        self._started = perf_counter_ns()
+        self.stages_ns = dict.fromkeys(ADVANCE_STAGES, 0)
+        self.total_ns = self.residual_ns = 0
+
+    def start(self) -> None:
+        self._stage_started = perf_counter_ns()
+
+    def stop(self, stage: str) -> None:
+        ended = perf_counter_ns()
+        self.stages_ns[stage] += ended - self._stage_started
+
+    def finish(self) -> None:
+        self.total_ns = perf_counter_ns() - self._started
+        self.residual_ns = self.total_ns - sum(self.stages_ns.values())
+
+    def record(self) -> dict:
+        return {"schema": "cpu-advance-timing-v1", "total_ns": self.total_ns,
+                "stages_ns": dict(self.stages_ns), "stage_sum_ns": sum(self.stages_ns.values()),
+                "residual_ns": self.residual_ns}
+
+
 @dataclass(frozen=True, slots=True)
 class PreparedRuntime:
     """Resume the existing reference loop with chunk-relative explicit input.
@@ -361,17 +405,23 @@ class PreparedRuntime:
     def advance(self, state: SimulationState, *, duration_ms: float,
                 stimulus: ExplicitStimulus = ExplicitStimulus(),
                 silenced_neuron_ids: Iterable[int] = (),
-                trace_neuron_ids: Iterable[int] = ()) -> SimulationResult:
+                trace_neuron_ids: Iterable[int] = (),
+                timing: AdvanceTiming | None = None) -> SimulationResult:
+        if timing is not None:
+            timing.begin()
         if state.runtime_identity != self.identity:
             raise ValueError("state belongs to another prepared runtime")
         if not isinstance(stimulus, ExplicitStimulus):
             raise TypeError("advance requires explicit chunk-relative events")
-        return simulate_lif(
+        result = simulate_lif(
             self.projection, duration_ms=duration_ms, stimulus=stimulus,
             parameters=self.parameters, dt_ms=self.dt_ms,
             silenced_neuron_ids=silenced_neuron_ids,
-            trace_neuron_ids=trace_neuron_ids, _state=state,
+            trace_neuron_ids=trace_neuron_ids, _state=state, _timing=timing,
         )
+        if timing is not None:
+            timing.finish()
+        return result
 
 
 def simulate_lif(
@@ -385,6 +435,7 @@ def simulate_lif(
     trace_neuron_ids: Iterable[int] = (),
     collect_sparse_trace: bool = False,
     _state: SimulationState | None = None,
+    _timing: AdvanceTiming | None = None,
 ) -> SimulationResult:
     """Run the reference model using active spikes and a dense delay ring.
 
@@ -396,6 +447,8 @@ def simulate_lif(
     ``t-lastspike <= refractory_period``; this is Brian's timestep-safe rule.
     """
 
+    if _timing is not None:
+        _timing.start()
     delay_steps, refractory_steps = parameters.grid_steps(dt_ms)
     if not np.isclose(
         projection.synaptic_weight_mV,
@@ -420,7 +473,13 @@ def simulate_lif(
         explicit = ExplicitStimulus(tuple(stimulus))
         stimulus_fingerprint = explicit.fingerprint
     input_weight = parameters.synaptic_weight_per_anatomical_synapse_mV if explicit.weight_mV is None else explicit.weight_mV
+    if _timing is not None:
+        _timing.stop("preparation")
+        _timing.start()
     event_batches = schedule_events(explicit, neuron_positions=ids, duration_steps=steps, dt_ms=dt_ms)
+    if _timing is not None:
+        _timing.stop("event_schedule")
+        _timing.start()
     refractory_free = validate_refractory_ids(explicit.refractory_free_neuron_ids, ids)
     refractory_free_mask = np.zeros(n, dtype=bool)
     refractory_free_mask[refractory_free] = True
@@ -452,13 +511,20 @@ def simulate_lif(
         trace_g[:, 0] = g[trace_positions]
     queued_events = 0
     delivered_events = 0
+    if _timing is not None:
+        _timing.stop("state_setup")
     for local_step in range(steps):
+        if _timing is not None:
+            _timing.start()
         step = offset + local_step
         if local_step in event_batches:
             positions, _ = event_batches[local_step]
             direct = np.bincount(positions, minlength=n).astype(np.float64) * input_weight
             direct_allowed = (~(step <= refractory_until)) | refractory_free_mask
             v[direct_allowed] += direct[direct_allowed]
+        if _timing is not None:
+            _timing.stop("direct_input")
+            _timing.start()
         slot = step % ring_size
         due = pending[slot]
         if np.any(due) or np.any(pending_event_counts[slot]):
@@ -478,11 +544,17 @@ def simulate_lif(
             g[allowed] += due[allowed]
             due.fill(0.0)
             pending_event_counts[slot].fill(0)
+        if _timing is not None:
+            _timing.stop("pending_delivery")
+            _timing.start()
         allowed = (step > refractory_until) | refractory_free_mask
         if np.any(allowed):
             updated_v, updated_g = linear_state_update(v[allowed], g[allowed], parameters=parameters, dt_ms=dt_ms)
             v[allowed] = updated_v
             g[allowed] = updated_g
+        if _timing is not None:
+            _timing.stop("linear_update")
+            _timing.start()
         fired = allowed & (v > parameters.v_threshold_mV)
         fired_positions = np.flatnonzero(fired)
         if fired_positions.size:
@@ -502,9 +574,16 @@ def simulate_lif(
                     np.add.at(pending[event_slot], targets, weights)
                     np.add.at(pending_event_counts[event_slot], targets, 1)
                     queued_events += int(end - start)
+        if _timing is not None:
+            _timing.stop("spike_reset_enqueue")
+            _timing.start()
         if trace_v is not None:
             trace_v[:, local_step + 1] = v[trace_positions]
             trace_g[:, local_step + 1] = g[trace_positions]
+        if _timing is not None:
+            _timing.stop("trace")
+    if _timing is not None:
+        _timing.start()
     state.timestep += steps
     if spike_ids:
         output_ids = np.concatenate(spike_ids)
@@ -548,7 +627,7 @@ def simulate_lif(
         for array in arrays:
             _freeze(array)
         sparse_trace = SparseTrace(*arrays)
-    return SimulationResult(
+    result = SimulationResult(
         spike_neuron_ids=output_ids,
         spike_timesteps=output_steps,
         spike_counts=counts,
@@ -569,6 +648,9 @@ def simulate_lif(
         trace_g_mV=trace_g,
         sparse_trace=sparse_trace,
     )
+    if _timing is not None:
+        _timing.stop("output")
+    return result
 
 
 def simulate_lif_active(

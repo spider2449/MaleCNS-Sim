@@ -1,0 +1,4951 @@
+{
+  "schema": "a019f-synthetic-cpu-evidence-v1",
+  "cases": [
+    {
+      "case": "S1-E0",
+      "neurons": 128,
+      "edges": 1024,
+      "density": 0.0625,
+      "input_events": 0,
+      "duration_ms": 20,
+      "seed": 1906,
+      "graph_identity": "cb6b2f8d081a743325a68fde7fe76d3bf6e4d8a506b078c57fd8546dbe79e49c",
+      "stimulus_identity": "7b9b6cf6d774ed61c9f41c2c24e66c3c291b975ac3975d9007e53db6614e22d5",
+      "warmups": 3,
+      "repeats": 10,
+      "replay": "exact bytes/state/output: two chunks",
+      "raw": [
+        {
+          "repeat": 0,
+          "off": {
+            "wall_ns": 8800600,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "on": {
+            "wall_ns": 9499700,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9496300,
+              "stages_ns": {
+                "preparation": 79600,
+                "event_schedule": 2300,
+                "state_setup": 38200,
+                "direct_input": 47100,
+                "pending_delivery": 1481200,
+                "linear_update": 6513000,
+                "spike_reset_enqueue": 897900,
+                "trace": 38500,
+                "output": 74500
+              },
+              "residual_ns": 324000,
+              "stage_sum_ns": 9172300
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S1-E0"
+        },
+        {
+          "repeat": 1,
+          "on": {
+            "wall_ns": 9864000,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9860000,
+              "stages_ns": {
+                "preparation": 105200,
+                "event_schedule": 4200,
+                "state_setup": 50300,
+                "direct_input": 52600,
+                "pending_delivery": 1518200,
+                "linear_update": 6732600,
+                "spike_reset_enqueue": 912500,
+                "trace": 37400,
+                "output": 110400
+              },
+              "residual_ns": 336600,
+              "stage_sum_ns": 9523400
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "off": {
+            "wall_ns": 8949300,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S1-E0"
+        },
+        {
+          "repeat": 2,
+          "off": {
+            "wall_ns": 9289200,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "on": {
+            "wall_ns": 9892500,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9888000,
+              "stages_ns": {
+                "preparation": 80400,
+                "event_schedule": 2300,
+                "state_setup": 45600,
+                "direct_input": 51500,
+                "pending_delivery": 1522200,
+                "linear_update": 6761500,
+                "spike_reset_enqueue": 918300,
+                "trace": 59700,
+                "output": 117000
+              },
+              "residual_ns": 329500,
+              "stage_sum_ns": 9558500
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S1-E0"
+        },
+        {
+          "repeat": 3,
+          "on": {
+            "wall_ns": 9544800,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9541500,
+              "stages_ns": {
+                "preparation": 78900,
+                "event_schedule": 2700,
+                "state_setup": 37000,
+                "direct_input": 50000,
+                "pending_delivery": 1489000,
+                "linear_update": 6540800,
+                "spike_reset_enqueue": 905400,
+                "trace": 37200,
+                "output": 83500
+              },
+              "residual_ns": 317000,
+              "stage_sum_ns": 9224500
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "off": {
+            "wall_ns": 9316900,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S1-E0"
+        },
+        {
+          "repeat": 4,
+          "off": {
+            "wall_ns": 8706600,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "on": {
+            "wall_ns": 9656800,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9653000,
+              "stages_ns": {
+                "preparation": 88900,
+                "event_schedule": 3000,
+                "state_setup": 42000,
+                "direct_input": 52300,
+                "pending_delivery": 1534000,
+                "linear_update": 6582100,
+                "spike_reset_enqueue": 902200,
+                "trace": 38200,
+                "output": 85500
+              },
+              "residual_ns": 324800,
+              "stage_sum_ns": 9328200
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S1-E0"
+        },
+        {
+          "repeat": 5,
+          "on": {
+            "wall_ns": 9200900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9197200,
+              "stages_ns": {
+                "preparation": 80600,
+                "event_schedule": 2200,
+                "state_setup": 38100,
+                "direct_input": 49300,
+                "pending_delivery": 1458700,
+                "linear_update": 6303500,
+                "spike_reset_enqueue": 849100,
+                "trace": 36200,
+                "output": 78100
+              },
+              "residual_ns": 301400,
+              "stage_sum_ns": 8895800
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "off": {
+            "wall_ns": 8661100,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S1-E0"
+        },
+        {
+          "repeat": 6,
+          "off": {
+            "wall_ns": 8787100,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "on": {
+            "wall_ns": 9485100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9480700,
+              "stages_ns": {
+                "preparation": 82400,
+                "event_schedule": 1900,
+                "state_setup": 38300,
+                "direct_input": 47400,
+                "pending_delivery": 1489900,
+                "linear_update": 6458400,
+                "spike_reset_enqueue": 919700,
+                "trace": 36500,
+                "output": 95800
+              },
+              "residual_ns": 310400,
+              "stage_sum_ns": 9170300
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S1-E0"
+        },
+        {
+          "repeat": 7,
+          "on": {
+            "wall_ns": 9548100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9544800,
+              "stages_ns": {
+                "preparation": 91200,
+                "event_schedule": 1900,
+                "state_setup": 36300,
+                "direct_input": 49100,
+                "pending_delivery": 1482800,
+                "linear_update": 6531300,
+                "spike_reset_enqueue": 893200,
+                "trace": 36900,
+                "output": 113300
+              },
+              "residual_ns": 308800,
+              "stage_sum_ns": 9236000
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "off": {
+            "wall_ns": 9229000,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S1-E0"
+        },
+        {
+          "repeat": 8,
+          "off": {
+            "wall_ns": 9200300,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "on": {
+            "wall_ns": 10013200,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 10009800,
+              "stages_ns": {
+                "preparation": 116900,
+                "event_schedule": 1900,
+                "state_setup": 38600,
+                "direct_input": 66300,
+                "pending_delivery": 1572200,
+                "linear_update": 6782400,
+                "spike_reset_enqueue": 958200,
+                "trace": 38100,
+                "output": 114800
+              },
+              "residual_ns": 320400,
+              "stage_sum_ns": 9689400
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S1-E0"
+        },
+        {
+          "repeat": 9,
+          "on": {
+            "wall_ns": 9945100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9940800,
+              "stages_ns": {
+                "preparation": 91700,
+                "event_schedule": 2700,
+                "state_setup": 46700,
+                "direct_input": 49200,
+                "pending_delivery": 1561300,
+                "linear_update": 6809100,
+                "spike_reset_enqueue": 924500,
+                "trace": 39000,
+                "output": 96400
+              },
+              "residual_ns": 320200,
+              "stage_sum_ns": 9620600
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "off": {
+            "wall_ns": 9217500,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S1-E0"
+        }
+      ],
+      "off_wall_ns": {
+        "median": 9074800.0,
+        "mean": 9015760,
+        "min": 8661100,
+        "max": 9316900
+      },
+      "on_wall_ns": {
+        "median": 9602450.0,
+        "mean": 9665020,
+        "min": 9200900,
+        "max": 10013200
+      },
+      "overhead_ns": 527650.0,
+      "overhead_percent": 5.8144532110900515,
+      "total_ns": {
+        "median": 9598900.0,
+        "mean": 9661210,
+        "min": 9197200,
+        "max": 10009800
+      },
+      "stages": {
+        "preparation": {
+          "median": 85650.0,
+          "mean": 89580,
+          "min": 78900,
+          "max": 116900,
+          "mean_share": 0.00927213050953245
+        },
+        "event_schedule": {
+          "median": 2300.0,
+          "mean": 2510,
+          "min": 1900,
+          "max": 4200,
+          "mean_share": 0.0002598018260652651
+        },
+        "state_setup": {
+          "median": 38450.0,
+          "mean": 41110,
+          "min": 36300,
+          "max": 50300,
+          "mean_share": 0.004255160585475318
+        },
+        "direct_input": {
+          "median": 49650.0,
+          "mean": 51480,
+          "min": 47100,
+          "max": 66300,
+          "mean_share": 0.005328525101928226
+        },
+        "pending_delivery": {
+          "median": 1504050.0,
+          "mean": 1510950,
+          "min": 1458700,
+          "max": 1572200,
+          "mean_share": 0.1563934538220368
+        },
+        "linear_update": {
+          "median": 6561450.0,
+          "mean": 6601470,
+          "min": 6303500,
+          "max": 6809100,
+          "mean_share": 0.6832963986912612
+        },
+        "spike_reset_enqueue": {
+          "median": 908950.0,
+          "mean": 908100,
+          "min": 849100,
+          "max": 958200,
+          "mean_share": 0.09399443754974791
+        },
+        "trace": {
+          "median": 37750.0,
+          "mean": 39770,
+          "min": 36200,
+          "max": 59700,
+          "mean_share": 0.004116461602635695
+        },
+        "output": {
+          "median": 96100.0,
+          "mean": 96930,
+          "min": 74500,
+          "max": 117000,
+          "mean_share": 0.010032904781078147
+        }
+      },
+      "residual_ns": {
+        "median": 320300.0,
+        "mean": 319310,
+        "min": 301400,
+        "max": 336600,
+        "mean_share": 0.03305072553023897
+      },
+      "overhead_class": "OHD-B"
+    },
+    {
+      "case": "S1-E1",
+      "neurons": 128,
+      "edges": 1024,
+      "density": 0.0625,
+      "input_events": 5,
+      "duration_ms": 20,
+      "seed": 1906,
+      "graph_identity": "cb6b2f8d081a743325a68fde7fe76d3bf6e4d8a506b078c57fd8546dbe79e49c",
+      "stimulus_identity": "16c87b94075ad036f2be0ef923013f2d5e8efe0e1d0feb1f26d976e7fe04878a",
+      "warmups": 3,
+      "repeats": 10,
+      "replay": "exact bytes/state/output: two chunks",
+      "raw": [
+        {
+          "repeat": 0,
+          "off": {
+            "wall_ns": 9364700,
+            "timing": null,
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "on": {
+            "wall_ns": 9905600,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9902600,
+              "stages_ns": {
+                "preparation": 87700,
+                "event_schedule": 101000,
+                "state_setup": 38800,
+                "direct_input": 111800,
+                "pending_delivery": 1532200,
+                "linear_update": 6542400,
+                "spike_reset_enqueue": 1027900,
+                "trace": 37400,
+                "output": 99600
+              },
+              "residual_ns": 323800,
+              "stage_sum_ns": 9578800
+            },
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "case": "S1-E1"
+        },
+        {
+          "repeat": 1,
+          "on": {
+            "wall_ns": 10184100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 10180500,
+              "stages_ns": {
+                "preparation": 94600,
+                "event_schedule": 122200,
+                "state_setup": 42100,
+                "direct_input": 114600,
+                "pending_delivery": 1559200,
+                "linear_update": 6744600,
+                "spike_reset_enqueue": 1028500,
+                "trace": 38200,
+                "output": 108600
+              },
+              "residual_ns": 327900,
+              "stage_sum_ns": 9852600
+            },
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "off": {
+            "wall_ns": 9269900,
+            "timing": null,
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "case": "S1-E1"
+        },
+        {
+          "repeat": 2,
+          "off": {
+            "wall_ns": 9119300,
+            "timing": null,
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "on": {
+            "wall_ns": 9419100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9414400,
+              "stages_ns": {
+                "preparation": 99900,
+                "event_schedule": 101700,
+                "state_setup": 39800,
+                "direct_input": 104900,
+                "pending_delivery": 1459100,
+                "linear_update": 6182300,
+                "spike_reset_enqueue": 970100,
+                "trace": 35600,
+                "output": 91600
+              },
+              "residual_ns": 329400,
+              "stage_sum_ns": 9085000
+            },
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "case": "S1-E1"
+        },
+        {
+          "repeat": 3,
+          "on": {
+            "wall_ns": 9544400,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9540400,
+              "stages_ns": {
+                "preparation": 95300,
+                "event_schedule": 110600,
+                "state_setup": 42300,
+                "direct_input": 108500,
+                "pending_delivery": 1442700,
+                "linear_update": 6291900,
+                "spike_reset_enqueue": 992900,
+                "trace": 37100,
+                "output": 105400
+              },
+              "residual_ns": 313700,
+              "stage_sum_ns": 9226700
+            },
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "off": {
+            "wall_ns": 9032500,
+            "timing": null,
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "case": "S1-E1"
+        },
+        {
+          "repeat": 4,
+          "off": {
+            "wall_ns": 9297100,
+            "timing": null,
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "on": {
+            "wall_ns": 9835500,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9832300,
+              "stages_ns": {
+                "preparation": 86300,
+                "event_schedule": 100400,
+                "state_setup": 37600,
+                "direct_input": 111000,
+                "pending_delivery": 1554100,
+                "linear_update": 6466500,
+                "spike_reset_enqueue": 1009900,
+                "trace": 38500,
+                "output": 100000
+              },
+              "residual_ns": 328000,
+              "stage_sum_ns": 9504300
+            },
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "case": "S1-E1"
+        },
+        {
+          "repeat": 5,
+          "on": {
+            "wall_ns": 9847700,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9844300,
+              "stages_ns": {
+                "preparation": 89300,
+                "event_schedule": 106300,
+                "state_setup": 40200,
+                "direct_input": 109200,
+                "pending_delivery": 1536900,
+                "linear_update": 6481200,
+                "spike_reset_enqueue": 1026400,
+                "trace": 37100,
+                "output": 97100
+              },
+              "residual_ns": 320600,
+              "stage_sum_ns": 9523700
+            },
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "off": {
+            "wall_ns": 9202800,
+            "timing": null,
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "case": "S1-E1"
+        },
+        {
+          "repeat": 6,
+          "off": {
+            "wall_ns": 9345300,
+            "timing": null,
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "on": {
+            "wall_ns": 9514900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9511700,
+              "stages_ns": {
+                "preparation": 93200,
+                "event_schedule": 107900,
+                "state_setup": 41000,
+                "direct_input": 105600,
+                "pending_delivery": 1469700,
+                "linear_update": 6279200,
+                "spike_reset_enqueue": 958400,
+                "trace": 36600,
+                "output": 107300
+              },
+              "residual_ns": 312800,
+              "stage_sum_ns": 9198900
+            },
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "case": "S1-E1"
+        },
+        {
+          "repeat": 7,
+          "on": {
+            "wall_ns": 9784300,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 9779000,
+              "stages_ns": {
+                "preparation": 90000,
+                "event_schedule": 104700,
+                "state_setup": 38800,
+                "direct_input": 121400,
+                "pending_delivery": 1500000,
+                "linear_update": 6401700,
+                "spike_reset_enqueue": 1008800,
+                "trace": 52200,
+                "output": 124400
+              },
+              "residual_ns": 337000,
+              "stage_sum_ns": 9442000
+            },
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "off": {
+            "wall_ns": 9239700,
+            "timing": null,
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "case": "S1-E1"
+        },
+        {
+          "repeat": 8,
+          "off": {
+            "wall_ns": 9353400,
+            "timing": null,
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "on": {
+            "wall_ns": 12869200,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 12864800,
+              "stages_ns": {
+                "preparation": 98600,
+                "event_schedule": 112300,
+                "state_setup": 44600,
+                "direct_input": 157600,
+                "pending_delivery": 1997300,
+                "linear_update": 8456200,
+                "spike_reset_enqueue": 1342000,
+                "trace": 50500,
+                "output": 151000
+              },
+              "residual_ns": 454700,
+              "stage_sum_ns": 12410100
+            },
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "case": "S1-E1"
+        },
+        {
+          "repeat": 9,
+          "on": {
+            "wall_ns": 10728400,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 10723100,
+              "stages_ns": {
+                "preparation": 141300,
+                "event_schedule": 120900,
+                "state_setup": 129700,
+                "direct_input": 138000,
+                "pending_delivery": 1648500,
+                "linear_update": 6898200,
+                "spike_reset_enqueue": 1079300,
+                "trace": 38600,
+                "output": 164100
+              },
+              "residual_ns": 364500,
+              "stage_sum_ns": 10358600
+            },
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "off": {
+            "wall_ns": 9506500,
+            "timing": null,
+            "pending_before": 8,
+            "pending_after": 8,
+            "queued": 32,
+            "delivered": 32,
+            "spikes": 4
+          },
+          "case": "S1-E1"
+        }
+      ],
+      "off_wall_ns": {
+        "median": 9283500.0,
+        "mean": 9273120,
+        "min": 9032500,
+        "max": 9506500
+      },
+      "on_wall_ns": {
+        "median": 9841600.0,
+        "mean": 10163320,
+        "min": 9419100,
+        "max": 12869200
+      },
+      "overhead_ns": 558100.0,
+      "overhead_percent": 6.011741261377713,
+      "total_ns": {
+        "median": 9838300.0,
+        "mean": 10159310,
+        "min": 9414400,
+        "max": 12864800
+      },
+      "stages": {
+        "preparation": {
+          "median": 93900.0,
+          "mean": 97620,
+          "min": 86300,
+          "max": 141300,
+          "mean_share": 0.009608920290846524
+        },
+        "event_schedule": {
+          "median": 107100.0,
+          "mean": 108800,
+          "min": 100400,
+          "max": 122200,
+          "mean_share": 0.010709388728171499
+        },
+        "state_setup": {
+          "median": 40600.0,
+          "mean": 49490,
+          "min": 37600,
+          "max": 129700,
+          "mean_share": 0.0048713938249743335
+        },
+        "direct_input": {
+          "median": 111400.0,
+          "mean": 118260,
+          "min": 104900,
+          "max": 157600,
+          "mean_share": 0.01164055432898494
+        },
+        "pending_delivery": {
+          "median": 1534550.0,
+          "mean": 1569970,
+          "min": 1442700,
+          "max": 1997300,
+          "mean_share": 0.15453510130117104
+        },
+        "linear_update": {
+          "median": 6473850.0,
+          "mean": 6674420,
+          "min": 6182300,
+          "max": 8456200,
+          "mean_share": 0.6569757198077428
+        },
+        "spike_reset_enqueue": {
+          "median": 1018150.0,
+          "mean": 1044420,
+          "min": 958400,
+          "max": 1342000,
+          "mean_share": 0.10280422587754483
+        },
+        "trace": {
+          "median": 37800.0,
+          "mean": 40180,
+          "min": 35600,
+          "max": 52200,
+          "mean_share": 0.003954993006414806
+        },
+        "output": {
+          "median": 106350.0,
+          "mean": 114910,
+          "min": 91600,
+          "max": 164100,
+          "mean_share": 0.011310807525314218
+        }
+      },
+      "residual_ns": {
+        "median": 327950.0,
+        "mean": 341240,
+        "min": 312800,
+        "max": 454700,
+        "mean_share": 0.03358889530883495
+      },
+      "overhead_class": "OHD-B"
+    },
+    {
+      "case": "S1-E2",
+      "neurons": 128,
+      "edges": 1024,
+      "density": 0.0625,
+      "input_events": 60,
+      "duration_ms": 20,
+      "seed": 1906,
+      "graph_identity": "cb6b2f8d081a743325a68fde7fe76d3bf6e4d8a506b078c57fd8546dbe79e49c",
+      "stimulus_identity": "26f55d2f71e58fbfdd23cf6961e977de3d1916ec2ddc5c7785b2adac31a8ee69",
+      "warmups": 3,
+      "repeats": 10,
+      "replay": "exact bytes/state/output: two chunks",
+      "raw": [
+        {
+          "repeat": 0,
+          "off": {
+            "wall_ns": 10545500,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 11222400,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 11219000,
+              "stages_ns": {
+                "preparation": 127700,
+                "event_schedule": 1047300,
+                "state_setup": 42400,
+                "direct_input": 111100,
+                "pending_delivery": 1553900,
+                "linear_update": 6516000,
+                "spike_reset_enqueue": 1347800,
+                "trace": 37400,
+                "output": 108400
+              },
+              "residual_ns": 327000,
+              "stage_sum_ns": 10892000
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "case": "S1-E2"
+        },
+        {
+          "repeat": 1,
+          "on": {
+            "wall_ns": 10992200,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 10989100,
+              "stages_ns": {
+                "preparation": 136200,
+                "event_schedule": 1047400,
+                "state_setup": 41000,
+                "direct_input": 110300,
+                "pending_delivery": 1496500,
+                "linear_update": 6382700,
+                "spike_reset_enqueue": 1311300,
+                "trace": 36300,
+                "output": 102300
+              },
+              "residual_ns": 325100,
+              "stage_sum_ns": 10664000
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 10138800,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "case": "S1-E2"
+        },
+        {
+          "repeat": 2,
+          "off": {
+            "wall_ns": 10769700,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 11299900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 11296500,
+              "stages_ns": {
+                "preparation": 142100,
+                "event_schedule": 1065900,
+                "state_setup": 42800,
+                "direct_input": 111800,
+                "pending_delivery": 1557400,
+                "linear_update": 6520200,
+                "spike_reset_enqueue": 1359100,
+                "trace": 39100,
+                "output": 111500
+              },
+              "residual_ns": 346600,
+              "stage_sum_ns": 10949900
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "case": "S1-E2"
+        },
+        {
+          "repeat": 3,
+          "on": {
+            "wall_ns": 10767100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 10762900,
+              "stages_ns": {
+                "preparation": 126800,
+                "event_schedule": 1038100,
+                "state_setup": 42000,
+                "direct_input": 120600,
+                "pending_delivery": 1442700,
+                "linear_update": 6234400,
+                "spike_reset_enqueue": 1290900,
+                "trace": 35900,
+                "output": 106600
+              },
+              "residual_ns": 324900,
+              "stage_sum_ns": 10438000
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 10401900,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "case": "S1-E2"
+        },
+        {
+          "repeat": 4,
+          "off": {
+            "wall_ns": 10807200,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 11010700,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 11007300,
+              "stages_ns": {
+                "preparation": 129100,
+                "event_schedule": 1094200,
+                "state_setup": 42900,
+                "direct_input": 108300,
+                "pending_delivery": 1497300,
+                "linear_update": 6321300,
+                "spike_reset_enqueue": 1352800,
+                "trace": 36500,
+                "output": 103100
+              },
+              "residual_ns": 321800,
+              "stage_sum_ns": 10685500
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "case": "S1-E2"
+        },
+        {
+          "repeat": 5,
+          "on": {
+            "wall_ns": 10973700,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 10968600,
+              "stages_ns": {
+                "preparation": 116500,
+                "event_schedule": 924600,
+                "state_setup": 37100,
+                "direct_input": 143200,
+                "pending_delivery": 1512100,
+                "linear_update": 6389900,
+                "spike_reset_enqueue": 1337400,
+                "trace": 37400,
+                "output": 133200
+              },
+              "residual_ns": 337200,
+              "stage_sum_ns": 10631400
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 10549200,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "case": "S1-E2"
+        },
+        {
+          "repeat": 6,
+          "off": {
+            "wall_ns": 10756400,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 10723400,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 10719500,
+              "stages_ns": {
+                "preparation": 122600,
+                "event_schedule": 1013100,
+                "state_setup": 37000,
+                "direct_input": 106600,
+                "pending_delivery": 1459900,
+                "linear_update": 6248900,
+                "spike_reset_enqueue": 1275700,
+                "trace": 37600,
+                "output": 99700
+              },
+              "residual_ns": 318400,
+              "stage_sum_ns": 10401100
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "case": "S1-E2"
+        },
+        {
+          "repeat": 7,
+          "on": {
+            "wall_ns": 11065800,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 11060700,
+              "stages_ns": {
+                "preparation": 116500,
+                "event_schedule": 1012000,
+                "state_setup": 43300,
+                "direct_input": 111000,
+                "pending_delivery": 1527200,
+                "linear_update": 6419600,
+                "spike_reset_enqueue": 1345700,
+                "trace": 37200,
+                "output": 125600
+              },
+              "residual_ns": 322600,
+              "stage_sum_ns": 10738100
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 10475600,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "case": "S1-E2"
+        },
+        {
+          "repeat": 8,
+          "off": {
+            "wall_ns": 10807000,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "on": {
+            "wall_ns": 10737400,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 10733300,
+              "stages_ns": {
+                "preparation": 117500,
+                "event_schedule": 939200,
+                "state_setup": 36800,
+                "direct_input": 109300,
+                "pending_delivery": 1480000,
+                "linear_update": 6262700,
+                "spike_reset_enqueue": 1297900,
+                "trace": 38200,
+                "output": 121200
+              },
+              "residual_ns": 330500,
+              "stage_sum_ns": 10402800
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "case": "S1-E2"
+        },
+        {
+          "repeat": 9,
+          "on": {
+            "wall_ns": 11216300,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 11212400,
+              "stages_ns": {
+                "preparation": 121400,
+                "event_schedule": 994300,
+                "state_setup": 37000,
+                "direct_input": 112500,
+                "pending_delivery": 1531400,
+                "linear_update": 6537000,
+                "spike_reset_enqueue": 1361600,
+                "trace": 39400,
+                "output": 129900
+              },
+              "residual_ns": 347900,
+              "stage_sum_ns": 10864500
+            },
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "off": {
+            "wall_ns": 10618500,
+            "timing": null,
+            "pending_before": 96,
+            "pending_after": 96,
+            "queued": 384,
+            "delivered": 384,
+            "spikes": 48
+          },
+          "case": "S1-E2"
+        }
+      ],
+      "off_wall_ns": {
+        "median": 10583850.0,
+        "mean": 10586980,
+        "min": 10138800,
+        "max": 10807200
+      },
+      "on_wall_ns": {
+        "median": 11001450.0,
+        "mean": 11000890,
+        "min": 10723400,
+        "max": 11299900
+      },
+      "overhead_ns": 417600.0,
+      "overhead_percent": 3.945634150143851,
+      "total_ns": {
+        "median": 10998200.0,
+        "mean": 10996930,
+        "min": 10719500,
+        "max": 11296500
+      },
+      "stages": {
+        "preparation": {
+          "median": 124700.0,
+          "mean": 125640,
+          "min": 116500,
+          "max": 142100,
+          "mean_share": 0.011425006797351624
+        },
+        "event_schedule": {
+          "median": 1025600.0,
+          "mean": 1017610,
+          "min": 924600,
+          "max": 1094200,
+          "mean_share": 0.09253582590777608
+        },
+        "state_setup": {
+          "median": 41500.0,
+          "mean": 40230,
+          "min": 36800,
+          "max": 43300,
+          "mean_share": 0.0036582937237938226
+        },
+        "direct_input": {
+          "median": 111050.0,
+          "mean": 114470,
+          "min": 106600,
+          "max": 143200,
+          "mean_share": 0.01040926876864725
+        },
+        "pending_delivery": {
+          "median": 1504700.0,
+          "mean": 1505840,
+          "min": 1442700,
+          "max": 1557400,
+          "mean_share": 0.13693276214361644
+        },
+        "linear_update": {
+          "median": 6386300.0,
+          "mean": 6383270,
+          "min": 6234400,
+          "max": 6537000,
+          "mean_share": 0.5804592736336414
+        },
+        "spike_reset_enqueue": {
+          "median": 1341550.0,
+          "mean": 1328020,
+          "min": 1275700,
+          "max": 1361600,
+          "mean_share": 0.12076279470725011
+        },
+        "trace": {
+          "median": 37400.0,
+          "mean": 37500,
+          "min": 35900,
+          "max": 39400,
+          "mean_share": 0.003410042620986039
+        },
+        "output": {
+          "median": 109950.0,
+          "mean": 114150,
+          "min": 99700,
+          "max": 133200,
+          "mean_share": 0.010380169738281502
+        }
+      },
+      "residual_ns": {
+        "median": 326050.0,
+        "mean": 330200,
+        "min": 318400,
+        "max": 347900,
+        "mean_share": 0.030026561958655735
+      },
+      "overhead_class": "OHD-A"
+    },
+    {
+      "case": "S2-E0",
+      "neurons": 4096,
+      "edges": 32768,
+      "density": 0.001953125,
+      "input_events": 0,
+      "duration_ms": 20,
+      "seed": 1906,
+      "graph_identity": "936fdabb280271e1c8dcd7e390d2dde21eb1545383423eb26017706cf6a36eb9",
+      "stimulus_identity": "7b9b6cf6d774ed61c9f41c2c24e66c3c291b975ac3975d9007e53db6614e22d5",
+      "warmups": 3,
+      "repeats": 10,
+      "replay": "exact bytes/state/output: two chunks",
+      "raw": [
+        {
+          "repeat": 0,
+          "off": {
+            "wall_ns": 15033600,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "on": {
+            "wall_ns": 16737600,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 16730800,
+              "stages_ns": {
+                "preparation": 102700,
+                "event_schedule": 3500,
+                "state_setup": 52200,
+                "direct_input": 57100,
+                "pending_delivery": 2869500,
+                "linear_update": 11680600,
+                "spike_reset_enqueue": 1337700,
+                "trace": 40400,
+                "output": 234600
+              },
+              "residual_ns": 352500,
+              "stage_sum_ns": 16378300
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S2-E0"
+        },
+        {
+          "repeat": 1,
+          "on": {
+            "wall_ns": 16434300,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 16429900,
+              "stages_ns": {
+                "preparation": 93800,
+                "event_schedule": 4300,
+                "state_setup": 47600,
+                "direct_input": 56200,
+                "pending_delivery": 2852400,
+                "linear_update": 11439000,
+                "spike_reset_enqueue": 1330000,
+                "trace": 39700,
+                "output": 220400
+              },
+              "residual_ns": 346500,
+              "stage_sum_ns": 16083400
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "off": {
+            "wall_ns": 15554300,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S2-E0"
+        },
+        {
+          "repeat": 2,
+          "off": {
+            "wall_ns": 15248800,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "on": {
+            "wall_ns": 15664600,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 15643600,
+              "stages_ns": {
+                "preparation": 90700,
+                "event_schedule": 3300,
+                "state_setup": 45200,
+                "direct_input": 50600,
+                "pending_delivery": 2660300,
+                "linear_update": 10960300,
+                "spike_reset_enqueue": 1230000,
+                "trace": 38800,
+                "output": 234500
+              },
+              "residual_ns": 329900,
+              "stage_sum_ns": 15313700
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S2-E0"
+        },
+        {
+          "repeat": 3,
+          "on": {
+            "wall_ns": 15859600,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 15854700,
+              "stages_ns": {
+                "preparation": 95000,
+                "event_schedule": 4100,
+                "state_setup": 51100,
+                "direct_input": 51200,
+                "pending_delivery": 2671100,
+                "linear_update": 11145600,
+                "spike_reset_enqueue": 1264400,
+                "trace": 39300,
+                "output": 206600
+              },
+              "residual_ns": 326300,
+              "stage_sum_ns": 15528400
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "off": {
+            "wall_ns": 15000400,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S2-E0"
+        },
+        {
+          "repeat": 4,
+          "off": {
+            "wall_ns": 15195600,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "on": {
+            "wall_ns": 15890600,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 15886400,
+              "stages_ns": {
+                "preparation": 117300,
+                "event_schedule": 4700,
+                "state_setup": 49100,
+                "direct_input": 53200,
+                "pending_delivery": 2725700,
+                "linear_update": 11095400,
+                "spike_reset_enqueue": 1251400,
+                "trace": 50800,
+                "output": 195600
+              },
+              "residual_ns": 343200,
+              "stage_sum_ns": 15543200
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S2-E0"
+        },
+        {
+          "repeat": 5,
+          "on": {
+            "wall_ns": 15810000,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 15806200,
+              "stages_ns": {
+                "preparation": 91000,
+                "event_schedule": 5000,
+                "state_setup": 46700,
+                "direct_input": 48200,
+                "pending_delivery": 2708100,
+                "linear_update": 11017000,
+                "spike_reset_enqueue": 1307900,
+                "trace": 39800,
+                "output": 198400
+              },
+              "residual_ns": 344100,
+              "stage_sum_ns": 15462100
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "off": {
+            "wall_ns": 15369500,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S2-E0"
+        },
+        {
+          "repeat": 6,
+          "off": {
+            "wall_ns": 15045300,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "on": {
+            "wall_ns": 15727700,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 15723200,
+              "stages_ns": {
+                "preparation": 97100,
+                "event_schedule": 3900,
+                "state_setup": 49600,
+                "direct_input": 50100,
+                "pending_delivery": 2639900,
+                "linear_update": 11040300,
+                "spike_reset_enqueue": 1239600,
+                "trace": 37800,
+                "output": 227200
+              },
+              "residual_ns": 337700,
+              "stage_sum_ns": 15385500
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S2-E0"
+        },
+        {
+          "repeat": 7,
+          "on": {
+            "wall_ns": 15592200,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 15587900,
+              "stages_ns": {
+                "preparation": 105800,
+                "event_schedule": 3500,
+                "state_setup": 46300,
+                "direct_input": 51200,
+                "pending_delivery": 2652700,
+                "linear_update": 10924600,
+                "spike_reset_enqueue": 1223500,
+                "trace": 39100,
+                "output": 201600
+              },
+              "residual_ns": 339600,
+              "stage_sum_ns": 15248300
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "off": {
+            "wall_ns": 14930500,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S2-E0"
+        },
+        {
+          "repeat": 8,
+          "off": {
+            "wall_ns": 15193000,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "on": {
+            "wall_ns": 15856900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 15852700,
+              "stages_ns": {
+                "preparation": 89700,
+                "event_schedule": 4200,
+                "state_setup": 44400,
+                "direct_input": 50700,
+                "pending_delivery": 2754200,
+                "linear_update": 11062100,
+                "spike_reset_enqueue": 1241000,
+                "trace": 38600,
+                "output": 228300
+              },
+              "residual_ns": 339500,
+              "stage_sum_ns": 15513200
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S2-E0"
+        },
+        {
+          "repeat": 9,
+          "on": {
+            "wall_ns": 15958700,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 15954500,
+              "stages_ns": {
+                "preparation": 96100,
+                "event_schedule": 3200,
+                "state_setup": 50100,
+                "direct_input": 52200,
+                "pending_delivery": 2799000,
+                "linear_update": 11082900,
+                "spike_reset_enqueue": 1263800,
+                "trace": 38100,
+                "output": 216100
+              },
+              "residual_ns": 353000,
+              "stage_sum_ns": 15601500
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "off": {
+            "wall_ns": 15072600,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S2-E0"
+        }
+      ],
+      "off_wall_ns": {
+        "median": 15132800.0,
+        "mean": 15164360,
+        "min": 14930500,
+        "max": 15554300
+      },
+      "on_wall_ns": {
+        "median": 15858250.0,
+        "mean": 15953220,
+        "min": 15592200,
+        "max": 16737600
+      },
+      "overhead_ns": 725450.0,
+      "overhead_percent": 4.793891414675407,
+      "total_ns": {
+        "median": 15853700.0,
+        "mean": 15946990,
+        "min": 15587900,
+        "max": 16730800
+      },
+      "stages": {
+        "preparation": {
+          "median": 95550.0,
+          "mean": 97920,
+          "min": 89700,
+          "max": 117300,
+          "mean_share": 0.006140343726308225
+        },
+        "event_schedule": {
+          "median": 4000.0,
+          "mean": 3970,
+          "min": 3200,
+          "max": 5000,
+          "mean_share": 0.00024894980181212884
+        },
+        "state_setup": {
+          "median": 48350.0,
+          "mean": 48230,
+          "min": 44400,
+          "max": 52200,
+          "mean_share": 0.0030243951993448293
+        },
+        "direct_input": {
+          "median": 51200.0,
+          "mean": 52070,
+          "min": 48200,
+          "max": 57100,
+          "mean_share": 0.003265192992533387
+        },
+        "pending_delivery": {
+          "median": 2716900.0,
+          "mean": 2733290,
+          "min": 2639900,
+          "max": 2869500,
+          "mean_share": 0.17139848962092533
+        },
+        "linear_update": {
+          "median": 11072500.0,
+          "mean": 11144780,
+          "min": 10924600,
+          "max": 11680600,
+          "mean_share": 0.698864174367702
+        },
+        "spike_reset_enqueue": {
+          "median": 1257600.0,
+          "mean": 1268930,
+          "min": 1223500,
+          "max": 1337700,
+          "mean_share": 0.07957175617467623
+        },
+        "trace": {
+          "median": 39200.0,
+          "mean": 40240,
+          "min": 37800,
+          "max": 50800,
+          "mean_share": 0.002523360207788429
+        },
+        "output": {
+          "median": 218250.0,
+          "mean": 216330,
+          "min": 195600,
+          "max": 234600,
+          "mean_share": 0.01356556942720852
+        }
+      },
+      "residual_ns": {
+        "median": 341400.0,
+        "mean": 341230,
+        "min": 326300,
+        "max": 353000,
+        "mean_share": 0.021397768481700937
+      },
+      "overhead_class": "OHD-A"
+    },
+    {
+      "case": "S2-E1",
+      "neurons": 4096,
+      "edges": 32768,
+      "density": 0.001953125,
+      "input_events": 200,
+      "duration_ms": 20,
+      "seed": 1906,
+      "graph_identity": "936fdabb280271e1c8dcd7e390d2dde21eb1545383423eb26017706cf6a36eb9",
+      "stimulus_identity": "e210560ccfea796d6f1e92965e4280f1d53ca44a9f6f4b4b179c2119f7727554",
+      "warmups": 3,
+      "repeats": 10,
+      "replay": "exact bytes/state/output: two chunks",
+      "raw": [
+        {
+          "repeat": 0,
+          "off": {
+            "wall_ns": 20295800,
+            "timing": null,
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "on": {
+            "wall_ns": 20703400,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 20698600,
+              "stages_ns": {
+                "preparation": 186600,
+                "event_schedule": 3208700,
+                "state_setup": 50700,
+                "direct_input": 224400,
+                "pending_delivery": 2789200,
+                "linear_update": 11115900,
+                "spike_reset_enqueue": 2507300,
+                "trace": 38500,
+                "output": 224400
+              },
+              "residual_ns": 352900,
+              "stage_sum_ns": 20345700
+            },
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "case": "S2-E1"
+        },
+        {
+          "repeat": 1,
+          "on": {
+            "wall_ns": 21010800,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 21006100,
+              "stages_ns": {
+                "preparation": 185200,
+                "event_schedule": 3244300,
+                "state_setup": 55300,
+                "direct_input": 248900,
+                "pending_delivery": 2863800,
+                "linear_update": 11255800,
+                "spike_reset_enqueue": 2517100,
+                "trace": 39100,
+                "output": 245400
+              },
+              "residual_ns": 351200,
+              "stage_sum_ns": 20654900
+            },
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "off": {
+            "wall_ns": 20227200,
+            "timing": null,
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "case": "S2-E1"
+        },
+        {
+          "repeat": 2,
+          "off": {
+            "wall_ns": 20434300,
+            "timing": null,
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "on": {
+            "wall_ns": 20710900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 20706700,
+              "stages_ns": {
+                "preparation": 203600,
+                "event_schedule": 3221900,
+                "state_setup": 48900,
+                "direct_input": 221800,
+                "pending_delivery": 2726500,
+                "linear_update": 11084700,
+                "spike_reset_enqueue": 2582500,
+                "trace": 39000,
+                "output": 228500
+              },
+              "residual_ns": 349300,
+              "stage_sum_ns": 20357400
+            },
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "case": "S2-E1"
+        },
+        {
+          "repeat": 3,
+          "on": {
+            "wall_ns": 21085100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 21080400,
+              "stages_ns": {
+                "preparation": 203300,
+                "event_schedule": 3261500,
+                "state_setup": 50500,
+                "direct_input": 232400,
+                "pending_delivery": 2899000,
+                "linear_update": 11192100,
+                "spike_reset_enqueue": 2616000,
+                "trace": 39700,
+                "output": 248900
+              },
+              "residual_ns": 337000,
+              "stage_sum_ns": 20743400
+            },
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "off": {
+            "wall_ns": 20944600,
+            "timing": null,
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "case": "S2-E1"
+        },
+        {
+          "repeat": 4,
+          "off": {
+            "wall_ns": 20309100,
+            "timing": null,
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "on": {
+            "wall_ns": 20603800,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 20598900,
+              "stages_ns": {
+                "preparation": 180800,
+                "event_schedule": 2963300,
+                "state_setup": 46800,
+                "direct_input": 220100,
+                "pending_delivery": 2861600,
+                "linear_update": 11139400,
+                "spike_reset_enqueue": 2575500,
+                "trace": 39600,
+                "output": 233500
+              },
+              "residual_ns": 338300,
+              "stage_sum_ns": 20260600
+            },
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "case": "S2-E1"
+        },
+        {
+          "repeat": 5,
+          "on": {
+            "wall_ns": 21332600,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 21327300,
+              "stages_ns": {
+                "preparation": 180800,
+                "event_schedule": 3208100,
+                "state_setup": 56600,
+                "direct_input": 254600,
+                "pending_delivery": 2953000,
+                "linear_update": 11419200,
+                "spike_reset_enqueue": 2625100,
+                "trace": 40100,
+                "output": 247700
+              },
+              "residual_ns": 342100,
+              "stage_sum_ns": 20985200
+            },
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "off": {
+            "wall_ns": 20135900,
+            "timing": null,
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "case": "S2-E1"
+        },
+        {
+          "repeat": 6,
+          "off": {
+            "wall_ns": 20062300,
+            "timing": null,
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "on": {
+            "wall_ns": 21006900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 21000800,
+              "stages_ns": {
+                "preparation": 179300,
+                "event_schedule": 3309700,
+                "state_setup": 54900,
+                "direct_input": 243300,
+                "pending_delivery": 2900100,
+                "linear_update": 11127200,
+                "spike_reset_enqueue": 2564900,
+                "trace": 39600,
+                "output": 234300
+              },
+              "residual_ns": 347500,
+              "stage_sum_ns": 20653300
+            },
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "case": "S2-E1"
+        },
+        {
+          "repeat": 7,
+          "on": {
+            "wall_ns": 20744700,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 20740100,
+              "stages_ns": {
+                "preparation": 195200,
+                "event_schedule": 3091000,
+                "state_setup": 46800,
+                "direct_input": 238100,
+                "pending_delivery": 2867200,
+                "linear_update": 11119300,
+                "spike_reset_enqueue": 2535800,
+                "trace": 39400,
+                "output": 251700
+              },
+              "residual_ns": 355600,
+              "stage_sum_ns": 20384500
+            },
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "off": {
+            "wall_ns": 20503100,
+            "timing": null,
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "case": "S2-E1"
+        },
+        {
+          "repeat": 8,
+          "off": {
+            "wall_ns": 19782100,
+            "timing": null,
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "on": {
+            "wall_ns": 21024600,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 21020100,
+              "stages_ns": {
+                "preparation": 185500,
+                "event_schedule": 3340400,
+                "state_setup": 45700,
+                "direct_input": 243600,
+                "pending_delivery": 2871700,
+                "linear_update": 11164600,
+                "spike_reset_enqueue": 2552500,
+                "trace": 39100,
+                "output": 230200
+              },
+              "residual_ns": 346800,
+              "stage_sum_ns": 20673300
+            },
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "case": "S2-E1"
+        },
+        {
+          "repeat": 9,
+          "on": {
+            "wall_ns": 20662000,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 20656900,
+              "stages_ns": {
+                "preparation": 180100,
+                "event_schedule": 3032900,
+                "state_setup": 50700,
+                "direct_input": 208500,
+                "pending_delivery": 2821400,
+                "linear_update": 11220100,
+                "spike_reset_enqueue": 2531600,
+                "trace": 40100,
+                "output": 222900
+              },
+              "residual_ns": 348600,
+              "stage_sum_ns": 20308300
+            },
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "off": {
+            "wall_ns": 20136600,
+            "timing": null,
+            "pending_before": 320,
+            "pending_after": 320,
+            "queued": 1280,
+            "delivered": 1280,
+            "spikes": 160
+          },
+          "case": "S2-E1"
+        }
+      ],
+      "off_wall_ns": {
+        "median": 20261500.0,
+        "mean": 20283100,
+        "min": 19782100,
+        "max": 20944600
+      },
+      "on_wall_ns": {
+        "median": 20875800.0,
+        "mean": 20888480,
+        "min": 20603800,
+        "max": 21332600
+      },
+      "overhead_ns": 614300.0,
+      "overhead_percent": 3.0318584507563604,
+      "total_ns": {
+        "median": 20870450.0,
+        "mean": 20883590,
+        "min": 20598900,
+        "max": 21327300
+      },
+      "stages": {
+        "preparation": {
+          "median": 185350.0,
+          "mean": 188040,
+          "min": 179300,
+          "max": 203600,
+          "mean_share": 0.009004198990690777
+        },
+        "event_schedule": {
+          "median": 3215300.0,
+          "mean": 3188180,
+          "min": 2963300,
+          "max": 3340400,
+          "mean_share": 0.1526643646997475
+        },
+        "state_setup": {
+          "median": 50600.0,
+          "mean": 50690,
+          "min": 45700,
+          "max": 56600,
+          "mean_share": 0.002427264660913186
+        },
+        "direct_input": {
+          "median": 235250.0,
+          "mean": 233570,
+          "min": 208500,
+          "max": 254600,
+          "mean_share": 0.011184379697168926
+        },
+        "pending_delivery": {
+          "median": 2865500.0,
+          "mean": 2855350,
+          "min": 2726500,
+          "max": 2953000,
+          "mean_share": 0.13672697079381466
+        },
+        "linear_update": {
+          "median": 11152000.0,
+          "mean": 11183830,
+          "min": 11084700,
+          "max": 11419200,
+          "mean_share": 0.5355319655289152
+        },
+        "spike_reset_enqueue": {
+          "median": 2558700.0,
+          "mean": 2560830,
+          "min": 2507300,
+          "max": 2625100,
+          "mean_share": 0.1226240315961001
+        },
+        "trace": {
+          "median": 39500.0,
+          "mean": 39420,
+          "min": 38500,
+          "max": 40100,
+          "mean_share": 0.0018876064891141802
+        },
+        "output": {
+          "median": 233900.0,
+          "mean": 236750,
+          "min": 222900,
+          "max": 251700,
+          "mean_share": 0.01133665236676261
+        }
+      },
+      "residual_ns": {
+        "median": 348050.0,
+        "mean": 346930,
+        "min": 337000,
+        "max": 355600,
+        "mean_share": 0.016612565176772766
+      },
+      "overhead_class": "OHD-A"
+    },
+    {
+      "case": "S2-E2",
+      "neurons": 4096,
+      "edges": 32768,
+      "density": 0.001953125,
+      "input_events": 2045,
+      "duration_ms": 20,
+      "seed": 1906,
+      "graph_identity": "936fdabb280271e1c8dcd7e390d2dde21eb1545383423eb26017706cf6a36eb9",
+      "stimulus_identity": "3fe14c6626a109ab9d7122ca1ca382577b7ebb36b94d6a88189a8ba766f6ee1f",
+      "warmups": 3,
+      "repeats": 10,
+      "replay": "exact bytes/state/output: two chunks",
+      "raw": [
+        {
+          "repeat": 0,
+          "off": {
+            "wall_ns": 60971300,
+            "timing": null,
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "on": {
+            "wall_ns": 61501400,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 61495800,
+              "stages_ns": {
+                "preparation": 826500,
+                "event_schedule": 32350100,
+                "state_setup": 99000,
+                "direct_input": 256500,
+                "pending_delivery": 2970600,
+                "linear_update": 11282800,
+                "spike_reset_enqueue": 12967100,
+                "trace": 39200,
+                "output": 303800
+              },
+              "residual_ns": 400200,
+              "stage_sum_ns": 61095600
+            },
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "case": "S2-E2"
+        },
+        {
+          "repeat": 1,
+          "on": {
+            "wall_ns": 61520900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 61516600,
+              "stages_ns": {
+                "preparation": 820100,
+                "event_schedule": 32702300,
+                "state_setup": 100700,
+                "direct_input": 253900,
+                "pending_delivery": 2834600,
+                "linear_update": 11079700,
+                "spike_reset_enqueue": 12982400,
+                "trace": 39300,
+                "output": 329700
+              },
+              "residual_ns": 373900,
+              "stage_sum_ns": 61142700
+            },
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "off": {
+            "wall_ns": 60828100,
+            "timing": null,
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "case": "S2-E2"
+        },
+        {
+          "repeat": 2,
+          "off": {
+            "wall_ns": 60932200,
+            "timing": null,
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "on": {
+            "wall_ns": 60886400,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 60882200,
+              "stages_ns": {
+                "preparation": 827000,
+                "event_schedule": 32204100,
+                "state_setup": 97200,
+                "direct_input": 241900,
+                "pending_delivery": 2959500,
+                "linear_update": 11175400,
+                "spike_reset_enqueue": 12655200,
+                "trace": 41000,
+                "output": 299300
+              },
+              "residual_ns": 381600,
+              "stage_sum_ns": 60500600
+            },
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "case": "S2-E2"
+        },
+        {
+          "repeat": 3,
+          "on": {
+            "wall_ns": 61253900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 61248100,
+              "stages_ns": {
+                "preparation": 744700,
+                "event_schedule": 31950700,
+                "state_setup": 90300,
+                "direct_input": 257900,
+                "pending_delivery": 2995900,
+                "linear_update": 11274900,
+                "spike_reset_enqueue": 13143600,
+                "trace": 42200,
+                "output": 337500
+              },
+              "residual_ns": 410400,
+              "stage_sum_ns": 60837700
+            },
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "off": {
+            "wall_ns": 61267700,
+            "timing": null,
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "case": "S2-E2"
+        },
+        {
+          "repeat": 4,
+          "off": {
+            "wall_ns": 62501100,
+            "timing": null,
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "on": {
+            "wall_ns": 60551800,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 60546800,
+              "stages_ns": {
+                "preparation": 821300,
+                "event_schedule": 31912200,
+                "state_setup": 96300,
+                "direct_input": 239400,
+                "pending_delivery": 2924300,
+                "linear_update": 11083400,
+                "spike_reset_enqueue": 12716200,
+                "trace": 40200,
+                "output": 325700
+              },
+              "residual_ns": 387800,
+              "stage_sum_ns": 60159000
+            },
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "case": "S2-E2"
+        },
+        {
+          "repeat": 5,
+          "on": {
+            "wall_ns": 61895600,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 61890100,
+              "stages_ns": {
+                "preparation": 845100,
+                "event_schedule": 32968600,
+                "state_setup": 99700,
+                "direct_input": 240700,
+                "pending_delivery": 3041200,
+                "linear_update": 11107400,
+                "spike_reset_enqueue": 12835500,
+                "trace": 39800,
+                "output": 328800
+              },
+              "residual_ns": 383300,
+              "stage_sum_ns": 61506800
+            },
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "off": {
+            "wall_ns": 64178700,
+            "timing": null,
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "case": "S2-E2"
+        },
+        {
+          "repeat": 6,
+          "off": {
+            "wall_ns": 60651400,
+            "timing": null,
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "on": {
+            "wall_ns": 60641500,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 60636500,
+              "stages_ns": {
+                "preparation": 802500,
+                "event_schedule": 32164900,
+                "state_setup": 100200,
+                "direct_input": 246100,
+                "pending_delivery": 2879500,
+                "linear_update": 10876700,
+                "spike_reset_enqueue": 12820200,
+                "trace": 38700,
+                "output": 330200
+              },
+              "residual_ns": 377500,
+              "stage_sum_ns": 60259000
+            },
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "case": "S2-E2"
+        },
+        {
+          "repeat": 7,
+          "on": {
+            "wall_ns": 61649400,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 61644000,
+              "stages_ns": {
+                "preparation": 788400,
+                "event_schedule": 32435200,
+                "state_setup": 88100,
+                "direct_input": 255700,
+                "pending_delivery": 3029700,
+                "linear_update": 11148000,
+                "spike_reset_enqueue": 13136600,
+                "trace": 51500,
+                "output": 330900
+              },
+              "residual_ns": 379900,
+              "stage_sum_ns": 61264100
+            },
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "off": {
+            "wall_ns": 60703100,
+            "timing": null,
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "case": "S2-E2"
+        },
+        {
+          "repeat": 8,
+          "off": {
+            "wall_ns": 60670900,
+            "timing": null,
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "on": {
+            "wall_ns": 61105700,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 61099800,
+              "stages_ns": {
+                "preparation": 830000,
+                "event_schedule": 32524000,
+                "state_setup": 97100,
+                "direct_input": 242400,
+                "pending_delivery": 2892300,
+                "linear_update": 10913000,
+                "spike_reset_enqueue": 12902700,
+                "trace": 39200,
+                "output": 297200
+              },
+              "residual_ns": 361900,
+              "stage_sum_ns": 60737900
+            },
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "case": "S2-E2"
+        },
+        {
+          "repeat": 9,
+          "on": {
+            "wall_ns": 61319700,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 61314600,
+              "stages_ns": {
+                "preparation": 794200,
+                "event_schedule": 32247600,
+                "state_setup": 95200,
+                "direct_input": 253300,
+                "pending_delivery": 3012800,
+                "linear_update": 11229200,
+                "spike_reset_enqueue": 12970100,
+                "trace": 40300,
+                "output": 300500
+              },
+              "residual_ns": 371400,
+              "stage_sum_ns": 60943200
+            },
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "off": {
+            "wall_ns": 60316900,
+            "timing": null,
+            "pending_before": 3272,
+            "pending_after": 3272,
+            "queued": 13088,
+            "delivered": 13088,
+            "spikes": 1636
+          },
+          "case": "S2-E2"
+        }
+      ],
+      "off_wall_ns": {
+        "median": 60880150.0,
+        "mean": 61302140,
+        "min": 60316900,
+        "max": 64178700
+      },
+      "on_wall_ns": {
+        "median": 61286800.0,
+        "mean": 61232630,
+        "min": 60551800,
+        "max": 61895600
+      },
+      "overhead_ns": 406650.0,
+      "overhead_percent": 0.6679517051124217,
+      "total_ns": {
+        "median": 61281350.0,
+        "mean": 61227450,
+        "min": 60546800,
+        "max": 61890100
+      },
+      "stages": {
+        "preparation": {
+          "median": 820700.0,
+          "mean": 809980,
+          "min": 744700,
+          "max": 845100,
+          "mean_share": 0.013229033709553476
+        },
+        "event_schedule": {
+          "median": 32298850.0,
+          "mean": 32345970,
+          "min": 31912200,
+          "max": 32968600,
+          "mean_share": 0.5282919670833915
+        },
+        "state_setup": {
+          "median": 97150.0,
+          "mean": 96380,
+          "min": 88100,
+          "max": 100700,
+          "mean_share": 0.0015741305574542138
+        },
+        "direct_input": {
+          "median": 249700.0,
+          "mean": 248780,
+          "min": 239400,
+          "max": 257900,
+          "mean_share": 0.004063210210452991
+        },
+        "pending_delivery": {
+          "median": 2965050.0,
+          "mean": 2954040,
+          "min": 2834600,
+          "max": 3041200,
+          "mean_share": 0.04824698725816607
+        },
+        "linear_update": {
+          "median": 11127700.0,
+          "mean": 11117050,
+          "min": 10876700,
+          "max": 11282800,
+          "mean_share": 0.18156970443812376
+        },
+        "spike_reset_enqueue": {
+          "median": 12934900.0,
+          "mean": 12912960,
+          "min": 12655200,
+          "max": 13143600,
+          "mean_share": 0.21090148291330113
+        },
+        "trace": {
+          "median": 40000.0,
+          "mean": 41140,
+          "min": 38700,
+          "max": 51500,
+          "mean_share": 0.0006719208459604312
+        },
+        "output": {
+          "median": 327250.0,
+          "mean": 318360,
+          "min": 297200,
+          "max": 337500,
+          "mean_share": 0.005199628597957289
+        }
+      },
+      "residual_ns": {
+        "median": 380750.0,
+        "mean": 382790,
+        "min": 361900,
+        "max": 410400,
+        "mean_share": 0.006251934385639121
+      },
+      "overhead_class": "OHD-A"
+    },
+    {
+      "case": "S3-E0",
+      "neurons": 32768,
+      "edges": 262144,
+      "density": 0.000244140625,
+      "input_events": 0,
+      "duration_ms": 20,
+      "seed": 1906,
+      "graph_identity": "eaeb6e4e3698ba175ea5e38e037e6c7d962f1dc312d6dd83ec1811287d47a909",
+      "stimulus_identity": "7b9b6cf6d774ed61c9f41c2c24e66c3c291b975ac3975d9007e53db6614e22d5",
+      "warmups": 3,
+      "repeats": 10,
+      "replay": "exact bytes/state/output: two chunks",
+      "raw": [
+        {
+          "repeat": 0,
+          "off": {
+            "wall_ns": 91894600,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "on": {
+            "wall_ns": 89253900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 89247100,
+              "stages_ns": {
+                "preparation": 115300,
+                "event_schedule": 3600,
+                "state_setup": 57500,
+                "direct_input": 84800,
+                "pending_delivery": 16072400,
+                "linear_update": 66976100,
+                "spike_reset_enqueue": 4621400,
+                "trace": 42800,
+                "output": 725400
+              },
+              "residual_ns": 547800,
+              "stage_sum_ns": 88699300
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S3-E0"
+        },
+        {
+          "repeat": 1,
+          "on": {
+            "wall_ns": 89816000,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 89811600,
+              "stages_ns": {
+                "preparation": 102800,
+                "event_schedule": 3200,
+                "state_setup": 59900,
+                "direct_input": 83900,
+                "pending_delivery": 16099300,
+                "linear_update": 67379600,
+                "spike_reset_enqueue": 4749700,
+                "trace": 43500,
+                "output": 749800
+              },
+              "residual_ns": 539900,
+              "stage_sum_ns": 89271700
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "off": {
+            "wall_ns": 88409100,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S3-E0"
+        },
+        {
+          "repeat": 2,
+          "off": {
+            "wall_ns": 88570800,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "on": {
+            "wall_ns": 89186100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 89181100,
+              "stages_ns": {
+                "preparation": 108200,
+                "event_schedule": 4400,
+                "state_setup": 57400,
+                "direct_input": 89100,
+                "pending_delivery": 16128500,
+                "linear_update": 66749500,
+                "spike_reset_enqueue": 4708300,
+                "trace": 43700,
+                "output": 762900
+              },
+              "residual_ns": 529100,
+              "stage_sum_ns": 88652000
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S3-E0"
+        },
+        {
+          "repeat": 3,
+          "on": {
+            "wall_ns": 90521100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 90516000,
+              "stages_ns": {
+                "preparation": 117100,
+                "event_schedule": 4600,
+                "state_setup": 63800,
+                "direct_input": 106200,
+                "pending_delivery": 16248800,
+                "linear_update": 67825900,
+                "spike_reset_enqueue": 4752700,
+                "trace": 43300,
+                "output": 783200
+              },
+              "residual_ns": 570400,
+              "stage_sum_ns": 89945600
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "off": {
+            "wall_ns": 90972200,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S3-E0"
+        },
+        {
+          "repeat": 4,
+          "off": {
+            "wall_ns": 90814900,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "on": {
+            "wall_ns": 90651600,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 90647200,
+              "stages_ns": {
+                "preparation": 94900,
+                "event_schedule": 4800,
+                "state_setup": 48600,
+                "direct_input": 89500,
+                "pending_delivery": 16399900,
+                "linear_update": 67852200,
+                "spike_reset_enqueue": 4757200,
+                "trace": 42700,
+                "output": 810500
+              },
+              "residual_ns": 546900,
+              "stage_sum_ns": 90100300
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S3-E0"
+        },
+        {
+          "repeat": 5,
+          "on": {
+            "wall_ns": 89908300,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 89903500,
+              "stages_ns": {
+                "preparation": 91300,
+                "event_schedule": 3300,
+                "state_setup": 49300,
+                "direct_input": 89600,
+                "pending_delivery": 16252800,
+                "linear_update": 67208300,
+                "spike_reset_enqueue": 4799700,
+                "trace": 45500,
+                "output": 824700
+              },
+              "residual_ns": 539000,
+              "stage_sum_ns": 89364500
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "off": {
+            "wall_ns": 91500600,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S3-E0"
+        },
+        {
+          "repeat": 6,
+          "off": {
+            "wall_ns": 88771100,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "on": {
+            "wall_ns": 88920000,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 88914900,
+              "stages_ns": {
+                "preparation": 92300,
+                "event_schedule": 3200,
+                "state_setup": 48700,
+                "direct_input": 80700,
+                "pending_delivery": 16169900,
+                "linear_update": 66470200,
+                "spike_reset_enqueue": 4740100,
+                "trace": 43600,
+                "output": 723800
+              },
+              "residual_ns": 542400,
+              "stage_sum_ns": 88372500
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S3-E0"
+        },
+        {
+          "repeat": 7,
+          "on": {
+            "wall_ns": 89626900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 89621500,
+              "stages_ns": {
+                "preparation": 103100,
+                "event_schedule": 3600,
+                "state_setup": 54900,
+                "direct_input": 80600,
+                "pending_delivery": 16228900,
+                "linear_update": 67109000,
+                "spike_reset_enqueue": 4750200,
+                "trace": 41300,
+                "output": 725100
+              },
+              "residual_ns": 524800,
+              "stage_sum_ns": 89096700
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "off": {
+            "wall_ns": 89280200,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S3-E0"
+        },
+        {
+          "repeat": 8,
+          "off": {
+            "wall_ns": 88908100,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "on": {
+            "wall_ns": 89788900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 89783700,
+              "stages_ns": {
+                "preparation": 112200,
+                "event_schedule": 4000,
+                "state_setup": 60300,
+                "direct_input": 83100,
+                "pending_delivery": 16141400,
+                "linear_update": 67206700,
+                "spike_reset_enqueue": 4804800,
+                "trace": 40800,
+                "output": 758300
+              },
+              "residual_ns": 572100,
+              "stage_sum_ns": 89211600
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S3-E0"
+        },
+        {
+          "repeat": 9,
+          "on": {
+            "wall_ns": 90694100,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 90689400,
+              "stages_ns": {
+                "preparation": 94100,
+                "event_schedule": 3500,
+                "state_setup": 47900,
+                "direct_input": 85200,
+                "pending_delivery": 16245200,
+                "linear_update": 67963200,
+                "spike_reset_enqueue": 4827000,
+                "trace": 46700,
+                "output": 785600
+              },
+              "residual_ns": 591000,
+              "stage_sum_ns": 90098400
+            },
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "off": {
+            "wall_ns": 88704600,
+            "timing": null,
+            "pending_before": 0,
+            "pending_after": 0,
+            "queued": 0,
+            "delivered": 0,
+            "spikes": 0
+          },
+          "case": "S3-E0"
+        }
+      ],
+      "off_wall_ns": {
+        "median": 89094150.0,
+        "mean": 89782620,
+        "min": 88409100,
+        "max": 91894600
+      },
+      "on_wall_ns": {
+        "median": 89802450.0,
+        "mean": 89836690,
+        "min": 88920000,
+        "max": 90694100
+      },
+      "overhead_ns": 708300.0,
+      "overhead_percent": 0.7950016920302848,
+      "total_ns": {
+        "median": 89797650.0,
+        "mean": 89831600,
+        "min": 88914900,
+        "max": 90689400
+      },
+      "stages": {
+        "preparation": {
+          "median": 102950.0,
+          "mean": 103130,
+          "min": 91300,
+          "max": 117100,
+          "mean_share": 0.0011480369936636996
+        },
+        "event_schedule": {
+          "median": 3600.0,
+          "mean": 3820,
+          "min": 3200,
+          "max": 4800,
+          "mean_share": 4.252401159502892e-05
+        },
+        "state_setup": {
+          "median": 56150.0,
+          "mean": 54830,
+          "min": 47900,
+          "max": 63800,
+          "mean_share": 0.0006103642816113706
+        },
+        "direct_input": {
+          "median": 85000.0,
+          "mean": 87270,
+          "min": 80600,
+          "max": 106200,
+          "mean_share": 0.0009714844219628727
+        },
+        "pending_delivery": {
+          "median": 16199400.0,
+          "mean": 16198710,
+          "min": 16072400,
+          "max": 16399900,
+          "mean_share": 0.18032307116872015
+        },
+        "linear_update": {
+          "median": 67207500.0,
+          "mean": 67274070,
+          "min": 66470200,
+          "max": 67963200,
+          "mean_share": 0.7488909247970648
+        },
+        "spike_reset_enqueue": {
+          "median": 4751450.0,
+          "mean": 4751110,
+          "min": 4621400,
+          "max": 4827000,
+          "mean_share": 0.0528890724422141
+        },
+        "trace": {
+          "median": 43400.0,
+          "mean": 43390,
+          "min": 40800,
+          "max": 46700,
+          "mean_share": 0.0004830148856304463
+        },
+        "output": {
+          "median": 760600.0,
+          "mean": 764930,
+          "min": 723800,
+          "max": 824700,
+          "mean_share": 0.008515155023399338
+        }
+      },
+      "residual_ns": {
+        "median": 544650.0,
+        "mean": 550340,
+        "min": 524800,
+        "max": 591000,
+        "mean_share": 0.0061263519741382765
+      },
+      "overhead_class": "OHD-A"
+    },
+    {
+      "case": "S3-E1",
+      "neurons": 32768,
+      "edges": 262144,
+      "density": 0.000244140625,
+      "input_events": 1635,
+      "duration_ms": 20,
+      "seed": 1906,
+      "graph_identity": "eaeb6e4e3698ba175ea5e38e037e6c7d962f1dc312d6dd83ec1811287d47a909",
+      "stimulus_identity": "30bec460d8b4e95061cc4b64c2b7870151ea13b91f2b94f3564f8fb104debf13",
+      "warmups": 3,
+      "repeats": 10,
+      "replay": "exact bytes/state/output: two chunks",
+      "raw": [
+        {
+          "repeat": 0,
+          "off": {
+            "wall_ns": 113525600,
+            "timing": null,
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "on": {
+            "wall_ns": 114092700,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 114086700,
+              "stages_ns": {
+                "preparation": 620800,
+                "event_schedule": 25666300,
+                "state_setup": 106000,
+                "direct_input": 1374200,
+                "pending_delivery": 16512600,
+                "linear_update": 53692400,
+                "spike_reset_enqueue": 14557500,
+                "trace": 41000,
+                "output": 734000
+              },
+              "residual_ns": 781900,
+              "stage_sum_ns": 113304800
+            },
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "case": "S3-E1"
+        },
+        {
+          "repeat": 1,
+          "on": {
+            "wall_ns": 113293800,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 113288300,
+              "stages_ns": {
+                "preparation": 624400,
+                "event_schedule": 25529500,
+                "state_setup": 108100,
+                "direct_input": 1293300,
+                "pending_delivery": 16216400,
+                "linear_update": 53474200,
+                "spike_reset_enqueue": 14666300,
+                "trace": 41400,
+                "output": 811500
+              },
+              "residual_ns": 523200,
+              "stage_sum_ns": 112765100
+            },
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "off": {
+            "wall_ns": 114188600,
+            "timing": null,
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "case": "S3-E1"
+        },
+        {
+          "repeat": 2,
+          "off": {
+            "wall_ns": 112941200,
+            "timing": null,
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "on": {
+            "wall_ns": 116486600,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 116481400,
+              "stages_ns": {
+                "preparation": 702200,
+                "event_schedule": 25810900,
+                "state_setup": 94200,
+                "direct_input": 1355100,
+                "pending_delivery": 17092000,
+                "linear_update": 55113600,
+                "spike_reset_enqueue": 14906500,
+                "trace": 44400,
+                "output": 811100
+              },
+              "residual_ns": 551400,
+              "stage_sum_ns": 115930000
+            },
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "case": "S3-E1"
+        },
+        {
+          "repeat": 3,
+          "on": {
+            "wall_ns": 117859400,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 117854300,
+              "stages_ns": {
+                "preparation": 655400,
+                "event_schedule": 25966200,
+                "state_setup": 105900,
+                "direct_input": 1332400,
+                "pending_delivery": 16964200,
+                "linear_update": 54678300,
+                "spike_reset_enqueue": 16694700,
+                "trace": 43000,
+                "output": 854300
+              },
+              "residual_ns": 559900,
+              "stage_sum_ns": 117294400
+            },
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "off": {
+            "wall_ns": 114047300,
+            "timing": null,
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "case": "S3-E1"
+        },
+        {
+          "repeat": 4,
+          "off": {
+            "wall_ns": 113093100,
+            "timing": null,
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "on": {
+            "wall_ns": 113270800,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 113265600,
+              "stages_ns": {
+                "preparation": 629700,
+                "event_schedule": 26118300,
+                "state_setup": 103600,
+                "direct_input": 1277800,
+                "pending_delivery": 16563300,
+                "linear_update": 52657300,
+                "spike_reset_enqueue": 14579800,
+                "trace": 40600,
+                "output": 734400
+              },
+              "residual_ns": 560800,
+              "stage_sum_ns": 112704800
+            },
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "case": "S3-E1"
+        },
+        {
+          "repeat": 5,
+          "on": {
+            "wall_ns": 113062200,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 113056400,
+              "stages_ns": {
+                "preparation": 694700,
+                "event_schedule": 25839000,
+                "state_setup": 99900,
+                "direct_input": 1266600,
+                "pending_delivery": 16660200,
+                "linear_update": 52872300,
+                "spike_reset_enqueue": 14323900,
+                "trace": 39900,
+                "output": 730400
+              },
+              "residual_ns": 529500,
+              "stage_sum_ns": 112526900
+            },
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "off": {
+            "wall_ns": 112028600,
+            "timing": null,
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "case": "S3-E1"
+        },
+        {
+          "repeat": 6,
+          "off": {
+            "wall_ns": 112651000,
+            "timing": null,
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "on": {
+            "wall_ns": 119266800,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 119260900,
+              "stages_ns": {
+                "preparation": 724600,
+                "event_schedule": 25067000,
+                "state_setup": 94700,
+                "direct_input": 1320800,
+                "pending_delivery": 17831300,
+                "linear_update": 55703000,
+                "spike_reset_enqueue": 17078600,
+                "trace": 47200,
+                "output": 806100
+              },
+              "residual_ns": 587600,
+              "stage_sum_ns": 118673300
+            },
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "case": "S3-E1"
+        },
+        {
+          "repeat": 7,
+          "on": {
+            "wall_ns": 114229900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 114224000,
+              "stages_ns": {
+                "preparation": 633800,
+                "event_schedule": 25420800,
+                "state_setup": 96000,
+                "direct_input": 1305100,
+                "pending_delivery": 16943600,
+                "linear_update": 53957600,
+                "spike_reset_enqueue": 14481800,
+                "trace": 43100,
+                "output": 814700
+              },
+              "residual_ns": 527500,
+              "stage_sum_ns": 113696500
+            },
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "off": {
+            "wall_ns": 114222000,
+            "timing": null,
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "case": "S3-E1"
+        },
+        {
+          "repeat": 8,
+          "off": {
+            "wall_ns": 113444400,
+            "timing": null,
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "on": {
+            "wall_ns": 116110700,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 116105700,
+              "stages_ns": {
+                "preparation": 629200,
+                "event_schedule": 26451800,
+                "state_setup": 103800,
+                "direct_input": 1406900,
+                "pending_delivery": 16811100,
+                "linear_update": 54465300,
+                "spike_reset_enqueue": 14831700,
+                "trace": 42500,
+                "output": 811400
+              },
+              "residual_ns": 552000,
+              "stage_sum_ns": 115553700
+            },
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "case": "S3-E1"
+        },
+        {
+          "repeat": 9,
+          "on": {
+            "wall_ns": 115483600,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 115476900,
+              "stages_ns": {
+                "preparation": 692200,
+                "event_schedule": 25898500,
+                "state_setup": 100400,
+                "direct_input": 1339100,
+                "pending_delivery": 16751100,
+                "linear_update": 54414200,
+                "spike_reset_enqueue": 14874700,
+                "trace": 41500,
+                "output": 828500
+              },
+              "residual_ns": 536700,
+              "stage_sum_ns": 114940200
+            },
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "off": {
+            "wall_ns": 113698900,
+            "timing": null,
+            "pending_before": 2616,
+            "pending_after": 2616,
+            "queued": 10464,
+            "delivered": 10464,
+            "spikes": 1308
+          },
+          "case": "S3-E1"
+        }
+      ],
+      "off_wall_ns": {
+        "median": 113485000.0,
+        "mean": 113384070,
+        "min": 112028600,
+        "max": 114222000
+      },
+      "on_wall_ns": {
+        "median": 114856750.0,
+        "mean": 115315650,
+        "min": 113062200,
+        "max": 119266800
+      },
+      "overhead_ns": 1371750.0,
+      "overhead_percent": 1.2087500550733576,
+      "total_ns": {
+        "median": 114850450.0,
+        "mean": 115310020,
+        "min": 113056400,
+        "max": 119260900
+      },
+      "stages": {
+        "preparation": {
+          "median": 644600.0,
+          "mean": 660700,
+          "min": 620800,
+          "max": 724600,
+          "mean_share": 0.0057297709253714465
+        },
+        "event_schedule": {
+          "median": 25824950.0,
+          "mean": 25776830,
+          "min": 25067000,
+          "max": 26451800,
+          "mean_share": 0.22354371285340163
+        },
+        "state_setup": {
+          "median": 102000.0,
+          "mean": 101260,
+          "min": 94200,
+          "max": 108100,
+          "mean_share": 0.0008781543876239029
+        },
+        "direct_input": {
+          "median": 1326600.0,
+          "mean": 1327130,
+          "min": 1266600,
+          "max": 1406900,
+          "mean_share": 0.01150923397637083
+        },
+        "pending_delivery": {
+          "median": 16781100.0,
+          "mean": 16834580,
+          "min": 16216400,
+          "max": 17831300,
+          "mean_share": 0.1459940775311634
+        },
+        "linear_update": {
+          "median": 54185900.0,
+          "mean": 54102820,
+          "min": 52657300,
+          "max": 55703000,
+          "mean_share": 0.4691944377427044
+        },
+        "spike_reset_enqueue": {
+          "median": 14749000.0,
+          "mean": 15099550,
+          "min": 14323900,
+          "max": 17078600,
+          "mean_share": 0.13094742330284914
+        },
+        "trace": {
+          "median": 42000.0,
+          "mean": 42460,
+          "min": 39900,
+          "max": 47200,
+          "mean_share": 0.00036822472149428126
+        },
+        "output": {
+          "median": 811250.0,
+          "mean": 793640,
+          "min": 730400,
+          "max": 854300,
+          "mean_share": 0.0068826629290325335
+        }
+      },
+      "residual_ns": {
+        "median": 551700.0,
+        "mean": 571050,
+        "min": 523200,
+        "max": 781900,
+        "mean_share": 0.0049523016299884435
+      },
+      "overhead_class": "OHD-A"
+    },
+    {
+      "case": "S3-E2",
+      "neurons": 32768,
+      "edges": 262144,
+      "density": 0.000244140625,
+      "input_events": 16380,
+      "duration_ms": 20,
+      "seed": 1906,
+      "graph_identity": "eaeb6e4e3698ba175ea5e38e037e6c7d962f1dc312d6dd83ec1811287d47a909",
+      "stimulus_identity": "883c6b04d6168d4b670a5804cb878d03ddbb1ff104a8df416d0f9df6a05098ff",
+      "warmups": 3,
+      "repeats": 10,
+      "replay": "exact bytes/state/output: two chunks",
+      "raw": [
+        {
+          "repeat": 0,
+          "off": {
+            "wall_ns": 448533300,
+            "timing": null,
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "on": {
+            "wall_ns": 434711400,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 434703800,
+              "stages_ns": {
+                "preparation": 5585100,
+                "event_schedule": 257006000,
+                "state_setup": 137100,
+                "direct_input": 1290400,
+                "pending_delivery": 16823300,
+                "linear_update": 53615100,
+                "spike_reset_enqueue": 97633500,
+                "trace": 42700,
+                "output": 1717400
+              },
+              "residual_ns": 853200,
+              "stage_sum_ns": 433850600
+            },
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "case": "S3-E2"
+        },
+        {
+          "repeat": 1,
+          "on": {
+            "wall_ns": 449277500,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 449271300,
+              "stages_ns": {
+                "preparation": 5845900,
+                "event_schedule": 272931100,
+                "state_setup": 113300,
+                "direct_input": 1142100,
+                "pending_delivery": 16826800,
+                "linear_update": 53359400,
+                "spike_reset_enqueue": 96537800,
+                "trace": 43000,
+                "output": 1622100
+              },
+              "residual_ns": 849800,
+              "stage_sum_ns": 448421500
+            },
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "off": {
+            "wall_ns": 443213300,
+            "timing": null,
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "case": "S3-E2"
+        },
+        {
+          "repeat": 2,
+          "off": {
+            "wall_ns": 465925500,
+            "timing": null,
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "on": {
+            "wall_ns": 450873800,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 450868300,
+              "stages_ns": {
+                "preparation": 5840900,
+                "event_schedule": 268511800,
+                "state_setup": 150300,
+                "direct_input": 1182100,
+                "pending_delivery": 17918200,
+                "linear_update": 54516300,
+                "spike_reset_enqueue": 100047200,
+                "trace": 45100,
+                "output": 1793700
+              },
+              "residual_ns": 862700,
+              "stage_sum_ns": 450005600
+            },
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "case": "S3-E2"
+        },
+        {
+          "repeat": 3,
+          "on": {
+            "wall_ns": 446216300,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 446209000,
+              "stages_ns": {
+                "preparation": 5710900,
+                "event_schedule": 266341400,
+                "state_setup": 141700,
+                "direct_input": 1142500,
+                "pending_delivery": 17283900,
+                "linear_update": 53792800,
+                "spike_reset_enqueue": 99231800,
+                "trace": 43600,
+                "output": 1633100
+              },
+              "residual_ns": 887300,
+              "stage_sum_ns": 445321700
+            },
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "off": {
+            "wall_ns": 435084900,
+            "timing": null,
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "case": "S3-E2"
+        },
+        {
+          "repeat": 4,
+          "off": {
+            "wall_ns": 431580400,
+            "timing": null,
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "on": {
+            "wall_ns": 430802500,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 430795200,
+              "stages_ns": {
+                "preparation": 5683500,
+                "event_schedule": 256097600,
+                "state_setup": 116900,
+                "direct_input": 1191200,
+                "pending_delivery": 16732300,
+                "linear_update": 52737200,
+                "spike_reset_enqueue": 95854000,
+                "trace": 43300,
+                "output": 1528300
+              },
+              "residual_ns": 810900,
+              "stage_sum_ns": 429984300
+            },
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "case": "S3-E2"
+        },
+        {
+          "repeat": 5,
+          "on": {
+            "wall_ns": 436264900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 436257100,
+              "stages_ns": {
+                "preparation": 5486800,
+                "event_schedule": 259705500,
+                "state_setup": 121300,
+                "direct_input": 1308100,
+                "pending_delivery": 16730800,
+                "linear_update": 53091100,
+                "spike_reset_enqueue": 97261600,
+                "trace": 43500,
+                "output": 1682100
+              },
+              "residual_ns": 826300,
+              "stage_sum_ns": 435430800
+            },
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "off": {
+            "wall_ns": 446297500,
+            "timing": null,
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "case": "S3-E2"
+        },
+        {
+          "repeat": 6,
+          "off": {
+            "wall_ns": 437362000,
+            "timing": null,
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "on": {
+            "wall_ns": 451410000,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 451402900,
+              "stages_ns": {
+                "preparation": 7618700,
+                "event_schedule": 271909600,
+                "state_setup": 146000,
+                "direct_input": 1301000,
+                "pending_delivery": 16809000,
+                "linear_update": 53429600,
+                "spike_reset_enqueue": 97518100,
+                "trace": 44200,
+                "output": 1715700
+              },
+              "residual_ns": 911000,
+              "stage_sum_ns": 450491900
+            },
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "case": "S3-E2"
+        },
+        {
+          "repeat": 7,
+          "on": {
+            "wall_ns": 436284600,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 436275000,
+              "stages_ns": {
+                "preparation": 5843800,
+                "event_schedule": 258005000,
+                "state_setup": 143700,
+                "direct_input": 1228800,
+                "pending_delivery": 17031400,
+                "linear_update": 53093200,
+                "spike_reset_enqueue": 98316200,
+                "trace": 43400,
+                "output": 1684700
+              },
+              "residual_ns": 884800,
+              "stage_sum_ns": 435390200
+            },
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "off": {
+            "wall_ns": 448524600,
+            "timing": null,
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "case": "S3-E2"
+        },
+        {
+          "repeat": 8,
+          "off": {
+            "wall_ns": 443463100,
+            "timing": null,
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "on": {
+            "wall_ns": 456911300,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 456902900,
+              "stages_ns": {
+                "preparation": 5834800,
+                "event_schedule": 273543400,
+                "state_setup": 130600,
+                "direct_input": 1228600,
+                "pending_delivery": 17709300,
+                "linear_update": 55023100,
+                "spike_reset_enqueue": 100758400,
+                "trace": 45700,
+                "output": 1719300
+              },
+              "residual_ns": 909700,
+              "stage_sum_ns": 455993200
+            },
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "case": "S3-E2"
+        },
+        {
+          "repeat": 9,
+          "on": {
+            "wall_ns": 447822300,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 447815000,
+              "stages_ns": {
+                "preparation": 5878300,
+                "event_schedule": 266365300,
+                "state_setup": 146000,
+                "direct_input": 1209000,
+                "pending_delivery": 17200200,
+                "linear_update": 54098600,
+                "spike_reset_enqueue": 100295400,
+                "trace": 42700,
+                "output": 1711500
+              },
+              "residual_ns": 868000,
+              "stage_sum_ns": 446947000
+            },
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "off": {
+            "wall_ns": 461852400,
+            "timing": null,
+            "pending_before": 26208,
+            "pending_after": 26208,
+            "queued": 104832,
+            "delivered": 104832,
+            "spikes": 13104
+          },
+          "case": "S3-E2"
+        }
+      ],
+      "off_wall_ns": {
+        "median": 444880300.0,
+        "mean": 446183700,
+        "min": 431580400,
+        "max": 465925500
+      },
+      "on_wall_ns": {
+        "median": 447019300.0,
+        "mean": 444057460,
+        "min": 430802500,
+        "max": 456911300
+      },
+      "overhead_ns": 2139000.0,
+      "overhead_percent": 0.480803488039367,
+      "total_ns": {
+        "median": 447012000.0,
+        "mean": 444050050,
+        "min": 430795200,
+        "max": 456902900
+      },
+      "stages": {
+        "preparation": {
+          "median": 5837850.0,
+          "mean": 5932870,
+          "min": 5486800,
+          "max": 7618700,
+          "mean_share": 0.013360813719084144
+        },
+        "event_schedule": {
+          "median": 266353350.0,
+          "mean": 265041670,
+          "min": 256097600,
+          "max": 273543400,
+          "mean_share": 0.5968734155080041
+        },
+        "state_setup": {
+          "median": 139400.0,
+          "mean": 134690,
+          "min": 113300,
+          "max": 150300,
+          "mean_share": 0.00030332166385298236
+        },
+        "direct_input": {
+          "median": 1218800.0,
+          "mean": 1222380,
+          "min": 1142100,
+          "max": 1308100,
+          "mean_share": 0.002752797798356289
+        },
+        "pending_delivery": {
+          "median": 16929100.0,
+          "mean": 17106520,
+          "min": 16730800,
+          "max": 17918200,
+          "mean_share": 0.03852385558790051
+        },
+        "linear_update": {
+          "median": 53522350.0,
+          "mean": 53675640,
+          "min": 52737200,
+          "max": 55023100,
+          "mean_share": 0.12087745514272547
+        },
+        "spike_reset_enqueue": {
+          "median": 97974850.0,
+          "mean": 98345400,
+          "min": 95854000,
+          "max": 100758400,
+          "mean_share": 0.2214736829778535
+        },
+        "trace": {
+          "median": 43450.0,
+          "mean": 43720,
+          "min": 42700,
+          "max": 45700,
+          "mean_share": 9.845736983927826e-05
+        },
+        "output": {
+          "median": 1698100.0,
+          "mean": 1680790,
+          "min": 1528300,
+          "max": 1793700,
+          "mean_share": 0.0037851363827118138
+        }
+      },
+      "residual_ns": {
+        "median": 865350.0,
+        "mean": 866370,
+        "min": 810900,
+        "max": 911000,
+        "mean_share": 0.0019510638496719008
+      },
+      "overhead_class": "OHD-A"
+    },
+    {
+      "case": "S2-edge-E2",
+      "neurons": 4096,
+      "edges": 131072,
+      "density": 0.0078125,
+      "input_events": 2045,
+      "duration_ms": 20,
+      "seed": 1906,
+      "graph_identity": "f44db23651dfc412d318170ac664853fbaa9fc70df83046460e30e43e440a041",
+      "stimulus_identity": "3fe14c6626a109ab9d7122ca1ca382577b7ebb36b94d6a88189a8ba766f6ee1f",
+      "warmups": 3,
+      "repeats": 10,
+      "replay": "exact bytes/state/output: two chunks",
+      "raw": [
+        {
+          "repeat": 0,
+          "off": {
+            "wall_ns": 64298300,
+            "timing": null,
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "on": {
+            "wall_ns": 65064400,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 65059400,
+              "stages_ns": {
+                "preparation": 857800,
+                "event_schedule": 31991000,
+                "state_setup": 101400,
+                "direct_input": 270400,
+                "pending_delivery": 2974500,
+                "linear_update": 11335700,
+                "spike_reset_enqueue": 16772800,
+                "trace": 37700,
+                "output": 345200
+              },
+              "residual_ns": 372900,
+              "stage_sum_ns": 64686500
+            },
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "case": "S2-edge-E2"
+        },
+        {
+          "repeat": 1,
+          "on": {
+            "wall_ns": 66612900,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 66607100,
+              "stages_ns": {
+                "preparation": 842500,
+                "event_schedule": 32210600,
+                "state_setup": 92600,
+                "direct_input": 282700,
+                "pending_delivery": 3052300,
+                "linear_update": 11716300,
+                "spike_reset_enqueue": 17649200,
+                "trace": 39500,
+                "output": 350600
+              },
+              "residual_ns": 370800,
+              "stage_sum_ns": 66236300
+            },
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "off": {
+            "wall_ns": 64275600,
+            "timing": null,
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "case": "S2-edge-E2"
+        },
+        {
+          "repeat": 2,
+          "off": {
+            "wall_ns": 64374000,
+            "timing": null,
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "on": {
+            "wall_ns": 65510000,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 65504300,
+              "stages_ns": {
+                "preparation": 738400,
+                "event_schedule": 32597200,
+                "state_setup": 94800,
+                "direct_input": 263800,
+                "pending_delivery": 2974300,
+                "linear_update": 11057600,
+                "spike_reset_enqueue": 17046400,
+                "trace": 37700,
+                "output": 335300
+              },
+              "residual_ns": 358800,
+              "stage_sum_ns": 65145500
+            },
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "case": "S2-edge-E2"
+        },
+        {
+          "repeat": 3,
+          "on": {
+            "wall_ns": 64484300,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 64479600,
+              "stages_ns": {
+                "preparation": 810200,
+                "event_schedule": 31375500,
+                "state_setup": 94800,
+                "direct_input": 263600,
+                "pending_delivery": 3030900,
+                "linear_update": 11317800,
+                "spike_reset_enqueue": 16874500,
+                "trace": 37900,
+                "output": 307100
+              },
+              "residual_ns": 367300,
+              "stage_sum_ns": 64112300
+            },
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "off": {
+            "wall_ns": 64030000,
+            "timing": null,
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "case": "S2-edge-E2"
+        },
+        {
+          "repeat": 4,
+          "off": {
+            "wall_ns": 64035900,
+            "timing": null,
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "on": {
+            "wall_ns": 66992200,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 66986600,
+              "stages_ns": {
+                "preparation": 855300,
+                "event_schedule": 33239700,
+                "state_setup": 102900,
+                "direct_input": 271400,
+                "pending_delivery": 3014100,
+                "linear_update": 11426000,
+                "spike_reset_enqueue": 17363200,
+                "trace": 38300,
+                "output": 311400
+              },
+              "residual_ns": 364300,
+              "stage_sum_ns": 66622300
+            },
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "case": "S2-edge-E2"
+        },
+        {
+          "repeat": 5,
+          "on": {
+            "wall_ns": 64814200,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 64808700,
+              "stages_ns": {
+                "preparation": 774200,
+                "event_schedule": 31854100,
+                "state_setup": 95400,
+                "direct_input": 261400,
+                "pending_delivery": 2968700,
+                "linear_update": 11369200,
+                "spike_reset_enqueue": 16743300,
+                "trace": 38400,
+                "output": 343900
+              },
+              "residual_ns": 360100,
+              "stage_sum_ns": 64448600
+            },
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "off": {
+            "wall_ns": 64131500,
+            "timing": null,
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "case": "S2-edge-E2"
+        },
+        {
+          "repeat": 6,
+          "off": {
+            "wall_ns": 64038400,
+            "timing": null,
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "on": {
+            "wall_ns": 64425300,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 64419500,
+              "stages_ns": {
+                "preparation": 744400,
+                "event_schedule": 31466900,
+                "state_setup": 93300,
+                "direct_input": 247700,
+                "pending_delivery": 2946700,
+                "linear_update": 11190500,
+                "spike_reset_enqueue": 17002300,
+                "trace": 36500,
+                "output": 342700
+              },
+              "residual_ns": 348500,
+              "stage_sum_ns": 64071000
+            },
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "case": "S2-edge-E2"
+        },
+        {
+          "repeat": 7,
+          "on": {
+            "wall_ns": 64702800,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 64696900,
+              "stages_ns": {
+                "preparation": 754000,
+                "event_schedule": 31876600,
+                "state_setup": 102300,
+                "direct_input": 257000,
+                "pending_delivery": 2885000,
+                "linear_update": 11060300,
+                "spike_reset_enqueue": 17009300,
+                "trace": 47300,
+                "output": 355500
+              },
+              "residual_ns": 349600,
+              "stage_sum_ns": 64347300
+            },
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "off": {
+            "wall_ns": 63948800,
+            "timing": null,
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "case": "S2-edge-E2"
+        },
+        {
+          "repeat": 8,
+          "off": {
+            "wall_ns": 64177200,
+            "timing": null,
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "on": {
+            "wall_ns": 65309000,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 65303800,
+              "stages_ns": {
+                "preparation": 878100,
+                "event_schedule": 32113100,
+                "state_setup": 100100,
+                "direct_input": 256400,
+                "pending_delivery": 2930200,
+                "linear_update": 11271600,
+                "spike_reset_enqueue": 17006400,
+                "trace": 39500,
+                "output": 353400
+              },
+              "residual_ns": 355000,
+              "stage_sum_ns": 64948800
+            },
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "case": "S2-edge-E2"
+        },
+        {
+          "repeat": 9,
+          "on": {
+            "wall_ns": 64918500,
+            "timing": {
+              "schema": "cpu-advance-timing-v1",
+              "total_ns": 64912300,
+              "stages_ns": {
+                "preparation": 828800,
+                "event_schedule": 31906900,
+                "state_setup": 101900,
+                "direct_input": 261200,
+                "pending_delivery": 2892900,
+                "linear_update": 11237900,
+                "spike_reset_enqueue": 16927700,
+                "trace": 39800,
+                "output": 344800
+              },
+              "residual_ns": 370400,
+              "stage_sum_ns": 64541900
+            },
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "off": {
+            "wall_ns": 65039000,
+            "timing": null,
+            "pending_before": 13088,
+            "pending_after": 13088,
+            "queued": 52352,
+            "delivered": 52352,
+            "spikes": 1636
+          },
+          "case": "S2-edge-E2"
+        }
+      ],
+      "off_wall_ns": {
+        "median": 64154350.0,
+        "mean": 64234870,
+        "min": 63948800,
+        "max": 65039000
+      },
+      "on_wall_ns": {
+        "median": 64991450.0,
+        "mean": 65283360,
+        "min": 64425300,
+        "max": 66992200
+      },
+      "overhead_ns": 837100.0,
+      "overhead_percent": 1.3048218865906989,
+      "total_ns": {
+        "median": 64985850.0,
+        "mean": 65277820,
+        "min": 64419500,
+        "max": 66986600
+      },
+      "stages": {
+        "preparation": {
+          "median": 819500.0,
+          "mean": 808370,
+          "min": 738400,
+          "max": 878100,
+          "mean_share": 0.012383532415757757
+        },
+        "event_schedule": {
+          "median": 31948950.0,
+          "mean": 32063160,
+          "min": 31375500,
+          "max": 33239700,
+          "mean_share": 0.4911800057048474
+        },
+        "state_setup": {
+          "median": 97750.0,
+          "mean": 97950,
+          "min": 92600,
+          "max": 102900,
+          "mean_share": 0.001500509667755449
+        },
+        "direct_input": {
+          "median": 262500.0,
+          "mean": 263560,
+          "min": 247700,
+          "max": 282700,
+          "mean_share": 0.004037512282119716
+        },
+        "pending_delivery": {
+          "median": 2971500.0,
+          "mean": 2966960,
+          "min": 2885000,
+          "max": 3052300,
+          "mean_share": 0.04545127272938956
+        },
+        "linear_update": {
+          "median": 11294700.0,
+          "mean": 11298290,
+          "min": 11057600,
+          "max": 11716300,
+          "mean_share": 0.17308007528437683
+        },
+        "spike_reset_enqueue": {
+          "median": 17004350.0,
+          "mean": 17039510,
+          "min": 16743300,
+          "max": 17649200,
+          "mean_share": 0.2610306226525334
+        },
+        "trace": {
+          "median": 38350.0,
+          "mean": 39260,
+          "min": 36500,
+          "max": 47300,
+          "mean_share": 0.0006014293982243892
+        },
+        "output": {
+          "median": 344350.0,
+          "mean": 338990,
+          "min": 307100,
+          "max": 355500,
+          "mean_share": 0.005193034938973146
+        }
+      },
+      "residual_ns": {
+        "median": 362200.0,
+        "mean": 361770,
+        "min": 348500,
+        "max": 372900,
+        "mean_share": 0.005542004926022345
+      },
+      "overhead_class": "OHD-A"
+    }
+  ],
+  "accounting": "fail-closed guarded accounting, not independent native byte telemetry",
+  "counters": {
+    "full_real_preparations": 0,
+    "real_advances": 0,
+    "a019d_reruns": 0,
+    "gpu_runs": 0,
+    "arena_runs": 0,
+    "scientific_interventions": 0,
+    "downloads": 0,
+    "archive_writes": 0
+  },
+  "accepted_registered_reads": {
+    "REAL_CONNECTIVITY": 0,
+    "REAL_ANNOTATION": 0,
+    "REAL_NEUROTRANSMITTER": 0,
+    "REAL_NEURON_METADATA": 0,
+    "REAL_MAPPING": 0,
+    "REAL_PROVENANCE": 0,
+    "REAL_OTHER_REGISTERED_DATA": 0
+  },
+  "classification": "A019F-B",
+  "starting_sha": "0fbfc3e57ff263fb1f2a195e9671abcf77df7e7a",
+  "next_task": "A019G \u2014 bounded synthetic substage instrumentation of linear_state_update() and schedule_events(), with fixed-event-count graph scaling",
+  "overhead_policy": {
+    "OHD-A": "median paired wall increase <= 5%",
+    "OHD-B": "5% < median paired wall increase <= 15%; caution",
+    "OHD-C": "median paired wall increase > 15%; no target attribution"
+  },
+  "overall_overhead": "OHD-B: small smoke-case effect; all medium/larger cases OHD-A",
+  "validation": {
+    "targeted_and_selected_regressions": "16 passed",
+    "starting_sha_off_replay": "3 activities x 2 chunks, exact bytes/state/output pass",
+    "compileall": "pass",
+    "diff_check": "pass"
+  },
+  "guard_observations": {
+    "active_process_records": 9,
+    "blocked_probe_categories": {
+      "REAL_ANNOTATION": 7,
+      "REAL_CONNECTIVITY": 3,
+      "REAL_NEUROTRANSMITTER": 3,
+      "REAL_NEURON_METADATA": 3,
+      "REAL_MAPPING": 3,
+      "REAL_PROVENANCE": 3,
+      "REAL_OTHER_REGISTERED_DATA": 3
+    },
+    "accepted_registered_reads": 0,
+    "limitation": "Python audit/public Arrow guard accounting; not independent native byte telemetry"
+  },
+  "measurement_notes": [
+    "One preliminary coarse 10-case matrix preceded the final finer matrix; only final finer timings are ranked here.",
+    "Stage-sum field and report metadata were materialized from recorded integer durations after measurement; no durations were altered.",
+    "Raw repeat identity is explicit and inherits graph/workload metadata from its enclosing case.",
+    "Per-call output record allocation occurs outside outer OFF/ON wall measurement.",
+    "No overhead is subtracted from any stage."
+  ]
+}
