@@ -90,19 +90,16 @@ class RunManager:
                 record.export_path = destination
                 record.export_hash = digest
                 record.state = result.status
-                self.active = False
         except ApplicationError as exc:
             with self.lock:
                 record.error = exc.to_dict()
                 record.result = exc.partial_result
                 record.state = exc.partial_result.status if exc.partial_result else "FAILED"
-                self.active = False
         except Exception:
             logging.exception("Unhandled local run failure")
             with self.lock:
                 record.error = {"code": "SIMULATION_FAILED", "message": "local run failed", "phase": record.state}
                 record.state = "FAILED"
-                self.active = False
         finally:
             with self.lock:
                 self.active = False

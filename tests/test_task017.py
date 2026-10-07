@@ -95,7 +95,7 @@ def test_task017_resume_gate_requires_normalized_repository_relative_paths():
     assert not _is_certified_infrastructure_path(f"docs/plans/../{certified_path}", TASK017_CERTIFIED_INFRASTRUCTURE_BASE)
 
 
-def _starting_state_for_certified_delta(monkeypatch, paths, changed_blob_path=None):
+def _starting_state_for_certified_delta(monkeypatch, paths, changed_blob_path=None, configure_only=False):
     state = {
         "head": "future-head",
         "origin_master": "future-head",
@@ -119,6 +119,8 @@ def _starting_state_for_certified_delta(monkeypatch, paths, changed_blob_path=No
         return expected
 
     monkeypatch.setattr(task017_module.subprocess, "check_output", fake_check_output)
+    if configure_only:
+        return None
     return task017_module._starting_state(TASK016_PLAN)
 
 
@@ -137,6 +139,7 @@ def test_task017_resume_gate_accepts_exact_certified_infrastructure_delta(monkey
 
 @pytest.mark.parametrize("path", tuple(TASK017_CERTIFIED_INFRASTRUCTURE_BLOBS))
 def test_task017_resume_gate_rejects_modified_certified_infrastructure_blob(monkeypatch, path):
+    _starting_state_for_certified_delta(monkeypatch, (path,), changed_blob_path=path, configure_only=True)
     assert _is_certified_infrastructure_path(path, "future-head") is False
     with pytest.raises(RuntimeError, match="authoritative source drift"):
         _starting_state_for_certified_delta(monkeypatch, (path,), changed_blob_path=path)

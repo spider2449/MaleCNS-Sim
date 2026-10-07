@@ -88,10 +88,13 @@ def test_exact_frozen_constants_and_no_execution_entrypoints():
 
 @pytest.mark.skipif(sys.platform != "win32", reason="Windows contained process tree")
 def test_supervisor_time_failure_cleans_without_retry(tmp_path, monkeypatch):
-    monkeypatch.setattr(harness, "PREPARATION_CAP", 0.15)
+    # Guard startup imports Arrow before the synthetic preparation boundary.
+    # Keep the timeout below the workload sleep while allowing guarded readiness.
+    monkeypatch.setattr(harness, "PREPARATION_CAP", 2.0)
     code = 'import json,os,time; print(json.dumps(dict(kind="prepare_start",pid=os.getpid(),started_ns=time.perf_counter_ns(),clock_ns=time.perf_counter_ns(),stage="synthetic")),flush=True); time.sleep(5)'
     result = harness.supervise([sys.executable, "-c", code], tmp_path / "result.json")
     assert result["classification"] == "A018R-TIME-LIMIT", result
+    assert any(event['kind'] == 'prepare_start' for event in result['events'])
     assert result["attempts"] == 0
     assert result["orphans"] == []
 

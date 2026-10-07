@@ -168,7 +168,14 @@ def test_http_ui_assets_and_commands(tmp_path):
         with get('/api/arena/events') as r: assert json.load(r)['events'][-1]['kind']=='control_step'
         path=tmp_path/'arena.json';path.write_text(json.dumps(advanced))
         root=Path(__file__).resolve().parents[1]
-        result=subprocess.run(['node',str(root/'tests/js/application_a011.cjs'),str(path),str(root/'src/malecns_sim/application/static')],capture_output=True,text=True)
+        import os
+        if os.environ.get('MALECNS_A019C_R2_FIREWALL') == '1':
+            from a011_node import command, environment
+            result = subprocess.run(command(path), env=environment(), cwd=str(root),
+                                    capture_output=True, text=True, timeout=30, close_fds=True)
+            assert 'A011 guard ACTIVE; payload and descendant probes BLOCKED' in result.stdout
+        else:
+            result=subprocess.run(['node',str(root/'tests/js/application_a011.cjs'),str(path),str(root/'src/malecns_sim/application/static')],capture_output=True,text=True)
         assert result.returncode==0,result.stdout+result.stderr
         print(result.stdout)
     finally:

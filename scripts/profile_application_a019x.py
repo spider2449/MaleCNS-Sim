@@ -99,6 +99,7 @@ def child_environment():
     env = dict(os.environ)
     for name in ('PYTHONHOME', 'PYTHONSTARTUP', 'PYTHONINSPECT'):
         env.pop(name, None)
+    env['PYTHONPATH'] = str(ROOT / 'scripts/a019c_firewall')
     return env
 
 

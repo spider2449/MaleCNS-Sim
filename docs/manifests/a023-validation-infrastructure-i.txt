@@ -1,0 +1,12 @@
+tests/test_a023_fail_closed_inspect.py::InspectorTests::test_absolute_outside
+tests/test_a023_fail_closed_inspect.py::InspectorTests::test_classifier_exception_before_open
+tests/test_a023_fail_closed_inspect.py::InspectorTests::test_directory
+tests/test_a023_fail_closed_inspect.py::InspectorTests::test_exact_safe_content_and_ledger
+tests/test_a023_fail_closed_inspect.py::InspectorTests::test_explicit_multiple_no_following_exact_ledger
+tests/test_a023_fail_closed_inspect.py::InspectorTests::test_hardlink_ambiguity
+tests/test_a023_fail_closed_inspect.py::InspectorTests::test_protected_before_open
+tests/test_a023_fail_closed_inspect.py::InspectorTests::test_reparse_attribute_before_open
+tests/test_a023_fail_closed_inspect.py::InspectorTests::test_symlink_escape
+tests/test_a023_fail_closed_inspect.py::InspectorTests::test_traversal
+tests/test_a023_fail_closed_inspect.py::InspectorTests::test_unknown_before_open
+tests/test_a023_fail_closed_inspect.py::InspectorTests::test_wildcards

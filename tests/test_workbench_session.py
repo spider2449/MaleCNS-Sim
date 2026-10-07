@@ -41,7 +41,16 @@ assert.equal(page.location.hash, '#token=fresh');
 page = load(false, '', 'fresh');
 assert.equal(vm.runInContext('token', page.context), 'fresh');
 """
-    subprocess.run([node, "-e", script, str(app)], check=True)
+    import os
+    if os.environ.get('MALECNS_A019C_R2_FIREWALL') == '1':
+        from session_node import command
+        from a007c_node import environment
+        result = subprocess.run(command(), env=environment(), cwd=str(app.parents[4]),
+                                capture_output=True, text=True, timeout=30, close_fds=True)
+        assert result.returncode == 0, result.stdout + result.stderr
+        assert 'Browser session guard ACTIVE; payload and descendants BLOCKED' in result.stdout
+    else:
+        subprocess.run([node, "-e", script, str(app)], check=True)
 
 
 
