@@ -1,6 +1,13 @@
 # Application reproducibility record
 
-Package: `malecns-sim` **0.3.0**. Authoritative application source baseline:
+Package metadata: `malecns-sim` **0.3.0**. Current runtime implementation
+acceptance is [A023-A](../plans/2026-10-07-application-a023-r11-closeout-result.md)
+at commit `70d494b144162aff2e8918bf81e96508dea92a34`. This is not new-wheel
+certification. For intended 0.4.0 artifact validation use the
+[application/runtime gate](../runtime/RELEASE_GATE.md) and
+[consumer examples](../runtime/USER_GUIDE.md).
+
+Historical A008 application source baseline:
 `257355c266e2a41d4b5af0bb4412dbca6e9aa07d`. A008 adds documentation and
 certification checks to that baseline, with no product behavior changes.
 Historical annotated `v0.3.0` peels to
@@ -44,6 +51,11 @@ and visualization data are distinct identities.
 
 There are zero active tracked GitHub Actions workflows. Historical CI evidence
 does not replace current local validation. From the checkout:
+
+The following commands are generic development checks, not a guarded zero-payload
+release route. Tests/integrity can read tracked scientific evidence. Current
+release-safe validation requires the separately authorized candidate gate above,
+with I1 reported separately as NOT RUN when protected inputs are excluded.
 
 ```powershell
 uv sync --frozen --group dev

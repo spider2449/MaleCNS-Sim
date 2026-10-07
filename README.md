@@ -4,17 +4,26 @@ MaleCNS-Sim is a research software foundation for turning the Drosophila
 MaleCNS connectome into a deterministic executable graph for later
 sensorimotor research.
 
-It is not a complete brain simulation, a biological claim that a connectome is
-an executable brain, or an embodied fly environment. It has deterministic CPU
-reference and optional CUDA float64 Leaky Integrate-and-Fire engines, but no
-sensory/body coupling, FlyGym, NeuroMechFly, MuJoCo, or learning system.
+It provides deterministic CPU reference and optional CUDA float64
+Leaky Integrate-and-Fire engines, a resumable CPU runtime and a local experiment
+workbench. The fixed synthetic Arena uses engineered sensory/motor coupling;
+biological coupling is not validated. It is not a complete brain simulation,
+an executable-brain claim, a biological fly behavior simulator, or a FlyGym,
+NeuroMechFly, MuJoCo or learning-system integration.
 
 ## Current stage
 
 MaleCNS-Sim **v0.3.0 is RELEASED**. The annotated `v0.3.0` tag peels to
 `a1a6651163840a982799b1fa82c1904e67f84660`; current `master` also contains
-later publication-control and post-release documentation commits. See the
+later application/runtime engineering and documentation commits. See the
 [Task 021 closure](docs/plans/2026-09-30-task-021-v0.3-post-release-closure.md).
+
+The stable CPU public runtime is implemented under A023-A. Start with the
+[runtime guide and synthetic examples](docs/runtime/USER_GUIDE.md).
+The intended **0.4.0 application/runtime release is not published**; package
+metadata remains 0.3.0. See the [candidate notes](docs/releases/0.4.0-preparation.md)
+and [artifact release gate](docs/runtime/RELEASE_GATE.md). This engineering scope
+does not reopen the historical scientific v0.4 roadmap.
 
 The v0.3 scientific scope is complete under Task 018B Decision A. The
 prospectively preregistered Task 018A asks an independent anatomical question:
@@ -138,6 +147,12 @@ GPU support is optional; see the [reproducibility and recovery guide](docs/REPRO
 for its setup and preflight boundary.
 
 ## Tests
+
+For application/runtime zero-payload release certification, use the separately
+authorized [candidate gate](docs/runtime/RELEASE_GATE.md). The generic commands
+below are ordinary local development checks: they can read tracked scientific
+evidence and do not establish zero protected-payload access. A023's split
+integrity acceptance does not turn protected I1 into PASS.
 
 Validation is local. After setup, run the data-free tests, package build, and
 tracked-integrity check:

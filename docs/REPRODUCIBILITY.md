@@ -4,6 +4,13 @@ This is the current engineering entry point. The [research checkpoint](MALECNS_R
 
 ## Local CPU setup and verification
 
+The [resumable runtime guide](runtime/USER_GUIDE.md) documents current consumer
+usage. Its intended application/runtime release has a separate
+[artifact gate](runtime/RELEASE_GATE.md). Generic commands below are ordinary
+development checks and may read tracked scientific evidence; they do not certify
+zero protected-payload access or satisfy protected I1 through split I0/I2 checks.
+No real-source benchmark is part of routine runtime release validation.
+
 Use Python 3.12 or newer and `uv` from the repository root. The tracked `pyproject.toml` and `uv.lock` define the environment. CPU development does not require GPU dependencies.
 
 | Purpose | Command |

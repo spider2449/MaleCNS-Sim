@@ -1,5 +1,11 @@
 # MaleCNS simulation workbench user guide
 
+For the prepare-once/advance-many Python API, see the
+[resumable runtime guide](../runtime/USER_GUIDE.md). Its CPU facade is stable;
+GPU and the fixed engineered synthetic Arena remain experimental. The intended
+0.4.0 application/runtime release is still in preparation; fresh artifact
+certification follows the [candidate gate](../runtime/RELEASE_GATE.md).
+
 ## What this application can and cannot establish
 
 This connectome simulation workbench supports virtual intervention screening,

@@ -1,5 +1,16 @@
 # Visual experiment workbench: A001 architecture contract
 
+Current application/runtime scope (A024, 2026-10-07): the stable CPU public
+facade is separate from dataset preparation and workbench schemas. See the
+[runtime guide](../runtime/USER_GUIDE.md) for projection/runtime/state ownership
+and output rules, and the [artifact gate](../runtime/RELEASE_GATE.md) for release
+certification. The preparation envelope contains policy/cache/provenance state;
+the facade snapshots its effective projection and creates independent trajectory
+handles. No general resumable scenario UI or arbitrary adapter API is claimed.
+The fixed synthetic Arena is engineered/example-only; GPU is experimental.
+The dated sections below retain historical implementation decisions; the current
+launcher uses an automatically available loopback port as documented in USER_GUIDE.
+
 Status: A001 design, 2026-10-01. Decision: **APP1 — ARCHITECTURE_READY_FOR_IMPLEMENTATION**. Engine boundary: **E2 — THIN_APPLICATION_ADAPTER_REQUIRED**. This document specifies new application experiments; it does not revise historical Tasks 010, 011, 017, or 018. The workbench exposes connectome data, declared model assumptions, actual simulation output, and provenance. It is not a second simulator.
 
 ## A002 implementation note (2026-10-01)
