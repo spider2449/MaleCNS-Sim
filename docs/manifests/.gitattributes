@@ -1,0 +1,6 @@
+# Preserve exact closed-run evidence bytes across Git platforms.
+a025-v040-frozen-candidate.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+a025-windows-isolation-final.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+a025-symlink-controls-final.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+a025-v040-full-validation.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+a025-v040-release-candidate-result.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

@@ -22,8 +22,9 @@ later application/runtime engineering and documentation commits. See the
 
 The stable CPU public runtime is implemented under A023-A. Start with the
 [runtime guide and synthetic examples](docs/runtime/USER_GUIDE.md).
-The intended **0.4.0 application/runtime release is not published**; package
-metadata remains 0.3.0. See the [candidate notes](docs/releases/0.4.0-preparation.md)
+The **0.4.0 application/runtime candidate is not published**; package
+metadata is 0.4.0. Candidate-specific Windows/GPU and artifact evidence is tracked
+in the [A025 result](docs/plans/2026-10-08-application-a025-release-candidate-result.md). See the [candidate notes](docs/releases/0.4.0-preparation.md)
 and [artifact release gate](docs/runtime/RELEASE_GATE.md). This engineering scope
 does not reopen the historical scientific v0.4 roadmap.
 

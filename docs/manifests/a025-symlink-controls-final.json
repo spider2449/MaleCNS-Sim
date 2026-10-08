@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "run": "C:\\TEMP\\malecns-a025-symlink-9e1fd643e71d4049a198914ec8dbb330",
+  "claim": "Synthetic native link control only",
+  "control_sha256": "3321f7a84fb3f2bc5a71fb89931b42b876ccca1230b9dd1a1580cd8c95b73888",
+  "original_source_hashes": {
+    "scripts/a023_fail_closed_inspect.py": "374e7dc965fa8be239e2644d1da31356ea0ff47be3cfafd6ac15e3164397e00e",
+    "tests/test_a023_fail_closed_inspect.py": "d650b183414870e0ca219ef7a7a439447022aa034fbc887581b277c86a97587b"
+  },
+  "outside_request_denial": "PASS; rejected before filesystem metadata",
+  "process": {
+    "pid": 18108,
+    "exit": 0,
+    "job": {
+      "active": 0,
+      "total": 2,
+      "terminated": 0
+    }
+  },
+  "probe": {
+    "status": "PASS",
+    "original_symlink_test": 1,
+    "skipped": 0
+  },
+  "receipts": [
+    {
+      "target": "C:\\TEMP\\malecns-a025-symlink-9e1fd643e71d4049a198914ec8dbb330\\output\\temp\\tmp5s2sj5fl\\outside.py",
+      "link": "C:\\TEMP\\malecns-a025-symlink-9e1fd643e71d4049a198914ec8dbb330\\output\\temp\\tmpwna1tyw2\\link.py",
+      "native_symlink": true,
+      "content_reads": 0
+    }
+  ],
+  "helpers": {
+    "a025_symlink_broker.py": "8d388ebcee548e9063f865dd2e2d62d6c6afeb05dcde9a4a00e50d70740ec579",
+    "a025_symlink_compat.py": "8f49ccf3437c5f23e31c0b3f62cf7a3fe9c6a7dd4cc242aea7441cf1818404b7",
+    "a025_windows_isolation.py": "0e9241ca95bf050f7f6cb58af01bf2ec3a8a704df18faba2dbe52e0930ca730c",
+    "a025_metadata_controls.py": "249012ea85637d4063f8e0659f93e424c63081314e147d7f0439b2d399261217",
+    "a023_local_repro.py": "9bb4841bed622b904f36fc40f183f4309d735067e35309d43b7e8de047c599d2"
+  },
+  "job_cleanup": "closed",
+  "broker_cleanup": "closed",
+  "metadata_cleanup": "removed",
+  "profile_cleanup_hresult": 0
+}

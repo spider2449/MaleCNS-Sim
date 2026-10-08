@@ -4,15 +4,18 @@ The stable CPU API is `malecns_sim.runtime`. It snapshots an already resolved
 `EffectiveSignedProjection` once, creates independent trajectory handles and
 advances each handle in place. The implementation is accepted under
 [A023-A](../plans/2026-10-07-application-a023-r11-closeout-result.md).
-Package metadata is still 0.3.0; the intended application/runtime release is
-0.4.0 and has not been published. See the [candidate notes](../releases/0.4.0-preparation.md).
+Package metadata is 0.4.0 for the unpublished application/runtime candidate.
+Candidate-specific validation is recorded in the
+[A025 result](../plans/2026-10-08-application-a025-release-candidate-result.md). See the [candidate notes](../releases/0.4.0-preparation.md).
 
 ## Synthetic quick start
 
 Use Python >=3.12 and the locked CPU environment (`uv sync --frozen --group dev`
 from the checkout). This complete example constructs four synthetic neurons
-without datasets or test helpers. It is statically reviewed in A024; fresh
-installed-artifact execution is still required by the [release gate](RELEASE_GATE.md).
+without datasets or test helpers. A025 checks the executable CPU examples in a fresh installed-wheel environment,
+with the legacy whole/chunk continuity oracle. The signature block below is an
+API reference, rather than an executable example. GPU guide execution uses a
+separate explicitly admitted device environment. See the [release gate](RELEASE_GATE.md).
 Its construction objects are existing model/preparation surfaces, not new
 supported dataset-loader APIs.
 

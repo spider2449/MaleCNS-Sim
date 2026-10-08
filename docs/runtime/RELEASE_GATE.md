@@ -1,8 +1,8 @@
 # Application/runtime candidate release gate
 
-Status: **PREPARATION READY; ARTIFACT VALIDATION NOT RUN; PUBLICATION NOT AUTHORIZED**.
-This gate concerns the intended 0.4.0 engineering release. Package version remains
-0.3.0. It complements the [historical scientific gate](../MALECNS_RELEASE_GATE.md)
+Status: **0.4.0 CANDIDATE WIP; ARTIFACT VALIDATION NOT RUN; PUBLICATION NOT AUTHORIZED**.
+This gate concerns the 0.4.0 engineering candidate. Package version is
+0.4.0. It complements the [historical scientific gate](../MALECNS_RELEASE_GATE.md)
 without rewriting scientific results or certifying protected payload integrity.
 
 ## Frozen scope
@@ -29,7 +29,7 @@ benchmark, GPU timing, scientific endpoint rerun or archive recovery.
 | Artifact exclusions | Inspect wheel/sdist contents; no raw inputs/caches/secrets/unrelated research WIP; document which guides/examples ship | NOT RUN |
 | GPU optionality | CPU import/install without GPU; extra metadata/locked closure checked separately; no mandatory device execution | Static metadata review only |
 | GPU claim | Fresh device certification only with separate explicit authority; fake-device/structural tests do not certify hardware | Experimental; historical EQ-B only |
-| Version transition | Explicit authority to set version and synchronize metadata/lock/notes; freeze and validate resulting bytes | NOT AUTHORIZED |
+| Version transition | Explicit authority to set version and synchronize metadata/lock/notes; freeze and validate resulting bytes | Authorized in A025; metadata/lock/notes updated to 0.4.0; executable validation NOT RUN |
 | Publication | Exact tested artifact/source identity, final diff/scope/cleanup report, explicit tag/release/publication authority | NOT AUTHORIZED |
 
 A023 counted H=1503, I=12, N=41 (1556 collected, 1544 passed, 12 NOT RUN).
@@ -41,12 +41,15 @@ candidate, not relabeling the old evidence.
 
 ## Bounded validation route
 
-The 2026-10-08 A024 documentation reconciliation is preparation only. Its
-uncommitted documentation changes are not covered by the earlier commit identity
-or by A023 implementation validation. Preserve the incoming A025 stopped-work
+The 2026-10-08 A024 documentation reconciliation was delivered separately at
+80f57f97eb0429d6d9845766a78e0bc41cd524ca. The subsequent A025 version overlay
+requires its own candidate-specific evidence; A023 implementation validation
+does not certify different source or artifact bytes. Preserve the incoming A025 stopped-work
 files separately; their presence grants no authority to resume execution.
 
-Separately authorize A025 before execution. Review the A023 provisioner/freezer/
+The user has authorized A025 candidate execution under the
+[0.4.0 candidate plan](../plans/2026-10-08-application-a025-v040-release-candidate.md).
+Protection/custody certification remains a prerequisite. Review the A023 provisioner/freezer/
 runner as ordinary text, adapt their approved frozen inputs to the actual candidate
 and example/artifact checks, and certify the route before discovery or build.
 Do not treat a bare checkout pytest or build as a zero-payload certification route.
@@ -72,3 +75,34 @@ protected integrity is a blocker under any full-integrity requirement. Similarly
 Python >=3.12 metadata is not evidence of every Python/platform combination.
 A008's installed wheel and A023's provisioning wheel are historical evidence only;
 A009 blind new-user acceptance remains uncertified.
+
+
+## A025 native Windows candidate route
+
+The task-local controller freezes finite ordinary inputs at the A024 baseline
+and executes them in a unique Windows AppContainer and kill-on-close Job.
+Independent controls require actual GPU availability, native protected-root
+read denials, raw-device/write denials, immutable tools, and complete cleanup.
+Temporary profile-only namespace/ancestor metadata, read-only NUL, fixed Node
+and suspended Nsight executable rights are removed afterward. The synthetic
+symlink broker admits only bounded temporary fixture links and reads no target
+contents; it preserves the original test and native symlink audit.
+
+Clean environments receive the complete original locked wheel closure with
+whole-artifact SHA-256 verification. Frozen offline uv sync reconciles the GPU/dev
+environment before the actual candidate wheel is installed. A separate build
+environment creates wheel and sdist from a protected-root-free copy. The complete
+original collection must produce 1544 passed, zero skips/failures and 12 original
+taxonomy exclusions: 11 registered-payload-required nodes and one unavailable
+external starting-SHA replay. Original B3/terminal/taxonomy requirements remain.
+
+The installed GPU guide runs only the four-neuron synthetic example. A separate
+fresh CPU environment installs the actual wheel with runtime dependencies,
+checks both archive metadata/inventories, executable CPU guide blocks, legacy
+continuity, CLI entry points, authenticated HTTP routes and static assets.
+The signature-reference fence is not executable; it is identified explicitly.
+The [A025 result](../plans/2026-10-08-application-a025-release-candidate-result.md)
+records the tested source/tool/artifact identities and all subgate results.
+Final result records are written after execution and excluded from their own
+candidate hash map to avoid circular identity. I1 remains NOT RUN; no publication,
+new full-real attempt, GPU speedup or biological claim follows from RC acceptance.

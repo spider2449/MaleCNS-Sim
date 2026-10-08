@@ -21,7 +21,7 @@ def test_gpu_closure_is_complete_and_does_not_mutate_lock():
     lock = locked()
     before = copy.deepcopy(lock)
     expected = expected_validation_dependencies(lock)
-    assert ('malecns-sim', '0.3.0') in expected
+    assert ('malecns-sim', '0.4.0') in expected
     assert ('cupy-cuda12x', '14.2.0') in expected
     assert ('cuda-toolkit', '12.9.2.0') in expected
     assert {'nvidia-cuda-runtime-cu12', 'nvidia-cuda-nvrtc-cu12', 'nvidia-cublas-cu12',
@@ -77,5 +77,5 @@ def test_frozen_packaging_inputs_are_required(tmp_path):
 def test_genuine_project_metadata_and_gpu_prerequisites():
     evidence = inspect_environment(ROOT, locked())
     assert evidence['gpu_device_count'] >= 1
-    assert ('malecns-sim', '0.3.0') in evidence['dependencies']
+    assert ('malecns-sim', '0.4.0') in evidence['dependencies']
     assert Path(evidence['source_origin']) == ROOT / 'src/malecns_sim/__init__.py'
