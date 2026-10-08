@@ -1,8 +1,10 @@
 # MaleCNS-Sim
 
-MaleCNS-Sim is a research software foundation for turning the Drosophila
-MaleCNS connectome into a deterministic executable graph for later
-sensorimotor research.
+MaleCNS-Sim is a reusable, reproducible, stateful connectome-simulation runtime.
+Applications can prepare a resolved projection once, advance independent states
+incrementally, inject explicit stimuli, consume detached results, and embed the
+runtime in engineered closed-loop systems. Start with the
+[runtime guide and synthetic examples](docs/runtime/USER_GUIDE.md).
 
 It provides deterministic CPU reference and optional CUDA float64
 Leaky Integrate-and-Fire engines, a resumable CPU runtime and a local experiment

@@ -168,6 +168,27 @@ for start, stop in ((0, 20), (20, 40)):
     )
 ```
 
+## Embed the runtime in an application loop
+
+Prepare the projection before entering the loop and retain one state for each
+trajectory. For each control interval, the application constructs an explicit
+chunk-relative stimulus, calls `advance`, and consumes the detached result to
+update its own environment or readout. Delayed events and refractory deadlines
+remain in the retained neural state across calls. Keep environment state and
+adapter policy in the application; neither is inferred by the runtime.
+
+Choose a positive grid-aligned interval for the application. The public CPU API
+has no fixed 20-ms control interval; that value belongs to the engineered Arena.
+Use the result's absolute start/end timesteps to associate output with the
+application clock. Wall-clock pacing does not change simulated time. Reset a
+trajectory by obtaining a fresh state and resetting the application's associated
+environment state explicitly. An execution failure requires a fresh neural state;
+the application decides how to reconcile its own environment before continuing.
+
+The examples above show incremental calls and explicit input construction.
+Arbitrary sensory/motor adapters and their biological validity remain the
+embedding application's responsibility; this guide adds no adapter framework.
+
 ## Support and migration
 
 | Surface | Support |

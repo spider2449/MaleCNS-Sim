@@ -18,7 +18,7 @@ benchmark, GPU timing, scientific endpoint rerun or archive recovery.
 
 | Gate | Acceptance requirement | Current disposition |
 | --- | --- | --- |
-| Candidate identity | Exact local/origin/live source SHA; complete dirty/staged/WIP inventory; frozen ordinary input/lock hashes | A024 starting SHA recorded; final candidate not yet frozen |
+| Candidate identity | Exact local/origin/live source SHA; complete dirty/staged/WIP inventory; frozen ordinary input/lock hashes | A024 preparation committed at c32919d4f0228310401abce17d09d3d68cb76deb; final validation candidate not yet frozen |
 | Guarded validation | Approved task-wide guard before discovery/import; fresh sparse execution tree, environment, plugin/child/cache custody; preserve exact H/I/N and terminal exclusions | A023 historical PASS only; fresh candidate run NOT RUN |
 | Changed validation inputs | Explicitly review additions and taxonomy; keep numerical oracles and all exclusions, never silently broaden grants | New example checks require admission; NOT RUN |
 | Integrity split | I0 unprotected content; I2 bounded consistency; report I1 separately | Fresh checks NOT RUN; I1 NOT RUN — REGISTERED-PAYLOAD-REQUIRED |
@@ -40,6 +40,11 @@ change after freeze invalidates affected certification and requires a fresh
 candidate, not relabeling the old evidence.
 
 ## Bounded validation route
+
+The 2026-10-08 A024 documentation reconciliation is preparation only. Its
+uncommitted documentation changes are not covered by the earlier commit identity
+or by A023 implementation validation. Preserve the incoming A025 stopped-work
+files separately; their presence grants no authority to resume execution.
 
 Separately authorize A025 before execution. Review the A023 provisioner/freezer/
 runner as ordinary text, adapt their approved frozen inputs to the actual candidate
