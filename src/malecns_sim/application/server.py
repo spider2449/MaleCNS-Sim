@@ -114,6 +114,8 @@ class LocalServer(ThreadingHTTPServer):
     allow_reuse_address = False
 
     def server_close(self) -> None:
+        if getattr(self, "flight", None) is not None:
+            self.flight.close()
         if hasattr(self, "robustness"):
             self.robustness.close()
         if hasattr(self, "parent_results"):
@@ -126,7 +128,7 @@ class LocalServer(ThreadingHTTPServer):
             self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
         super().server_bind()
 
-    def __init__(self, port: int, catalog: DatasetCatalog | None = None, result_root: Path | None = None):
+    def __init__(self, port: int, catalog: DatasetCatalog | None = None, result_root: Path | None = None, *, flight_session=None):
         self.server_instance_id = uuid4().hex[:12]
         self.token = secrets.token_urlsafe(32)
         self.catalog = catalog or DatasetCatalog.local()
@@ -135,6 +137,7 @@ class LocalServer(ThreadingHTTPServer):
         self.parent_results = ParentResultStore(self.token)
         self.robustness = RobustnessManager(self.manager, self.parent_results, self.token)
         self.arena = ArenaSession()
+        self.flight = flight_session
         self.comparisons: dict[str, tuple[str, str, dict]] = {}
         super().__init__(("127.0.0.1", port), Handler)
 
@@ -154,7 +157,11 @@ class Handler(BaseHTTPRequestHandler):
     def _json(self, status: int, value: object) -> None:
         body = canonical_bytes(value)
         self._headers(status, "application/json; charset=utf-8", len(body))
-        self.wfile.write(body)
+        try:
+            self.wfile.write(body)
+        except (BrokenPipeError, ConnectionAbortedError, ConnectionResetError):
+            # A browser may cancel an in-flight request during navigation.
+            return
 
     def _valid_request(self, protected: bool = False, mutating: bool = False) -> bool:
         host = self.headers.get("Host", "")
@@ -190,9 +197,20 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         parsed = urlsplit(self.path)
         path = parsed.path
-        if not self._valid_request(protected=path == "/api/runs" or path.startswith("/api/runs/") or path.startswith("/api/comparisons") or path.startswith("/api/robustness") or path.startswith("/api/arena")):
+        if not self._valid_request(protected=path == "/api/runs" or path.startswith("/api/runs/") or path.startswith("/api/comparisons") or path.startswith("/api/robustness") or path.startswith("/api/arena") or path.startswith("/api/flight")):
             return
-        if path == "/api/arena":
+        if path in ("/api/flight", "/api/flight/events", "/api/flight/frame"):
+            if self.server.flight is None:
+                self._json(200 if path == "/api/flight" else 409, {"configured": False,
+                    "message": "No prepared neural runtime and physical body attached. No synthetic fallback or automatic graph preparation."})
+            else:
+                try:
+                    value = (self.server.flight.export() if path.endswith("/events") else
+                             self.server.flight.frame() if path.endswith("/frame") else self.server.flight.snapshot())
+                    self._json(200, value)
+                except (ValueError, RuntimeError) as exc:
+                    self._json(409, {"error": {"code": "FLIGHT_UNAVAILABLE", "message": str(exc)}})
+        elif path == "/api/arena":
             with self.server.arena.lock:
                 self._json(200, self.server.arena.snapshot())
         elif path == "/api/arena/events":
@@ -200,9 +218,11 @@ class Handler(BaseHTTPRequestHandler):
                 self._json(200, {"spec":self.server.arena.spec,"session_identity":self.server.arena.identity,"events":self.server.arena.events})
         elif path == "/arena":
             self._static("arena.html", "text/html; charset=utf-8")
+        elif path == "/flight":
+            self._static("flight.html", "text/html; charset=utf-8")
         elif path == "/":
             self._static("index.html", "text/html; charset=utf-8")
-        elif path in ("/arena.js", "/arena.css", "/app.js", "/run-status.js", "/playback.js", "/compare.js", "/robustness.js", "/style.css"):
+        elif path in ("/flight.js", "/flight.css", "/arena.js", "/arena.css", "/app.js", "/run-status.js", "/playback.js", "/compare.js", "/robustness.js", "/style.css"):
             self._static(path[1:], "text/javascript; charset=utf-8" if path.endswith(".js") else "text/css; charset=utf-8")
         elif path == "/api/status":
             self._json(200, {"service": "MaleCNS visual workbench", "status": "READY", "active": self.server.manager.active, "server_instance_id": self.server.server_instance_id})
@@ -351,6 +371,17 @@ class Handler(BaseHTTPRequestHandler):
         if not self._valid_request(protected=True, mutating=True):
             return
         path = urlsplit(self.path).path
+        if path == "/api/flight":
+            body = self._body()
+            if body is not None:
+                if self.server.flight is None:
+                    self._json(409, {"error": {"code": "FLIGHT_NOT_CONFIGURED", "message": "Attach a prepared runtime and physical body before execution."}})
+                else:
+                    try:
+                        self._json(200, self.server.flight.command(body))
+                    except (ValueError, TypeError, RuntimeError) as exc:
+                        self._json(409, {"error": {"code": "FLIGHT_COMMAND_FAILED", "message": str(exc)}})
+            return
         if path == "/api/arena":
             body = self._body()
             if body is not None:

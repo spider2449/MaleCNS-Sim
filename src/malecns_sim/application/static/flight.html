@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MaleCNS embodied flight</title><link rel="stylesheet" href="/flight.css"><script src="/flight.js" defer></script></head>
+<body>
+<header><a href="/">Workbench</a><h1>MaleCNS · embodied flight</h1><p>Third-person observation of the physical body and neural coupling.</p></header>
+<nav aria-label="Coupled simulation controls"><button id="run" disabled>Run</button><button id="pause" disabled>Pause</button><button id="step" disabled>Step · 0.2 ms</button><button id="reset" disabled>Reset</button><button id="refresh">Refresh session</button><button id="export" disabled>Export coupling evidence</button></nav>
+<p id="status" role="status">Connecting to the local model session…</p>
+<main>
+<section class="views"><h2>Third-person body camera</h2><canvas id="overview" width="512" height="512" aria-label="Live third-person physical body view" style="display:block;width:100%;aspect-ratio:1;background:#080d12"></canvas><p id="frame-status">No physical camera frame available.</p><p>The camera follows the fly's position. Dark checkerboard: ground. Blue gradient: sky. Orange sphere: visual expansion target. Body tilt and wing motion come from the physical model. This is a small model test scene, with no manual steering.</p><details hidden><summary>Auxiliary eye cameras</summary><div class="eyes"><figure><canvas id="left" width="256" height="256" aria-label="Left eye camera"></canvas><figcaption>Left eye</figcaption></figure><figure><canvas id="right" width="256" height="256" aria-label="Right eye camera"></canvas><figcaption>Right eye</figcaption></figure></div><p>Self geometry is hidden in eye views. These images do not reconstruct compound-eye physiology.</p></details><details><summary>Physical body state</summary><pre id="body">No model attached.</pre></details></section>
+<aside><h2>Applied sensory input</h2><pre id="sensory">No interval executed.</pre><h2>Neural readout</h2><pre id="neural">No interval executed.</pre><h2>Engineered wing command</h2><pre id="action">No interval executed.</pre></aside>
+</main>
+<section class="identity"><h2>Model and coupling identity</h2><pre id="identity">No configured session.</pre><details><summary>Exact session specification</summary><pre id="spec"></pre></details></section>
+<footer><p>Geometry-derived expansion is injected into LC4, bypassing phototransduction and upstream visual processing. DNg02/DNp03 decoding and basal wing motion are engineered assumptions. Movement with zero neural readout is basal oscillator motion. Display pacing does not establish biological real time.</p></footer>
+</body></html>

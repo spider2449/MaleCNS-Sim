@@ -193,7 +193,11 @@ def _preflight(runtime, state, duration_ms, stimulus):
     if any(type(i) is not int for i in stimulus.refractory_free_neuron_ids):
         raise TypeError("malformed refractory-free IDs")
     ids = runtime._engine.projection.neuron_ids
-    known = set(runtime.neuron_ids)
+    known = getattr(runtime, "_known_ids", None)
+    if known is None:
+        # The owned projection is immutable; reuse membership across chunks.
+        known = frozenset(runtime.neuron_ids)
+        runtime._known_ids = known
     if any(schedule.neuron_id not in known for schedule in stimulus.schedules):
         raise KeyError("unknown stimulus neuron ID")
     if any(i not in known for i in stimulus.refractory_free_neuron_ids):
@@ -209,7 +213,7 @@ class PreparedRuntime(_Opaque):
 
     No close or context manager. States strongly retain their exact owner.
     """
-    __slots__ = ("_engine",)
+    __slots__ = ("_engine", "_known_ids")
     _state_type = SimulationState
 
     @property
@@ -262,4 +266,5 @@ def prepare_runtime(projection, *, parameters=_lif.REFERENCE_LIF_PARAMETERS, dt_
     snapshot, parameters, dt = _snapshot(projection, parameters, dt_ms)
     runtime = object.__new__(PreparedRuntime)
     runtime._engine = _lif.PreparedRuntime(snapshot, parameters, dt)
+    runtime._known_ids = frozenset(int(i) for i in snapshot.neuron_ids)
     return runtime
