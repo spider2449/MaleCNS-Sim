@@ -1,0 +1,231 @@
+﻿{
+    "schema":  "a025-development-stopped-v1",
+    "classification":  "A025-CONTRACT-VIOLATION",
+    "reason":  "Build started before full task-wide route certification",
+    "candidate":  {
+                      "base":  "c32919d4f0228310401abce17d09d3d68cb76deb",
+                      "inputs":  {
+                                     "LICENSE":  "5185fad577fdc845d2789fd51549f82a55234caf3bbff6515497a03844420332",
+                                     "MANIFEST.in":  "378ad58d8d8384eb2a34f62ef6aab94f3588f961c6095565e0dc1e7560e0317a",
+                                     "README.md":  "5a561f3b8342ca1a7db6b96174929c7363167a7143f3d57b909d429614bcfa24",
+                                     "docs/releases/0.4.0-preparation.md":  "ceadac0dab6437b9c98e620c2e68c78a295140d93ea12e50b3059ef9dd0cb76d",
+                                     "docs/runtime/RELEASE_GATE.md":  "38dbf45abfd11fa38acc0aa8ffafe8a785cc6280072abc0bf29548948a158cbb",
+                                     "docs/runtime/USER_GUIDE.md":  "922b87ab96f02b148d1c603296dd0aebb946f7bc5376c20f43e0f3843be62071",
+                                     "pyproject.toml":  "d5eabc90a94478fc50aca4e87dc144e922c59b58090cdb06bcbd38724bf8d2b8",
+                                     "src/malecns_sim/__init__.py":  "dfa5d44f326b4a5abe21506ac3e86cfc8db862ca607ef7507481b1ebc59b2f4a",
+                                     "src/malecns_sim/__main__.py":  "87beb7a29fbcf65f7f43ac77227db25d3ca832957efecd07bdbfc5c2352097fb",
+                                     "src/malecns_sim/analysis/__init__.py":  "54bb2d9e2450d77bb5933f96d8fdd09e27352ffe1d8980f959cfeb569ae0262a",
+                                     "src/malecns_sim/analysis/benchmark.py":  "dee9cc0126a616f20999580259edfe892b4c9ca432b9e77b039295eb925647b6",
+                                     "src/malecns_sim/analysis/shiu_v630.py":  "4d233e939c613bb19b15127b5bced674dd20e2d4a552b15e7a65941a962eee87",
+                                     "src/malecns_sim/analysis/task007.py":  "14c3108bb9b861d248d67b0225f07b6e7df973407ffc058aa5f8a33c2925003d",
+                                     "src/malecns_sim/analysis/task007a.py":  "7a802d5028521081ea4caaa2f86d4b596e7ddd775c35318daaf50799193c119b",
+                                     "src/malecns_sim/analysis/task007b.py":  "ae0f7d6cdd6e6a482ed2c3caf26d2651b26e1ca0b02ff6ca545a0c54bd867e9f",
+                                     "src/malecns_sim/analysis/task008.py":  "af1af589d6559854312ca44a18b9a2491120dae3462bec3663bf57ad4f9f88e6",
+                                     "src/malecns_sim/analysis/task008a.py":  "c5bcfd9176ef8bc7d1bfee1ecba22f64336ed5d9933b1833f147e580d4d2515a",
+                                     "src/malecns_sim/analysis/task009.py":  "836b6d9f87962440789ce24b3ff07070efa18d0153df0ab722c87c4dd8c6ec82",
+                                     "src/malecns_sim/analysis/task010.py":  "c3b26c82ccdc22a816d8a89b7ee666c03c9f6773b40650939541cfc9afb821a9",
+                                     "src/malecns_sim/analysis/task011.py":  "64f809eb1753c8030385a5761413fe4f1c583235846db6ae2a9ffd9eab21e947",
+                                     "src/malecns_sim/analysis/task017.py":  "2039d3f45ba5518ac3a8b495f209999bd35a32e7ba7759b76a84500af7b97aba",
+                                     "src/malecns_sim/analysis/task017_portability.py":  "2a08a5af74b32f3803955980331da75b8a90783deff55b622fb8717993726970",
+                                     "src/malecns_sim/analysis/task017_scoring.py":  "556832756d12d2acd598672a41a41e89c08c8133e1af70108a0b9dd7e685df1b",
+                                     "src/malecns_sim/analysis/task018.py":  "e51c75e0cd6dd9458713a89cc4e9a405368d6ee97e10c2a5356dc399475a4767",
+                                     "src/malecns_sim/application/__init__.py":  "9f589c24435a5fa5ef0e54d3d0157c7f378ce1260f478318300f8c406658b54e",
+                                     "src/malecns_sim/application/arena.py":  "22f621ab3332973f13356e1e54e0da505489f571d73a61f2a9dcc03f1303c6b4",
+                                     "src/malecns_sim/application/comparisons.py":  "9c99ef7a1f4f0b44cb2ae81f052ae0927a6bfe49657cab46bea5f51e1938c95d",
+                                     "src/malecns_sim/application/errors.py":  "f963eff110883c97de4b8c260cbb4d8717a881632c08c292cf5ee9824398ef3b",
+                                     "src/malecns_sim/application/events.py":  "09e57c47b85c2b21fa91a07665f26f815b789a918c07ba5bd85ed7b9ce1600bf",
+                                     "src/malecns_sim/application/models.py":  "4fcbb3a2591e973bdc3aa1864c15511b2077025ed4bd3c71905a473592c76495",
+                                     "src/malecns_sim/application/playback.py":  "32d179415fca1624df5ab88e16fc9cc6c188e01c7dd5de3a46a618da8f250a01",
+                                     "src/malecns_sim/application/preparation.py":  "d1535a1f249d2c171e8f68b74900dc317f44803122636e71069e909ba9386af2",
+                                     "src/malecns_sim/application/retention.py":  "f985d6257c7070d9973b23119e45b31585538ae171bd0f3d9f5d2425f13b7395",
+                                     "src/malecns_sim/application/robustness.py":  "77069c47ff806a4717f33580a31e2dd1afd26d2bb5bbdc8f4d7acd04909c5996",
+                                     "src/malecns_sim/application/serialization.py":  "a491e656ae68084898c7f92f0b313f479833769b43a46359e556a551103d81df",
+                                     "src/malecns_sim/application/server.py":  "2e74b5ca00e37fe9b72431ca9ca87f74d157dcc86403645d24f47e6dddd587e6",
+                                     "src/malecns_sim/application/service.py":  "2944333e163807db1b16cc38587c2c6ec8a86a5e4e6026e81c2296f57ff33291",
+                                     "src/malecns_sim/application/static/app.js":  "fcff8505389c74f0b6fe890a3c2ac61e7bd0303b26fcef71550c73f36fc4963c",
+                                     "src/malecns_sim/application/static/arena.css":  "200836bce8999aab795ce59d2f1466d8a2e4bf555dd62ff4b52fd5f7669fe523",
+                                     "src/malecns_sim/application/static/arena.html":  "eb19bcc4ea5a848df83d5e85b71ffe3f50104a2f4ad3a0939ae723a507dadd66",
+                                     "src/malecns_sim/application/static/arena.js":  "792ee439ff95ff61fe37a2f3efa81791355670e9df3bb9bf0fc032885c0b3bb2",
+                                     "src/malecns_sim/application/static/compare.js":  "a6138277b0378e629743f05156ae1e01f89af945293c69e7065390f6a8fa49d6",
+                                     "src/malecns_sim/application/static/index.html":  "f16da19b22b79e64bfb8234f05abeb746613d3bf636a6763cd431871fe29ec26",
+                                     "src/malecns_sim/application/static/playback.js":  "29e6272eb3635490d32b225545fa0bffbf88302e9adeba86c7374481588ebf69",
+                                     "src/malecns_sim/application/static/robustness.js":  "0e38c4f25007a0b176758086cef9bb42428417bd0f6cb57333cad7faa8fdb150",
+                                     "src/malecns_sim/application/static/run-status.js":  "5e5831a161da55f8847bfb860e567f886eb95ea31f8a84dcb82d3a6b5d02b410",
+                                     "src/malecns_sim/application/static/style.css":  "457009624c9718a9608634e714e7b50955ea282d25db95012ad230bc44846897",
+                                     "src/malecns_sim/application/subgraph.py":  "686ab64043493b01147f9479a19a3fedc9c33aa9ea92bc1572ec90372aea94c4",
+                                     "src/malecns_sim/application/workbench.py":  "fa33ec09b304534b728f310ed6b29351d0e60d17aaa47a80f402431e16f20371",
+                                     "src/malecns_sim/cli.py":  "6e6e44afd5f07274f97396b0f9653a7cad2643369e4d576c12d79f5c2dc80cac",
+                                     "src/malecns_sim/data/__init__.py":  "3c2834e700c1749050280bf2280f9b554d580b8190c312876d50780c00acb21b",
+                                     "src/malecns_sim/data/blockwise_integer_merge.py":  "ce531d18c1c4ad01d753e431c7cfa11bc7253821cbfd7a4bfc748eac329eb849",
+                                     "src/malecns_sim/data/experimental_preparation.py":  "4dd2e9bcc8ccc58d4b5f161e81fe5c119335af065c22506e22862e9c22a3e4eb",
+                                     "src/malecns_sim/data/feather_batches.py":  "656decd8223cf8ea5e2dd7d7b0d81082be85f87945a8f2fee2aba39a4fc18aea",
+                                     "src/malecns_sim/data/fetch.py":  "fcef6f86726f4734cf88a225dd5117f202c925d27169da38196804000879fd89",
+                                     "src/malecns_sim/data/integer_aggregation.py":  "167463c3f560a43e349ef9d7e0d0712f3e71185565ad8f5cbba9522af10df2d2",
+                                     "src/malecns_sim/data/io.py":  "9442a02d676b5d2c25af1f399cd65c235cfe86b1ffb651f4288900005225380b",
+                                     "src/malecns_sim/data/male_cns_v1.py":  "bb41673eed8cf86abf5b2486d910f802715ea770457b96fe86baa233c8df8a11",
+                                     "src/malecns_sim/data/model.py":  "9634567d956b0cd0222ef5729c7cdb379d16e4295fd64135dfa372ce44b04a49",
+                                     "src/malecns_sim/data/neurotransmitter.py":  "69782b7fecbe3d3400528bfcc53f9ea26d3270d764540c95c934f038a5c43c09",
+                                     "src/malecns_sim/data/normalize.py":  "574f00adf4f6a9731efc0278ad8f4a57f156af54254e8b46bb9a72f8648e6984",
+                                     "src/malecns_sim/data/provenance.py":  "279e8ed55c062c79147be7c299d43b7bbf03a3b450d561b80aab4189d0d0978a",
+                                     "src/malecns_sim/data/shiu_v630.py":  "73812fdcc6c09bdecf2e687be1a9e7c34345bece11e008abd058e7627e227075",
+                                     "src/malecns_sim/data/single_pass_integer_merge.py":  "3844b64df46bda1821f1ac2a1f2a851aa65fc3393c626dd1363b1180350e1249",
+                                     "src/malecns_sim/data/staged_integer_merge.py":  "5734b551da04fbbaa84200621dcabab8db3aef28906dfa1fe787ec3790446381",
+                                     "src/malecns_sim/dynamics/__init__.py":  "c628b6aa9a258bb3bbc5eeef310420a2afe0c98ef8f3987c226f89dd780fbd88",
+                                     "src/malecns_sim/dynamics/cache.py":  "4563708f496d94eb871705f46ec655260b36a27febf4fe4bbd225942c38ee583",
+                                     "src/malecns_sim/dynamics/cuda.py":  "793b4859ff11355611c788f222d82334b6da023b82504348e115996a9b5b8ddc",
+                                     "src/malecns_sim/dynamics/lif.py":  "c8b2f10b37ecaecce14830b6b027e79e9474bf0f3a7c79b15b7115cb923b8d8e",
+                                     "src/malecns_sim/dynamics/stimulus.py":  "8a3d14f6d7f76cf4399fe94076b0f6f4d9adde63579bd3d303da30f6a3f5f94d",
+                                     "src/malecns_sim/experimental/__init__.py":  "6a50cd6c9c0d1778292513deeaeffe1fdf1419da72dc2a45fc6bbd4645e61128",
+                                     "src/malecns_sim/experimental/gpu.py":  "56c0ec202306f84ed378c8439fe923f9292b8dc2432893ff2dc6e176ed68dfbc",
+                                     "src/malecns_sim/graph/__init__.py":  "4572baf6c50ccb4ad68a83d356293e2a0e9dc45aa5d20b571c0500f8bf96ef0e",
+                                     "src/malecns_sim/graph/fingerprint.py":  "fb698685d02ca29bb35cd68a57adefb17a4127341f0b85713da4463ebac8a4dd",
+                                     "src/malecns_sim/graph/signed.py":  "cf39c7f38cdcb80314a0ca35f42d6c48029b43003da7f140271eae6abe610e96",
+                                     "src/malecns_sim/graph/sparse.py":  "7a0adabcfc9c48a3b5931881605178681d3f0cb9a29dc9c065fb029f186f58fb",
+                                     "src/malecns_sim/homology.py":  "7c3f028104d2942653419bd81d069c0dba7923c6b5fe422842bfe7fc660a84db",
+                                     "src/malecns_sim/runtime.py":  "acc6520c565f32b179faa20d1bf73dee0e898878c5eb4fdf5658a29dca188e3d",
+                                     "src/malecns_sim/sign.py":  "87fffc36d5df5a7ba4ff49edc95748b12c7db73cbd21e1f282f1b6bd2a4cf5ff",
+                                     "uv.lock":  "7523bec3c8947522d8eb80bda995696aba8941f143f7ef37c46afaece416ec02"
+                                 },
+                      "controls":  {
+                                       "scripts/a025_artifact_validation.py":  "7ef6040d69648c7528418ab1f33507b9bd325fb02ed82920213a89c93aebba3e",
+                                       "scripts/a023_local_repro.py":  "9bb4841bed622b904f36fc40f183f4309d735067e35309d43b7e8de047c599d2",
+                                       "scripts/a019c_firewall/validation_firewall.py":  "170e203635d0fcf3b2af9a860dfa049c3c8e24fd43829c023a7bb5c3dd5643af",
+                                       "scripts/a019c_firewall/a007c_node.py":  "2db2b80327743e6a664bc2ed9271017664bc9a59336f122018ecd1dfe48014b6",
+                                       "scripts/a019c_firewall/a006r_node.py":  "77f03451c1b728fe43bc9e3b898f986eba794f8793eab1efa59966f25ba793de",
+                                       "scripts/a019c_firewall/guarded_child.py":  "4fab805f502560d6df5ef2ac2e5d2efab6865225a8a6a4ace4400615bcc2e2a7",
+                                       "scripts/a019c_firewall/sitecustomize.py":  "e618ef91c277ee13396cbb0d939e563bd80823ef93d6b80b09b96a9787247e2a"
+                                   },
+                      "build_backend":  "setuptools==80.9.0",
+                      "historical_suite":  "NOT RUN; original H/I/N preserved; no GPU execution admitted",
+                      "I1":  "NOT RUN — REGISTERED-PAYLOAD-REQUIRED",
+                      "guides_shipped":  [
+                                             "docs/runtime/USER_GUIDE.md",
+                                             "docs/runtime/RELEASE_GATE.md",
+                                             "docs/releases/0.4.0-preparation.md"
+                                         ]
+                  },
+    "commands":  {
+                     "value":  [
+                                   {
+                                       "argv":  [
+                                                    "C:\\Program Files\\Git\\cmd\\git.EXE",
+                                                    "rev-parse",
+                                                    "HEAD"
+                                                ],
+                                       "cwd":  "D:\\spider\\working\\MaleCNS-Sim",
+                                       "exit":  0,
+                                       "job":  {
+                                                   "active":  0,
+                                                   "total":  2,
+                                                   "terminated":  0
+                                               },
+                                       "log":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\00.txt"
+                                   },
+                                   {
+                                       "argv":  [
+                                                    "C:\\Program Files\\Git\\cmd\\git.EXE",
+                                                    "ls-files",
+                                                    "src"
+                                                ],
+                                       "cwd":  "D:\\spider\\working\\MaleCNS-Sim",
+                                       "exit":  0,
+                                       "job":  {
+                                                   "active":  0,
+                                                   "total":  2,
+                                                   "terminated":  0
+                                               },
+                                       "log":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\01.txt"
+                                   },
+                                   {
+                                       "argv":  [
+                                                    "C:\\Users\\spider.tp\\.local\\bin\\uv.EXE",
+                                                    "venv",
+                                                    "--python",
+                                                    "D:\\spider\\working\\MaleCNS-Sim\\.venv\\Scripts\\python.exe",
+                                                    "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\build-env",
+                                                    "--no-config"
+                                                ],
+                                       "cwd":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882",
+                                       "exit":  0,
+                                       "job":  {
+                                                   "active":  0,
+                                                   "total":  3,
+                                                   "terminated":  0
+                                               },
+                                       "log":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\02.txt"
+                                   },
+                                   {
+                                       "argv":  [
+                                                    "C:\\Users\\spider.tp\\.local\\bin\\uv.EXE",
+                                                    "pip",
+                                                    "install",
+                                                    "--python",
+                                                    "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\build-env\\Scripts\\python.exe",
+                                                    "--no-config",
+                                                    "setuptools==80.9.0"
+                                                ],
+                                       "cwd":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882",
+                                       "exit":  0,
+                                       "job":  {
+                                                   "active":  0,
+                                                   "total":  3,
+                                                   "terminated":  0
+                                               },
+                                       "log":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\03.txt"
+                                   },
+                                   {
+                                       "argv":  [
+                                                    "C:\\Users\\spider.tp\\.local\\bin\\uv.EXE",
+                                                    "build",
+                                                    "--python",
+                                                    "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\build-env\\Scripts\\python.exe",
+                                                    "--no-build-isolation",
+                                                    "--no-config",
+                                                    "--out-dir",
+                                                    "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\dist"
+                                                ],
+                                       "cwd":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\package",
+                                       "exit":  0,
+                                       "job":  {
+                                                   "active":  0,
+                                                   "total":  5,
+                                                   "terminated":  0
+                                               },
+                                       "log":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\04.txt"
+                                   },
+                                   {
+                                       "argv":  [
+                                                    "C:\\Users\\spider.tp\\.local\\bin\\uv.EXE",
+                                                    "sync",
+                                                    "--python",
+                                                    "D:\\spider\\working\\MaleCNS-Sim\\.venv\\Scripts\\python.exe",
+                                                    "--frozen",
+                                                    "--no-dev",
+                                                    "--no-install-project",
+                                                    "--no-config"
+                                                ],
+                                       "cwd":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\package",
+                                       "exit":  4294967295,
+                                       "job":  {
+                                                   "active":  0,
+                                                   "total":  1,
+                                                   "terminated":  0
+                                               },
+                                       "log":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\05.txt"
+                                   }
+                               ],
+                     "Count":  6
+                 },
+    "source_input_count":  80,
+    "source_input_mismatches":  [
+
+                                ],
+    "cleanup":  "Download PID 19356 terminated after exact process and parent verification; Job active=0; PIDs 10524,18756,19356 absent",
+    "installed_smoke":  "NOT RUN",
+    "historical_suite":  "NOT RUN",
+    "I0":  "No final certification",
+    "I1":  "NOT RUN - REGISTERED-PAYLOAD-REQUIRED",
+    "I2":  "No final certification",
+    "protected_native_reads":  "UNRESOLVED - no independent native read census",
+    "final_acceptance":  false
+}
