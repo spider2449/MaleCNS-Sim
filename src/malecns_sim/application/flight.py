@@ -96,6 +96,9 @@ class FlightBody(Protocol):
 
     def reset(self, seed: int) -> dict: ...
     def advance(self, action: dict) -> dict: ...
+    # Optional: bodies with a movable target accept a goal in centimeters and
+    # move the target toward it in physics time, never instantaneously.
+    # def set_target(self, position_cm: list[float]) -> list[float]: ...
     def render(self) -> dict: ...
     def close(self) -> None: ...
 
@@ -115,6 +118,11 @@ def validate_body_observation(value, expected_ms):
         expansion = value.get(name)
         if type(expansion) not in (float, int) or not math.isfinite(expansion) or expansion < 0:
             raise ValueError("nonnegative finite geometry expansion required")
+    for name in ("target_cm", "target_goal_cm"):
+        vector = value.get(name)
+        if vector is not None and (type(vector) not in (list, tuple) or len(vector) != 3
+                or any(type(v) not in (float, int) or not math.isfinite(v) for v in vector)):
+            raise ValueError(f"invalid body {name}")
     if type(value.get("terminal")) is not bool:
         raise ValueError("body termination flag required")
     return copy.deepcopy(value)
@@ -142,7 +150,10 @@ class FlightSession:
                      "neural_dt_ms": runtime.dt_ms, "mapping": asdict(mapping),
                      "body": body_identity, "coupling": asdict(parameters),
                      "sensory_boundary": "geometry-derived expansion injected into bilateral LC4; phototransduction, retinotopy and upstream motion computation bypassed",
-                     "motor_boundary": "engineered DNg02 frequency and DNp03 differential wing offsets; no calibrated biological decoder",
+                     # A body may reinterpret the decoded command (e.g. as reference steering).
+                     "motor_boundary": body_identity.get("motor_boundary",
+                         "engineered DNg02 frequency and DNp03 differential wing offsets; no calibrated biological decoder"),
+                     "target_intervention": "observer-set target goals are recorded events applied at control-step boundaries; the body moves the target at bounded speed, so looming arises only from physical approach",
                      "initial_condition": "fresh resting neural state; explicit body seed; no inferred flight-state drive"}
         self.identity = hashlib.sha256(json.dumps(self.spec, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()).hexdigest()
         self.generation = self.revision = 0
@@ -279,14 +290,39 @@ class FlightSession:
             finally:
                 self.revision += 1
 
+    def set_target(self, position_cm):
+        """Record an observer intervention; the body moves the target in physics time."""
+        with self.lock:
+            if self.failed:
+                raise ValueError("coupled state failed; explicit Reset required")
+            mover = getattr(self.body, "set_target", None)
+            if mover is None:
+                raise ValueError("this body has no movable target")
+            if (type(position_cm) is not list or len(position_cm) != 3
+                    or any(type(v) not in (int, float) or not math.isfinite(v) for v in position_cm)):
+                raise ValueError("finite target_cm [x, y, z] required")
+            goal = [float(v) for v in mover(position_cm)]
+            self.observation["target_goal_cm"] = goal
+            self._record({"kind": "target", "simulation_ms": self.steps*self.parameters.control_ms,
+                          "target_goal_cm": goal})
+            self.revision += 1
+
     def command(self, request):
         with self.lock:
-            if (type(request) is not dict or set(request) != {"command", "generation", "revision"}
+            if (type(request) is not dict or not {"command", "generation", "revision"} <= set(request)
+                    or not set(request) <= {"command", "generation", "revision", "target_cm"}
                     or type(request["generation"]) is not int or type(request["revision"]) is not int
                     or request["generation"] != self.generation or request["revision"] != self.revision):
                 raise ValueError("exact current generation/revision and command required")
             command = request["command"]
-            if command == "reset":
+            if "target_cm" in request:
+                if command == "reset":
+                    raise ValueError("reset restores the initial target; send target_cm separately")
+                self.set_target(request["target_cm"])
+            if command == "target":
+                if "target_cm" not in request:
+                    raise ValueError("target command requires target_cm")
+            elif command == "reset":
                 self.reset()
             elif command == "pause":
                 self.running = False

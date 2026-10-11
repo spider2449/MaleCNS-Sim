@@ -283,3 +283,103 @@ def test_protected_http_session_and_unconfigured_route(session):
         server.shutdown()
         server.server_close()
         thread.join(timeout=5)
+
+
+class TargetBody(SyntheticBody):
+    """Synthetic body whose target glides toward a goal and looms on approach."""
+
+    def reset(self, seed):
+        self.target, self.goal = [2.0, 0.0, 1.0], [2.0, 0.0, 1.0]
+        self.previous = None
+        return super().reset(seed)
+
+    def set_target(self, position_cm):
+        if position_cm[2] < 0:
+            raise ValueError("target lies outside the bounded flight arena")
+        self.goal = list(position_cm)
+        return self.goal
+
+    def observe(self):
+        value = super().observe()
+        distance = math.dist(value["position_cm"], self.target)
+        angle = 2*math.asin(min(1.0, .08/distance))
+        expansion = 0.0 if self.previous is None else max(0.0, (angle-self.previous)/(self.control_ms/1000))
+        self.previous = angle
+        value.update(expansion_left_rad_s=expansion, expansion_right_rad_s=0.0,
+                     target_cm=list(self.target), target_goal_cm=list(self.goal))
+        return value
+
+    def advance(self, action):
+        delta = [g-t for g, t in zip(self.goal, self.target)]
+        distance = math.hypot(*delta)
+        step = min(distance, .01)
+        if distance:
+            self.target = [t+d*step/distance for t, d in zip(self.target, delta)]
+        return super().advance(action)
+
+
+def test_target_goal_is_recorded_and_moves_only_in_physics_time(session):
+    session = FlightSession(session.runtime, session.mapping, TargetBody(),
+        expected_projection_fingerprint=session.runtime.projection_fingerprint, parameters=session.parameters)
+    before = session.snapshot()
+    state = session.command({"command": "target", "generation": session.generation,
+                             "revision": session.revision, "target_cm": [0.2, 0.0, 1.0]})
+    assert state["simulation_ms"] == 0 and session.body.calls == 0
+    assert state["body"]["target_goal_cm"] == [0.2, 0.0, 1.0]
+    assert state["body"]["target_cm"] == before["body"]["target_cm"]
+    assert state["revision"] == before["revision"]+1
+    for _ in range(20):
+        session.step()
+    assert session.observation["target_cm"][0] == pytest.approx(1.8)
+    assert session.latest["sensory"]["rates_hz"][0] > 0, "approach produces looming input"
+    session.command({"command": "step", "generation": session.generation, "revision": session.revision,
+                     "target_cm": [2.0, 0.0, 1.0]})
+    events = [e for e in session.export()["events"] if e["kind"] == "target"]
+    assert events == [{"kind": "target", "simulation_ms": 0.0, "target_goal_cm": [0.2, 0.0, 1.0]},
+                      {"kind": "target", "simulation_ms": pytest.approx(4.0), "target_goal_cm": [2.0, 0.0, 1.0]}]
+    assert session.steps == 21
+    for request in ({"command": "target"}, {"command": "target", "target_cm": [0, 0]},
+                    {"command": "target", "target_cm": [0, 0, float("nan")]},
+                    {"command": "target", "target_cm": [0, 0, -1]},
+                    {"command": "reset", "target_cm": [0, 0, 1]},
+                    {"command": "step", "target_cm": [0, 0, 1], "pose": [0, 0, 0]}):
+        with pytest.raises(ValueError):
+            session.command({**request, "generation": session.generation, "revision": session.revision})
+    session.reset()
+    assert session.observation["target_cm"] == [2.0, 0.0, 1.0]
+    session.close()
+
+
+def test_target_command_rejected_for_fixed_target_body(session):
+    with pytest.raises(ValueError, match="no movable target"):
+        session.command({"command": "target", "generation": session.generation,
+                         "revision": session.revision, "target_cm": [0.0, 0.0, 1.0]})
+    assert session.steps == 0
+
+
+def test_policy_directory_identity_covers_names_and_bytes(tmp_path):
+    from malecns_sim.application.flight_body import directory_sha256
+    (tmp_path / "variables").mkdir()
+    (tmp_path / "saved_model.pb").write_bytes(b"graph")
+    (tmp_path / "variables" / "variables.index").write_bytes(b"index")
+    first = directory_sha256(tmp_path)
+    assert first == directory_sha256(tmp_path)
+    (tmp_path / "variables" / "variables.index").write_bytes(b"changed")
+    assert directory_sha256(tmp_path) != first
+    (tmp_path / "variables" / "variables.index").write_bytes(b"index")
+    (tmp_path / "variables" / "variables.index").rename(tmp_path / "variables" / "renamed.index")
+    assert directory_sha256(tmp_path) != first
+    with pytest.raises(ValueError, match="empty"):
+        directory_sha256(tmp_path / "missing")
+
+
+def test_body_may_declare_its_motor_boundary(session):
+    class SteeredBody(SyntheticBody):
+        identity = {"model": "synthetic", "motor_boundary": "decoded command steers a reference trajectory"}
+
+    steered = FlightSession(session.runtime, session.mapping, SteeredBody(),
+        expected_projection_fingerprint=session.runtime.projection_fingerprint, parameters=session.parameters)
+    assert steered.spec["motor_boundary"] == "decoded command steers a reference trajectory"
+    assert steered.identity != session.identity
+    assert "no calibrated biological decoder" in session.spec["motor_boundary"]
+    steered.close()

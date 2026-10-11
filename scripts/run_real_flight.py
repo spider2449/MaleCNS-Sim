@@ -24,6 +24,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", type=int, default=0)
     parser.add_argument("--open", action="store_true")
+    parser.add_argument("--controller", choices=("oscillator", "flight-policy"), default="oscillator",
+                        help="flight-policy: the published flybody policy flies a MaleCNS-steered reference")
+    parser.add_argument("--flybody-assets", type=Path, default=None,
+                        help="directory from scripts/fetch_flybody_assets.py (default: data/flybody)")
     args = parser.parse_args()
     if not 0 <= args.port <= 65535:
         parser.error("port must be 0..65535")
@@ -31,7 +35,8 @@ def main() -> None:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root / "src"))
     from malecns_sim.application.flight import FlightSession
-    from malecns_sim.application.flight_body import FlybodyBody
+    from malecns_sim.application.flight_body import (FLIGHT_POLICY_SHA256, WING_PATTERN_FMECH_SHA256,
+                                                     FlybodyBody)
     from malecns_sim.application.flight_populations import native_flight_mapping
     from malecns_sim.application.server import LocalServer
     from malecns_sim.application.service import ProductionEngine
@@ -56,7 +61,16 @@ def main() -> None:
     mapping.validate(runtime.neuron_ids)
     print(f"Prepared {len(runtime.neuron_ids)} neurons; projection {runtime.projection_fingerprint}", flush=True)
 
-    body = FlybodyBody(pattern_kind="engineered-oscillator")
+    if args.controller == "flight-policy":
+        assets = args.flybody_assets or root / "data" / "flybody"
+        # Start the target ahead of the fly and slightly to its left, off the
+        # straight reference line, so the default episode is not a collision.
+        body = FlybodyBody(pattern_kind="measured-pattern", wing_pattern_path=assets / "wing_pattern_fmech.npy",
+                           expected_pattern_sha256=WING_PATTERN_FMECH_SHA256, controller="flight-policy",
+                           policy_path=assets / "flight", expected_policy_sha256=FLIGHT_POLICY_SHA256,
+                           obstacle_cm=(3.0, 0.3, 1.0))
+    else:
+        body = FlybodyBody(pattern_kind="engineered-oscillator")
     session = FlightSession(runtime, mapping, body,
                             expected_projection_fingerprint=runtime.projection_fingerprint)
     server = LocalServer(args.port, catalog=catalog, flight_session=session)

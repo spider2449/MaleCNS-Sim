@@ -13,3 +13,6 @@ data/derived/
 data/reference/shiu-2024/
 *.parquet
 *.feather
+
+# Downloaded flybody policy and wing pattern (scripts/fetch_flybody_assets.py).
+data/flybody/

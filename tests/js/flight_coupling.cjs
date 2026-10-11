@@ -17,12 +17,17 @@ const copy = value => JSON.parse(JSON.stringify(value));
 
 function harness(configured) {
   const painted = [], clears = [];
-  const context = {clearRect(){clears.push(true);}, createImageData(width, height){return {data: new Uint8ClampedArray(width*height*4)};}, putImageData(){painted.push(true);}, drawImage(){painted.push(true);}};
-  const elements = Object.fromEntries(["run", "pause", "step", "reset", "refresh", "export", "status", "left", "right", "overview", "frame-status", "body", "sensory", "neural", "action", "identity", "spec"].map(id => [id,
-    {id, disabled: true, textContent: "", handlers: {}, getContext: () => context, addEventListener(type, handler){this.handlers[type] = handler;}}]));
+  const strokes = [];
+  const base = {clearRect(){clears.push(true);}, createImageData(width, height){return {data: new Uint8ClampedArray(width*height*4)};}, putImageData(){painted.push(true);}, drawImage(){painted.push(true);}, arc(x, y){strokes.push([x, y]);}};
+  // Vector drawing calls (paths, fills, transforms) are accepted as no-ops.
+  const context = new Proxy(base, {get: (target, name) => name in target ? target[name] : () => {}, set: () => true});
+  const elements = Object.fromEntries(["run", "pause", "step", "reset", "refresh", "export", "status", "left", "right", "overview", "map", "target-height", "target-height-value", "target-readout", "frame-status", "body", "sensory", "neural", "action", "identity", "spec"].map(id => [id,
+    {id, disabled: true, textContent: "", value: "", width: id === "map" ? 400 : 512, height: id === "map" ? 400 : 512, handlers: {}, getContext: () => context,
+      classList: {add(){}, remove(){}}, setPointerCapture(){}, getBoundingClientRect(){return {left: 0, top: 0, width: this.width, height: this.height};},
+      addEventListener(type, handler){this.handlers[type] = handler;}}]));
   let state = {configured, message: "No prepared model attached", running: false, failed: false, failure: null,
     simulation_ms: 0, condition: "intact", session_identity: "fixture", generation: 1, revision: 1,
-    body: {terminal: false, position_cm: [0, 0, 1]}, latest: null,
+    body: {terminal: false, position_cm: [0, 0, 1], quaternion_wxyz: [1, 0, 0, 0], target_cm: [.5, .2, 1], target_goal_cm: [.5, .2, 1], target_radius_cm: .08}, latest: null,
     spec: {coupling: {control_ms: .2, maximum_steps: 10}}};
   let failNext = false, failRefresh = false, holdFrame = false, releaseFrame = null, failFrame = false, encodedFrame = false;
   const requests = [], timers = new Map(), documentHandlers = {};
@@ -31,7 +36,7 @@ function harness(configured) {
     createImageBitmap: async blob => {assert.equal(blob.type, "image/jpeg"); assert.ok(blob.size > 0); return {close(){}};},
     location: {hash: "#token=fixture-session", pathname: "/flight"},
     sessionStorage: {setItem(){}, getItem(){return null;}}, history: {replaceState(){}},
-    document: {hidden: false, getElementById: id => elements[id], addEventListener: (type, handler) => documentHandlers[type] = handler},
+    document: {hidden: false, activeElement: null, getElementById: id => elements[id], addEventListener: (type, handler) => documentHandlers[type] = handler},
     setTimeout: fn => {const id = timers.size + 1; timers.set(id, fn); return id;}, clearTimeout: id => timers.delete(id),
     fetch: async (url, options) => {
       requests.push({url, options});
@@ -42,7 +47,9 @@ function harness(configured) {
       if (failNext && options.method === "POST") {failNext = false; return {ok: false, json: async () => ({error: {message: "Rejected stale command"}})};}
       if (options.method === "POST") {
         const body = JSON.parse(options.body);
-        assert.deepEqual(Object.keys(body).sort(), ["command", "generation", "revision"]);
+        const keys = Object.keys(body).sort();
+        assert.ok(["command,generation,revision", "command,generation,revision,target_cm"].includes(keys.join()), keys.join());
+        if (body.target_cm) { assert.notEqual(body.command, "reset"); state.body.target_goal_cm = body.target_cm; }
         assert.equal(body.generation, state.generation); assert.equal(body.revision, state.revision);
         if (body.command === "run") state.running = true;
         if (body.command === "pause") state.running = false;
@@ -50,14 +57,17 @@ function harness(configured) {
         state.revision++;
       }
       const response = url.endsWith("/frame") ? {session_identity: state.session_identity, generation: state.generation,
-        revision: state.revision, simulation_ms: state.simulation_ms, eyes: encodedFrame ? {overview: {width:512, height:512, image_url:"data:image/jpeg;base64,/9j/2Q=="}} : {left: pixels(), right: pixels(), overview: pixels(512)}} : copy(state);
+        revision: state.revision, simulation_ms: state.simulation_ms, eyes: encodedFrame ? {overview: {width:512, height:512, image_url:"data:image/jpeg;base64,/9j/2Q==",
+          // Camera 2 cm above (0, 0, 1) looking straight down; image +x is world +x.
+          camera: {position_cm: [0, 0, 3], xmat: [1, 0, 0, 0, 1, 0, 0, 0, 1], fovy_deg: 90}}} : {left: pixels(), right: pixels(), overview: pixels(512)}} : copy(state);
       return {ok: true, json: async () => response};
     }};
   vm.runInNewContext(source, sandbox);
   return {elements, requests, painted, clears, timers, documentHandlers, sandbox, fail: () => {failNext = true;},
     holdFrame: () => {holdFrame = true;}, releaseFrame: () => releaseFrame(), failFrame: () => {failFrame = true;},
     useEncoded: () => {encodedFrame = true;},
-    failRefresh: () => {failRefresh = true;}, state: () => state, click: id => elements[id].handlers.click()};
+    failRefresh: () => {failRefresh = true;}, state: () => state, click: id => elements[id].handlers.click(), strokes,
+    pointer: (id, type, x, y) => elements[id].handlers[type]({currentTarget: elements[id], clientX: x, clientY: y, pointerId: 1, preventDefault(){}})};
 }
 
 (async () => {
@@ -107,5 +117,41 @@ function harness(configured) {
   assert.equal(ready.state().simulation_ms, prior);
   assert.equal(ready.timers.size, 0);
   assert.ok(ready.requests.filter(r => r.options.method === "POST").every(r => !r.options.body.includes("pose")));
-  console.log("PASS: no-model fail-closed UI, token header, physical-frame display, manual step, serialized run, stop after command failure, hidden-tab pacing, no client-authored pose.");
+  // Dragging the target in the body view: hit the projected sphere, then move on the z=1 plane.
+  const drag = harness(true); await flush();
+  drag.useEncoded(); drag.click("refresh"); await flush();
+  const posts = () => drag.requests.filter(r => r.options.method === "POST").map(r => JSON.parse(r.options.body));
+  // Sphere at (.5, .2, 1) seen from 2 cm above with f=256 px: (256+64, 256-25.6).
+  drag.pointer("overview", "pointerdown", 0, 0);
+  drag.pointer("overview", "pointermove", 100, 100); await flush();
+  assert.equal(posts().length, 0, "A press away from the sphere does not start a drag");
+  drag.pointer("overview", "pointerdown", 320, 230.4);
+  drag.pointer("overview", "pointermove", 256-128, 256); await flush();
+  let sent = posts().at(-1);
+  assert.equal(sent.command, "target");
+  assert.deepEqual(sent.target_cm.map(v => +v.toFixed(6)), [-1, 0, 1]);
+  assert.deepEqual(drag.state().body.target_goal_cm, sent.target_cm);
+  drag.pointer("overview", "pointerup", 0, 0);
+  assert.equal(drag.state().simulation_ms, 0, "Moving the goal never advances simulated time");
+  // Height slider keeps x/y and changes only z.
+  drag.elements["target-height"].value = "2.5";
+  drag.elements["target-height"].handlers.input({currentTarget: drag.elements["target-height"]}); await flush();
+  assert.deepEqual(posts().at(-1).target_cm.map(v => +v.toFixed(6)), [-1, 0, 2.5]);
+  // Map drags clamp to arena bounds; while running the goal rides on the next tick.
+  drag.click("run"); await flush();
+  drag.pointer("map", "pointerdown", 0, 0);
+  drag.pointer("map", "pointermove", -1e6, 1e6); await flush();
+  assert.equal(posts().at(-1).command, "run");
+  drag.timers.values().next().value(); await flush();
+  sent = posts().at(-1);
+  assert.equal(sent.command, "tick");
+  assert.deepEqual(sent.target_cm, [-10, -10, 2.5]);
+  drag.pointer("map", "pointerup", 0, 0);
+  drag.timers.values().next().value(); await flush();
+  assert.equal(posts().at(-1).target_cm, undefined, "A goal is sent once, not repeated on every tick");
+  drag.click("pause"); await flush();
+  drag.pointer("map", "pointerdown", 200, 200); await flush();
+  drag.click("reset"); await flush();
+  assert.equal(posts().at(-1).target_cm, undefined, "Reset never carries a dragged goal");
+  console.log("PASS: no-model fail-closed UI, token header, physical-frame display, manual step, serialized run, stop after command failure, hidden-tab pacing, no client-authored pose, target drag in view/map/height with bounds and tick piggybacking.");
 })().catch(error => {console.error(error);process.exitCode = 1;});
