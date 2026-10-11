@@ -1,7 +1,7 @@
 # Application A019C-R9: validation/firewall integration adjudication
 
 Authorization: `授權 A019C-R9`. Repository root derived using
-`git rev-parse --show-toplevel`: `D:/spider/working/MaleCNS-Sim`.
+`git rev-parse --show-toplevel`: `.`.
 
 ## Plan
 
@@ -55,7 +55,7 @@ historical evidence. Its broader validation was 15 passed, 1 failed,
 These are not rewritten as complete certification.
 
 R9 bootstrap, with activation 1, absolute firewall PYTHONPATH and log
-`C:/TEMP/a019c-r9-bootstrap.jsonl`:
+`<TEMP>/a019c-r9-bootstrap.jsonl`:
 
 ```text
 .venv/Scripts/python.exe scripts/a019c_firewall/guarded_child.py -m pytest
@@ -93,7 +93,7 @@ Git-object content. A clean current status does not prove a command family
 will never read those contents. Replacing this assertion with a source-only
 check would remove its data-immutability coverage and was not done.
 
-Resolved executable discovery: `C:/Program Files/Git/cmd/git.exe`.
+Resolved executable discovery: `<PROGRAM_FILES>/Git/cmd/git.exe`.
 No executable exception was added. Existing Python identity checks and mandatory
 entrypoint enforcement remain unchanged. A future native exception would need
 exact resolved executable identity, exact arguments, controlled configuration,
@@ -107,7 +107,7 @@ Git through a Python launcher establishes the required native-read restriction.
 No new OS sandbox or bootstrap redesign was attempted. Source-only tooling may
 be adjudicable separately, but does not satisfy the exact existing test.
 
-Temporary guarded probe `C:/TEMP/a019c-r9-probes.py` exited 0:
+Temporary guarded probe `<TEMP>/a019c-r9-probes.py` exited 0:
 exact diff rejected; `git show HEAD:data/provenance/male-cns-v1.0.json` rejected;
 shell-wrapped Git rejected; registered provenance and connectivity blocked
 before content reads. An earlier inline probe failed with SyntaxError before
@@ -140,7 +140,7 @@ Source inspection alone is not integrity verification.
 on any startup exception. Guarded-child activation failure also uses 78.
 
 Safe diagnostic, with activation, absolute firewall PYTHONPATH and audit path
-`C:/TEMP/a019c-r9-build.jsonl`: `uv build --offline`.
+`<TEMP>/a019c-r9-build.jsonl`: `uv build --offline`.
 Result: build_sdist backend exit 78; no build audit file was created.
 This establishes failure before recorded guard activation, not its precise
 exception. Missing pyarrow in the setuptools-only isolated environment is a

@@ -1,7 +1,7 @@
 # A023 — Public runtime implementation
 
 Authorization: **授權 A023**. Starting root derived with git rev-parse:
-`D:/spider/working/MaleCNS-Sim`. Local HEAD, origin/master and live GitHub master
+`.`. Local HEAD, origin/master and live GitHub master
 all equaled `c5ad89377575592665344f6420126b16c29b4339`. Worktree/staging/stash
 empty, version 0.3.0, tracked workflows zero. A022 is authoritative.
 
@@ -133,7 +133,7 @@ payload reads accepted, downloads, archive changes or scientific interventions.
 Only bounded synthetic tests ran; existing A011 regression tests exercised the
 engineered synthetic Arena fixture, with no separate Arena experiment or
 implementation expansion. No new scientific claim or GPU certification scope.
-Task guard audit logs remain outside tracked files in C:/TEMP/a023-*.jsonl.
+Task guard audit logs remain outside tracked files in <TEMP>/a023-*.jsonl.
 
 Commit/push **NOT PERFORMED**, because G16 is not satisfied. No tag, release,
 publication or version bump. Local/origin/live remain the starting SHA, staging

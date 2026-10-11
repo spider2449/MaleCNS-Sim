@@ -48,7 +48,7 @@ One bootstrap run (activation=1; PYTHONPATH=scripts/a019c_firewall), no retry:
 37 passed, 1 failed in 5.34 s
 ```
 
-Audit: C:/TEMP/a019c-r7-bootstrap.jsonl. Parent PID 17708.
+Audit: <TEMP>/a019c-r7-bootstrap.jsonl. Parent PID 17708.
 Failure: R2 test_child_cannot_drop_guard expected parent SourceAccessDenied.
 Actual mandatory child started, printed FIREWALL_REQUIRED_BUT_NOT_ACTIVE and
 rejected before its harmless pass workload. This obsolete parent-rejection

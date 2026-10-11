@@ -2,11 +2,11 @@
   "schema": "a023r11-final-validation-v1",
   "phase": "C",
   "base": "c5ad89377575592665344f6420126b16c29b4339",
-  "run": "C:\\TEMP\\malecns-a023r11-final-23b63938ad7347a6b5d8691c07792eae",
-  "tree": "C:\\TEMP\\malecns-a023r11-final-23b63938ad7347a6b5d8691c07792eae\\execution",
+  "run": "<TEMP>\\malecns-a023r11-final-23b63938ad7347a6b5d8691c07792eae",
+  "tree": "<TEMP>\\malecns-a023r11-final-23b63938ad7347a6b5d8691c07792eae\\execution",
   "pid": 20248,
   "python": "3.14.0 (main, Nov 19 2025, 22:43:52) [MSC v.1944 64 bit (AMD64)]",
-  "executable": "C:\\TEMP\\malecns-a023r11-final-23b63938ad7347a6b5d8691c07792eae\\execution\\.venv\\Scripts\\python.exe",
+  "executable": "<TEMP>\\malecns-a023r11-final-23b63938ad7347a6b5d8691c07792eae\\execution\\.venv\\Scripts\\python.exe",
   "dependencies": [
     [
       "colorama",
@@ -213,7 +213,7 @@
         "2026.4"
       ]
     ],
-    "source_origin": "C:\\TEMP\\malecns-a023r11-final-23b63938ad7347a6b5d8691c07792eae\\execution\\src\\malecns_sim\\__init__.py",
+    "source_origin": "<TEMP>\\malecns-a023r11-final-23b63938ad7347a6b5d8691c07792eae\\execution\\src\\malecns_sim\\__init__.py",
     "gpu_device_count": 1
   },
   "manifest_sha256": "b8f0dfd2f37ce34035a0d220b4408caf3124be582c8f42fb70c498740744203e",
@@ -1461,10 +1461,10 @@
     "tests/test_application_a019c_r4_firewall.py::test_required_child_rejects_before_workload[True-corrupt]",
     "tests/test_application_a019c_r5_firewall.py::test_actual_windows_audit_serialization",
     "tests/test_application_a019c_r5_firewall.py::test_actual_worker_bypass_rejected",
-    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python Space\\\\python.exe-C:\\\\repo space\\\\guarded_child.py-tail3-True]",
-    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python Space\\\\python.exe-C:\\\\repo\\\\guarded_child.py-tail1-True]",
-    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python\\\\python.exe-C:\\\\repo space\\\\guarded_child.py-tail2-True]",
-    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python\\\\python.exe-C:\\\\repo\\\\guarded_child.py-tail0-True]",
+    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON> Space\\\\python.exe-<CONTAINER_REPO> space\\\\guarded_child.py-tail3-True]",
+    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON> Space\\\\python.exe-<CONTAINER_REPO>\\\\guarded_child.py-tail1-True]",
+    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON>\\\\python.exe-<CONTAINER_REPO> space\\\\guarded_child.py-tail2-True]",
+    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON>\\\\python.exe-<CONTAINER_REPO>\\\\guarded_child.py-tail0-True]",
     "tests/test_application_a019c_r5_firewall.py::test_contained_actual_worker_startup[1]",
     "tests/test_application_a019c_r5_firewall.py::test_contained_actual_worker_startup[None]",
     "tests/test_application_a019c_r5_firewall.py::test_contained_actual_worker_startup[corrupt]",
@@ -3014,10 +3014,10 @@
     "tests/test_application_a019c_r4_firewall.py::test_required_child_rejects_before_workload[True-corrupt]",
     "tests/test_application_a019c_r5_firewall.py::test_actual_windows_audit_serialization",
     "tests/test_application_a019c_r5_firewall.py::test_actual_worker_bypass_rejected",
-    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python Space\\\\python.exe-C:\\\\repo space\\\\guarded_child.py-tail3-True]",
-    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python Space\\\\python.exe-C:\\\\repo\\\\guarded_child.py-tail1-True]",
-    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python\\\\python.exe-C:\\\\repo space\\\\guarded_child.py-tail2-True]",
-    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python\\\\python.exe-C:\\\\repo\\\\guarded_child.py-tail0-True]",
+    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON> Space\\\\python.exe-<CONTAINER_REPO> space\\\\guarded_child.py-tail3-True]",
+    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON> Space\\\\python.exe-<CONTAINER_REPO>\\\\guarded_child.py-tail1-True]",
+    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON>\\\\python.exe-<CONTAINER_REPO> space\\\\guarded_child.py-tail2-True]",
+    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON>\\\\python.exe-<CONTAINER_REPO>\\\\guarded_child.py-tail0-True]",
     "tests/test_application_a019c_r5_firewall.py::test_contained_actual_worker_startup[1]",
     "tests/test_application_a019c_r5_firewall.py::test_contained_actual_worker_startup[None]",
     "tests/test_application_a019c_r5_firewall.py::test_contained_actual_worker_startup[corrupt]",
@@ -4639,10 +4639,10 @@
     "tests/test_application_a019c_r4_firewall.py::test_required_child_rejects_before_workload[True-None]",
     "tests/test_application_a019c_r5_firewall.py::test_actual_windows_audit_serialization",
     "tests/test_application_a019c_r5_firewall.py::test_actual_worker_bypass_rejected",
-    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python Space\\\\python.exe-C:\\\\repo space\\\\guarded_child.py-tail3-True]",
-    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python Space\\\\python.exe-C:\\\\repo\\\\guarded_child.py-tail1-True]",
-    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python\\\\python.exe-C:\\\\repo space\\\\guarded_child.py-tail2-True]",
-    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python\\\\python.exe-C:\\\\repo\\\\guarded_child.py-tail0-True]",
+    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON> Space\\\\python.exe-<CONTAINER_REPO> space\\\\guarded_child.py-tail3-True]",
+    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON> Space\\\\python.exe-<CONTAINER_REPO>\\\\guarded_child.py-tail1-True]",
+    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON>\\\\python.exe-<CONTAINER_REPO> space\\\\guarded_child.py-tail2-True]",
+    "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON>\\\\python.exe-<CONTAINER_REPO>\\\\guarded_child.py-tail0-True]",
     "tests/test_application_a019c_r5_firewall.py::test_contained_actual_worker_startup[1]",
     "tests/test_application_a019c_r5_firewall.py::test_contained_actual_worker_startup[corrupt]",
     "tests/test_application_a019c_r5_firewall.py::test_contained_actual_worker_startup[None]",
@@ -11492,25 +11492,25 @@
       "reason": null
     },
     {
-      "node_id": "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python\\\\python.exe-C:\\\\repo\\\\guarded_child.py-tail0-True]",
+      "node_id": "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON>\\\\python.exe-<CONTAINER_REPO>\\\\guarded_child.py-tail0-True]",
       "phase": "call",
       "outcome": "passed",
       "reason": null
     },
     {
-      "node_id": "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python Space\\\\python.exe-C:\\\\repo\\\\guarded_child.py-tail1-True]",
+      "node_id": "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON> Space\\\\python.exe-<CONTAINER_REPO>\\\\guarded_child.py-tail1-True]",
       "phase": "call",
       "outcome": "passed",
       "reason": null
     },
     {
-      "node_id": "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python\\\\python.exe-C:\\\\repo space\\\\guarded_child.py-tail2-True]",
+      "node_id": "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON>\\\\python.exe-<CONTAINER_REPO> space\\\\guarded_child.py-tail2-True]",
       "phase": "call",
       "outcome": "passed",
       "reason": null
     },
     {
-      "node_id": "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[C:\\\\Python Space\\\\python.exe-C:\\\\repo space\\\\guarded_child.py-tail3-True]",
+      "node_id": "tests/test_application_a019c_r5_firewall.py::test_canonical_serialization[<CONTAINER_PYTHON> Space\\\\python.exe-<CONTAINER_REPO> space\\\\guarded_child.py-tail3-True]",
       "phase": "call",
       "outcome": "passed",
       "reason": null
@@ -14420,12 +14420,12 @@
     "terminated": 0
   },
   "tools": {
-    "D:\\spider\\working\\MaleCNS-Sim\\.venv\\Scripts\\python.exe": "38311f7e761ab797d31f024724dad7f53f4afaa6cd561956e821dca75ce06a37",
-    "C:\\Users\\spider.tp\\.local\\bin\\uv.EXE": "c3f337907f233811954d96e0ecf2d46df094413250ebdcd10d40d9b5c48febd2",
-    "C:/Program Files/nodejs/node.exe": "d14ba95cdce1ef7dc9ad3ac74949ca5db38b27378ee30f30a23cf26f9e875a11"
+    ".venv\\Scripts\\python.exe": "38311f7e761ab797d31f024724dad7f53f4afaa6cd561956e821dca75ce06a37",
+    "<USER_HOME>\\.local\\bin\\uv.EXE": "c3f337907f233811954d96e0ecf2d46df094413250ebdcd10d40d9b5c48febd2",
+    "<PROGRAM_FILES>/nodejs/node.exe": "d14ba95cdce1ef7dc9ad3ac74949ca5db38b27378ee30f30a23cf26f9e875a11"
   },
   "provisioning": {
-    "wheel": "C:\\TEMP\\malecns-a023r11-final-23b63938ad7347a6b5d8691c07792eae\\wheels\\malecns_sim-0.3.0-py3-none-any.whl",
+    "wheel": "<TEMP>\\malecns-a023r11-final-23b63938ad7347a6b5d8691c07792eae\\wheels\\malecns_sim-0.3.0-py3-none-any.whl",
     "wheel_sha256": "b60794418c87d47384b4288717432b855cf6f19a21b514412315641a639203e4",
     "packaging_inputs": {
       "LICENSE": "5185fad577fdc845d2789fd51549f82a55234caf3bbff6515497a03844420332",

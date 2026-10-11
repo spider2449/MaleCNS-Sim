@@ -3,7 +3,7 @@
 ## Gate and decision
 
 Dynamic root: `git rev-parse --show-toplevel` returned
-`D:/spider/working/MaleCNS-Sim`. Starting local/origin/live master all equal
+`.`. Starting local/origin/live master all equal
 `727f241c4b3e1aac6f45cf8008b3b199832d077a`; clean worktree, empty stash,
 version 0.3.0, zero tracked workflows. The tracked A015 plan establishes A15-B.
 
@@ -211,7 +211,7 @@ Full-real preparations and advances, real Arena/behavior/scientific experiments,
 raw downloads, Task017 historical new units, Task017Q, archive writes and BANC:
 all **0**. No biological claim, scientific model or biological identity change.
 Historical Task016 unchanged; historical Task017 unchanged / NOT_ROBUST;
-`B:\MaleCNS-Archive` unchanged. Production default unchanged. A014 watchdog is
+`<ARCHIVE_ROOT>` unchanged. Production default unchanged. A014 watchdog is
 unchanged and remains CERTIFIED_SYNTHETIC; no full-real watchdog certification.
 No tag, release or version mutation.
 

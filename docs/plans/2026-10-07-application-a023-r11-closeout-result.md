@@ -15,7 +15,7 @@ This is post-run documentation outside the frozen candidate. It does not replace
 - Starting authoritative local/origin/live SHA: `c5ad89377575592665344f6420126b16c29b4339`.
 - Frozen manifest SHA256: `b8f0dfd2f37ce34035a0d220b4408caf3124be582c8f42fb70c498740744203e`.
 - Frozen ordinary inputs: 440.
-- Final environment: `C:/TEMP/malecns-a023r11-final-23b63938ad7347a6b5d8691c07792eae`.
+- Final environment: `<TEMP>/malecns-a023r11-final-23b63938ad7347a6b5d8691c07792eae`.
 - Python: `3.14.0 (main, Nov 19 2025, 22:43:52) [MSC v.1944 64 bit (AMD64)]`; pytest 9.1.1.
 - Exact locked project/runtime/dev/GPU distributions: 25; no lock/dependency/version edit.
 - Fresh exact-base sparse tree, candidate overlay, Python/uv environment, process, TEMP/TMP/cache, disabled plugin autoload, accepted builtin census, contained children and cleanup.

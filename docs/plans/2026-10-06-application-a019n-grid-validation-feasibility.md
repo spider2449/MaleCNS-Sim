@@ -4,7 +4,7 @@
 
 User authorization: `授權 A019N`. Synthetic-only, feasibility-only; diagnostic,
 tests, documentation, commit and push authorized. Root derived using
-`git rev-parse --show-toplevel`: D:/spider/working/MaleCNS-Sim.
+`git rev-parse --show-toplevel`: `.`.
 Starting local HEAD = origin/master = live GitHub master =
 `f2ce4c705822b4cc074085ee3585ebe97e111dba`.
 Worktree clean; staging empty; stash empty; version 0.3.0; tracked workflows 0.

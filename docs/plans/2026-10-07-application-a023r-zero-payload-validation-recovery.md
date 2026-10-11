@@ -8,7 +8,7 @@ restrictions. No runtime contract defect or guard defect has been established.
 
 ## Starting custody and frozen fingerprints
 
-Root derived by git rev-parse: D:/spider/working/MaleCNS-Sim.
+Root derived by git rev-parse: `.`.
 HEAD, origin/master, and live origin refs/heads/master all equal
 c5ad89377575592665344f6420126b16c29b4339. Exactly the five expected untracked
 files; tracked diff/stat and staging empty, stash empty, version 0.3.0,
@@ -45,7 +45,7 @@ markers are configured in pyproject.toml. No guard semantics were changed.
 The log records active and blocked events, not a separate accepted-read counter.
 Zero accepted registered reads follows enforcement for the intercepted routes;
 do not describe it as a directly emitted numeric counter or universal OS tracer.
-Collection log: C:/TEMP/a023r-collection-20261007.jsonl.
+Collection log: <TEMP>/a023r-collection-20261007.jsonl.
 
 ## Original blocker and proven dependencies
 
@@ -81,12 +81,12 @@ Executed only collection with activation before imports:
 
     MALECNS_A019C_R2_FIREWALL=1
     PYTHONPATH=<absolute repository>/scripts/a019c_firewall
-    MALECNS_A019C_R2_LOG=C:/TEMP/a023r-collection-20261007.jsonl
+    MALECNS_A019C_R2_LOG=<TEMP>/a023r-collection-20261007.jsonl
     uv run python -m pytest --collect-only -q
 
 Result: **1503 collected**, one existing CUDA_PATH warning. Log contains one
 active event and no blocked event. Accepted protected reads 0; denied reads 0
-for collection. Raw output: C:/TEMP/a023r-collection-20261007.txt.
+for collection. Raw output: <TEMP>/a023r-collection-20261007.txt.
 This is not an executable-suite pass. Z0/Z1/Z2 final counts and complete exact
 node classification are NOT ESTABLISHED; only the five Z1 candidates above are
 proven here. No selected executable suite or selection manifest was added.
@@ -140,7 +140,7 @@ Authorization: **授權 A023-R2**. Terminal classification:
 **A023-R2-CONTRACT-VIOLATION**. Overall **A023-B** remains; G16 NOT PASS.
 The A023-B and A023-R-B history above remains unchanged.
 
-Root was dynamically derived as D:/spider/working/MaleCNS-Sim. Starting local
+Root was dynamically derived as `.`. Starting local
 HEAD, origin/master and live origin refs/heads/master were exactly
 c5ad89377575592665344f6420126b16c29b4339. Baseline status had exactly the six
 authorized untracked files, no tracked changes, empty staging and stash,
@@ -158,8 +158,8 @@ version 0.3.0 and zero tracked workflows. Starting SHA-256 fingerprints:
 All four original runtime/test fingerprints match A023-R exactly. Before edits
 or new tests, guarded ordinary collection again yielded **1503 nodes**. Startup
 activation used MALECNS_A019C_R2_FIREWALL=1 and absolute firewall PYTHONPATH.
-Collection output: C:/TEMP/a023r2-collection-20261007.txt; guard log:
-C:/TEMP/a023r2-collection-20261007.jsonl. The log contains one active event and
+Collection output: <TEMP>/a023r2-collection-20261007.txt; guard log:
+<TEMP>/a023r2-collection-20261007.jsonl. The log contains one active event and
 no blocked events. Collection accepted registered reads 0 under the existing
 interception contract; collection denied reads 0.
 
@@ -233,7 +233,7 @@ A023-R2-CONTRACT-VIOLATION. R4 has NOT started.
 ### Incoming custody and freeze
 
 Repository root was dynamically derived by `git rev-parse --show-toplevel` as
-D:/spider/working/MaleCNS-Sim. Starting HEAD, origin/master and live GitHub
+`.`. Starting HEAD, origin/master and live GitHub
 refs/heads/master all equal `c5ad89377575592665344f6420126b16c29b4339`.
 Metadata-only status established exactly the six incoming untracked files,
 empty staging and stash, and no tracked changes. Existing additional detached
@@ -370,7 +370,7 @@ Compileall restricted to the new helper and new test: **PASS, exit 0**.
 No A023 source compilation or broader validation was performed.
 
 Canary command used the same isolated interpreter and helper with --emit,
---ledger C:/TEMP/a023r3-canary-20261007.json, followed by exactly these four
+--ledger <TEMP>/a023r3-canary-20261007.json, followed by exactly these four
 separately enumerated targets: the recovery report, tests/test_application_a011.py,
 tests/test_application_a007b.py, and scripts/a019c_firewall/validation_firewall.py.
 Each requested file classified SAFE before opening. Requested 4, accepted 4,
@@ -402,7 +402,7 @@ whitespace/diff checks PASS: explicit `git diff --no-index --check` against
 /dev/null emitted no whitespace-error diagnostics for each of the three R3
 files (exit 1 denotes the untracked additions; LF/CRLF conversion warnings
 are not whitespace-error findings). Final exact-path inspection also PASS;
-ledger C:/TEMP/a023r3-final-inspection-20261007.json records five explicit
+ledger <TEMP>/a023r3-final-inspection-20261007.json records five explicit
 content-open events: guard bootstrap, helper control, and the three R3 files.
 That report snapshot precedes this closure-detail append; no snapshot hash is
 represented as a final-report self-hash. Final committed local/origin/live SHA remains
@@ -437,7 +437,7 @@ The required 1503-node taxonomy cannot be certified against the actual
 ### Custody and incoming fingerprints
 
 Root dynamically derived with git rev-parse --show-toplevel:
-D:/spider/working/MaleCNS-Sim. Local HEAD, origin/master and live GitHub master
+`.`. Local HEAD, origin/master and live GitHub master
 all equal c5ad89377575592665344f6420126b16c29b4339. Exactly eight incoming
 untracked files, no unrelated WIP, staging empty, stash empty, version 0.3.0,
 tracked workflows zero. Existing detached clarity-mare worktree preserved.
@@ -456,7 +456,7 @@ All eight SHA256 fingerprints captured before report edits:
 
 Original four runtime/test hashes match retained R1/R3 identities. Inspector
 hash matches the R3 report; inspector and test hashes both match external
-C:/TEMP/a023r3-final-inspection-20261007.json. Guard bootstrap identity remains
+<TEMP>/a023r3-final-inspection-20261007.json. Guard bootstrap identity remains
 170e203635d0fcf3b2af9a860dfa049c3c8e24fd43829c023a7bb5c3dd5643af.
 R3 route and guard unchanged. R1/R2/R3 history preserved. R2 remains IR3:
 actual protected read occurrence UNKNOWN; R2 zero-read attestation INVALID.
@@ -470,8 +470,8 @@ Executed uv run python -m pytest --collect-only -q, exit 0.
 **1515 tests collected**, with 1515 distinct exact node IDs and zero duplicates.
 Expected baseline: **1503**. No R4 tests were added.
 
-Output: C:/Users/spider.tp/AppData/Local/Temp/a023r4-collection.txt.
-Guard log: C:/Users/spider.tp/AppData/Local/Temp/a023r4-collection.jsonl.
+Output: <TEMP>/a023r4-collection.txt.
+Guard log: <TEMP>/a023r4-collection.jsonl.
 One active event, no blocked events. Accepted registered reads 0 under the
 unchanged guard interception contract; denied reads 0. This is not a separate
 OS-level accepted-read counter or executable test-suite result.
@@ -557,7 +557,7 @@ Do NOT start A024.
 Authorization: **?? A023-R5**. Classification **A023-R5-B**; overall **A023-B**; G16 NOT PASS.
 Exactly one named blocker: **A011 C2 has no certified guard-compatible execution route or certified regression-safe exclusion**. Phase 6 requires STOP for Z3-BLOCKED. No guard defect is claimed. R1-R4 history preserved.
 
-Root dynamically derived: D:/spider/working/MaleCNS-Sim. Starting local HEAD, origin/master and live GitHub master all c5ad89377575592665344f6420126b16c29b4339. Exactly eight expected incoming untracked files; staging/stash empty; version 0.3.0; tracked workflows zero. Incoming SHA256:
+Root dynamically derived: `.`. Starting local HEAD, origin/master and live GitHub master all c5ad89377575592665344f6420126b16c29b4339. Exactly eight expected incoming untracked files; staging/stash empty; version 0.3.0; tracked workflows zero. Incoming SHA256:
 
 | File | SHA256 |
 | --- | --- |
@@ -574,7 +574,7 @@ Four original source/test identities match R1/R3/R4; inspector/test match retain
 
 ### Exact collection accounting
 
-Before any new tests, guard activation environment was set before imports: MALECNS_A019C_R2_FIREWALL=1, absolute scripts/a019c_firewall PYTHONPATH, external log. uv run python -m pytest --collect-only -q exited 0: **1515 distinct nodes, zero duplicates**. Output/log: C:/Users/spider.tp/AppData/Local/Temp/a023r5-collection.txt and a023r5-collection.jsonl. One active event, no blocked events.
+Before any new tests, guard activation environment was set before imports: MALECNS_A019C_R2_FIREWALL=1, absolute scripts/a019c_firewall PYTHONPATH, external log. uv run python -m pytest --collect-only -q exited 0: **1515 distinct nodes, zero duplicates**. Output/log: <TEMP>/a023r5-collection.txt and a023r5-collection.jsonl. One active event, no blocked events.
 
 Exact collected R3 module nodes define I. H is the authorized exact set difference. Sorted manifests: docs/manifests/a023-validation-baseline-h.txt (**1503**) and a023-validation-infrastructure-i.txt (**12**). N is the empty set (**0**). H/I/N pairwise disjoint, exact union equals observed collection, missing/extra zero. No tests added or changed after collection. This is the authorized R5 H definition, not proof of an independently reconstructed historical snapshot. Do not silently regenerate H. Manifest self-tests have not run.
 
@@ -609,7 +609,7 @@ this execution-order incident.
 ### Starting custody and incoming fingerprints
 
 Root dynamically derived with git rev-parse --show-toplevel:
-D:/spider/working/MaleCNS-Sim. Starting local HEAD, origin/master and live
+`.`. Starting local HEAD, origin/master and live
 GitHub master all c5ad89377575592665344f6420126b16c29b4339.
 Metadata-only Git inventory established exactly the eleven incoming untracked
 files below, no tracked changes, empty staging and stash, and zero tracked
@@ -646,8 +646,8 @@ H=1503, I=12, H intersection I empty; exact observed collection equals H union I
 missing/extra zero. N remains empty (0); no R6 tests were added.
 
 External collection output/log:
-C:/Users/spider.tp/AppData/Local/Temp/a023r6-collection.txt and
-C:/Users/spider.tp/AppData/Local/Temp/a023r6-collection.jsonl.
+<TEMP>/a023r6-collection.txt and
+<TEMP>/a023r6-collection.jsonl.
 Log: one active event, zero blocked events. This is collection evidence,
 not an executable release-safe suite PASS.
 
@@ -710,7 +710,7 @@ under active startup guard, before certifying A011's terminal disposition and
 before completing the R6 taxonomy/execution gate. Result: **27 passed, zero
 failures/skips**, one existing CUDA_PATH warning. This included the bounded
 synthetic GPU correctness test. External guard log:
-C:/Users/spider.tp/AppData/Local/Temp/a023r6-a023.jsonl.
+<TEMP>/a023r6-a023.jsonl.
 Log: one active event, zero blocked events.
 
 The run was premature. General permission to run A023 correctness tests does
@@ -777,7 +777,7 @@ Authorization: **授權 A023-R7**. Terminal classification: **A023-R7-C — PREM
 Incident classification: **PE3 — PREMATURE EXECUTION WITH UNKNOWN SAFETY SCOPE**.
 Overall **A023-B**; **G16 NOT PASS**. All historical outcomes, including R6's contract violation, remain in force.
 
-Starting and final committed custody: local HEAD, origin/master and live GitHub master equal `c5ad89377575592665344f6420126b16c29b4339`. Root derived dynamically: D:/spider/working/MaleCNS-Sim. Exactly eleven incoming untracked files; staging and stash empty. Detached clarity-mare worktree preserved. Version 0.3.0; tracked workflows zero.
+Starting and final committed custody: local HEAD, origin/master and live GitHub master equal `c5ad89377575592665344f6420126b16c29b4339`. Root derived dynamically: `.`. Exactly eleven incoming untracked files; staging and stash empty. Detached clarity-mare worktree preserved. Version 0.3.0; tracked workflows zero.
 
 ## Eleven incoming SHA256 fingerprints, before edits
 
@@ -801,7 +801,7 @@ Original four A023 source/test identities and R3 inspector/test identities match
 
 Retained R6 report recovers `uv run python -m pytest -q tests/test_application_a023.py`: 27 passed, zero failures/skips, one CUDA_PATH warning. The selected command names only A023 tests; importing helper modules does not establish execution of their test bodies. Retained report states the synthetic GPU test ran. No R7 repetition occurred.
 
-The retained exact external log `C:/Users/spider.tp/AppData/Local/Temp/a023r6-a023.jsonl` was inspected: one active event, PID 9516, repository data denied root; no blocked events. Denied counter=0 events. Accepted registered reads=0 under the unchanged interception contract as retained in R6; no directly emitted accepted-read counter exists. Protected payload access is NOT PROVEN. This is not universal native/OS read telemetry.
+The retained exact external log `<TEMP>/a023r6-a023.jsonl` was inspected: one active event, PID 9516, repository data denied root; no blocked events. Denied counter=0 events. Accepted registered reads=0 under the unchanged interception contract as retained in R6; no directly emitted accepted-read counter exists. Protected payload access is NOT PROVEN. This is not universal native/OS read telemetry.
 
 The log has no general child-creation or file-write accounting. Absence of blocked events cannot establish that no child launched. Runtime state necessarily changed in the selected synthetic tests, but retained command/output does not attest whether all persistent effects were absent. R6 records unchanged production source/test/guard/manifests, supported by current retained byte identities and clean tracked status; this does not reconstruct transient writes. Pytest cache, bytecode, GPU-native cache and temporary-file creation/cleanup are not exhaustively inventoried in retained execution evidence. The current Git inventory excludes ignored artifacts and cannot prove their absence or origin. No complete execution-output file or incident before/after filesystem inventory was identified among metadata-discovered a023r6 external files. Thus child launch and residual/persistent artifact scope remain UNKNOWN. No actual protected-read breach is alleged. PE1 cannot be established from this evidence alone; PE3 prevents clean recovery certification.
 
@@ -827,7 +827,7 @@ or validation-gate certification followed this adjudication.
 ### Phase 1: incoming custody
 
 Root dynamically derived by git rev-parse --show-toplevel:
-D:/spider/working/MaleCNS-Sim. Local HEAD, origin/master and live GitHub master
+`.`. Local HEAD, origin/master and live GitHub master
 all equal **c5ad89377575592665344f6420126b16c29b4339**, before inspection.
 Exactly eleven untracked WIP files; no tracked changes, staging empty, stash
 empty. Main master worktree and existing detached clarity-mare worktree at
@@ -865,7 +865,7 @@ memory-registry query found no relevant A023 record and supplied no audit fact.
 AST summaries read only external outputs already emitted by the certified route.
 No repository AST reader or alternate inspection route was introduced.
 
-External evidence directory: C:/Users/spider.tp/AppData/Local/Temp/.
+External evidence directory: <TEMP>/.
 Ledgers use the exact prefix a023-r8- and suffix -20261007.json:
 report, test, graph1, graph2, control, graph3, infra, pytest, entry, graph4,
 graph5, graph6, graph7, graph8, before; final report inspection uses after.
@@ -971,11 +971,11 @@ unaccounted child's safety custody is claimed resolved.
 | Registered protected evidence or authoritative paths through unresolved native/plugin behavior | PW4 potential consequence / PW5 unresolved mechanism | No actual modification proved; no complete write trace or permitted before/after protected-content comparison establishes absence. |
 
 Metadata finds .pytest_cache, tests/__pycache__, src/malecns_sim/__pycache__ and
-C:/Users/spider.tp/.cupy/kernel_cache present. Their directory timestamps do not
+<USER_HOME>/.cupy/kernel_cache present. Their directory timestamps do not
 establish which files R6 wrote or whether files were read subsequently. R6's
 external a023r6-a023.jsonl exists (93 bytes); R7's retained log interpretation
 is used narrowly. No cache contents were opened and no cache/temp was deleted.
-Current TEMP/TMP are C:/Temp; no queried PYTEST_PLUGINS, PYTEST_ADDOPTS,
+Current TEMP/TMP are <TEMP>; no queried PYTEST_PLUGINS, PYTEST_ADDOPTS,
 PYTHONPATH, CUPY_CACHE_DIR, CUPY_CACHE_IN_MEMORY, CUDA_CACHE_PATH or
 MALECNS_DATA_ROOT override was displayed. Current environment absence is not
 proof of R6's historical environment or plugin list.
@@ -1083,7 +1083,7 @@ Authorization: **?? A023-R9-CUSTODY**. DESIGN ONLY. Classification: **A023-R9-CU
 
 ### Starting custody
 
-Root dynamically derived: D:/spider/working/MaleCNS-Sim. HEAD, origin/master and live GitHub master all equal `c5ad89377575592665344f6420126b16c29b4339`. Exactly eleven untracked files, no tracked/staged changes, empty stash. Both main and existing detached .kilo/worktrees/clarity-mare worktrees preserved at that SHA. Version 0.3.0; tracked workflows zero. Incoming fingerprints before design edits:
+Root dynamically derived: `.`. HEAD, origin/master and live GitHub master all equal `c5ad89377575592665344f6420126b16c29b4339`. Exactly eleven untracked files, no tracked/staged changes, empty stash. Both main and existing detached .kilo/worktrees/clarity-mare worktrees preserved at that SHA. Version 0.3.0; tracked workflows zero. Incoming fingerprints before design edits:
 
 | Exact path | Bytes | SHA256 |
 | --- | ---: | --- |
@@ -1102,7 +1102,7 @@ Root dynamically derived: D:/spider/working/MaleCNS-Sim. HEAD, origin/master and
 
 Original A023 source/test, R3 inspector/test, H/I/taxonomy and implementation-report identities match retained R8 custody. Only this recovery report evolves. Future transfer must freeze its final then-authorized hash, not reuse its incoming hash above.
 
-Repository inspection used only the unchanged exact-path R3 inspector; initial help requested no content, subsequent invocations used Python -I -S -B. External ledgers: D:/spider/working/a023-r9-inspection-1.json, a023-r9-inspection-2.json, a023-r9-incoming-inspection.json, a023-r9-before-report.json. First ledger rejected missing .python-version before opening it; no fallback. Explicit authorized 11-file hashes were independently confirmed by certified incoming inspection. Site-packages directory labels were inventoried metadata-only; no installed content opened. External emitted-output parsing is not repository search. No relevant A023 memory entry supplied an audit/design fact.
+Repository inspection used only the unchanged exact-path R3 inspector; initial help requested no content, subsequent invocations used Python -I -S -B. External ledgers: ../a023-r9-inspection-1.json, a023-r9-inspection-2.json, a023-r9-incoming-inspection.json, a023-r9-before-report.json. First ledger rejected missing .python-version before opening it; no fallback. Explicit authorized 11-file hashes were independently confirmed by certified incoming inspection. Site-packages directory labels were inventoried metadata-only; no installed content opened. External emitted-output parsing is not repository search. No relevant A023 memory entry supplied an audit/design fact.
 
 Static metadata: pyproject.toml 910 bytes, SHA256 `00de0136d78559c96a5cd54c4f3004f51affa0f6dce1c2c4312f96f389baaf51`; Python >=3.12, no .python-version. uv.lock 91219 bytes, SHA256 `7523bec3c8947522d8eb80bda995696aba8941f143f7ef37c46afaece416ec02`, format 1/revision 3, Python/platform marker branches. Runtime numpy>=1.26, pandas>=2.1, pyarrow>=15.0, scipy>=1.11; test extra/dev pytest>=8.0; GPU cupy-cuda12x[ctk]==14.2.0. Pytest testpaths=tests/addopts=-ra, no declared external plugin. Metadata inventory finds no tracked conftest.py/pytest.ini/setup.cfg/tox.ini. Isolated stdlib-only current interpreter probe reports CPython 3.14.0, MSC v.1944 AMD64, .venv/Scripts/python.exe: observation only, not trusted binary identity. Installed dist-info labels match lock names/versions but do not certify installed metadata, historical plugins or file bytes.
 
@@ -1310,22 +1310,22 @@ observation supplies this trust lineage.
 
 ### Metadata-only admission and ORCH-0
 
-Git metadata dynamically established root D:/spider/working/MaleCNS-Sim.
+Git metadata dynamically established root `.`.
 Starting HEAD = origin/master = live GitHub refs/heads/master =
 c5ad89377575592665344f6420126b16c29b4339. Exactly the eleven authorized
 untracked paths were present; no tracked changes, staging or stash; tracked
 workflow filename count zero. Worktrees: authoritative root and
-D:/spider/working/MaleCNS-Sim/.kilo/worktrees/clarity-mare, both at that SHA.
+.kilo/worktrees/clarity-mare, both at that SHA.
 No repository content was opened before external bootstrap admission.
 
-ORCH-0: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe.
+ORCH-0: <WINDIR>\System32\WindowsPowerShell\v1.0\powershell.exe.
 Current executing host path and Resolve-Path agree. Length 492032 bytes,
 PowerShell 5.1.19041.2673, NTFS volume serial 0xa43ae428 (-1539644376),
 file ID 0x0000000000000000000100000000d566 (high/low 65536/54630).
 All path ancestors and executable lack reparse attributes.
 Hardlink inventory has exactly two Windows-system paths: the admitted
 System32 path and
-C:\Windows\WinSxS\amd64_microsoft-windows-powershell-exe_31bf3856ad364e35_10.0.19041.2913_none_dd8b6791b7a0eed5\powershell.exe.
+<WINDIR>\WinSxS\amd64_microsoft-windows-powershell-exe_31bf3856ad364e35_10.0.19041.2913_none_dd8b6791b7a0eed5\powershell.exe.
 Both are outside both Git worktrees, repo .venv, and observed external A023
 execution trees. This system hardlink disposition is explicitly accounted
 for, not treated as a single-link repository target. No PATH-selected,
@@ -1336,7 +1336,7 @@ unadmitted, repo-local or .venv runtime was executed. No Python was executed.
 Version: **A023-EXTERNAL-BOOTSTRAP-V3**.
 Run ID: malecns-a023-r10b3-c4d6a96ff34248e094c87fc685e3f43e.
 Source generated directly from this authorization outside the repository:
-C:\Temp\malecns-a023-r10b3-c4d6a96ff34248e094c87fc685e3f43e\bootstrap-v3.ps1.
+<TEMP>\malecns-a023-r10b3-c4d6a96ff34248e094c87fc685e3f43e\bootstrap-v3.ps1.
 
 The four initial repository opens used the original read-stage source:
 5495 bytes, SHA256
@@ -1379,7 +1379,7 @@ authority, not an OS sandbox against concurrent hostile file replacement.
 ### Initial four-file repository ledger and identities
 
 External ledger:
-C:\Temp\malecns-a023-r10b3-c4d6a96ff34248e094c87fc685e3f43e\repository-ledger.json.
+<TEMP>\malecns-a023-r10b3-c4d6a96ff34248e094c87fc685e3f43e\repository-ledger.json.
 
 | Ordinal | File | Bytes | SHA256 |
 | --- | --- | ---: | --- |
@@ -1390,7 +1390,7 @@ C:\Temp\malecns-a023-r10b3-c4d6a96ff34248e094c87fc685e3f43e\repository-ledger.js
 
 Each canonical path is the dynamically established root joined to that exact
 relative path. Each has reparse=false and hardlinks=1. B3 canonical path:
-D:\spider\working\MaleCNS-Sim\scripts\a019c_firewall\validation_firewall.py.
+scripts\a019c_firewall\validation_firewall.py.
 B0/B1 match R10B2 exactly; B2 matches its supplied pre-R10B3 identity exactly.
 Four successful repository opens; four distinct files; B0/B1/B2/B3 once each.
 No fifth repository file opened. Analysis thereafter used the already captured

@@ -3,7 +3,7 @@
 ## Authorization, start gate and disposition
 
 Authorized: 授權 A019A, contract/evidence adjudication only. Repository root derived
-with `git rev-parse --show-toplevel`: D:/spider/working/MaleCNS-Sim.
+with `git rev-parse --show-toplevel`: `.`.
 Starting local HEAD = origin/master = live GitHub master =
 `0fee2dfdddbfaac37bb5970ab6b73c3fbcc686e4`; clean worktree, empty stash,
 version 0.3.0, zero tracked workflows. Prior A018UJ plan establishes A18UJ-A / R-A

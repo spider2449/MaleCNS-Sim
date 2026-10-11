@@ -1,7 +1,7 @@
 # A019C-R16: A007C Node synthetic-validation admission
 
 Authorization: `授權 A019C-R16`. Synthetic-only; no real payload authorization.
-Root derived by `git rev-parse --show-toplevel`: D:/spider/working/MaleCNS-Sim.
+Root derived by `git rev-parse --show-toplevel`: `.`.
 Starting local HEAD/origin/master/live master:
 `60c900b0c8e5a02ea95efc7340fd190193edf7e9`.
 Initial expanded inventory: 32 paths, all accumulated A019C recovery scope;
@@ -39,7 +39,7 @@ synthetic HTTP evidence and source assets; no registered scientific payload need
 Historical exact argv:
 `["node", ROOT/tests/js/application_a007c.cjs, TEMP/evidence.json, ROOT/src/malecns_sim/application/static]`.
 No flags, npm/npx, inline JS or shell. PATH resolves to
-`C:/Program Files/nodejs/node.exe`; file metadata version 24.13.0.
+`<PROGRAM_FILES>/nodejs/node.exe`; file metadata version 24.13.0.
 cwd is repository root, environment inherited, stdout/stderr PIPE, text=True.
 Expected exit 0 and `A007C DOM/API contract checks PASS; out-of-order variant and parent switching PASS`,
 followed by synthetic measurement text. subprocess.run waits and closes pipes;
@@ -56,9 +56,9 @@ mandatory_child subprocess audit and Windows CreateProcess are never reached.
 No child identity, activation or JS assertion failure occurred.
 
 Single unmodified reproduction: guarded pytest -q -x, JUnit
-C:/TEMP/a019c-r16-prefix.xml; **1 FAIL**, 5.49 s, exit 1.
-Parent PID 17672, active=1, audit C:/TEMP/a019c-r16-prefix.jsonl.
-Exact data path C:/TEMP/a019c-r16-prefix/test_synthetic_production_api_0/evidence.json.
+<TEMP>/a019c-r16-prefix.xml; **1 FAIL**, 5.49 s, exit 1.
+Parent PID 17672, active=1, audit <TEMP>/a019c-r16-prefix.jsonl.
+Exact data path <TEMP>/a019c-r16-prefix/test_synthetic_production_api_0/evidence.json.
 Node PID none; descendants none; child activation not reached; script/workload
 start false. Synthetic HTTP assertions executed and fixture teardown completed.
 No Node workload cleanup PASS is inferred from pre-launch rejection.
@@ -77,7 +77,7 @@ admission changed Yes. Historical CJS and production JS are unchanged.
 New fixed helper scripts/a019c_firewall/a007c_node.py constructs exactly:
 
 ```text
-C:\Program Files\nodejs\node.exe
+<PROGRAM_FILES>\nodejs\node.exe
 --permission
 --allow-fs-read=<absolute scripts/a019c_firewall/a007c_node.cjs>
 --allow-fs-read=<absolute tests/js/application_a007c.cjs>
@@ -92,7 +92,7 @@ a007c-synthetic-dom-contract-v1
 
 All eleven argv tokens and order match exactly. Input must be a canonical existing
 file named evidence.json under tempfile.gettempdir(), pass registered-source check;
-all admitted source paths must resolve to themselves. Test runs set TEMP/TMP=C:/TEMP.
+all admitted source paths must resolve to themselves. Test runs set TEMP/TMP=<TEMP>.
 cwd must equal ROOT, activation=1, ACTIVE true, close_fds=True, no executable
 override or shell. Child environment strips NODE_* and OPENSSL_CONF; admission
 rejects their presence. Fixture adds timeout=30 s. Wrapper checks permission state,
@@ -125,18 +125,18 @@ Corrected single A007C plus admission controls: **2 PASS**, 5.84 s, exit 0.
 Parent PID 19384, Node PID 18268. stdout contains direct/descendant probe blocks,
 guard ACTIVE, script-start and workload-start, followed by historical contract PASS.
 One Node launch; no retry. No descendant created. JUnit
-C:/TEMP/a019c-r16-single.xml; audit C:/TEMP/a019c-r16-single.jsonl.
+<TEMP>/a019c-r16-single.xml; audit <TEMP>/a019c-r16-single.jsonl.
 
 Complete application selection uses the exact R15/R10 admitted node list,
-C:/TEMP/a019c-r15-application-nodes.txt, -q -x, unique basetemp and JUnit.
+<TEMP>/a019c-r15-application-nodes.txt, -q -x, unique basetemp and JUnit.
 Result **78 PASS, 1 FAIL**, 21.92 s, exit 1. Parent PID 9400; A007C passes again.
 Next distinct blocker:
 `tests/test_application_a006r.py::test_visible_run_transitions`, line 84,
-`[C:/Program Files/nodejs/node.EXE, '-e', <tracked inline DOM/run-status JS>, STATIC]`.
+`[<PROGRAM_FILES>/nodejs/node.EXE, '-e', <tracked inline DOM/run-status JS>, STATIC]`.
 It raises the same unsupported-executable exception before launch. This is a
 separate inline JS contract, not admitted by A007C's exact grammar. It is not an
 application assertion regression. Fail-fast STOP; no A006R correction or retry.
-JUnit C:/TEMP/a019c-r16-application.xml; audit C:/TEMP/a019c-r16-application.jsonl.
+JUnit <TEMP>/a019c-r16-application.xml; audit <TEMP>/a019c-r16-application.jsonl.
 
 ## Final disposition and remaining gates
 
@@ -192,7 +192,7 @@ Final local/origin/live SHA remains starting SHA. Commit/push NOT RUN; no new SH
 Final worktree dirty; staging/stash empty; version 0.3.0; workflows 0.
 No tag/release/version mutation or reset/restore/clean/stash. Only metadata custody
 checks and this report/manifest were completed after STOP. Earlier records unchanged.
-Local C:/TEMP evidence is not guaranteed to persist on another machine.
+Local <TEMP> evidence is not guaranteed to persist on another machine.
 
 ## Exact initial inventory (32 paths)
 

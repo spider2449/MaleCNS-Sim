@@ -26,7 +26,7 @@ Earlier recovery documents retain their historical observations and pending hand
 
 ## Scientific boundary and next task
 
-No scientific execution. Scientific runs = 0; Task017 units = 0; Task017Q executions = 0; raw-data downloads = 0; archive writes = 0. Historical scientific artifacts and `B:\MaleCNS-Archive` remain unchanged. Validation uses mocks and synthetic test fixtures, not scientific experiment runs. Active tracked GitHub Actions workflows = 0.
+No scientific execution. Scientific runs = 0; Task017 units = 0; Task017Q executions = 0; raw-data downloads = 0; archive writes = 0. Historical scientific artifacts and `<ARCHIVE_ROOT>` remain unchanged. Validation uses mocks and synthetic test fixtures, not scientific experiment runs. Active tracked GitHub Actions workflows = 0.
 
 Package version remains `0.3.0`; `v0.3.0` peels to `a1a6651163840a982799b1fa82c1904e67f84660`. No tag, release or version mutation.
 

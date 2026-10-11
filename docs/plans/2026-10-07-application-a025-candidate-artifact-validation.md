@@ -99,17 +99,17 @@ and retain no session token in the evidence.
 
 Development attempts, never final certification:
 
-- `C:/TEMP/malecns-a025-489b1541e7e74782a94f37d059e7c6cb`:
+- `<TEMP>/malecns-a025-489b1541e7e74782a94f37d059e7c6cb`:
   wheel/sdist build succeeded, then the archive inspector incorrectly rejected
   the ordinary `malecns_sim/data/__init__.py` code member. No installed smoke.
-- `C:/TEMP/malecns-a025-7e33004e5e8d4bc5a420f4d30f27ebc3`:
+- `<TEMP>/malecns-a025-7e33004e5e8d4bc5a420f4d30f27ebc3`:
   wheel/sdist build succeeded, then archive inspection failed on the sdist root
   directory entry. Command/Job ledger retained; no installed smoke.
 - Both inspector defects were repaired in development. Positive ordinary-code
   and root-directory fixtures plus negative protected-root/research/traversal
   fixtures now run before builds, together with protected-open and child-denial
   controls. `--self-test` passed in isolated, no-site Python.
-- `C:/TEMP/malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882`:
+- `<TEMP>/malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882`:
   fresh build and archive inspection passed; CPU dependency provisioning began.
   Static follow-up found that the smoke's authentication expectation used the
   public status endpoint instead of a protected route. This candidate cannot

@@ -1,7 +1,7 @@
 ﻿# Application A019C-R10: validation manifest closure and build-backend adjudication
 
 Authorization: `授權 A019C-R10`. Root dynamically derived with
-`git rev-parse --show-toplevel`: `D:/spider/working/MaleCNS-Sim`.
+`git rev-parse --show-toplevel`: `.`.
 
 ## Plan
 
@@ -40,7 +40,7 @@ this report supplies new R10 adjudication, not an edited R9 outcome.
 ## Bootstrap preservation
 
 Activation: `MALECNS_A019C_R2_FIREWALL=1`; absolute
-`PYTHONPATH=D:/spider/working/MaleCNS-Sim/scripts/a019c_firewall`.
+`PYTHONPATH=scripts/a019c_firewall`.
 Correct audit variable: `MALECNS_A019C_R2_LOG`.
 
 Command:
@@ -49,7 +49,7 @@ Command:
 First pre-validation bootstrap: **39 passed in 5.27 s**. Its environment mistakenly
 used the unused `MALECNS_A019C_R2_AUDIT_LOG` name, so that run supplies test evidence
 but no audit-file evidence. Corrected audit-only rerun, unchanged suite:
-**39 passed in 5.23 s**; `C:/TEMP/a019c-r10-bootstrap.jsonl`.
+**39 passed in 5.23 s**; `<TEMP>/a019c-r10-bootstrap.jsonl`.
 Parent, valid/missing/corrupt activation, bypass rejection, serialized Windows
 commands, public/native Feather, seven source categories, 4-/6-process trees,
 repeated cleanup and no-orphan assertions PASS. Two live-tree cleanup records.
@@ -94,12 +94,12 @@ not PASS. Historical integrity evidence is not recertified by source inspection.
 Backend: `setuptools.build_meta`; build requirement `setuptools>=68`.
 uv 0.11.8 selected cached setuptools 84.0.0 under `uv build --offline -v`.
 A temporary diagnostic `sitecustomize.py` under
-`C:/Temp/a019c-r10-build-diagnostic` invokes the unchanged firewall install and
+`<TEMP>/a019c-r10-build-diagnostic` invokes the unchanged firewall install and
 records the startup exception before retaining `os._exit(78)`.
 No guard disabling, arbitrary-child permission or repository bootstrap change.
 
 Exact executable returning 78:
-`D:/spider/uv_cache_dir/builds-v0/.tmpN65Pwr/Scripts/python.exe`.
+`<UV_CACHE_DIR>/builds-v0/.tmpN65Pwr/Scripts/python.exe`.
 It inherited activation `'1'`, the diagnostic path, and the real firewall path.
 Its isolated site-packages contain build requirements, not project runtime
 requirements. Stack: diagnostic sitecustomize -> validation_firewall.install
@@ -111,7 +111,7 @@ build_sdist; debug identifies the pending get_requires_for_build_sdist hook.
 Missing activation, environment sanitization, mandatory-child rejection and an
 ordinary setuptools/backend error are not the observed cause.
 
-Evidence: `C:/TEMP/a019c-r10-build-startup.txt`; no completed activation record
+Evidence: `<TEMP>/a019c-r10-build-startup.txt`; no completed activation record
 in the build guard log. Offline mode: no downloads.
 Packaging configuration selects `src` packages and static assets; it does not
 require registered scientific payload. This is source inspection, not a successful
@@ -128,8 +128,8 @@ permission exists. No unguarded repository build was attempted.
 ## Fresh harness and CLI
 
 Targeted command: guarded `-m pytest tests/test_application_a019c.py -q -x`.
-**35 passed in 7.31 s**; `C:/TEMP/a019c-r10-harness.xml`.
-Fresh CLI: guarded `scripts/benchmark_application_a019.py --synthetic --output C:/TEMP/a019c-r10-forward-evidence.json`; **exit 0**, classification A19C-A.
+**35 passed in 7.31 s**; `<TEMP>/a019c-r10-harness.xml`.
+Fresh CLI: guarded `scripts/benchmark_application_a019.py --synthetic --output <TEMP>/a019c-r10-forward-evidence.json`; **exit 0**, classification A19C-A.
 This execution result is not the withheld overall R10 certification.
 
 CLI evidence: bounded route A015/A016/A017/A018/A018T/A018U/A018UJ explicit;
@@ -170,8 +170,8 @@ no stronger root cause or independent historical test defect is claimed.
 No retry, cap adjustment, test rewrite, historical harness edit or conversion
 of this failed S0 entry to an exclusion. Stop is authoritative.
 Saved evidence:
-`C:/TEMP/pytest-of-spider.tp/pytest-383/test_supervisor_time_failure_c0/result.json`;
-JUnit `C:/TEMP/a019c-r10-broader.xml`.
+`<TEMP>/pytest-of-spider.tp/pytest-383/test_supervisor_time_failure_c0/result.json`;
+JUnit `<TEMP>/a019c-r10-broader.xml`.
 A019A 4 PASS; A018UJ admitted subset 11 PASS; A018UI admitted subset 2 PASS;
 A018UR 6 PASS + 1 FAIL. Remaining selected suites NOT RUN after fail-fast stop.
 R10 integration suite NOT RUN/not created. compileall NOT RUN after stop.

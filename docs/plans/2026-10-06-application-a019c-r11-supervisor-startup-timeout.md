@@ -2,7 +2,7 @@
 
 Authorization: `授權 A019C-R11`. Synthetic-only; no registered payload access,
 real preparation/advance/benchmark, GPU, Arena, experiment, download or archive write.
-Root derived by `git rev-parse --show-toplevel`: `D:/spider/working/MaleCNS-Sim`.
+Root derived by `git rev-parse --show-toplevel`: `.`.
 
 ## Plan
 
@@ -58,8 +58,8 @@ child-side fail-closed; bypass remains parent-rejected.
 ## Pre-fix reproduction
 
 Environment: MALECNS_A019C_R2_FIREWALL=1; absolute firewall PYTHONPATH;
-MALECNS_A019C_R2_LOG=C:/TEMP/a019c-r11-prefix.jsonl.
-Command: `.venv/Scripts/python.exe scripts/a019c_firewall/guarded_child.py -m pytest tests/test_application_a018ur.py::test_supervisor_time_failure_cleans_without_retry -q -x --basetemp=C:/TEMP/a019c-r11-prefix-tests`.
+MALECNS_A019C_R2_LOG=<TEMP>/a019c-r11-prefix.jsonl.
+Command: `.venv/Scripts/python.exe scripts/a019c_firewall/guarded_child.py -m pytest tests/test_application_a018ur.py::test_supervisor_time_failure_cleans_without_retry -q -x --basetemp=<TEMP>/a019c-r11-prefix-tests`.
 Exit 1; 1 failed in 1.34 s. Saved result: PREPARATION-ERROR, events=[], attempts=0,
 orphans=[], terminated child exit 1. Contained child PID 15812 exists in samples.
 Activation inherited and valid in parent; no child ACTIVE completion record before
@@ -91,7 +91,7 @@ exact events=[prepare_start], interrupted duration >=0.15 and terminated exit.
 ## Targeted gates
 
 Corrected single node: 1 passed in 1.47 s, exit 0.
-Audit C:/TEMP/a019c-r11-target.jsonl records ACTIVE for parent and child PID 4924.
+Audit <TEMP>/a019c-r11-target.jsonl records ACTIVE for parent and child PID 4924.
 Post-fix sequence: legitimate contained child -> active guard -> fixture ready
 -> workload release -> prepare_start -> stall -> TIME-LIMIT -> job cleanup.
 No success/result event; no orphan; attempts=0. TIME-LIMIT and PREPARATION-ERROR
@@ -103,8 +103,8 @@ Bootstrap: **39 passed in 5.28 s**. Valid activation, missing/corrupt activation
 bypass rejection and live contained cleanup controls PASS. Certification remains
 FIREWALL_BOOTSTRAP_CERTIFIED; no bootstrap source changes.
 A019C harness: **35 passed in 7.42 s**.
-Fresh guarded CLI: `scripts/benchmark_application_a019.py --synthetic --output C:/TEMP/a019c-r11-forward-evidence.json`, exit 0, A19C-A.
-JUnit files: C:/TEMP/a019c-r11-a018ur.xml, a019c-r11-bootstrap.xml,
+Fresh guarded CLI: `scripts/benchmark_application_a019.py --synthetic --output <TEMP>/a019c-r11-forward-evidence.json`, exit 0, A19C-A.
+JUnit files: <TEMP>/a019c-r11-a018ur.xml, a019c-r11-bootstrap.xml,
 a019c-r11-harness.xml. Separate audit logs use the corresponding names.
 
 ## Frozen forward contract retained
@@ -145,8 +145,8 @@ Certification sufficiency NOT SATISFIED. No commit/push; all WIP retained.
 Exact resumed command: guarded pytest separately, sequentially, `-q -x`, explicit
 files tests/test_application_a018u.py, a018t.py, a018s.py, a018.py, a017.py,
 a016.py, a015.py, a014.py, a013.py (each with test_application_ prefix).
-Each writes C:/TEMP/a019c-r11-<suite>.xml. Environment remains activated with
-absolute firewall PYTHONPATH and log C:/TEMP/a019c-r11-deferred.jsonl.
+Each writes <TEMP>/a019c-r11-<suite>.xml. Environment remains activated with
+absolute firewall PYTHONPATH and log <TEMP>/a019c-r11-deferred.jsonl.
 PowerShell exits immediately when a suite exits nonzero; final command exit 1.
 
 | Suite | R11 outcome |
@@ -169,7 +169,7 @@ PowerShell exits immediately when a suite exits nonzero; final command exit 1.
 Exact new blocker:
 `tests/test_application_a014.py::test_tree_memory_enforcement[0-direct]`.
 Fixture direct mode uses sys._base_executable:
-`D:/uv/cpython-3.14-windows-x86_64-none/python.exe`, while the admitted executable
+`<UV_PYTHON_DIR>/cpython-3.14-windows-x86_64-none/python.exe`, while the admitted executable
 is the current virtual-environment sys.executable. ProcessJob -> Popen ->
 validation_firewall.guarded_command raises
 `SourceAccessDenied('unsupported A019 child executable')` at line 62.

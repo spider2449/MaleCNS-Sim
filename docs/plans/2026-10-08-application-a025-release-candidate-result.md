@@ -62,7 +62,7 @@ closed-run evidence. Post-execution result records are excluded from their own
 candidate map to avoid circular identity. A scoped docs/manifests/.gitattributes
 rule preserves exact bytes for the five new evidence files across Git platforms;
 other files retain existing normalization. Artifacts remain at
-`C:/TEMP/malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985/output/dist`.
+`<TEMP>/malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985/output/dist`.
 
 - `malecns_sim-0.4.0-py3-none-any.whl`: SHA-256 `f50a31e3f03b7f5da7a1f73f46d1d34c7fbec30a6adacc49d32d812af5b9c4d6`.
 - `malecns_sim-0.4.0.tar.gz`: SHA-256 `42c58fb8901fb68207cdb90eefe84b91a535451b2cf512024549a460cb0faa43`.

@@ -1,7 +1,7 @@
 # Application A019C-R13: replacement-control adjudication
 
 Authorization: `授權 A019C-R13`. Synthetic-only; no registered payload permission.
-Root dynamically verified: D:/spider/working/MaleCNS-Sim.
+Root dynamically verified: `.`.
 Starting local HEAD = origin/master = live GitHub master =
 `60c900b0c8e5a02ea95efc7340fd190193edf7e9`.
 
@@ -48,8 +48,8 @@ Original allocation is 167772160 bytes; cap 134217728; sampling 20 ms; timeout
 ## Single pre-fix reproduction and adjudication
 
 Unmodified repository code, temporary observational pytest plugin:
-C:/TEMP/a019c-r13-capture.py. Guarded child entrypoint; activation=1;
-absolute firewall PYTHONPATH; audit C:/TEMP/a019c-r13-prefix.jsonl.
+<TEMP>/a019c-r13-capture.py. Guarded child entrypoint; activation=1;
+absolute firewall PYTHONPATH; audit <TEMP>/a019c-r13-prefix.jsonl.
 Only test_tree_memory_enforcement[0-replacement], -q -x -s, ran: 1 failed.
 Parent/supervisor PID 5748; root venv redirector PID 19064; its base worker
 PID 18624. Root command was the historical -c spawn/sys.exit(0) string, rewritten
@@ -100,8 +100,8 @@ this is not a new exact-purpose admission claim for general venv Python scripts.
 Corrected target command: `.venv/Scripts/python.exe
 scripts/a019c_firewall/guarded_child.py -m pytest
 tests/test_application_a014.py::test_tree_memory_enforcement[0-replacement]
--q -x --basetemp=C:/TEMP/a019c-r13-corrected-tests`.
-Same guard environment; log C:/TEMP/a019c-r13-corrected.jsonl.
+-q -x --basetemp=<TEMP>/a019c-r13-corrected-tests`.
+Same guard environment; log <TEMP>/a019c-r13-corrected.jsonl.
 Result 1 passed in 1.04 s, pytest exit 0. Supervisor 6920, original root 9944,
 original base parent 17764, replacement redirector 19736, workload/base child
 13404, probe base child 15756. Parent records handoff child_pid=19736 then exits;
@@ -118,9 +118,9 @@ root exit and empty live Job inventory are the actual cleanup evidence.
 ## Complete A014 and mandatory STOP
 
 Command: guarded `-m pytest tests/test_application_a019c_r12_firewall.py
-tests/test_application_a014.py -q -x --junitxml=C:/TEMP/a019c-r13-a014.xml
---basetemp=C:/TEMP/a019c-r13-a014-tests`.
-Audit C:/TEMP/a019c-r13-a014.jsonl. **16 passed, 1 failed in 4.26 s**, exit 1.
+tests/test_application_a014.py -q -x --junitxml=<TEMP>/a019c-r13-a014.xml
+--basetemp=<TEMP>/a019c-r13-a014-tests`.
+Audit <TEMP>/a019c-r13-a014.jsonl. **16 passed, 1 failed in 4.26 s**, exit 1.
 Seven R12 controls, all eight tree-memory cases, and aggregate control PASS.
 Replacement repeat 0: root 4200, parent 20036, replacement redirector 13976,
 workload/offender 6928, descendant probe 13980; root 0; allocation 167772160.

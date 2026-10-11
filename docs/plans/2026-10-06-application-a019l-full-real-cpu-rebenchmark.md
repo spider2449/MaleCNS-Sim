@@ -4,7 +4,7 @@ Authorization: `授權 A019L`, exactly one independent full-real CPU attempt,
 result documentation and commit/push. No retry, tuning, alternate setting,
 second preparation, GPU, Arena, intervention, download or archive mutation.
 
-Root derived by `git rev-parse --show-toplevel`: D:/spider/working/MaleCNS-Sim.
+Root derived by `git rev-parse --show-toplevel`: `.`.
 Starting local HEAD = origin/master = live GitHub master =
 `4d0eeb14fafe70295f3565d8182de913c58c23ee`. Worktree/staging/stash empty,
 version 0.3.0, tracked workflows 0. Committed D-P2, J-A/JPERF-A and K-A verified.
@@ -43,7 +43,7 @@ Status before invocation: consumed No; preparations 0; advances 0; retries 0.
 
 **A019L-L1 / P2**. Raw harness: A19C-A.
 
-Consumption: {"path": "D:\\spider\\working\\MaleCNS-Sim\\data\\raw\\male-cns\\v1.0\\connectome-weights-male-cns-v1.0-minconf-0.5.feather", "pid": 17428, "point": "first successful registered edge-source binary open for source identity verification", "utc": "2026-10-06T07:07:34.110213+00:00"}
+Consumption: {"path": "data\\raw\\male-cns\\v1.0\\connectome-weights-male-cns-v1.0-minconf-0.5.feather", "pid": 17428, "point": "first successful registered edge-source binary open for source identity verification", "utc": "2026-10-06T07:07:34.110213+00:00"}
 
 Preparation: {"preparations": 1, "preparation_seconds": 98.58040070001152, "preparation_start_utc": "2026-10-06T07:07:36.536112+00:00", "preparation_end_utc": "2026-10-06T07:09:15.114306+00:00", "gates": {"G1": true, "G2": true, "G3": true, "G4": true, "G5": true, "G6": true}}
 

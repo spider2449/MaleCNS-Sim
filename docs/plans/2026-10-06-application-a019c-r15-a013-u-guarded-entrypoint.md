@@ -48,8 +48,8 @@ R13 additionally has replacement handoff topology; R12 uses a distinct exact bas
 -S/purpose contract. Those topology differences are not a simple flag difference.
 
 Single unmodified reproduction: guarded pytest -q -x with observational plugin
-`C:/TEMP/a019c_r15_capture.py`; 1 FAIL, exit 1; audit
-`C:/TEMP/a019c-r15-prefix.jsonl`. Raw and parsed argv and parent activation recorded.
+`<TEMP>/a019c_r15_capture.py`; 1 FAIL, exit 1; audit
+`<TEMP>/a019c-r15-prefix.jsonl`. Raw and parsed argv and parent activation recorded.
 No child PID exists; readiness/output, termination and cleanup are not claimed
 as successful watchdog execution. Parent guard ACTIVE; activation=1.
 
@@ -81,16 +81,16 @@ basetemp and JUnit paths. No discovery/import ran without the task-wide guard.
 | Affected A014 | Not required/not rerun; no shared admission change; R14 19 PASS retained as historical |
 | Complete bootstrap R5/R4/R3/R2 | 39 PASS, 5.41 s; FIREWALL_BOOTSTRAP_CERTIFIED renewed |
 | A019C harness | 35 PASS, 7.60 s |
-| Fresh contained CLI | exit 0, A19C-A; C:/TEMP/a019c-r15-forward-evidence.json |
+| Fresh contained CLI | exit 0, A19C-A; <TEMP>/a019c-r15-forward-evidence.json |
 | Stateful/A011/reference LIF | 27 PASS, 1.37 s |
 | Application manifest selection | 2 PASS, 1 FAIL, 6.05 s; fail-fast |
 | compileall | NOT RUN after mandatory STOP |
 | Final git diff --check | NOT RUN after mandatory STOP |
 
 Prefix parent PID 13084, executable
-`D:\spider\working\MaleCNS-Sim\.venv\Scripts\python.exe`, base executable
-`D:\uv\cpython-3.14-windows-x86_64-none\python.exe`.
-Exact raw/transformed/parsed argv is logged in C:/TEMP/a019c-r15-prefix.jsonl;
+`.venv\Scripts\python.exe`, base executable
+`<UV_PYTHON_DIR>\cpython-3.14-windows-x86_64-none\python.exe`.
+Exact raw/transformed/parsed argv is logged in <TEMP>/a019c-r15-prefix.jsonl;
 transformed form is that executable + absolute guarded_child.py + -u + -c +
 the exact historical code above. Rejection is token position/option, not executable
 identity, parser ambiguity, -c, activation or payload. Parent ACTIVE/activation 1;
@@ -98,7 +98,7 @@ no launcher/worker PID, no child guard, no workload/readiness, no watchdog armin
 
 Corrected single: parent 3436, venv launcher 540, actual worker 17892.
 Windows QueryFullProcessImageNameW reports
-`D:\uv\cpython-3.14.0-windows-x86_64-none\python.exe`, which resolves equal to
+`<UV_PYTHON_DIR>\cpython-3.14.0-windows-x86_64-none\python.exe`, which resolves equal to
 sys._base_executable (the unversioned alias). Child ACTIVE -> workload-start with
 PYTHONUNBUFFERED=1 -> explicitly flushed PID consumed -> native handle/snapshot
 -> watchdog armed -> TerminateProcess -> worker exit 1 and launcher exit 1.
@@ -121,7 +121,7 @@ negative controls. Child/descendant registered probes block before content read.
 Stateful command selects only A011::test_exact_continuity,
 A011::test_initial_state_and_identity and tests/test_task005.py; no Arena cases.
 Application selection is the exact R10 S0/S1 node list for A008 through A002,
-saved C:/TEMP/a019c-r15-application-nodes.txt. A008's two tests PASS. Next node
+saved <TEMP>/a019c-r15-application-nodes.txt. A008's two tests PASS. Next node
 `tests/test_application_a007c.py::test_synthetic_production_api_and_assets` FAILS
 at line 51: `["node", tests/js/application_a007c.cjs, temporary synthetic
 evidence.json, src/malecns_sim/application/static]`.
@@ -195,7 +195,7 @@ modified A013 test and this R15 plan. Staging/stash empty; unrelated WIP No.
 Version 0.3.0; active tracked workflows 0. No reset/clean/restore/stash/discard.
 R15 changed no earlier recovery record. Final diff gate intentionally NOT RUN.
 
-Audit/JUnit/result artifacts under C:/TEMP are local validation evidence and may
+Audit/JUnit/result artifacts under <TEMP> are local validation evidence and may
 not persist on another machine; this tracked-candidate report records material
 results and boundary limitations. Final per-node manifest follows.
 

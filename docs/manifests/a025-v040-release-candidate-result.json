@@ -3,7 +3,7 @@
   "result": "A025 0.4.0 RELEASE CANDIDATE ACCEPTED",
   "baseline": "80f57f97eb0429d6d9845766a78e0bc41cd524ca",
   "delivery_identity": "The containing Git commit is the delivery identity; physical tested bytes are pinned separately.",
-  "run": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985",
+  "run": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985",
   "version": "0.4.0",
   "unpublished": true,
   "checks": {
@@ -525,25 +525,25 @@
   "commands": [
     {
       "argv": [
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\tools\\python.exe",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\tools\\python.exe",
         "-I",
         "-m",
         "venv",
         "--without-pip",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\.venv"
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\.venv"
       ],
-      "cwd": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
+      "cwd": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
       "pid": 19180,
-      "log": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-00.log",
+      "log": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-00.log",
       "exit": 0
     },
     {
       "argv": [
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\.venv\\Scripts\\python.exe",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\.venv\\Scripts\\python.exe",
         "-I",
         "-B",
         "-c",
-        "import sys,runpy,faulthandler; faulthandler.dump_traceback_later(30,repeat=True); sys.path.insert(0,'C:\\\\TEMP\\\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\\\output\\\\pip-tool'); runpy.run_module('pip',run_name='__main__')",
+        "import sys,runpy,faulthandler; faulthandler.dump_traceback_later(30,repeat=True); sys.path.insert(0,'<TEMP>\\\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\\\output\\\\pip-tool'); runpy.run_module('pip',run_name='__main__')",
         "--isolated",
         "--disable-pip-version-check",
         "install",
@@ -551,22 +551,22 @@
         "off",
         "--no-index",
         "--find-links",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\locked-wheels",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\locked-wheels",
         "--no-cache-dir",
         "--no-deps",
         "--only-binary=:all:",
         "--require-hashes",
         "-r",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\gpu-requirements.txt"
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\gpu-requirements.txt"
       ],
-      "cwd": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
+      "cwd": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
       "pid": 21532,
-      "log": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-01.log",
+      "log": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-01.log",
       "exit": 0
     },
     {
       "argv": [
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\tools\\uv.exe",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\tools\\uv.exe",
         "sync",
         "--frozen",
         "--group",
@@ -578,51 +578,51 @@
         "--no-build",
         "--no-managed-python",
         "--python",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\.venv\\Scripts\\python.exe"
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\.venv\\Scripts\\python.exe"
       ],
-      "cwd": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution",
+      "cwd": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution",
       "pid": 18840,
-      "log": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-02.log",
+      "log": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-02.log",
       "exit": 0
     },
     {
       "argv": [
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\tools\\python.exe",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\tools\\python.exe",
         "-I",
         "-m",
         "venv",
         "--without-pip",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\build-env"
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\build-env"
       ],
-      "cwd": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
+      "cwd": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
       "pid": 24364,
-      "log": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-03.log",
+      "log": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-03.log",
       "exit": 0
     },
     {
       "argv": [
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\tools\\curl.exe",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\tools\\curl.exe",
         "--fail",
         "--silent",
         "--show-error",
         "--max-time",
         "1700",
         "--output",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\locked-wheels\\setuptools-80.9.0-py3-none-any.whl",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\locked-wheels\\setuptools-80.9.0-py3-none-any.whl",
         "https://mirrors.aliyun.com/pypi/packages/a3/dc/17031897dae0efacfea57dfd3a82fdd2a2aeb58e0ff71b77b87e44edc772/setuptools-80.9.0-py3-none-any.whl"
       ],
-      "cwd": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
+      "cwd": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
       "pid": 23856,
-      "log": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-04.log",
+      "log": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-04.log",
       "exit": 0
     },
     {
       "argv": [
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\build-env\\Scripts\\python.exe",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\build-env\\Scripts\\python.exe",
         "-I",
         "-B",
         "-c",
-        "import sys,runpy,faulthandler; faulthandler.dump_traceback_later(30,repeat=True); sys.path.insert(0,'C:\\\\TEMP\\\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\\\output\\\\pip-tool'); runpy.run_module('pip',run_name='__main__')",
+        "import sys,runpy,faulthandler; faulthandler.dump_traceback_later(30,repeat=True); sys.path.insert(0,'<TEMP>\\\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\\\output\\\\pip-tool'); runpy.run_module('pip',run_name='__main__')",
         "--isolated",
         "--disable-pip-version-check",
         "install",
@@ -630,39 +630,39 @@
         "off",
         "--no-index",
         "--find-links",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\locked-wheels",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\locked-wheels",
         "--no-cache-dir",
         "--no-deps",
         "--only-binary=:all:",
         "--require-hashes",
         "-r",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\build-requirements.txt"
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\build-requirements.txt"
       ],
-      "cwd": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
+      "cwd": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
       "pid": 24600,
-      "log": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-05.log",
+      "log": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-05.log",
       "exit": 0
     },
     {
       "argv": [
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\build-env\\Scripts\\python.exe",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\build-env\\Scripts\\python.exe",
         "-I",
         "-B",
         "-c",
-        "from setuptools.build_meta import build_wheel,build_sdist; build_wheel('C:\\\\TEMP\\\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\\\output\\\\dist'); build_sdist('C:\\\\TEMP\\\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\\\output\\\\dist')"
+        "from setuptools.build_meta import build_wheel,build_sdist; build_wheel('<TEMP>\\\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\\\output\\\\dist'); build_sdist('<TEMP>\\\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\\\output\\\\dist')"
       ],
-      "cwd": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\package",
+      "cwd": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\package",
       "pid": 6928,
-      "log": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-06.log",
+      "log": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-06.log",
       "exit": 0
     },
     {
       "argv": [
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\.venv\\Scripts\\python.exe",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\.venv\\Scripts\\python.exe",
         "-I",
         "-B",
         "-c",
-        "import sys,runpy,faulthandler; faulthandler.dump_traceback_later(30,repeat=True); sys.path.insert(0,'C:\\\\TEMP\\\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\\\output\\\\pip-tool'); runpy.run_module('pip',run_name='__main__')",
+        "import sys,runpy,faulthandler; faulthandler.dump_traceback_later(30,repeat=True); sys.path.insert(0,'<TEMP>\\\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\\\output\\\\pip-tool'); runpy.run_module('pip',run_name='__main__')",
         "--isolated",
         "--disable-pip-version-check",
         "install",
@@ -670,62 +670,62 @@
         "off",
         "--no-index",
         "--find-links",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\locked-wheels",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\locked-wheels",
         "--no-deps",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\dist\\malecns_sim-0.4.0-py3-none-any.whl"
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\dist\\malecns_sim-0.4.0-py3-none-any.whl"
       ],
-      "cwd": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
+      "cwd": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
       "pid": 5992,
-      "log": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-07.log",
+      "log": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-07.log",
       "exit": 0
     },
     {
       "argv": [
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\.venv\\Scripts\\python.exe",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\.venv\\Scripts\\python.exe",
         "-B",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\scripts\\a025_release_validation.py",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output"
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\scripts\\a025_release_validation.py",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output"
       ],
-      "cwd": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution",
+      "cwd": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution",
       "pid": 20116,
-      "log": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-08.log",
+      "log": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-08.log",
       "exit": 0
     },
     {
       "argv": [
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\.venv\\Scripts\\python.exe",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\.venv\\Scripts\\python.exe",
         "-I",
         "-B",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\scripts\\a025_container_smoke.py",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\scripts\\a025_container_smoke.py",
         "--gpu-guide",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output"
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output"
       ],
-      "cwd": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
+      "cwd": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
       "pid": 24340,
-      "log": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-09.log",
+      "log": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-09.log",
       "exit": 0
     },
     {
       "argv": [
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\tools\\python.exe",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\tools\\python.exe",
         "-I",
         "-m",
         "venv",
         "--without-pip",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\package\\.venv"
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\package\\.venv"
       ],
-      "cwd": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
+      "cwd": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
       "pid": 10976,
-      "log": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-10.log",
+      "log": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-10.log",
       "exit": 0
     },
     {
       "argv": [
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\package\\.venv\\Scripts\\python.exe",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\package\\.venv\\Scripts\\python.exe",
         "-I",
         "-B",
         "-c",
-        "import sys,runpy,faulthandler; faulthandler.dump_traceback_later(30,repeat=True); sys.path.insert(0,'C:\\\\TEMP\\\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\\\output\\\\pip-tool'); runpy.run_module('pip',run_name='__main__')",
+        "import sys,runpy,faulthandler; faulthandler.dump_traceback_later(30,repeat=True); sys.path.insert(0,'<TEMP>\\\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\\\output\\\\pip-tool'); runpy.run_module('pip',run_name='__main__')",
         "--isolated",
         "--disable-pip-version-check",
         "install",
@@ -733,26 +733,26 @@
         "off",
         "--no-index",
         "--find-links",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\locked-wheels",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\locked-wheels",
         "--no-cache-dir",
         "--no-deps",
         "--only-binary=:all:",
         "--require-hashes",
         "-r",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\cpu-requirements.txt"
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\cpu-requirements.txt"
       ],
-      "cwd": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
+      "cwd": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
       "pid": 19208,
-      "log": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-11.log",
+      "log": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-11.log",
       "exit": 0
     },
     {
       "argv": [
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\package\\.venv\\Scripts\\python.exe",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\package\\.venv\\Scripts\\python.exe",
         "-I",
         "-B",
         "-c",
-        "import sys,runpy,faulthandler; faulthandler.dump_traceback_later(30,repeat=True); sys.path.insert(0,'C:\\\\TEMP\\\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\\\output\\\\pip-tool'); runpy.run_module('pip',run_name='__main__')",
+        "import sys,runpy,faulthandler; faulthandler.dump_traceback_later(30,repeat=True); sys.path.insert(0,'<TEMP>\\\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\\\output\\\\pip-tool'); runpy.run_module('pip',run_name='__main__')",
         "--isolated",
         "--disable-pip-version-check",
         "install",
@@ -760,26 +760,26 @@
         "off",
         "--no-index",
         "--find-links",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\locked-wheels",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\locked-wheels",
         "--no-deps",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\dist\\malecns_sim-0.4.0-py3-none-any.whl"
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\dist\\malecns_sim-0.4.0-py3-none-any.whl"
       ],
-      "cwd": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
+      "cwd": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
       "pid": 23580,
-      "log": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-12.log",
+      "log": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-12.log",
       "exit": 0
     },
     {
       "argv": [
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\package\\.venv\\Scripts\\python.exe",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\package\\.venv\\Scripts\\python.exe",
         "-I",
         "-B",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\scripts\\a025_container_smoke.py",
-        "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output"
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\scripts\\a025_container_smoke.py",
+        "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output"
       ],
-      "cwd": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
+      "cwd": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output",
       "pid": 26620,
-      "log": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-13.log",
+      "log": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\evidence\\command-13.log",
       "exit": 0
     }
   ],
@@ -787,7 +787,7 @@
     "status": "CPU ARTIFACT SMOKE PASS",
     "platform": "win32",
     "python": "3.14.0 (main, Nov 19 2025, 22:43:52) [MSC v.1944 64 bit (AMD64)]",
-    "origin": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\package\\.venv\\Lib\\site-packages\\malecns_sim\\__init__.py",
+    "origin": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\package\\.venv\\Lib\\site-packages\\malecns_sim\\__init__.py",
     "version": "0.4.0",
     "guide_examples": {
       "python_fences": 4,
@@ -1040,7 +1040,7 @@
   "gpu_guide": {
     "status": "INSTALLED GPU GUIDE PASS",
     "version": "0.4.0",
-    "origin": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\.venv\\Lib\\site-packages\\malecns_sim\\__init__.py",
+    "origin": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input\\execution\\.venv\\Lib\\site-packages\\malecns_sim\\__init__.py",
     "gpu_device_count": 1,
     "executed_blocks": [
       0,
@@ -1049,7 +1049,7 @@
     "claim": "bounded synthetic example; no performance claim"
   },
   "controller": {
-    "run": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985",
+    "run": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985",
     "base": "80f57f97eb0429d6d9845766a78e0bc41cd524ca",
     "profile": "MaleCNSA025.c7e19fed7f9844f88894d7d1317947b7",
     "certificate_sha256": "d15fe1b1f8c27db205d74c4fd1cfc95b20d10463a71c846642a7bc9dbc626c89",
@@ -1696,15 +1696,15 @@
         "mask": "0x1000a0"
       },
       {
-        "object": "C:\\TEMP",
+        "object": "<TEMP>",
         "mask": "0x1000a0"
       },
       {
-        "object": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985",
+        "object": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985",
         "mask": "0x1000a0"
       },
       {
-        "object": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input",
+        "object": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\input",
         "mask": "0x1000a0"
       }
     ],
@@ -2475,8 +2475,8 @@
     },
     "symlink_receipts": [
       {
-        "target": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\temp\\tmpn_8esjcn\\outside.py",
-        "link": "C:\\TEMP\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\temp\\tmp41wi7q5d\\link.py",
+        "target": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\temp\\tmpn_8esjcn\\outside.py",
+        "link": "<TEMP>\\malecns-a025-windows-candidate-3b17f9b880bc4b33a6c61aa2ce295985\\output\\temp\\tmp41wi7q5d\\link.py",
         "native_symlink": true,
         "content_reads": 0
       }

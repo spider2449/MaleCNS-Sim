@@ -37,8 +37,8 @@ does not classify nonzero child exit as a separate process-error status.
 
 ## Single unmodified reproduction
 
-Guarded pytest observational plugin C:/TEMP/a019c-r14-capture.py; output
-C:/TEMP/a019c-r14-prefix-output.txt; audit C:/TEMP/a019c-r14-prefix.jsonl.
+Guarded pytest observational plugin <TEMP>/a019c-r14-capture.py; output
+<TEMP>/a019c-r14-prefix-output.txt; audit <TEMP>/a019c-r14-prefix.jsonl.
 Only test_normal_exit: 1 failed in 0.24 s. Supervisor 7868 ACTIVE; root 17128
 venv redirector; base worker 7360 (role from source topology; image path was
 not independently queried). First aggregate private 303104, then 8118272,
@@ -89,7 +89,7 @@ The single-variable comparison supports native startup pool interference; it is
 not a full native allocation attribution. No numeric cap changed.
 
 Commands use mandatory guarded_child.py -m pytest, activation=1, absolute
-scripts/a019c_firewall PYTHONPATH, separate C:/TEMP/a019c-r14-*.jsonl audit logs,
+scripts/a019c_firewall PYTHONPATH, separate <TEMP>/a019c-r14-*.jsonl audit logs,
 -q -x and unique bounded basetemp directories. The final target's completion
 file assertion prevents a PASS from skipping the workload.
 
@@ -100,7 +100,7 @@ file assertion prevents a PASS from skipping the workload.
 | Complete A014 plus R12 admission controls | 19 PASS, 5.48 s (12 A014 + 7 admission) |
 | Bootstrap R2/R3/R4/R5 | 39 PASS, 5.27 s; FIREWALL_BOOTSTRAP_CERTIFIED renewed |
 | A019C harness | 35 PASS, 7.36 s |
-| Fresh contained CLI | exit 0, A19C-A; C:/TEMP/a019c-r14-forward-evidence.json |
+| Fresh contained CLI | exit 0, A19C-A; <TEMP>/a019c-r14-forward-evidence.json |
 | A013 | 16 PASS, 1 FAIL, 1.43 s |
 | Stateful/A011/reference LIF | NOT RUN after mandatory STOP |
 | Remaining application regressions | NOT RUN after mandatory STOP |

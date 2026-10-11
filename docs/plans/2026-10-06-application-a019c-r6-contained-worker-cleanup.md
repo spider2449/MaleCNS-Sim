@@ -50,7 +50,7 @@ One guarded fail-fast bootstrap invocation ran, using the existing virtualenv
 ```
 
 Activation=1, PYTHONPATH=scripts/a019c_firewall. Audit log:
-C:/TEMP/a019c-r6-bootstrap.jsonl. Result: **14 passed, 1 failed in 1.90 s**.
+<TEMP>/a019c-r6-bootstrap.jsonl. Result: **14 passed, 1 failed in 1.90 s**.
 Classification: **A19C-R6-CONTAINED-WORKER-CLEANUP-INCOMPLETE**.
 FIREWALL_BOOTSTRAP_CERTIFIED NOT issued. No downstream validation resumed.
 

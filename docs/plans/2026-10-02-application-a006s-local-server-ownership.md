@@ -33,7 +33,7 @@ A second normal invocation selected 59264 with instance 42c03cab5620 and a disti
 
 ## Scientific firewall and handoff
 
-Real MaleCNS runs 0; Task017 units 0; Task017Q 0; raw-data downloads 0; archive writes 0. Historical scientific artifacts and B:\MaleCNS-Archive unchanged by this work. No scientific identity or result changes. Existing recovery edits retained. No commit.
+Real MaleCNS runs 0; Task017 units 0; Task017Q 0; raw-data downloads 0; archive writes 0. Historical scientific artifacts and <ARCHIVE_ROOT> unchanged by this work. No scientific identity or result changes. Existing recovery edits retained. No commit.
 
 A006S-READY-FOR-USER-STARTUP-TEST. Run `uv run malecns-workbench`, open its exact printed URL, check initial open and refresh, start another normal server and confirm the first remains usable, and inspect the browser console. No Run is required.
 

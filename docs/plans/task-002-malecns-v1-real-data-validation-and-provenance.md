@@ -7,7 +7,7 @@ remote modification was performed.
 
 ## Baseline and scope
 
-- Repository: `F:\coding\otherPrj\MaleCNS-Sim`
+- Repository: `.`
 - Branch: `master`
 - Baseline: `28989667fdc7d62f79f5cbc86770708bde23a44f`
 - Baseline verification: exact `HEAD`, clean worktree, 27 tracked files, and

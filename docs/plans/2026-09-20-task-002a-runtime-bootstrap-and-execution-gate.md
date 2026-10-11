@@ -24,7 +24,7 @@ was not resumed, and no Task 003 work, commit, push, or tag was performed.
 - `uv python list` showed the installed project runtime
   `cpython-3.12.13-windows-x86_64-none`.
 - `uv run python --version`: `Python 3.12.13`.
-- Exact interpreter: `F:\coding\otherPrj\MaleCNS-Sim\.venv\Scripts\python.exe`.
+- Exact interpreter: `.venv\Scripts\python.exe`.
 - `pyproject.toml` declares Python `>=3.12`, runtime dependencies numpy,
   pandas, pyarrow, and scipy, and the pytest test extra.
 - Observed dependency versions:

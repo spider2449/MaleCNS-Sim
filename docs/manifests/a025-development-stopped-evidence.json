@@ -108,110 +108,110 @@
                      "value":  [
                                    {
                                        "argv":  [
-                                                    "C:\\Program Files\\Git\\cmd\\git.EXE",
+                                                    "<PROGRAM_FILES>\\Git\\cmd\\git.EXE",
                                                     "rev-parse",
                                                     "HEAD"
                                                 ],
-                                       "cwd":  "D:\\spider\\working\\MaleCNS-Sim",
+                                       "cwd":  ".",
                                        "exit":  0,
                                        "job":  {
                                                    "active":  0,
                                                    "total":  2,
                                                    "terminated":  0
                                                },
-                                       "log":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\00.txt"
+                                       "log":  "<TEMP>\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\00.txt"
                                    },
                                    {
                                        "argv":  [
-                                                    "C:\\Program Files\\Git\\cmd\\git.EXE",
+                                                    "<PROGRAM_FILES>\\Git\\cmd\\git.EXE",
                                                     "ls-files",
                                                     "src"
                                                 ],
-                                       "cwd":  "D:\\spider\\working\\MaleCNS-Sim",
+                                       "cwd":  ".",
                                        "exit":  0,
                                        "job":  {
                                                    "active":  0,
                                                    "total":  2,
                                                    "terminated":  0
                                                },
-                                       "log":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\01.txt"
+                                       "log":  "<TEMP>\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\01.txt"
                                    },
                                    {
                                        "argv":  [
-                                                    "C:\\Users\\spider.tp\\.local\\bin\\uv.EXE",
+                                                    "<USER_HOME>\\.local\\bin\\uv.EXE",
                                                     "venv",
                                                     "--python",
-                                                    "D:\\spider\\working\\MaleCNS-Sim\\.venv\\Scripts\\python.exe",
-                                                    "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\build-env",
+                                                    ".venv\\Scripts\\python.exe",
+                                                    "<TEMP>\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\build-env",
                                                     "--no-config"
                                                 ],
-                                       "cwd":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882",
+                                       "cwd":  "<TEMP>\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882",
                                        "exit":  0,
                                        "job":  {
                                                    "active":  0,
                                                    "total":  3,
                                                    "terminated":  0
                                                },
-                                       "log":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\02.txt"
+                                       "log":  "<TEMP>\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\02.txt"
                                    },
                                    {
                                        "argv":  [
-                                                    "C:\\Users\\spider.tp\\.local\\bin\\uv.EXE",
+                                                    "<USER_HOME>\\.local\\bin\\uv.EXE",
                                                     "pip",
                                                     "install",
                                                     "--python",
-                                                    "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\build-env\\Scripts\\python.exe",
+                                                    "<TEMP>\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\build-env\\Scripts\\python.exe",
                                                     "--no-config",
                                                     "setuptools==80.9.0"
                                                 ],
-                                       "cwd":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882",
+                                       "cwd":  "<TEMP>\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882",
                                        "exit":  0,
                                        "job":  {
                                                    "active":  0,
                                                    "total":  3,
                                                    "terminated":  0
                                                },
-                                       "log":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\03.txt"
+                                       "log":  "<TEMP>\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\03.txt"
                                    },
                                    {
                                        "argv":  [
-                                                    "C:\\Users\\spider.tp\\.local\\bin\\uv.EXE",
+                                                    "<USER_HOME>\\.local\\bin\\uv.EXE",
                                                     "build",
                                                     "--python",
-                                                    "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\build-env\\Scripts\\python.exe",
+                                                    "<TEMP>\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\build-env\\Scripts\\python.exe",
                                                     "--no-build-isolation",
                                                     "--no-config",
                                                     "--out-dir",
-                                                    "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\dist"
+                                                    "<TEMP>\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\dist"
                                                 ],
-                                       "cwd":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\package",
+                                       "cwd":  "<TEMP>\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\package",
                                        "exit":  0,
                                        "job":  {
                                                    "active":  0,
                                                    "total":  5,
                                                    "terminated":  0
                                                },
-                                       "log":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\04.txt"
+                                       "log":  "<TEMP>\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\04.txt"
                                    },
                                    {
                                        "argv":  [
-                                                    "C:\\Users\\spider.tp\\.local\\bin\\uv.EXE",
+                                                    "<USER_HOME>\\.local\\bin\\uv.EXE",
                                                     "sync",
                                                     "--python",
-                                                    "D:\\spider\\working\\MaleCNS-Sim\\.venv\\Scripts\\python.exe",
+                                                    ".venv\\Scripts\\python.exe",
                                                     "--frozen",
                                                     "--no-dev",
                                                     "--no-install-project",
                                                     "--no-config"
                                                 ],
-                                       "cwd":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\package",
+                                       "cwd":  "<TEMP>\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\package",
                                        "exit":  4294967295,
                                        "job":  {
                                                    "active":  0,
                                                    "total":  1,
                                                    "terminated":  0
                                                },
-                                       "log":  "C:\\TEMP\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\05.txt"
+                                       "log":  "<TEMP>\\malecns-a025-cb7e2c5c7d7c46cb843b2d5561da1882\\logs\\05.txt"
                                    }
                                ],
                      "Count":  6
