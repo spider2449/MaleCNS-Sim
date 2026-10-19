@@ -61,6 +61,43 @@ uv venv --python 3.12 ../.codex-envs/malecns-flight-20261008
 uv pip install --python ../.codex-envs/malecns-flight-20261008/Scripts/python.exe 'flybody @ git+https://github.com/TuragaLab/flybody@d015e9bfe441bd90ae431bac24c55cb74bdbce26' pyarrow pandas scipy
 ```
 
+### Environment verified on 2026-10-19 (Windows 10, Python 3.12.10)
+
+The whole launcher runs inside the flybody environment, because the physical body
+is created in-process. The environment therefore needs this project as well. Keep
+it outside the checkout so the project's Python 3.14 environment and lockfile stay
+intact:
+
+```powershell
+python3.12 -m venv D:\spider\flybody-env
+D:\spider\flybody-env\Scripts\python.exe -m pip install -e .          # from the repo root
+D:\spider\flybody-env\Scripts\python.exe -m pip install 'git+https://github.com/TuragaLab/flybody.git@d015e9bfe441bd90ae431bac24c55cb74bdbce26'
+D:\spider\flybody-env\Scripts\python.exe -m pip install 'numpy>=2'
+# flight-policy controller only:
+D:\spider\flybody-env\Scripts\python.exe -m pip install -c constraints.txt tensorflow tensorflow-probability tf-keras
+```
+
+`constraints.txt` contains the single line `numpy>=2`, so TensorFlow cannot
+downgrade numpy again. The resulting versions were mujoco 3.16.0, dm_control
+1.0.49, tensorflow 2.21.0, tensorflow-probability 0.25.0, tf-keras 2.21.0 and
+numpy 2.5.4. Launch with that interpreter:
+
+```powershell
+D:\spider\flybody-env\Scripts\python.exe scripts\run_real_flight.py --controller flight-policy --open
+```
+
+Why numpy is upgraded: installing flybody downgrades numpy to 1.26.4, but this
+project's pyarrow requires numpy 2, so `import malecns_sim.application` fails
+with `pyarrow requires NumPy 2.0 or newer`. flybody's package metadata pins
+`numpy==1.26.4`, so `pip check` reports a conflict. This is metadata only: with
+numpy 2.5.4 the body, the flight-policy SavedModel and a full real-network run
+all worked. Without the TensorFlow packages, `--controller flight-policy` cannot
+start, and a missing `flybody` install fails with `PackageNotFoundError: No
+package metadata was found for flybody`.
+
+Preparing the registered network takes about 4.5-5.5 minutes before the server
+prints its URL.
+
 The adapter verifies the installed VCS commit and records model asset hashes,
 dependency versions, units, initial conditions, pattern kind, and coupling gains.
 A measured pattern additionally requires an explicit file and SHA-256. It never
@@ -133,9 +170,13 @@ python scripts/fetch_flybody_assets.py            # -> data/flybody (gitignored)
 python scripts/run_real_flight.py --controller flight-policy --open
 ```
 
-The flight environment additionally needs `tensorflow-cpu==2.17.1` and
-`tensorflow-probability==0.24.0`, with numpy kept at flybody's pinned 1.26.4.
-The pinned pyarrow must be below 20, since pyarrow 20+ requires numpy 2.
+The flight environment additionally needs TensorFlow and TensorFlow
+Probability. Two combinations are known to work. The first is
+`tensorflow-cpu==2.17.1` and `tensorflow-probability==0.24.0` with numpy kept at
+flybody's pinned 1.26.4, which requires pyarrow below 20 because pyarrow 20+
+requires numpy 2. The second, verified on 2026-10-19, is tensorflow 2.21.0,
+tensorflow-probability 0.25.0 and tf-keras 2.21.0 with numpy 2.5.4 (see
+"Environment verified" above).
 The published SavedModel was exported by an older TFP. The loader therefore
 registers the old `Independent` TypeSpec name before loading.
 
@@ -146,8 +187,10 @@ Division of labour:
   policy produces all wing and body actuation. Its deterministic mean action
   is used.
 - MaleCNS steers only the reference. The decoded DNp03 left-minus-right command
-  sets the reference yaw rate, up to 20 rad/s. Its sign is chosen so stronger
-  left DNp03 turns right, an away-from-loom hypothesis. The DNg02 command raises
+  sets the reference yaw rate, up to 20 rad/s. `FlybodyBody(loom_response=...)`
+  selects the sign: `"approach"` (default) makes stronger left DNp03 turn left,
+  and `"avoid"` makes it turn right, the original away-from-loom hypothesis. Both
+  are engineering hypotheses and the choice is recorded in the body identity. The DNg02 command raises
   reference speed by up to 50%, to 30 cm/s. In body-only checks, the policy
   tracked 30 cm/s but lost the reference and fell at 40 cm/s. The session spec's `motor_boundary` records this
   mapping.
@@ -164,5 +207,35 @@ within 1 mm.
 Each control step costs about 5 ms of wall time for the body and policy,
 before neural time.
 The launcher starts the target at (3.0, 0.3, 1.0) cm, ahead of the fly and
-off the straight reference line. On the line, at (0.5, 0.2, 1.0), the fly
-collides with the sphere within 30 ms.
+off the straight reference line.
+
+### Target collision
+
+By default the target is a pass-through visual stimulus
+(`FlybodyBody(solid_target=False)`): the fly can fly through it. A solid sphere
+(`solid_target=True`) ends the episode: a head-on hit at 1.5 cm knocked the policy
+off balance within about 90 ms, and the episode ended after about 450 control
+steps. Removing the 2 cm tracking-distance termination did not help, because the
+fly still lost balance and fell, ending the episode at about 700 steps. So pass-through is
+the only way to keep an episode alive after the fly reaches the target.
+
+### Neural drive and input weight
+
+On the real 166,700-neuron network the original `input_weight_mV=1.0` produced
+almost no response. LC4 input is capped at 200 Hz, so the mean depolarisation is
+about 0.2 events/ms x 1 mV x 20 ms = 4 mV, below the 7 mV gap to threshold.
+Over a 190 ms episode the sensory cells fired 9 spikes, the single DNp03 turn
+neuron fired once and the DNg02 power cells never fired. A sweep over 1, 2, 4,
+7 and 10 mV over 300 ms found 2 mV to be the smallest value that drives the turn
+neurons (5-8 turn spikes and a command near the 0.15 rad limit), so
+`FlightParameters.input_weight_mV` now defaults to 2.0. At 2 mV with the default
+`"approach"` sign, a target 0.6 cm to the left gave +3.9 cm of lateral
+displacement, one to the right gave -1.2 cm, and a target dead ahead was passed
+through, with no episode ending in any of them. The right side responds more
+weakly. The sensory populations have 71 (left) and 55 (right) cells and the
+cause of the asymmetry was not investigated. One run at 4 mV produced a burst
+of 59,788 network spikes that did not repeat at 7 or 10 mV. DNg02 (power) cells
+stayed silent in nearly every run, so speed is effectively not modulated. These
+are diagnostics of one synthetic placement protocol, not a validated behavioural
+model. The turn command also accumulates in the reference heading, so a course
+change persists after the target is passed.
