@@ -176,7 +176,7 @@ def test_execution_and_output_failure_poison_only_one_state(monkeypatch, phase):
     def fail(*args, **kwargs):
         raise MemoryError('injected internal failure')
     with monkeypatch.context() as patch:
-        patch.setattr(Engine, 'advance', fail) if phase == 'loop' else patch.setattr(api, '_result', fail)
+        patch.setattr(api._lean, 'advance_lean', fail) if phase == 'loop' else patch.setattr(api, '_result', fail)
         with pytest.raises(MemoryError):
             runtime.advance(state, duration_ms=1)
     for operation in (lambda: state.timestep, lambda: state.time_ms,

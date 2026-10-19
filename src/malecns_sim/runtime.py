@@ -10,6 +10,7 @@ from dataclasses import dataclass as _dataclass, fields as _fields, replace as _
 import math as _math
 import numpy as _np
 from malecns_sim.dynamics import lif as _lif
+from malecns_sim.dynamics import lif_fast as _lean
 from malecns_sim.dynamics import stimulus as _events
 
 __all__ = ["prepare_runtime", "PreparedRuntime", "SimulationState", "AdvanceResult"]
@@ -251,7 +252,11 @@ class PreparedRuntime(_Opaque):
         """
         start, steps = _preflight(self, state, duration_ms, stimulus)
         try:
-            raw = self._engine.advance(state._state, duration_ms=steps * self.dt_ms, stimulus=stimulus)
+            if type(self._engine) is _lif.PreparedRuntime:
+                raw = _lean.advance_lean(self._engine, state._state, duration_ms=steps * self.dt_ms, stimulus=stimulus)
+            else:
+                # Subclassed backends (for example GPU) keep their own engine advance.
+                raw = self._engine.advance(state._state, duration_ms=steps * self.dt_ms, stimulus=stimulus)
             return _result(raw, start, steps, self.dt_ms)
         except Exception:
             state._failed = True
