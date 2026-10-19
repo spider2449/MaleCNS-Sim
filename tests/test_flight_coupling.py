@@ -350,6 +350,57 @@ def test_target_goal_is_recorded_and_moves_only_in_physics_time(session):
     session.close()
 
 
+def test_rejected_command_does_not_move_target(session):
+    session = FlightSession(session.runtime, session.mapping, TargetBody(),
+        expected_projection_fingerprint=session.runtime.projection_fingerprint, parameters=session.parameters)
+    session.command({"command": "run", "generation": session.generation, "revision": session.revision})
+    revision, events = session.revision, len(session.export()["events"])
+    for name in ("step", "jump"):
+        with pytest.raises(ValueError):
+            session.command({"command": name, "generation": session.generation, "revision": revision,
+                             "target_cm": [0.2, 0.0, 1.0]})
+    assert session.observation["target_goal_cm"] == [2.0, 0.0, 1.0]
+    assert session.revision == revision and len(session.export()["events"]) == events
+    session.close()
+
+
+def test_paused_drag_collapses_to_one_target_event(session):
+    session = FlightSession(session.runtime, session.mapping, TargetBody(),
+        expected_projection_fingerprint=session.runtime.projection_fingerprint, parameters=session.parameters)
+    revision = session.revision
+    for x in (0.5, 1.0, 1.5):
+        session.set_target((x, 0.0, 1.0))
+    session.step()
+    session.set_target([0.2, 0.0, 1.0])
+    events = [e for e in session.export()["events"] if e["kind"] == "target"]
+    assert [e["target_goal_cm"] for e in events] == [[1.5, 0.0, 1.0], [0.2, 0.0, 1.0]]
+    assert session.revision == revision+5
+    session.close()
+
+
+def test_target_bounds_follow_the_fly_horizontally():
+    from malecns_sim.application.flight_body import validate_target
+    assert validate_target([45.0, -3.0, 1.0], [40.0, 0.0, 1.0]) == [45.0, -3.0, 1.0]
+    for position in ([12.0, 0.0, 1.0], [40.0, 0.0, 6.0], [40.0, 0.0, 0.0]):
+        with pytest.raises(ValueError, match="outside"):
+            validate_target(position, [40.0, 0.0, 1.0] if position[0] == 40.0 else [0.0, 0.0, 1.0])
+
+
+def test_reference_rows_keep_a_bounded_window_by_absolute_step():
+    from malecns_sim.application.flight_body import _ReferenceRows
+    rows = _ReferenceRows(np, 2, capacity=8)
+    for k in range(6):
+        rows.reserve(k, 0)
+        rows[k] = [k, -k]
+    for step in range(1, 1000):
+        rows.reserve(step+5, step-1)
+        rows[step+5, :] = [step+5, -(step+5)]
+        assert rows[step:step+6, 0].tolist() == list(range(step, step+6))
+    assert len(rows.rows) == 16 and rows[999, 1] == -999
+    with pytest.raises(IndexError, match="discarded"):
+        rows[0, 0]
+
+
 def test_target_command_rejected_for_fixed_target_body(session):
     with pytest.raises(ValueError, match="no movable target"):
         session.command({"command": "target", "generation": session.generation,

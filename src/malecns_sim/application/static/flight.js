@@ -9,12 +9,18 @@
   } catch {}
   let snapshot = null, busy = false, timer = null, frameError = "", requestEpoch = 0, lastFrameTime = null, lastFrameWall = null;
   // Target dragging: the observer sets a goal only; the body moves the sphere in physics time.
-  const BOUNDS = [[-10, 10], [-10, 10], [0.1, 5]];
   let pendingTarget = null, inflightTarget = null, drag = null, camera = null, overviewImage = null, mapView = null;
   let trail = [], trailGeneration = null;
   const clamp = (v, [low, high]) => Math.min(high, Math.max(low, v));
+  // Goal limits published by the body; axes in the "fly" frame are offsets from the fly's position.
+  function bounds() {
+    const limits = snapshot?.spec?.body?.target_bounds_cm, frame = snapshot?.spec?.body?.target_bounds_frame || [];
+    if (!limits) return [0, 1, 2].map(() => [-Infinity, Infinity]);
+    const fly = snapshot.body?.position_cm || [0, 0, 0];
+    return limits.map(([low, high], i) => frame[i] === "fly" ? [fly[i]+low, fly[i]+high] : [low, high]);
+  }
   const goal = () => pendingTarget || inflightTarget || snapshot?.body?.target_goal_cm || null;
-  const movable = () => Boolean(snapshot?.configured && snapshot.body?.target_cm && !snapshot.failed);
+  const movable = () => Boolean(snapshot?.configured && snapshot.body?.target_cm && snapshot.body?.target_goal_cm && !snapshot.failed);
   function project(p) {
     // MuJoCo cameras look along their local -z axis; xmat is row-major camera-to-world.
     if (!camera) return null;
@@ -94,6 +100,8 @@
       $("target-readout").textContent = !snapshot?.configured ? "No target available." : target ? "Target is frozen after a failure; Reset to continue." : "This body has no movable target.";
       return;
     }
+    const [low, high] = bounds()[2];
+    if (Number.isFinite(low) && Number.isFinite(high)) { height.min = String(low); height.max = String(high); }
     if (!drag && document.activeElement !== height) height.value = String(wanted[2]);
     $("target-height-value").textContent = Number(height.value).toFixed(2);
     const fmt = p => p.map(v => v.toFixed(2)).join(", ");
@@ -101,7 +109,8 @@
     $("target-readout").textContent = `Target (${fmt(target)}) cm → goal (${fmt(wanted)}) cm · ${(distance*10).toFixed(1)} mm from the fly${pendingTarget || inflightTarget ? " · sending goal…" : ""}`;
   }
   function requestTarget(position) {
-    pendingTarget = position.map((v, i) => clamp(v, BOUNDS[i]));
+    const limits = bounds();
+    pendingTarget = position.map((v, i) => clamp(v, limits[i]));
     drawOverview(); drawMap(); showTarget();
     // While running, the next scheduled tick carries the goal; otherwise send it now.
     if (!busy && !snapshot.running) command("target");
@@ -257,6 +266,8 @@
     try { snapshot = await api("/api/flight"); paint(); await drawFrame(epoch); succeeded = true; }
     catch (error) { $("status").textContent = `${error.message}. Open the workbench session URL first.`; }
     finally { busy = false; controls(); if (succeeded) schedule(); }
+    // A goal dragged during the refresh is sent once the channel frees.
+    if (succeeded && pendingTarget && !snapshot.running) command("target");
   }
   async function command(name) {
     if (busy || !snapshot?.configured) return;

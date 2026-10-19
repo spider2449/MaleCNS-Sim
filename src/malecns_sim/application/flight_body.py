@@ -23,8 +23,11 @@ from pathlib import Path
 
 
 FLYBODY_COMMIT = "d015e9bfe441bd90ae431bac24c55cb74bdbce26"
-# Draggable target goal limits (x, y, z) in centimeters, kept above the floor.
+# Draggable target goal limits (x, y, z) in centimeters. x and y are relative
+# to the fly when the goal is set, so the goal stays reachable as it travels;
+# z is absolute and kept above the floor.
 TARGET_BOUNDS_CM = [[-10.0, 10.0], [-10.0, 10.0], [0.1, 5.0]]
+TARGET_BOUNDS_FRAME = ["fly", "fly", "world"]
 
 
 # Published artifacts from https://doi.org/10.25378/janelia.25309105 (v4).
@@ -53,21 +56,71 @@ def _load_policy(tf, path):
     distribution type under the module path; current TFP uses a short name.
     """
     import tensorflow_probability as tfp
-    from tensorflow.python.framework import type_spec_registry
-    registry = type_spec_registry._NAME_TO_TYPE_SPEC
     tfp.distributions.Independent(tfp.distributions.Normal(tf.zeros(1), tf.ones(1)), 1)._type_spec
+    try:
+        from tensorflow.python.framework import type_spec_registry
+        registry = type_spec_registry._NAME_TO_TYPE_SPEC
+        current = registry["tfp.distributions.Independent_ACTTypeSpec"]
+    except (ImportError, AttributeError, KeyError) as exc:
+        raise ValueError("installed TensorFlow/TFP changed the private type-spec registry; "
+                         "the legacy flight-policy loader shim needs updating") from exc
     legacy = "tensorflow_probability.python.distributions.independent.Independent_ACTTypeSpec"
-    registry.setdefault(legacy, registry["tfp.distributions.Independent_ACTTypeSpec"])
+    registry.setdefault(legacy, current)
     return tf.saved_model.load(str(path))
 
 
-def validate_target(position_cm):
+def validate_target(position_cm, fly_cm):
     if (type(position_cm) not in (list, tuple) or len(position_cm) != 3
             or any(type(v) not in (int, float) or not math.isfinite(v) for v in position_cm)):
         raise ValueError("finite target coordinates in centimeters required")
-    if any(not low <= v <= high for v, (low, high) in zip(position_cm, TARGET_BOUNDS_CM)):
+    offset = [v-(float(f) if frame == "fly" else 0.0)
+              for v, f, frame in zip(position_cm, fly_cm, TARGET_BOUNDS_FRAME)]
+    if any(not low <= v <= high for v, (low, high) in zip(offset, TARGET_BOUNDS_CM)):
         raise ValueError("target lies outside the bounded flight arena")
     return [float(v) for v in position_cm]
+
+
+class _ReferenceRows:
+    """Reference rows addressed by absolute control step, keeping a sliding window.
+
+    flybody reads the reference by absolute step (one row, or a short forward
+    slice from the current step), so rows behind the current step are dropped
+    and memory stays bounded however long the episode runs.
+    """
+
+    def __init__(self, np, width, capacity=4096):
+        self.np, self.rows, self.offset = np, np.zeros((capacity, width)), 0
+
+    def reserve(self, index, oldest):
+        """Make room for row ``index``, discarding rows before ``oldest``."""
+        if index-self.offset < len(self.rows):
+            return
+        live = self.rows[oldest-self.offset:index-self.offset].copy()
+        if len(live) >= len(self.rows)//2:
+            self.rows = self.np.zeros((2*len(self.rows), self.rows.shape[1]))
+        self.rows[:len(live)] = live
+        self.offset = oldest
+
+    def _local(self, row):
+        if isinstance(row, slice):
+            if row.step not in (None, 1) or row.start is None or row.stop is None:
+                raise IndexError("reference rows support forward absolute slices only")
+            local = slice(row.start-self.offset, row.stop-self.offset)
+            first = local.start
+        else:
+            local = first = int(row)-self.offset
+        if first < 0:
+            raise IndexError("reference row already discarded")
+        return local
+
+    def _key(self, key):
+        return (self._local(key[0]),)+key[1:] if isinstance(key, tuple) else self._local(key)
+
+    def __getitem__(self, key):
+        return self.rows[self._key(key)]
+
+    def __setitem__(self, key, value):
+        self.rows[self._key(key)] = value
 
 
 class _PhysicalFlybodyBody:
@@ -104,12 +157,12 @@ class _PhysicalFlybodyBody:
         if (type(target_speed_cm_s) not in (int, float) or not math.isfinite(target_speed_cm_s)
                 or not 0 < target_speed_cm_s <= 1000):
             raise ValueError("positive bounded target speed required")
-        validate_target(obstacle_cm)
+        validate_target(obstacle_cm, initial_position_cm)
         if controller not in ("oscillator", "flight-policy"):
             raise ValueError("explicit controller kind required")
         if controller == "flight-policy":
-            if pattern_kind != "measured-pattern":
-                raise ValueError("the flight policy was trained with the measured wing pattern")
+            if pattern_kind != "measured-pattern" or expected_pattern_sha256 != WING_PATTERN_FMECH_SHA256:
+                raise ValueError("the flight policy was trained with the pinned measured wing pattern")
             if policy_path is None or expected_policy_sha256 is None:
                 raise ValueError("flight policy path and SHA-256 required")
             policy_sha = directory_sha256(policy_path)
@@ -146,6 +199,7 @@ class _PhysicalFlybodyBody:
             "obstacle_cm": list(obstacle_cm), "obstacle_radius_cm": obstacle_radius_cm,
             "target_motion": "user-set goal; mocap sphere moves toward it at a bounded speed in physics time",
             "target_speed_cm_s": target_speed_cm_s, "target_bounds_cm": TARGET_BOUNDS_CM,
+            "target_bounds_frame": TARGET_BOUNDS_FRAME,
             "sex_transfer": "male connectome coupled to female anatomical body; unvalidated transfer",
             "sensory": "ground-truth sphere angular expansion and engineered bilateral bearing weights; not a retinal model",
             "controller": "no RL policy; explicit basal oscillator plus neural residuals"}
@@ -248,9 +302,10 @@ class _PhysicalFlybodyBody:
                     self.command = (0.0, reference_speed_cm_s)
 
                 def _append_reference(self):
-                    if self._ref_len == len(self._ref_qpos):
-                        self._ref_qpos = np.concatenate((self._ref_qpos, np.zeros_like(self._ref_qpos)))
-                        self._ref_qvel = np.concatenate((self._ref_qvel, np.zeros_like(self._ref_qvel)))
+                    # flybody never reads rows behind the current control step.
+                    oldest = max(0, self._step_counter-1)
+                    self._ref_qpos.reserve(self._ref_len, oldest)
+                    self._ref_qvel.reserve(self._ref_len, oldest)
                     yaw_rate, speed = self.command
                     heading = self.heading
                     quat = mult_quat(np.array([math.cos(heading/2), 0, 0, math.sin(heading/2)]), pitch_quat)
@@ -268,7 +323,7 @@ class _PhysicalFlybodyBody:
                     self.command = (0.0, reference_speed_cm_s)
                     self.heading = 0.0
                     self.reference_com = initial.copy()
-                    self._ref_qpos, self._ref_qvel, self._ref_len = np.zeros((4096, 7)), np.zeros((4096, 6)), 0
+                    self._ref_qpos, self._ref_qvel, self._ref_len = _ReferenceRows(np, 7), _ReferenceRows(np, 6), 0
                     for _ in range(self._future_steps+1):
                         self._append_reference()
                     self._traj_timesteps = 2**62
@@ -335,7 +390,8 @@ class _PhysicalFlybodyBody:
     def set_target(self, position_cm):
         if self.closed or self.env is None:
             raise ValueError("body must be reset before moving the target")
-        self.goal = self.np.array(validate_target(position_cm), dtype=float)
+        fly = self.task.walker.get_pose(self.env.physics)[0]
+        self.goal = self.np.array(validate_target(position_cm, fly), dtype=float)
         return self.goal.tolist()
 
     def _move_target(self):

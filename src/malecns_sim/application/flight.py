@@ -298,13 +298,19 @@ class FlightSession:
             mover = getattr(self.body, "set_target", None)
             if mover is None:
                 raise ValueError("this body has no movable target")
-            if (type(position_cm) is not list or len(position_cm) != 3
+            if (type(position_cm) not in (list, tuple) or len(position_cm) != 3
                     or any(type(v) not in (int, float) or not math.isfinite(v) for v in position_cm)):
                 raise ValueError("finite target_cm [x, y, z] required")
             goal = [float(v) for v in mover(position_cm)]
             self.observation["target_goal_cm"] = goal
-            self._record({"kind": "target", "simulation_ms": self.steps*self.parameters.control_ms,
-                          "target_goal_cm": goal})
+            event = {"kind": "target", "simulation_ms": self.steps*self.parameters.control_ms, "target_goal_cm": goal}
+            # Goals set at one simulated instant collapse to the last, so a long paused
+            # drag cannot push control-step evidence out of the bounded history.
+            last = self.events[-1] if self.events else None
+            if last and last["kind"] == "target" and last["simulation_ms"] == event["simulation_ms"]:
+                self.events[-1] = event
+            else:
+                self._record(event)
             self.revision += 1
 
     def command(self, request):
@@ -315,37 +321,36 @@ class FlightSession:
                     or request["generation"] != self.generation or request["revision"] != self.revision):
                 raise ValueError("exact current generation/revision and command required")
             command = request["command"]
+            # Reject the command before applying target_cm so a refused request moves nothing.
+            if command not in ("target", "reset", "pause", "run", "step", "tick"):
+                raise ValueError("unsupported flight command")
+            if command == "target" and "target_cm" not in request:
+                raise ValueError("target command requires target_cm")
+            if command == "reset" and "target_cm" in request:
+                raise ValueError("reset restores the initial target; send target_cm separately")
+            if command == "run" and (self.failed or self.observation["terminal"] or self._limit_reached()):
+                raise ValueError("flight episode cannot run")
+            if command == "step" and self.running:
+                raise ValueError("Pause before manual Step")
             if "target_cm" in request:
-                if command == "reset":
-                    raise ValueError("reset restores the initial target; send target_cm separately")
                 self.set_target(request["target_cm"])
-            if command == "target":
-                if "target_cm" not in request:
-                    raise ValueError("target command requires target_cm")
-            elif command == "reset":
+            if command == "reset":
                 self.reset()
             elif command == "pause":
                 self.running = False
                 self._record({"kind": "pause", "simulation_ms": self.steps*self.parameters.control_ms})
                 self.revision += 1
             elif command == "run":
-                if self.failed or self.observation["terminal"] or self._limit_reached():
-                    raise ValueError("flight episode cannot run")
                 self.running = True
                 self._record({"kind": "run", "simulation_ms": self.steps*self.parameters.control_ms})
                 self.revision += 1
-            elif command in ("step", "tick"):
-                if command == "step" and self.running:
-                    raise ValueError("Pause before manual Step")
-                if command == "step":
+            elif command == "step":
+                self.step()
+            elif command == "tick" and self.running:
+                for _ in range(self.parameters.playback_steps):
                     self.step()
-                elif self.running:
-                    for _ in range(self.parameters.playback_steps):
-                        self.step()
-                        if not self.running:
-                            break
-            else:
-                raise ValueError("unsupported flight command")
+                    if not self.running:
+                        break
             return self.snapshot()
 
     def set_condition(self, condition):

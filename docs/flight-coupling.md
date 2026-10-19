@@ -41,8 +41,9 @@ path map or use the height slider. The browser only proposes a goal
 next `tick` and never sets a pose. The session records each goal as a `target`
 event at the current simulated time. The body then moves a mocap sphere toward
 it at `target_speed_cm_s` (default 50) in physics time. No simulated time
-passes while a goal is set. Goals are bounded to x, y in [-10, 10] cm and z in
-[0.1, 5] cm. Reset restores the initial target.
+passes while a goal is set. Goals are bounded to x, y within [-10, 10] cm of the
+fly's position when the goal is set, and z in [0.1, 5] cm. Reset restores the
+initial target.
 
 The target moves at bounded speed, so it never jumps. LC4 input still comes only
 from geometric looming as the target and the fly approach each other. A dragged
