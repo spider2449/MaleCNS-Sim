@@ -131,10 +131,15 @@ class _PhysicalFlybodyBody:
                  obstacle_radius_cm=0.08, initial_position_cm=(0.0, 0.0, 1.0),
                  target_speed_cm_s=50.0, controller="oscillator", policy_path=None,
                  expected_policy_sha256=None, reference_speed_cm_s=20.0,
-                 maximum_yaw_rate_rad_s=20.0, maximum_speed_boost=0.5):
+                 maximum_yaw_rate_rad_s=20.0, maximum_speed_boost=0.5,
+                 loom_response="approach", solid_target=False):
         direct = metadata.distribution("flybody").read_text("direct_url.json")
         if not direct or json.loads(direct).get("vcs_info", {}).get("commit_id") != FLYBODY_COMMIT:
             raise ValueError("install the pinned upstream flybody commit in an isolated environment")
+        if loom_response not in ("approach", "avoid"):
+            raise ValueError("loom_response must be 'approach' or 'avoid'")
+        if type(solid_target) is not bool:
+            raise ValueError("solid_target must be a bool")
         if pattern_kind not in ("engineered-oscillator", "measured-pattern"):
             raise ValueError("explicit wing-pattern kind required")
         if pattern_kind == "measured-pattern":
@@ -197,6 +202,7 @@ class _PhysicalFlybodyBody:
             "initial_position_cm": list(initial_position_cm), "initial_pitch_deg": 47.5,
             "initial_velocity_cm_s": [0.0, 0.0, 0.0], "initial_wing_phase": 0.0,
             "obstacle_cm": list(obstacle_cm), "obstacle_radius_cm": obstacle_radius_cm,
+            "target_collision": "solid rigid sphere" if solid_target else "none; pass-through visual stimulus",
             "target_motion": "user-set goal; mocap sphere moves toward it at a bounded speed in physics time",
             "target_speed_cm_s": target_speed_cm_s, "target_bounds_cm": TARGET_BOUNDS_CM,
             "target_bounds_frame": TARGET_BOUNDS_FRAME,
@@ -214,8 +220,11 @@ class _PhysicalFlybodyBody:
                               "base_speed_cm_s": reference_speed_cm_s, "maximum_yaw_rate_rad_s": maximum_yaw_rate_rad_s,
                               "maximum_speed_boost": maximum_speed_boost,
                               "heading_rad": 0.0},
+                "loom_response": loom_response,
                 "motor_boundary": ("engineered decoder: DNp03 left-minus-right command (wing-yaw-offset field / 0.15) sets "
-                    "reference yaw rate, sign chosen so stronger left DNp03 turns right (away-from-loom hypothesis); "
+                    + ("reference yaw rate, sign chosen so stronger left DNp03 turns left (toward-loom, approach); "
+                       if loom_response == "approach" else
+                       "reference yaw rate, sign chosen so stronger left DNp03 turns right (away-from-loom hypothesis); ") +
                     f"DNg02 command (frequency field / 0.05) raises reference speed by up to {maximum_speed_boost:.0%}; the learned policy, "
                     "not MaleCNS, produces wing actuation and stabilizes flight")})
             self.policy = _load_policy(tf, policy_path)
@@ -230,6 +239,7 @@ class _PhysicalFlybodyBody:
         self.controller = controller
         self.reference_speed = reference_speed_cm_s
         self.maximum_yaw_rate = maximum_yaw_rate_rad_s
+        self.yaw_sign = 1.0 if loom_response == "approach" else -1.0
         self.maximum_speed_boost = maximum_speed_boost
         self.initial_obstacle = np.array(obstacle_cm, dtype=float)
         self.obstacle = self.initial_obstacle.copy()
@@ -249,11 +259,14 @@ class _PhysicalFlybodyBody:
         sky.width, sky.height = 128, 768
         self.identity["display_background"] = "procedural blue gradient sky; visual orientation reference only"
         # A mocap body lets the target move between control steps without
-        # becoming a dynamic object; it remains a collidable rigid sphere.
+        # becoming a dynamic object. By default it is a pass-through visual stimulus: a hard
+        # hit knocks the learned policy off balance and ends the episode (even with the
+        # tracking-distance termination removed), so a solid sphere is opt-in.
         self.target_body = arena.mjcf_model.worldbody.add("body", name="flight_target",
             mocap=True, pos=obstacle_cm)
         self.target_body.add("geom", name="flight_visual_obstacle", type="sphere",
-            size=[obstacle_radius_cm], rgba=[0.95, 0.35, 0.08, 1], contype=1, conaffinity=1)
+            size=[obstacle_radius_cm], rgba=[0.95, 0.35, 0.08, 1],
+            contype=int(solid_target), conaffinity=int(solid_target))
 
         class NeuralFlightTask(Flying):
             def __init__(self):
@@ -491,7 +504,7 @@ class _PhysicalFlybodyBody:
         if self.controller == "flight-policy":
             turn = action["left_wing_yaw_offset_rad"]/0.15
             power = max(0.0, action["frequency_fraction"])/0.05
-            self.task.command = (-turn*self.maximum_yaw_rate, self.reference_speed*(1+self.maximum_speed_boost*power))
+            self.task.command = (self.yaw_sign*turn*self.maximum_yaw_rate, self.reference_speed*(1+self.maximum_speed_boost*power))
             controls = self._policy_action(spec)
             self._move_target()
             self.timestep = self.env.step(controls)

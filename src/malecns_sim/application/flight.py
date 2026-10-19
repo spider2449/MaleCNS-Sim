@@ -57,7 +57,9 @@ class FlightParameters:
     maximum_steps: int | None = None
     playback_steps: int = 20
     seed: int = 0
-    input_weight_mV: float = 1.0
+    # 1.0 mV could not drive LC4 to threshold (steady mean ~4 mV vs 7 mV gap) so the
+    # turn neurons stayed silent; a real-network sweep found 2.0 mV the smallest working value.
+    input_weight_mV: float = 2.0
     baseline_hz: float = 0.0
     expansion_gain_hz_per_rad_s: float = 50.0
     maximum_input_hz: float = 200.0
