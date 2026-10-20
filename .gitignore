@@ -16,3 +16,4 @@ data/reference/shiu-2024/
 
 # Downloaded flybody policy and wing pattern (scripts/fetch_flybody_assets.py).
 data/flybody/
+_vizdoom.ini
